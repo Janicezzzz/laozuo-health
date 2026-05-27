@@ -1,0 +1,2652 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#5BA4CF">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="鑰佸乏鍋ュ悍妫€娴?>
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='38' fill='%235BA4CF'/><text y='130' x='96' text-anchor='middle' font-size='108'>馃挋</text></svg>">
+<title>鑰佸乏鍋ュ悍妫€娴?/title>
+<link rel="manifest" href="manifest.json">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --blue: #5BA4CF;
+  --blue-light: #B3D9FF;
+  --blue-bg: #E8F4FD;
+  --blue-pale: #F5FAFE;
+  --white: #FFFFFF;
+  --text: #2C3E50;
+  --text-light: #5A6C7D;
+  --green: #27AE60;
+  --green-bg: #E8F8EF;
+  --red: #E74C3C;
+  --red-bg: #FDEDEC;
+  --orange: #F39C12;
+  --orange-bg: #FEF5E7;
+  --gray: #ECF0F1;
+  --gray-border: #D5DBDB;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --font-xl: 22px;
+  --font-lg: 18px;
+  --font-md: 16px;
+  --font-sm: 14px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #F0F4F8;
+  color: var(--text);
+  font-size: var(--font-md);
+  line-height: 1.6;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.app-container {
+  max-width: 800px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.app-header {
+  background: linear-gradient(135deg, var(--blue), #6DB9DC);
+  color: white;
+  padding: 16px 20px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.app-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.app-header .subtitle {
+  font-size: var(--font-sm);
+  opacity: 0.9;
+  margin-top: 2px;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 16px;
+  padding-bottom: 90px;
+  overflow-y: auto;
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Bottom Nav */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 800px;
+  background: white;
+  display: flex;
+  border-top: 1px solid var(--gray-border);
+  z-index: 100;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+  padding-bottom: env(safe-area-inset-bottom, 12px);
+}
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .bottom-nav {
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+}
+
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 4px 12px;
+  cursor: pointer;
+  color: var(--text-light);
+  transition: all 0.2s ease;
+  border: none;
+  background: none;
+  font-size: var(--font-sm);
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav-item.active {
+  color: var(--blue);
+}
+
+.nav-item .nav-icon {
+  font-size: 26px;
+  margin-bottom: 2px;
+  line-height: 1;
+}
+
+/* Cards */
+.card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+}
+
+.card-title {
+  font-size: var(--font-lg);
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-title .icon { font-size: 24px; }
+
+/* Form Elements */
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  font-size: var(--font-md);
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+}
+
+.form-row > * { flex: 1; }
+
+input[type="number"],
+input[type="text"],
+input[type="date"],
+input[type="time"],
+select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid var(--gray-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-lg);
+  font-family: inherit;
+  background: var(--blue-pale);
+  transition: border-color 0.2s;
+  color: var(--text);
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--blue);
+  background: white;
+}
+
+.input-unit {
+  position: relative;
+}
+
+.input-unit input {
+  padding-right: 50px;
+}
+
+.input-unit .unit {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+  font-size: var(--font-sm);
+  pointer-events: none;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-lg);
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  min-height: 48px;
+  min-width: 48px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: var(--blue);
+  color: white;
+  width: 100%;
+}
+
+.btn-primary:hover { background: #4A93BA; }
+
+.btn-secondary {
+  background: var(--gray);
+  color: var(--text);
+}
+
+.btn-danger {
+  background: var(--red);
+  color: white;
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: var(--font-sm);
+  min-height: 36px;
+}
+
+.btn-outline {
+  background: white;
+  color: var(--blue);
+  border: 2px solid var(--blue);
+}
+
+/* Status Badge */
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: var(--font-sm);
+  font-weight: 600;
+}
+
+.badge-normal { background: var(--green-bg); color: var(--green); }
+.badge-high { background: var(--red-bg); color: var(--red); }
+.badge-low { background: var(--orange-bg); color: var(--orange); }
+.badge-gi-low { background: #E8F8EF; color: #27AE60; }
+.badge-gi-mid { background: #FEF5E7; color: #F39C12; }
+.badge-gi-high { background: #FDEDEC; color: #E74C3C; }
+
+/* Record Result */
+.record-result {
+  margin-top: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-md);
+  font-weight: 600;
+  display: none;
+}
+
+.record-result.show { display: block; }
+.record-result.normal { background: var(--green-bg); color: var(--green); }
+.record-result.abnormal { background: var(--red-bg); color: var(--red); }
+
+/* Food Search */
+.search-box {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.search-box input {
+  padding-left: 48px;
+}
+
+.search-box .search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px;
+  color: var(--text-light);
+}
+
+
+/* Food Detail Modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 200;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.modal-overlay.show {
+  display: flex;
+}
+
+.modal-sheet {
+  background: white;
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+  max-width: 800px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 24px 20px 32px;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.modal-handle {
+  width: 40px;
+  height: 4px;
+  background: var(--gray-border);
+  border-radius: 2px;
+  margin: 0 auto 20px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: var(--gray);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.food-detail-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.food-detail-header h2 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.food-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.food-detail-item {
+  background: var(--blue-pale);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  text-align: center;
+}
+
+.food-detail-item .value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+.food-detail-item .label {
+  font-size: var(--font-sm);
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+.food-advice {
+  background: #FFF9E6;
+  border-left: 4px solid var(--orange);
+  padding: 14px 16px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin-bottom: 12px;
+  font-size: var(--font-md);
+  line-height: 1.7;
+}
+
+.food-advice.warning {
+  background: #FDEDEC;
+  border-left-color: var(--red);
+}
+
+.food-advice.safe {
+  background: #E8F8EF;
+  border-left-color: var(--green);
+}
+
+/* Chart Area */
+.chart-period {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.chart-period button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: 2px solid var(--gray-border);
+  background: white;
+  font-size: var(--font-sm);
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.chart-period button.active {
+  background: var(--blue);
+  color: white;
+  border-color: var(--blue);
+}
+
+.chart-container {
+  position: relative;
+  height: 260px;
+  margin-bottom: 8px;
+}
+
+.chart-container canvas {
+  width: 100% !important;
+}
+
+.stats-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.stat-item {
+  flex: 1;
+  background: var(--blue-pale);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  text-align: center;
+}
+
+.stat-item .stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+.stat-item .stat-label {
+  font-size: var(--font-sm);
+  color: var(--text-light);
+}
+
+.stat-item.warn .stat-value { color: var(--red); }
+
+.no-data {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-light);
+}
+
+.no-data .icon { font-size: 56px; margin-bottom: 12px; }
+
+/* Settings */
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--gray-border);
+}
+
+.setting-item:last-child { border-bottom: none; }
+
+.setting-item .setting-label {
+  font-size: var(--font-md);
+  font-weight: 600;
+}
+
+.setting-item .setting-desc {
+  font-size: var(--font-sm);
+  color: var(--text-light);
+}
+
+.setting-item input[type="number"],
+.setting-item input[type="time"] {
+  width: 110px;
+  text-align: center;
+  padding: 10px;
+}
+
+.range-group {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.range-group span {
+  color: var(--text-light);
+  font-size: var(--font-sm);
+}
+
+.setting-section {
+  margin-bottom: 8px;
+}
+
+.setting-section h3 {
+  font-size: var(--font-lg);
+  color: var(--blue);
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--blue-light);
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2C3E50;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-size: var(--font-md);
+  z-index: 300;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+/* Guide Banner */
+.guide-banner {
+  background: #FFF9E6;
+  border: 1px solid #F0D060;
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: var(--font-sm);
+  color: #7D6608;
+  line-height: 1.6;
+}
+
+/* Autocomplete Dropdown (shared) */
+.autocomplete-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 2px solid var(--blue);
+  border-top: none;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  max-height: 280px;
+  overflow-y: auto;
+  z-index: 50;
+  box-shadow: var(--shadow);
+}
+
+.autocomplete-dropdown.show {
+  display: block;
+}
+
+.autocomplete-item {
+  padding: 12px 14px;
+  cursor: pointer;
+  font-size: var(--font-md);
+  border-bottom: 1px solid var(--gray-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.15s;
+}
+
+.autocomplete-item:last-child {
+  border-bottom: none;
+}
+
+.autocomplete-item:hover, .autocomplete-item:active {
+  background: var(--blue-bg);
+}
+
+.autocomplete-item .item-name {
+  font-weight: 600;
+}
+
+.autocomplete-item .item-meta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: var(--font-sm);
+  color: var(--text-light);
+}
+
+/* Daily Tips */
+.daily-tips {
+  margin-top: 16px;
+  background: linear-gradient(135deg, #E8F8EF, #E8F4FD);
+  border-radius: var(--radius);
+  padding: 20px;
+  border: 1px solid #C8E6D8;
+}
+
+.daily-tips h3 {
+  font-size: var(--font-lg);
+  color: var(--blue);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.daily-tips .tip-card {
+  background: white;
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  font-size: var(--font-md);
+  line-height: 1.7;
+}
+
+.daily-tips .tip-card:last-child {
+  margin-bottom: 0;
+}
+
+.daily-tips .tip-card .tip-icon {
+  font-size: 20px;
+  margin-right: 4px;
+}
+
+.daily-tips .tip-card .tip-title {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.daily-tips .tip-card .tip-text {
+  color: var(--text-light);
+}
+
+.daily-tips .tip-date {
+  font-size: var(--font-sm);
+  color: var(--text-light);
+  text-align: center;
+  margin-top: 12px;
+}
+
+.autocomplete-empty {
+  padding: 20px;
+  text-align: center;
+  color: var(--text-light);
+  font-size: var(--font-sm);
+}
+
+/* Dinner Record */
+.dinner-search-wrap {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.dinner-autocomplete {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 2px solid var(--blue);
+  border-top: none;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  max-height: 180px;
+  overflow-y: auto;
+  z-index: 50;
+  box-shadow: var(--shadow);
+}
+
+.dinner-autocomplete.show {
+  display: block;
+}
+
+.dinner-autocomplete-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: var(--font-md);
+  border-bottom: 1px solid var(--gray-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dinner-autocomplete-item:last-child {
+  border-bottom: none;
+}
+
+.dinner-autocomplete-item:hover {
+  background: var(--blue-bg);
+}
+
+.dinner-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+  min-height: 36px;
+  align-items: center;
+}
+
+.dinner-tags .empty-hint {
+  color: var(--text-light);
+  font-size: var(--font-sm);
+}
+
+.dinner-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--blue-bg);
+  border-radius: 20px;
+  font-size: var(--font-md);
+  font-weight: 500;
+}
+
+.dinner-tag .remove-tag {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background: var(--blue);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.dinner-context {
+  background: #FFF9E6;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  font-size: var(--font-sm);
+  color: #7D6608;
+  line-height: 1.6;
+}
+
+.dinner-context strong {
+  color: #6D5808;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .app-header h1 { font-size: 20px; }
+  .card { padding: 16px; }
+  .card-title { font-size: var(--font-md); }
+  .food-detail-grid { grid-template-columns: 1fr; }
+  .form-row { flex-direction: column; gap: 0; }
+  input[type="number"],
+  input[type="text"],
+  input[type="date"],
+  input[type="time"],
+  select { padding: 12px 14px; font-size: var(--font-md); }
+}
+</style>
+</head>
+<body>
+
+<div class="app-container">
+  <!-- Header -->
+  <header class="app-header">
+    <h1>鑰佸乏鍋ュ悍妫€娴?/h1>
+    <div class="subtitle">璁板綍鍋ュ悍 路 绉戝楗</div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content" id="mainContent">
+
+    <!-- Tab 1: 琛€鍘嬬鐞?-->
+    <section class="tab-content active" id="tab-bp">
+      <!-- 鏃ユ湡閫夋嫨 -->
+      <div class="card">
+        <div class="card-title"><span class="icon">馃搮</span>閫夋嫨鏃ユ湡</div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <button class="btn btn-secondary btn-sm" onclick="changeDate(-1)">鈼€ 鍓嶄竴澶?/button>
+          <input type="date" id="recordDate" style="flex:1;text-align:center;" onchange="loadDayRecords()">
+          <button class="btn btn-secondary btn-sm" onclick="changeDate(1)">鍚庝竴澶?鈻?/button>
+        </div>
+        <button class="btn btn-outline btn-sm" style="width:100%;margin-top:10px;" onclick="goToToday()">鍥炲埌浠婂ぉ</button>
+      </div>
+
+      <!-- 琛€鍘嬪綍鍏?-->
+      <div class="card">
+        <div class="card-title"><span class="icon">馃挀</span>琛€鍘嬭褰?/div>
+
+        <div style="margin-bottom:16px;">
+          <div style="font-weight:600;margin-bottom:8px;color:var(--blue);">鈽€锔?鏃╀笂琛€鍘?/div>
+          <div class="form-row">
+            <div class="input-unit">
+              <input type="number" id="bpMorningSys" placeholder="鏀剁缉鍘? min="60" max="250">
+              <span class="unit">mmHg</span>
+            </div>
+            <div class="input-unit">
+              <input type="number" id="bpMorningDia" placeholder="鑸掑紶鍘? min="30" max="150">
+              <span class="unit">mmHg</span>
+            </div>
+          </div>
+          <div id="bpMorningStatus" class="record-result"></div>
+        </div>
+
+        <div style="margin-bottom:8px;">
+          <div style="font-weight:600;margin-bottom:8px;color:var(--blue);">馃寵 鏅氫笂琛€鍘?/div>
+          <div class="form-row">
+            <div class="input-unit">
+              <input type="number" id="bpEveningSys" placeholder="鏀剁缉鍘? min="60" max="250">
+              <span class="unit">mmHg</span>
+            </div>
+            <div class="input-unit">
+              <input type="number" id="bpEveningDia" placeholder="鑸掑紶鍘? min="30" max="150">
+              <span class="unit">mmHg</span>
+            </div>
+          </div>
+          <div id="bpEveningStatus" class="record-result"></div>
+        </div>
+
+        <button class="btn btn-primary" onclick="saveBP()">馃捑 淇濆瓨琛€鍘嬭褰?/button>
+      </div>
+
+      <!-- 琛€鍘嬭秼鍔垮浘琛?-->
+      <div class="card">
+        <div class="card-title"><span class="icon">馃搳</span>琛€鍘嬭秼鍔?/div>
+        <div class="chart-period" id="bpPeriod">
+          <button data-period="7" class="active" onclick="switchBPPeriod(7, this)">鏈€杩?澶?/button>
+          <button data-period="30" onclick="switchBPPeriod(30, this)">30澶?/button>
+          <button data-period="90" onclick="switchBPPeriod(90, this)">90澶?/button>
+        </div>
+        <div style="margin-bottom:20px;">
+          <div style="font-weight:600;margin-bottom:10px;color:var(--blue);">鈽€锔?鏃╀笂琛€鍘?/div>
+          <div class="chart-container"><canvas id="bpMorningChart"></canvas></div>
+          <div id="bpMorningNoData" class="no-data" style="display:none;">
+            <div class="icon">馃搵</div>
+            <div>鏆傛棤鏃╀笂琛€鍘嬫暟鎹?/div>
+          </div>
+          <div class="stats-row" id="bpMorningStats"></div>
+        </div>
+        <div>
+          <div style="font-weight:600;margin-bottom:10px;color:var(--blue);">馃寵 鏅氫笂琛€鍘?/div>
+          <div class="chart-container"><canvas id="bpEveningChart"></canvas></div>
+          <div id="bpEveningNoData" class="no-data" style="display:none;">
+            <div class="icon">馃搵</div>
+            <div>鏆傛棤鏅氫笂琛€鍘嬫暟鎹?/div>
+          </div>
+          <div class="stats-row" id="bpEveningStats"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 2: 琛€绯栫鐞?-->
+    <section class="tab-content" id="tab-glucose">
+      <!-- 鏃ユ湡閫夋嫨 -->
+      <div class="card">
+        <div class="card-title"><span class="icon">馃搮</span>閫夋嫨鏃ユ湡</div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <button class="btn btn-secondary btn-sm" onclick="changeDate(-1)">鈼€ 鍓嶄竴澶?/button>
+          <input type="date" id="recordDate" style="flex:1;text-align:center;" onchange="loadDayRecords()">
+          <button class="btn btn-secondary btn-sm" onclick="changeDate(1)">鍚庝竴澶?鈻?/button>
+        </div>
+        <button class="btn btn-outline btn-sm" style="width:100%;margin-top:10px;" onclick="goToToday()">鍥炲埌浠婂ぉ</button>
+      </div>
+
+      <!-- 琛€绯栧綍鍏?-->
+      <div class="card">
+        <div class="card-title"><span class="icon">馃└</span>琛€绯栬褰?/div>
+
+        <div style="margin-bottom:16px;">
+          <div style="font-weight:600;margin-bottom:8px;color:var(--blue);">馃寘 绌鸿吂琛€绯栵紙鏃╀笂璧峰簥鍚庯級</div>
+          <div class="input-unit">
+            <input type="number" id="glucoseFasting" placeholder="绌鸿吂琛€绯栧€? min="2" max="30" step="0.1">
+            <span class="unit">mmol/L</span>
+          </div>
+          <div id="glucoseFastingStatus" class="record-result"></div>
+        </div>
+
+        <div style="margin-bottom:8px;">
+          <div style="font-weight:600;margin-bottom:8px;color:var(--blue);">馃嵔锔?鏅氶キ鍚?灏忔椂琛€绯?/div>
+          <div class="input-unit">
+            <input type="number" id="glucosePostmeal" placeholder="椁愬悗2h琛€绯栧€? min="2" max="30" step="0.1">
+            <span class="unit">mmol/L</span>
+          </div>
+          <div id="glucosePostmealStatus" class="record-result"></div>
+        </div>
+
+        <button class="btn btn-primary" onclick="saveGlucose()">馃捑 淇濆瓨琛€绯栬褰?/button>
+      </div>
+
+      <!-- 鏅氶璁板綍 -->
+      <div class="card">
+        <div class="card-title"><span class="icon">馃嵔锔?/span>褰撴棩鏅氶璁板綍</div>
+        <div class="guide-banner" style="margin-bottom:12px;">
+          馃挕 璁板綍浠婃櫄鍚冧簡浠€涔堬紝瀵圭収椁愬悗琛€绯栧€硷紝甯姪鎵惧嚭褰卞搷琛€绯栫殑椋熺墿銆?        </div>
+        <div class="dinner-search-wrap">
+          <input type="text" id="dinnerSearch" placeholder="鎼滅储椋熺墿娣诲姞鍒版櫄椁?.." oninput="onDinnerSearch()" onfocus="onDinnerSearch()" autocomplete="off">
+          <div class="dinner-autocomplete" id="dinnerAutocomplete"></div>
+        </div>
+        <div class="dinner-tags" id="dinnerTags">
+          <span class="empty-hint">杩樻病鏈夎褰曚粖鏅氱殑鏅氶</span>
+        </div>
+        <button class="btn btn-primary" onclick="saveDinner()">馃捑 淇濆瓨鏅氶璁板綍</button>
+      </div>
+
+      <!-- 琛€绯栬秼鍔垮浘琛?-->
+      <div class="card">
+        <div class="card-title"><span class="icon">馃搱</span>琛€绯栬秼鍔?/div>
+        <div class="chart-period" id="glucosePeriod">
+          <button data-period="7" class="active" onclick="switchGlucosePeriod(7, this)">鏈€杩?澶?/button>
+          <button data-period="30" onclick="switchGlucosePeriod(30, this)">30澶?/button>
+          <button data-period="90" onclick="switchGlucosePeriod(90, this)">90澶?/button>
+        </div>
+        <div class="chart-container"><canvas id="glucoseChart"></canvas></div>
+        <div id="glucoseNoData" class="no-data" style="display:none;">
+          <div class="icon">馃搵</div>
+          <div>鏆傛棤琛€绯栨暟鎹紝璇峰厛褰曞叆</div>
+        </div>
+        <div class="stats-row" id="glucoseStats"></div>
+        <div id="glucoseDinnerContext"></div>
+      </div>
+    </section>
+
+    <!-- Tab 3: 椋熺墿鏌ヨ -->
+    <section class="tab-content" id="tab-food">
+      <div class="card">
+        <div class="card-title"><span class="icon">馃崥</span>椋熺墿鏌ヨ</div>
+        <div class="guide-banner">
+          馃挕 <strong>浣跨敤璇存槑锛?/strong>杈撳叆椋熺墿鍚嶇О鎴栭€夋嫨鍒嗙被锛屾煡鐪嬮鐗╃殑GI鍊笺€佸琛€绯栬鍘嬬殑褰卞搷锛屼互鍙婄硸鍓嶆湡鐨勯ギ椋熷缓璁€侴I鍊艰秺浣庯紝瀵硅绯栧奖鍝嶈秺灏忋€?        </div>
+        <div class="search-box">
+          <span class="search-icon">馃攳</span>
+          <input type="text" id="foodSearch" placeholder="杈撳叆椋熺墿鍚嶇О锛屽锛氱背楗€佽嫻鏋?.." oninput="filterFoods()" onfocus="filterFoods()" autocomplete="off">
+          <div class="autocomplete-dropdown" id="foodAutocomplete"></div>
+        </div>
+
+        <div class="daily-tips" id="dailyTips"></div>
+      </div>
+    </section>
+
+    <!-- Tab 4: 璁剧疆 -->
+    <section class="tab-content" id="tab-settings">
+      <div class="card">
+        <div class="card-title"><span class="icon">鈿欙笍</span>璁剧疆</div>
+
+        <div class="setting-section">
+          <h3>馃搹 姝ｅ父鍊艰寖鍥?/h3>
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">鏀剁缉鍘嬩笂闄?/div>
+              <div class="setting-desc">姝ｅ父: 90鈥?40 mmHg</div>
+            </div>
+            <div class="range-group">
+              <span>90 鈥?/span>
+              <input type="number" id="setBpSysMax" min="100" max="200" value="140">
+              <span>mmHg</span>
+            </div>
+          </div>
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">鑸掑紶鍘嬩笂闄?/div>
+              <div class="setting-desc">姝ｅ父: 60鈥?0 mmHg</div>
+            </div>
+            <div class="range-group">
+              <span>60 鈥?/span>
+              <input type="number" id="setBpDiaMax" min="60" max="130" value="90">
+              <span>mmHg</span>
+            </div>
+          </div>
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">绌鸿吂琛€绯栦笂闄?/div>
+              <div class="setting-desc">姝ｅ父: 3.9鈥?.1 mmol/L</div>
+            </div>
+            <input type="number" id="setGluFastingMax" min="4" max="15" step="0.1" value="6.1">
+          </div>
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">椁愬悗2h琛€绯栦笂闄?/div>
+              <div class="setting-desc">姝ｅ父: &lt;7.8 mmol/L</div>
+            </div>
+            <input type="number" id="setGluPostmealMax" min="5" max="20" step="0.1" value="7.8">
+          </div>
+        </div>
+
+        <div class="setting-section">
+          <h3>鈴?姣忔棩鎻愰啋鏃堕棿</h3>
+          <div class="guide-banner">
+            馃挕 鍒拌揪璁惧畾鏃堕棿鏃讹紝娴忚鍣ㄤ細寮瑰嚭閫氱煡鎻愰啋銆傚悓鏃跺缓璁湪鎵嬫満绯荤粺闂归挓涓篃璁剧疆鐩稿悓鏃堕棿浣滀负鍏滃簳銆?          </div>
+          <div class="setting-item">
+            <div class="setting-label">鈽€锔?鏃╀笂琛€鍘?/div>
+            <input type="time" id="setRemindBpMorning" value="08:00">
+          </div>
+          <div class="setting-item">
+            <div class="setting-label">馃寵 鏅氫笂琛€鍘?/div>
+            <input type="time" id="setRemindBpEvening" value="20:00">
+          </div>
+          <div class="setting-item">
+            <div class="setting-label">馃寘 绌鸿吂琛€绯?/div>
+            <input type="time" id="setRemindGluFasting" value="07:30">
+          </div>
+          <div class="setting-item">
+            <div class="setting-label">馃嵔锔?鏅氶キ鍚?h琛€绯?/div>
+            <input type="time" id="setRemindGluPostmeal" value="20:30">
+          </div>
+        </div>
+
+        <div class="setting-section">
+          <h3>馃捑 鏁版嵁绠＄悊</h3>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="btn btn-outline btn-sm" onclick="exportData()">馃摜 瀵煎嚭鏁版嵁</button>
+            <button class="btn btn-outline btn-sm" onclick="document.getElementById('importFile').click()">馃摛 瀵煎叆鏁版嵁</button>
+            <button class="btn btn-danger btn-sm" onclick="clearAllData()">馃棏锔?娓呴櫎鍏ㄩ儴鏁版嵁</button>
+          </div>
+          <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importData(event)">
+        </div>
+
+        <div style="margin-top:20px;text-align:center;">
+          <button class="btn btn-primary" onclick="saveSettings()">馃捑 淇濆瓨璁剧疆</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="icon">鈩癸笍</span>鍏充簬</div>
+        <div style="font-size:var(--font-sm);color:var(--text-light);line-height:1.8;">
+          <p><strong>鑰佸乏鍋ュ悍妫€娴?/strong> v1.0</p>
+          <p>涓撲负绯栧墠鏈熶汉缇よ璁＄殑鍋ュ悍绠＄悊宸ュ叿銆?/p>
+          <p style="margin-top:4px;font-size:12px;">鍙戝竷鏃ユ湡锛?026-05-27 路 椋熺墿搴擄細175+绉?路 鏀寔绂荤嚎浣跨敤</p>
+          <p style="margin-top:8px;"><strong>鍋ュ悍鏍囧噯鍙傝€冿細</strong></p>
+          <p>鈥?琛€鍘嬫爣鍑嗗弬鑰冦€婁腑鍥介珮琛€鍘嬮槻娌绘寚鍗椼€?/p>
+          <p>鈥?琛€绯栨爣鍑嗗弬鑰冦€婁腑鍥?鍨嬬硸灏跨梾闃叉不鎸囧崡銆?/p>
+          <p>鈥?GI鍊兼暟鎹弬鑰冦€婁腑鍥介鐗╂垚鍒嗚〃銆嬪強鍥介檯GI鏁版嵁搴?/p>
+          <p style="margin-top:8px;color:var(--red);"><strong>鈿狅笍 鍏嶈矗澹版槑锛?/strong>鏈伐鍏蜂粎渚涘弬鑰冿紝涓嶈兘鏇夸唬涓撲笟鍖荤枟寤鸿銆傚鏈夊仴搴烽棶棰樿鍙婃椂灏卞尰銆?/p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-tab="tab-bp" onclick="switchTab('tab-bp', this)">
+      <span class="nav-icon">馃挀</span>琛€鍘?    </button>
+    <button class="nav-item" data-tab="tab-glucose" onclick="switchTab('tab-glucose', this)">
+      <span class="nav-icon">馃└</span>琛€绯?    </button>
+    <button class="nav-item" data-tab="tab-food" onclick="switchTab('tab-food', this)">
+      <span class="nav-icon">馃崥</span>鏌ラ鐗?    </button>
+    <button class="nav-item" data-tab="tab-settings" onclick="switchTab('tab-settings', this)">
+      <span class="nav-icon">鈿欙笍</span>璁剧疆
+    </button>
+  </nav>
+</div>
+
+<!-- Food Detail Modal -->
+<div class="modal-overlay" id="foodModal" onclick="if(event.target===this)closeFoodModal()">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div id="foodModalContent"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ==================== 鏁版嵁妯″瀷 ====================
+const STORAGE_KEY_RECORDS = 'lz_health_records';
+const STORAGE_KEY_SETTINGS = 'lz_settings';
+
+function loadRecords() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY_RECORDS)) || []; }
+  catch(e) { return []; }
+}
+
+function saveRecords(records) {
+  localStorage.setItem(STORAGE_KEY_RECORDS, JSON.stringify(records));
+}
+
+function loadSettings() {
+  const defaults = {
+    bp_systolic_max: 140,
+    bp_diastolic_max: 90,
+    bp_systolic_min: 90,
+    bp_diastolic_min: 60,
+    glucose_fasting_max: 6.1,
+    glucose_fasting_min: 3.9,
+    glucose_postmeal_max: 7.8,
+    reminder_morning_bp: '08:00',
+    reminder_evening_bp: '20:00',
+    reminder_fasting_glucose: '07:30',
+    reminder_postmeal_glucose: '20:30'
+  };
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY_SETTINGS)) || {};
+    return Object.assign({}, defaults, saved);
+  } catch(e) { return defaults; }
+}
+
+function saveSettingsToStore(settings) {
+  localStorage.setItem(STORAGE_KEY_SETTINGS, JSON.stringify(settings));
+}
+
+let records = loadRecords();
+let settings = loadSettings();
+
+// ==================== 椋熺墿鏁版嵁搴?====================
+const foodDB = [
+  // 涓婚
+  {name:'鐧界背楗?,cat:'涓婚',gi:83,giLevel:'high',calPer100:116,serve:'50-75g锛堢害鍗婄锛?,bgAdvice:'鐧界背楗璆I鍊奸珮锛屽悆鍚庤绯栦笂鍗囪緝蹇€傚缓璁斁鍑変竴鐐瑰啀鍚冿紝鎼厤钄彍鍜岃泲鐧借川涓€璧峰悆鍙互鍑忕紦鍗囩硸閫熷害銆傜硸鍓嶆湡姣忛寤鸿涓嶈秴杩囧崐纰椼€?,bpAdvice:'绫抽キ鏈韩瀵硅鍘嬪奖鍝嶈緝灏忥紝浣嗚娉ㄦ剰鎼厤鑿滆偞鐨勭洂鍒嗐€?,tip:'鍙互璇曡瘯鐢ㄧ硻绫虫垨鐕曢害鏇夸唬閮ㄥ垎鐧界背锛孏I鍊兼洿浣庯紝鏇存湁楗辫吂鎰熴€?},
+  {name:'棣掑ご',cat:'涓婚',gi:88,giLevel:'high',calPer100:223,serve:'30-50g锛堢害鍗婁釜锛?,bgAdvice:'棣掑ご鐨凣I鍊煎緢楂橈紝娑堝寲鍚告敹蹇紝瀹规槗寮曡捣琛€绯栧揩閫熶笂鍗囥€傜硸鍓嶆湡涓嶅缓璁┖鑵瑰悆锛屽彲浠ユ惌閰嶈敩鑿滃拰楦¤泲涓€璧峰悆銆?,bpAdvice:'棣掑ご鍚挔閲忚緝浣庯紝瀵硅鍘嬫棤涓嶈壇褰卞搷銆?,tip:'寤鸿閫夋嫨鍏ㄩ害棣掑ご鎴栨潅绮澶达紝GI鍊间細浣庝竴浜涖€?},
+  {name:'闈㈡潯',cat:'涓婚',gi:82,giLevel:'high',calPer100:110,serve:'50-75g锛堝共閲嶇害涓€灏忔妸锛?,bgAdvice:'闈㈡潯GI鍊煎亸楂橈紝浣嗘瘮棣掑ご绋嶅ソ銆傜叜寰楃‖涓€鐐癸紙寮圭墮鍙ｆ劅锛夋瘮鐓儌鐨勯潰鏉″崌绯栨洿鎱€?,bpAdvice:'娉ㄦ剰闈㈡堡閲岀殑鐩愬垎锛屽缓璁皯鍠濇堡銆?,tip:'鎺ㄨ崘鑽為害闈㈡垨鍏ㄩ害闈㈡潯锛屽崌绯栭€熷害鏇存參銆?},
+  {name:'灏忕背绮?,cat:'涓婚',gi:72,giLevel:'high',calPer100:46,serve:'涓€灏忕锛堢害200ml锛?,bgAdvice:'灏忕背绮ヨ櫧鐒舵槸绮楃伯锛屼絾鐓垚绮ュ悗GI鍊间笉浣庛€傚缓璁笉瑕佺叜澶儌锛屽彲浠ュ姞涓€浜涚嚂楹︿竴璧风叜闄嶄綆鍗囩硸閫熷害銆?,bpAdvice:'灏忕背瀵屽惈閽撅紝鏈夊姪浜庣淮鎸佹甯歌鍘嬨€?,tip:'绮ョ被鍗囩硸蹇紝绯栧墠鏈熷枬绮ヨ鎺у埗閲忥紝涓嶈绌鸿吂鍠濄€?},
+  {name:'鐕曢害',cat:'涓婚',gi:55,giLevel:'low',calPer100:377,serve:'30-40g锛堢害3-4鍕猴級',bgAdvice:'鐕曢害鏄綆GI椋熺墿锛屽瘜鍚彲婧舵€ц喅椋熺氦缁达紙尾-钁¤仛绯栵級锛岃兘鏈夋晥鍑忕紦琛€绯栦笂鍗囬€熷害锛屾槸绯栧墠鏈熷緢濂界殑涓婚閫夋嫨銆?,bpAdvice:'鐕曢害涓殑鑶抽绾ょ淮鏈夊姪浜庨檷浣庤儐鍥洪唶锛屽蹇冭绠″仴搴锋湁鐩娿€?,tip:'閫夋嫨鍘熷懗鐕曢害鐗囷紝涓嶈閫夐€熸憾鎴栬皟鍛崇殑锛岄偅浜涘線寰€鍔犱簡绯栥€?},
+  {name:'鍏ㄩ害闈㈠寘',cat:'涓婚',gi:50,giLevel:'low',calPer100:246,serve:'1-2鐗囷紙绾?0g锛?,bgAdvice:'鍏ㄩ害闈㈠寘GI鍊艰緝浣庯紝瀵屽惈鑶抽绾ょ淮锛屾瘮鐧介潰鍖呮洿閫傚悎绯栧墠鏈熶汉缇ゃ€備絾瑕佹敞鎰忕湅閰嶆枡琛紝閫夊叏楹︾矇鎺掔涓€鐨勩€?,bpAdvice:'鍏ㄩ害椋熷搧鍚捑鍜岄晛锛屾湁鍔╀簬琛€鍘嬫帶鍒躲€?,tip:'鏈変簺"鍏ㄩ害闈㈠寘"瀹為檯涓婃坊鍔犱簡寰堝绯栧拰娌癸紝璐拱鏃惰鐪嬫竻閰嶆枡琛ㄣ€?},
+  {name:'鐜夌背',cat:'涓婚',gi:55,giLevel:'low',calPer100:112,serve:'涓瓑澶у皬1鏍癸紙绾?00g锛?,bgAdvice:'鐜夌背灞炰簬涓綆GI椋熺墿锛屽瘜鍚喅椋熺氦缁村拰B鏃忕淮鐢熺礌銆傛按鐓帀绫虫瘮鐑ょ帀绫冲崌绯栨洿鎱€?,bpAdvice:'鐜夌背鍚捑涓板瘜锛屾湁鍔╀簬鎺掗挔闄嶅帇銆?,tip:'鐢滅帀绫冲拰绯帀绫矴I鍊间笉鍚岋紝绯帀绫矴I鍊兼洿楂橈紝绯栧墠鏈熷缓璁€夌敎鐜夌背銆?},
+  {name:'绾㈣柉',cat:'涓婚',gi:54,giLevel:'low',calPer100:86,serve:'涓瓑澶у皬1涓紙绾?50g锛?,bgAdvice:'绾㈣柉GI鍊间腑绛夊亸浣庯紝瀵屽惈鑶抽绾ょ淮銆備絾瑕佹敞鎰忥紝鐑ょ孩钖瘮钂哥孩钖崌绯栧揩锛屽洜涓虹儰鍒惰繃绋嬩腑娣€绮夋洿瀹规槗琚惛鏀躲€?,bpAdvice:'绾㈣柉楂橀捑浣庨挔锛屾槸楂樿鍘嬩汉缇ょ殑鐞嗘兂椋熺墿銆?,tip:'绾㈣柉鐨瘜鍚氦缁达紝娲楀噣鍚庡彲浠ュ甫鐨悆銆?},
+  {name:'灏忕背',cat:'涓婚',gi:71,giLevel:'high',calPer100:361,serve:'30-50g锛堝共閲嶏級',bgAdvice:'灏忕背鏄矖绮紝GI鍊兼瘮鐧界背楗暐浣庝絾浠嶅睘楂楪I銆傚仛鎴愬共楗瘮鐓播鍗囩硸鎱€?,bpAdvice:'灏忕背瀵屽惈B鏃忕淮鐢熺礌鍜岀熆鐗╄川锛岃惀鍏诲叏闈€?,tip:'灏忕背鍜屽ぇ绫虫贩鍚堢叜楗紝鏃㈣兘闄嶄綆鎬籊I鍊硷紝鍙ｆ劅涔熷ソ銆?},
+  {name:'绯欑背楗?,cat:'涓婚',gi:56,giLevel:'mid',calPer100:123,serve:'50-75g锛堢害鍗婄锛?,bgAdvice:'绯欑背楗瘮鐧界背楗璆I鍊间綆寰堝锛屾槸绯栧墠鏈熷緢濂界殑涓婚鏇夸唬銆傚瘜鍚喅椋熺氦缁达紝楗辫吂鎰熷己銆?,bpAdvice:'绯欑背淇濈暀浜嗙背绯犲眰锛屽瘜鍚晛鍜岄捑锛屾湁鐩婂績琛€绠″仴搴枫€?,tip:'鍒氬紑濮嬪悆绯欑背鍙互鍜岀櫧绫虫贩鍚堬紝閫愭笎澧炲姞绯欑背姣斾緥銆?},
+  {name:'鍦熻眴',cat:'涓婚',gi:62,giLevel:'mid',calPer100:81,serve:'涓瓑澶у皬1涓紙绾?50g锛?,bgAdvice:'鍦熻眴GI鍊间腑绛夛紝浣嗗仛娉曞緢鍏抽敭銆傝捀鐓湡璞咷I鍊艰緝浣庯紝鍦熻眴娉ュ拰鐐歌柉鏉I鍊煎緢楂樸€傛斁鍑夊悗鍚冨崌绯栨洿鎱€?,bpAdvice:'鍦熻眴瀵屽惈閽撅紝鏈夊姪浜庨檷琛€鍘嬶紝浣嗙偢钖潯鍚洂鍜屾补鑴傚锛岃閬垮厤銆?,tip:'鍦熻眴灞炰簬涓婚绫伙紝鍚冧簡鍦熻眴瑕佺浉搴斿噺灏戠背楗殑閲忋€?},
+
+  // 钄彍
+  {name:'鑿犺彍',cat:'钄彍',gi:15,giLevel:'low',calPer100:23,serve:'100-200g锛堢害涓€灏忕洏锛?,bgAdvice:'鑿犺彍GI鍊兼瀬浣庯紝鍑犱箮涓嶅奖鍝嶈绯栥€傚瘜鍚喅椋熺氦缁淬€侀搧鍜屽绉嶇淮鐢熺礌锛屾槸绯栧墠鏈熺悊鎯宠敩鑿溿€?,bpAdvice:'鑿犺彍瀵屽惈閽惧拰闀侊紝鏈夊姪浜庤绠¤垝寮犮€侀檷浣庤鍘嬨€備絾鑿犺彍鑽夐吀杈冮珮锛岃偩缁撶煶鎮ｈ€呰閫傞噺銆?,tip:'鐒按鍙互鍘婚櫎閮ㄥ垎鑽夐吀锛屼繚鐣欒惀鍏汇€?},
+  {name:'瑗跨孩鏌?,cat:'钄彍',gi:30,giLevel:'low',calPer100:19,serve:'1-2涓腑绛夊ぇ灏忥紙绾?00g锛?,bgAdvice:'瑗跨孩鏌縂I鍊间綆锛屽惈绯栭噺灏戯紝瀵屽惈鐣寗绾㈢礌鍜岀淮鐢熺礌C锛屾槸绯栧墠鏈熺殑瀹夊叏椋熺墿銆?,bpAdvice:'瑗跨孩鏌垮瘜鍚捑锛屾湁鍔╀簬鎺掗挔闄嶅帇銆傜暘鑼勭孩绱犲蹇冭绠℃湁淇濇姢浣滅敤銆?,tip:'鐔熷悆瑗跨孩鏌跨暘鑼勭孩绱犲惛鏀舵洿濂斤紝鐢熷悆缁寸敓绱燙淇濆瓨鏇村銆?},
+  {name:'榛勭摐',cat:'钄彍',gi:15,giLevel:'low',calPer100:15,serve:'1鏍癸紙绾?00g锛?,bgAdvice:'榛勭摐鍑犱箮涓嶅惈绯栵紝姘村垎楂樼儹閲忎綆锛屾槸绯栧墠鏈熼潪甯稿畨鍏ㄧ殑钄彍锛屽彲浠ユ斁蹇冨悆銆?,bpAdvice:'榛勭摐鍚捑锛屾湁鍒╁翱浣滅敤锛屽鎺у埗琛€鍘嬫湁鐩娿€?,tip:'榛勭摐鐨惀鍏讳赴瀵岋紝娲楀噣鍚庡缓璁甫鐨悆銆?},
+  {name:'瑗垮叞鑺?,cat:'钄彍',gi:10,giLevel:'low',calPer100:34,serve:'100-150g锛堢害涓€灏忕锛?,bgAdvice:'瑗垮叞鑺辨槸"瓒呯骇钄彍"锛孏I鍊兼瀬浣庯紝瀵屽惈鑶抽绾ょ淮鍜屾姉姘у寲鐗╄川锛堣悵鍗滅～绱狅級锛岃兘甯姪鏀瑰杽鑳板矝绱犳晱鎰熸€с€?,bpAdvice:'瑗垮叞鑺卞惈閽惧拰鎶楁哀鍖栫墿璐紝瀵瑰績琛€绠′繚鎶や綔鐢ㄦ樉钁椼€?,tip:'娓呰捀鎴栧揩鐐掓渶鑳戒繚鐣欒惀鍏伙紝涓嶈鐓お涔呫€?},
+  {name:'鑼勫瓙',cat:'钄彍',gi:15,giLevel:'low',calPer100:21,serve:'100-200g锛堢害1鏍癸級',bgAdvice:'鑼勫瓙GI鍊煎緢浣庯紝瀵屽惈鑶抽绾ょ淮鍜岃姳闈掔礌銆備絾瑕佹敞鎰忓仛娉曗€斺€旂孩鐑ц寗瀛愩€佹补鐒栬寗瀛愬惛娌瑰锛屽鍔犱簡涓嶅繀瑕佺殑鐑噺銆?,bpAdvice:'鑼勫瓙涓殑鑺遍潚绱犲拰閽炬湁鍔╀簬淇濇姢琛€绠★紝浣嗛噸娌圭児楗細鎶垫秷杩欎簺濂藉銆?,tip:'鎺ㄨ崘娓呰捀鎴栧噳鎷岋紝灏戞补灏戠洂銆?},
+  {name:'鑳¤悵鍗?,cat:'钄彍',gi:39,giLevel:'low',calPer100:37,serve:'50-100g锛堢害鍗婃牴鍒?鏍癸級',bgAdvice:'寰堝浜轰互涓鸿儭钀濆崪鍚硸楂橈紝鍏跺疄瀹冪殑GI鍊间笉楂樸€傚瘜鍚?鑳¤悵鍗滅礌锛屽彲浠ユ斁蹇冨悆銆?,bpAdvice:'鑳¤悵鍗滀腑鐨勯捑鍜屾姉姘у寲鐗╄川鏈夌泭蹇冭绠″仴搴枫€?,tip:'鐔熷悆姣旂敓鍚兾?鑳¤悵鍗滅礌鍚告敹鐜囨洿楂樸€?},
+  {name:'鍗楃摐',cat:'钄彍',gi:75,giLevel:'high',calPer100:22,serve:'50-80g锛堢害涓€灏忓潡锛?,bgAdvice:'鍗楃摐鐨凣I鍊煎叾瀹炰笉浣庯紝浣嗗畠鐨勭⒊姘村惈閲忎笉楂樸€傞€傞噺鍚冮棶棰樹笉澶э紝浣嗕笉瑕佸ぇ閲忓悆锛屽挨鍏舵槸鑰佸崡鐡溿€?,bpAdvice:'鍗楃摐瀵屽惈閽惧拰鏋滆兌锛屾湁鍔╀簬鎺у埗琛€鍘嬪拰鑳嗗浐閱囥€?,tip:'瀚╁崡鐡滄瘮鑰佸崡鐡淕I鍊间綆锛屾洿鎺ㄨ崘銆?},
+  {name:'鑺硅彍',cat:'钄彍',gi:15,giLevel:'low',calPer100:14,serve:'100-150g锛堢害涓€灏忕洏锛?,bgAdvice:'鑺硅彍鐑噺鏋佷綆锛岃喅椋熺氦缁翠赴瀵岋紝瀵硅绯栧嚑涔庢病鏈夊奖鍝嶃€?,bpAdvice:'鑺硅彍鏄憲鍚嶇殑"闄嶅帇钄彍"锛屽惈鏈夎姽鑿滅礌锛堜竴绉嶅ぉ鐒堕檷鍘嬫垚鍒嗭級锛岄珮绾ょ淮涔熸湁鍔╀簬闄嶄綆鑳嗗浐閱囥€?,tip:'鑺硅彍鍙惰惀鍏绘瘮鑼庢洿涓板瘜锛屽埆涓㈡帀銆?},
+  {name:'鐧借彍',cat:'钄彍',gi:15,giLevel:'low',calPer100:13,serve:'150-200g锛堢害涓€鐩橈級',bgAdvice:'澶х櫧鑿淕I鍊兼瀬浣庯紝鍚硸閲忔瀬灏戯紝鍙互闅忔剰鍚冦€?,bpAdvice:'鐧借彍閽惧惈閲忛珮锛岄挔鍚噺浣庯紝鏈夊姪浜庢帶鍒惰鍘嬨€?,tip:'鐧借彍鏄啲瀛ｆ椂浠よ彍锛岃惀鍏诲ソ鍙堜究瀹溿€?},
+  {name:'鑻︾摐',cat:'钄彍',gi:15,giLevel:'low',calPer100:19,serve:'100-150g锛堢害鍗婃牴锛?,bgAdvice:'鑻︾摐鏄叕璁ょ殑"闄嶇硸钄彍"锛屽惈鏈夎嫤鐡滅殏鑻凤紙琚О涓?妞嶇墿鑳板矝绱?锛夛紝鏈夊姪浜庢敼鍠勮绯栦唬璋€侴I鍊兼瀬浣庛€?,bpAdvice:'鑻︾摐瀵硅鍘嬫棤涓嶈壇褰卞搷锛屾竻鐑В姣掋€?,tip:'鑻︾摐鐨勮嫤鍛虫潵鑷嫤鐡滅礌锛屾€曡嫤鍙互鍏堢敤鐩愯厡涓€涓嬪啀娲楁帀銆?},
+
+  // 姘存灉
+  {name:'鑻规灉',cat:'姘存灉',gi:36,giLevel:'low',calPer100:53,serve:'涓瓑澶у皬1涓紙绾?00g锛?,bgAdvice:'鑻规灉鏄綆GI姘存灉锛屽瘜鍚灉鑳讹紙涓€绉嶅彲婧舵€х氦缁达級锛岃兘鍑忕紦绯栧垎鍚告敹銆傚甫鐨悆鐨勭氦缁存洿澶氥€傜硸鍓嶆湡姣忓ぉ1涓病闂銆?,bpAdvice:'鑻规灉瀵屽惈閽惧拰澶氶厷绫绘姉姘у寲鐗╋紝鏈夊姪浜庨檷浣庤鍘嬪拰淇濇姢蹇冭绠°€?,tip:'鏈€濂藉湪涓ら涔嬮棿鍚冿紝涓嶈楗悗椹笂鍚冿紝閬垮厤琛€绯栧彔鍔犲崌楂樸€?},
+  {name:'棣欒晧',cat:'姘存灉',gi:52,giLevel:'low',calPer100:93,serve:'灏忛钑?鏍癸紙绾?00g锛?,bgAdvice:'棣欒晧GI鍊间腑绛夊亸浣庯紝浣嗙⒊姘村寲鍚堢墿鍚噺杈冮珮銆傜硸鍓嶆湡鍙互閫傞噺鍚冿紝浣嗕笉瑕佷竴娆″悆澶锛屽挨鍏舵槸鐔熼€忕殑棣欒晧銆?,bpAdvice:'棣欒晧鏄?楂橀捑姘存灉涔嬬帇"锛屾湁鍔╀簬闄嶄綆琛€鍘嬨€備絾鑲惧姛鑳戒笉濂界殑浜鸿鎺у埗閲忋€?,tip:'閫夌◢寰潚涓€鐐圭殑棣欒晧锛孏I鍊兼洿浣庛€?},
+  {name:'瑗跨摐',cat:'姘存灉',gi:72,giLevel:'high',calPer100:31,serve:'涓€灏忕墖锛堢害150g锛?,bgAdvice:'瑗跨摐GI鍊煎緢楂橈紝浣嗘按鍒嗗ぇ銆佹€荤⒊姘翠笉绠楅珮銆傜硸鍓嶆湡瑕佷弗鏍兼帶鍒堕噺锛屼竴娆′笉瓒呰繃涓€灏忕墖锛屼笉瑕佹Θ姹佸枬銆?,bpAdvice:'瑗跨摐鍚摐姘ㄩ吀锛堜竴绉嶆皑鍩洪吀锛夛紝鏈夊姪浜庤绠¤垝寮犮€備絾鍚硸杈冮珮锛屼笉瀹滃鍚冦€?,tip:'涓嶈鍚冨啺瑗跨摐锛佷綆娓╀細鍒烘縺琛€绯栨尝鍔ㄣ€?},
+  {name:'钁¤悇',cat:'姘存灉',gi:56,giLevel:'mid',calPer100:44,serve:'10-15棰楋紙绾?00g锛?,bgAdvice:'钁¤悇GI鍊间腑绛夛紝浣嗗鏄撲竴娆″悆澶氾紝涓嶇煡涓嶈鎽勫叆杩囧绯栧垎銆傚缓璁寜棰楁暟鎺у埗鍒嗛噺銆?,bpAdvice:'钁¤悇鐨拰绫戒腑鍚櫧钘滆姦閱囩瓑鎶楁哀鍖栫墿璐紝鏈夊姪浜庡績琛€绠′繚鎶ゃ€?,tip:'鍚冭憽钀勪笉鍚愯憽钀勭毊锛屼絾瑕佸悙钁¤悇绫姐€?},
+  {name:'鐚曠尨妗?,cat:'姘存灉',gi:50,giLevel:'low',calPer100:61,serve:'1-2涓紙绾?00g锛?,bgAdvice:'鐚曠尨妗僄I鍊间綆锛屽瘜鍚淮鐢熺礌C鍜岃喅椋熺氦缁达紝鏄硸鍓嶆湡闈炲父鎺ㄨ崘鐨勬按鏋溿€?,bpAdvice:'鐚曠尨妗冮珮閽句綆閽狅紝缁寸敓绱燙鍚噺鏋侀珮锛屾姉姘у寲淇濇姢琛€绠°€?,tip:'鐚曠尨妗冨甫鐨悆绾ょ淮鏇村锛堟礂鍑€缁掓瘺锛夈€?},
+  {name:'鏌氬瓙',cat:'姘存灉',gi:25,giLevel:'low',calPer100:42,serve:'2-3鐡ｏ紙绾?50g锛?,bgAdvice:'鏌氬瓙GI鍊煎緢浣庯紝鏄硸鍓嶆湡鏈€瀹夊叏鐨勬按鏋滀箣涓€銆傚瘜鍚淮鐢熺礌C鍜屾煔鐨嫹锛屾湁鍔╀簬鏀瑰杽鑳板矝绱犳晱鎰熸€с€?,bpAdvice:'鏌氬瓙鍚捑涓板瘜锛屾湁鍔╀簬琛€鍘嬫帶鍒躲€?,tip:'姝ｅ湪鍚冮檷鍘嬭嵂锛堝挨鍏舵槸閽欓€氶亾闃绘粸鍓傦級鐨勪汉鎱庡悆鏌氬瓙锛屼細澧炲己鑽晥锛?},
+  {name:'钃濊帗',cat:'姘存灉',gi:53,giLevel:'low',calPer100:57,serve:'涓€灏忔妸锛堢害50-80g锛?,bgAdvice:'钃濊帗GI鍊艰緝浣庯紝瀵屽惈鑺遍潚绱狅紙澶╃劧鎶楁哀鍖栧墏锛夛紝鐮旂┒鍙戠幇鏈夊姪浜庢敼鍠勮儼宀涚礌鏁忔劅鎬с€?,bpAdvice:'钃濊帗涓殑鑺遍潚绱犺兘淇濇姢琛€绠″脊鎬э紝闄嶄綆琛€鍘嬨€?,tip:'鍐峰喕钃濊帗钀ュ吇涓嶈緭鏂伴矞钃濊帗锛屼环鏍兼洿瀹炴儬銆?},
+  {name:'姗欏瓙',cat:'姘存灉',gi:43,giLevel:'low',calPer100:48,serve:'涓瓑澶у皬1涓紙绾?00g锛?,bgAdvice:'姗欏瓙鏄綆GI姘存灉锛屽瘜鍚淮鐢熺礌C鍜岃喅椋熺氦缁淬€傚缓璁悆瀹屾暣姘存灉锛屼笉瑕佹Θ姹侊紝鍥犱负鏋滄眮澶卞幓浜嗙氦缁翠笖鍗囩硸鏇村揩銆?,bpAdvice:'姗欏瓙涓殑缁寸敓绱燙鍜岀被榛勯叜鏈夊姪浜庝繚鎶よ绠°€?,tip:'鐧借壊鐨勬缁滀腑鍚湁绾ょ淮鍜屾姉姘у寲鐗╋紝涓嶇敤鍓ュ緱澶共鍑€銆?},
+  {name:'妗冨瓙',cat:'姘存灉',gi:28,giLevel:'low',calPer100:42,serve:'涓瓑澶у皬1涓紙绾?00g锛?,bgAdvice:'妗冨瓙GI鍊间綆锛屾按鍒嗗ぇ锛屽惈绯栭噺閫備腑銆傜硸鍓嶆湡鍙互鏀惧績鍚冦€?,bpAdvice:'妗冨瓙瀵屽惈閽撅紝瀵硅鍘嬫湁鐩娿€?,tip:'閫夎剢妗冩瘮杞鍗囩硸鏇存參銆?},
+  {name:'姊?,cat:'姘存灉',gi:33,giLevel:'low',calPer100:51,serve:'涓瓑澶у皬1涓紙绾?00g锛?,bgAdvice:'姊ㄦ槸浣嶨I姘存灉锛屽瘜鍚按鍒嗗拰绾ょ淮銆傜硸鍓嶆湡姣忓ぉ1涓病闂銆?,bpAdvice:'姊ㄥ惈閽句赴瀵岋紝姘村垎澶氾紝鏈変竴瀹氬埄灏夸綔鐢ㄣ€?,tip:'姊ㄧ毊钀ュ吇鏈€涓板瘜锛屾礂鍑€鍚庡甫鐨悆銆?},
+
+  // 鑲夌被
+  {name:'楦¤兏鑲?,cat:'鑲夌被',gi:0,giLevel:'low',calPer100:133,serve:'100-150g锛堢害鎵嬫帉澶у皬锛?,bgAdvice:'楦¤兏鑲変笉鍚⒊姘达紝GI鍊间负0锛屽琛€绯栨棤鐩存帴褰卞搷銆傞珮铔嬬櫧浣庤剛鑲紝鏄硸鍓嶆湡浼樿川铔嬬櫧鏉ユ簮銆?,bpAdvice:'楦¤兏鑲変綆鑴備綆鑳嗗浐閱囷紝瀵硅鍘嬪弸濂姐€傛敞鎰忕児楗柟寮忥紝娓呰捀鎴栨按鐓渶濂姐€?,tip:'鍘荤毊鍚冿紝楦＄毊鑴傝偑鍚噺楂樸€?},
+  {name:'鐚槮鑲?,cat:'鑲夌被',gi:0,giLevel:'low',calPer100:143,serve:'50-75g锛堢害涓€鍓墤鍏嬬墝澶у皬锛?,bgAdvice:'鐦﹁倝涓嶅惈纰虫按锛屼笉褰卞搷琛€绯栥€備絾瑕佹帶鍒跺垎閲忥紝杩囧鐨勮泲鐧借川鍜岃剛鑲篃浼氶棿鎺ュ奖鍝嶈绯栥€?,bpAdvice:'閫夋嫨鐦︾尓鑲夛紝鍑忓皯楗卞拰鑴傝偑鎽勫叆銆傜児楗椂灏戞斁閰辨补鍜岀洂銆?,tip:'鐚倝鑴傝偑鍚噺杈冮珮锛岀孩鑲夋瘡鍛ㄥ缓璁笉瓒呰繃3娆°€?},
+  {name:'鐗涜倝',cat:'鑲夌被',gi:0,giLevel:'low',calPer100:125,serve:'50-75g锛堢害涓€鍓墤鍏嬬墝澶у皬锛?,bgAdvice:'鐗涜倝涓嶅惈纰虫按锛孏I鍊间负0銆傚瘜鍚搧鍜岄攲銆備絾绾㈣倝鎽勫叆杩囧涓庤儼宀涚礌鎶垫姉鏈夊叧锛屽缓璁€傞噺銆?,bpAdvice:'鐗涜倝涓殑楗卞拰鑴傝偑闇€娉ㄦ剰銆傞€夌墰鑵卞瓙銆佺墰閲岃剨绛夌槮鑲夐儴浣嶃€?,tip:'姣忓懆鍚冪孩鑲夛紙鐚墰缇婅倝锛夊缓璁笉瓒呰繃500g銆?},
+  {name:'楸艰倝',cat:'鑲夌被',gi:0,giLevel:'low',calPer100:104,serve:'100-150g锛堢害涓€鏉′腑绛夐奔锛?,bgAdvice:'楸艰倝涓嶅惈纰虫按锛孏I鍊间负0銆傚瘜鍚紭璐ㄨ泲鐧藉拰Omega-3鑴傝偑閰革紙灏ゅ叾鏄繁娴烽奔锛夛紝鏈夊姪浜庢敼鍠勮儼宀涚礌鏁忔劅鎬с€?,bpAdvice:'楸艰倝鏄?鎶ゅ績椋熺墿"锛孫mega-3鑳介檷浣庣敇娌逛笁閰€佷繚鎶よ绠★紝鏈夊埄浜庤鍘嬫帶鍒躲€傞潪甯告帹鑽愶紒',tip:'鎺ㄨ崘娓呰捀锛岄伩鍏嶆补鐐搞€傛繁娴烽奔锛堜笁鏂囬奔銆侀箔楸硷級Omega-3鍚噺鏇翠赴瀵屻€?},
+  {name:'铏?,cat:'鑲夌被',gi:0,giLevel:'low',calPer100:93,serve:'8-10鍙紙绾?00g锛?,bgAdvice:'铏句笉鍚⒊姘达紝GI鍊间负0銆傞珮铔嬬櫧浣庤剛鑲紝鏄硸鍓嶆湡鐞嗘兂鐨勬捣椴滆泲鐧芥潵婧愩€?,bpAdvice:'铏剧殑閽犲惈閲忚緝楂橈紝楂樿鍘嬩汉缇ゆ敞鎰忎笉瑕佸悆澶锛岀児楗椂涔熷皯鍔犵洂銆?,tip:'铏句粊寰堝ソ鍚冿紝浣嗚灏忓績鏈変汉瀵硅櫨杩囨晱銆?},
+  {name:'楦¤泲',cat:'鑲夌被',gi:0,giLevel:'low',calPer100:144,serve:'1涓紙绾?0g锛?,bgAdvice:'楦¤泲涓嶅惈纰虫按锛孏I鍊间负0銆備紭璐ㄨ泲鐧芥潵婧愶紝鐮旂┒鍙戠幇閫傞噺鍚冮浮铔嬩笉浼氬鍔犵硸灏跨梾椋庨櫓銆?,bpAdvice:'楦¤泲鍚儐鍥洪唶锛屼絾鐮旂┒鏄剧ず閫傞噺鍚冿紙姣忓ぉ1涓級瀵瑰ぇ澶氭暟浜鸿鍘嬪拰琛€鑴傚奖鍝嶄笉澶с€?,tip:'鎺ㄨ崘姘寸叜铔嬫垨钂歌泲锛屽皯娌圭児楗€?},
+
+  // 璞嗙被
+  {name:'榛勮眴',cat:'璞嗙被',gi:18,giLevel:'low',calPer100:390,serve:'25-30g锛堝共閲嶏紝绾︿袱鍕猴級',bgAdvice:'榛勮眴GI鍊兼瀬浣庯紝瀵屽惈妞嶇墿铔嬬櫧鍜岃喅椋熺氦缁达紝鏄硸鍓嶆湡浼樿川铔嬬櫧鏉ユ簮銆傝眴鍒跺搧瀵硅绯栨帶鍒堕潪甯稿ソ銆?,bpAdvice:'榛勮眴瀵屽惈閽俱€侀晛鍜屽ぇ璞嗗紓榛勯叜锛屾湁鍔╀簬闄嶄綆琛€鍘嬪拰鑳嗗浐閱囥€?,tip:'骞茶眴GI鍊间綆锛屼絾鐓啛鍚庡埆鍔犵硸銆?},
+  {name:'缁胯眴',cat:'璞嗙被',gi:27,giLevel:'low',calPer100:329,serve:'25-30g锛堝共閲嶏級',bgAdvice:'缁胯眴GI鍊煎緢浣庯紝瀵屽惈鑶抽绾ょ淮銆備絾娉ㄦ剰涓嶈鐓垚缁胯眴娌欙紙鍔犵硸锛夛紝閭ｆ牱琛€绯栧奖鍝嶅畬鍏ㄤ笉鍚屻€?,bpAdvice:'缁胯眴娓呯儹瑙ｆ瘨锛屾湁鍒╁翱浣滅敤锛屽琛€鍘嬫棤涓嶈壇褰卞搷銆?,tip:'澶忓ぉ鍠濈豢璞嗘堡涓嶈鍔犵硸銆?},
+  {name:'璞嗚厫',cat:'璞嗙被',gi:32,giLevel:'low',calPer100:73,serve:'100-150g锛堢害鍗婂潡锛?,bgAdvice:'璞嗚厫GI鍊间綆锛岃泲鐧藉惈閲忛珮锛屽惈閽欎赴瀵岋紝鏄硸鍓嶆湡闈炲父鎺ㄨ崘鐨勯鐗┿€?,bpAdvice:'璞嗚厫浣庤剛浣庨挔锛屽惈閽欏拰闀侊紝瀵瑰績琛€绠″仴搴锋湁鐩娿€?,tip:'鍖楄眴鑵愶紙鑰佽眴鑵愶級姣斿崡璞嗚厫锛堝璞嗚厫锛夎泲鐧借川鍜岄挋鍚噺鏇撮珮銆?},
+  {name:'璞嗘祮',cat:'璞嗙被',gi:34,giLevel:'low',calPer100:31,serve:'涓€鏉紙绾?50ml锛?,bgAdvice:'璞嗘祮GI鍊间綆锛屾槸寰堝ソ鐨勯ギ鍝侀€夋嫨銆備絾娉ㄦ剰鈥斺€斾笉瑕佸姞绯栵紒鏃犵硸璞嗘祮鎵嶆槸绯栧墠鏈熷ソ浼欎即銆?,bpAdvice:'璞嗘祮鍚ぇ璞嗚泲鐧藉拰寮傞粍閰紝瀵硅鍘嬪拰琛€鑴傛湁鐩娿€?,tip:'鑷繁鎵撶殑璞嗘祮姣斾拱鐨勬洿鍋ュ悍锛屽彲浠ヨ繛璞嗘福涓€璧峰枬澧炲姞绾ょ淮銆?},
+
+  // 濂跺埗鍝?  {name:'鐗涘ザ',cat:'濂跺埗鍝?,gi:27,giLevel:'low',calPer100:54,serve:'涓€鏉紙绾?50ml锛?,bgAdvice:'鐗涘ザGI鍊煎緢浣庯紝瀵屽惈浼樿川铔嬬櫧鍜岄挋銆傜爺绌跺彂鐜板ザ鍒跺搧鎽勫叆涓庤緝浣庣殑2鍨嬬硸灏跨梾椋庨櫓鐩稿叧銆傚缓璁€変綆鑴傛垨鑴辫剛鐗涘ザ銆?,bpAdvice:'鐗涘ザ涓殑閽欏拰閽炬湁鍔╀簬琛€鍘嬫帶鍒躲€備綆鑴傚ザ瀵瑰績琛€绠℃洿鍙嬪ソ銆?,tip:'涔崇硸涓嶈€愬彈鍙互閫夋棤涔崇硸鐗涘ザ鎴栭吀濂躲€?},
+  {name:'閰稿ザ',cat:'濂跺埗鍝?,gi:35,giLevel:'low',calPer100:61,serve:'涓€灏忔澂锛堢害150ml锛?,bgAdvice:'閰稿ザGI鍊艰緝浣庯紝鍚湁鐩婄敓鑿岋紝鏈夊姪浜庤偁閬撳仴搴枫€備絾涓€瀹氳閫夋棤绯栨垨鍘熷懗閰稿ザ锛佸競鍞灉鍛抽吀濂跺惈绯栭噺寰堥珮銆?,bpAdvice:'閰稿ザ涓殑鐩婄敓鑿屽拰閽欐湁鐩婃暣浣撳仴搴凤紝瀵硅鍘嬪奖鍝嶄笉澶с€?,tip:'鎺ㄨ崘甯岃厞閰稿ザ锛岃泲鐧借川鍚噺鏇撮珮锛岀⒊姘存洿浣庛€?},
+  {name:'濂堕叒',cat:'濂跺埗鍝?,gi:0,giLevel:'low',calPer100:328,serve:'涓€灏忕墖锛堢害20g锛?,bgAdvice:'濂堕叒GI鍊兼瀬浣庯紝铔嬬櫧鍜岄挋鍚噺楂樸€備絾鐑噺鍜岄ケ鍜岃剛鑲緝楂橈紝瑕佹帶鍒堕噺銆?,bpAdvice:'濂堕叒鍚挔杈冮珮锛岄珮琛€鍘嬩汉缇よ鐗瑰埆娉ㄦ剰鎺у埗鎽勫叆閲忋€?,tip:'閫変綆鑴備綆閽犵殑濂堕叒鍝佺锛屽鑼呭眿濂堕叒锛坈ottage cheese锛夈€?},
+
+  // 闆堕楗枡
+  {name:'鍙箰',cat:'闆堕楗枡',gi:63,giLevel:'mid',calPer100:42,serve:'涓嶅缓璁ギ鐢?,bgAdvice:'涓€缃愬彲涔愬惈绾?5g绯栵紙绾?鍧楁柟绯栵級锛屼細杩呴€熸帹楂樿绯栥€傜硸鍓嶆湡寮虹儓寤鸿閬垮厤銆傚嵆浣挎槸"鏃犵硸"鍙箰锛屼汉宸ョ敎鍛冲墏涔熷彲鑳藉奖鍝嶈偁閬撹弻缇ゃ€?,bpAdvice:'鍙箰鍚７閰稿拰鍜栧暋鍥狅紝瀵硅鍘嬫棤鐩娿€傞儴鍒嗗彲涔愬惈閽犱篃杈冮珮銆?,tip:'瀹炲湪鎯冲枬鐢滅殑锛屽彲浠ュ枬鏃犵硸鑻忔墦姘村姞涓€鐗囨煚妾€?},
+  {name:'姗欐眮',cat:'闆堕楗枡',gi:50,giLevel:'low',calPer100:45,serve:'涓嶅缓璁ギ鐢?,bgAdvice:'鍗充娇鏄矞姒ㄦ姹侊紝澶卞幓浜嗘按鏋滅殑绾ょ淮鍚庡崌绯栭€熷害杩滃揩浜庡悆姗欏瓙銆備竴鏉姹佺浉褰撲簬3-4涓瀛愮殑绯栧垎锛屽嵈灏戜簡楗辫吂鎰熴€?,bpAdvice:'鏋滄眮鍚捑浣嗙硸鍒嗛珮锛屽琛€鍘嬪ソ澶勪笉濡傚悆瀹屾暣姘存灉銆?,tip:'鍚冩按鏋滐紝涓嶈鍠濇灉姹佲€斺€旇繖鏄硸鍓嶆湡楗鐨勯粍閲戞硶鍒欍€?},
+  {name:'楗煎共',cat:'闆堕楗枡',gi:70,giLevel:'high',calPer100:435,serve:'涓嶅缓璁鐢?,bgAdvice:'甯傚敭楗煎共閫氬父鐢辩簿鐧介潰绮夈€佺硸鍜屽ぇ閲忔补鑴傚埗鎴愶紝GI鍊奸珮銆佺儹閲忛珮銆傜硸鍓嶆湡灏介噺涓嶅悆銆?,bpAdvice:'楗煎共涓殑浜洪€犲ザ娌癸紙鍙嶅紡鑴傝偑锛夊蹇冭绠℃瀬涓烘湁瀹筹紝杩樹細鍗囬珮琛€鍘嬨€?,tip:'鎯冲悆闆堕鍙€夊嚑棰楀師鍛冲潥鏋滐紝钀ュ吇鍙堝仴搴枫€?},
+  {name:'铔嬬硶',cat:'闆堕楗枡',gi:65,giLevel:'mid',calPer100:347,serve:'涓嶅缓璁鐢?,bgAdvice:'铔嬬硶鍚ぇ閲忕硸鍜岀簿鍒剁⒊姘达紝琛€绯栧弽搴斿墽鐑堛€傚嵆浣挎槸鏃犵硸铔嬬硶锛岀簿鍒堕潰绮夊拰娌硅剛涔熶細闂存帴褰卞搷琛€绯栥€?,bpAdvice:'铔嬬硶涓殑榛勬补鍜屼汉閫犲ザ娌瑰惈澶ч噺楗卞拰鑴傝偑鍜屽弽寮忚剛鑲紝瀵硅鍘嬪拰蹇冭绠′笉鍒┿€?,tip:'鍋跺皵鍚冧竴灏忓潡瑙ｉ鍙互锛屼絾瑕佺畻濂?棰勭畻"锛屽綋澶╁噺灏戝叾浠栦富椋熴€?},
+  {name:'宸у厠鍔?,cat:'闆堕楗枡',gi:49,giLevel:'low',calPer100:546,serve:'榛戝阀1-2灏忓潡锛堢害10-15g锛?,bgAdvice:'鍙彲鍚噺70%浠ヤ笂鐨勯粦宸у厠鍔汫I鍊艰緝浣庯紝鍙彲澶氶厷鏈夊姪浜庢敼鍠勮儼宀涚礌鏁忔劅鎬с€備絾鐑噺寰堥珮锛岃涓ユ牸鎺у埗閲忋€?,bpAdvice:'榛戝阀鍏嬪姏涓殑榛勭兎閱囨湁鍔╀簬鑸掑紶琛€绠°€佽交搴﹂檷浣庤鍘嬨€備絾浠呴檺楂樺彲鍙惈閲忕殑榛戝阀銆?,tip:'閫夊彲鍙惈閲忊墺70%鐨勯粦宸у厠鍔涳紝鐗涘ザ宸у厠鍔涘拰鐧藉阀鍏嬪姏閮芥槸"绯?娌?鐨勭粍鍚堬紝涓嶆帹鑽愩€?},
+  {name:'钖墖',cat:'闆堕楗枡',gi:56,giLevel:'mid',calPer100:536,serve:'涓嶅缓璁鐢?,bgAdvice:'钖墖鏄?纰虫按+娌硅剛"鐨勫弻閲嶆墦鍑伙紝鐑噺鏋侀珮锛屽琛€绯栧奖鍝嶅ぇ銆備竴灏忚钖墖绛変簬涓€澶х楗殑鐑噺銆?,bpAdvice:'钖墖鍚洂閲忔瀬楂橈紝涓€琚嬭柉鐗囩殑閽犲惈閲忓彲鑳借秴杩囦竴澶╂帹鑽愰噺鐨勪竴鍗娿€傞珮琛€鍘嬩汉缇ゅ繀椤昏繙绂汇€?,tip:'鎯冲悆鑴嗚剢鐨勯浂椋燂紝鍙互鑷繁鐢ㄥ井娉㈢倝鍋氭棤娌硅柉鐗囷紙鍒囪杽鐗囷紝鎾掑皯璁哥洂锛夈€?},
+  {name:'鍧氭灉锛堟牳妗冿級',cat:'闆堕楗枡',gi:14,giLevel:'low',calPer100:654,serve:'涓€灏忔妸锛堢害20-30g锛?-4涓牳妗冿級',bgAdvice:'鏍告GI鍊兼瀬浣庯紝瀵屽惈鍋ュ悍鐨勪笉楗卞拰鑴傝偑鍜岃喅椋熺氦缁达紝瀵硅绯栧嚑涔庢棤褰卞搷銆備絾鐑噺楂橈紝娉ㄦ剰鎺у埗閲忋€?,bpAdvice:'鏍告瀵屽惈Omega-3鑴傝偑閰革紙伪-浜氶夯閰革級锛屾湁鍔╀簬闄嶄綆鐐庣棁銆佷繚鎶ゅ績琛€绠°€傛瘡澶╀竴灏忔妸瀵硅鍘嬫湁鐩娿€?,tip:'閫夊師鍛冲潥鏋滐紝涓嶈閫夌洂鐒楁垨绯栭湝鐨勩€?},
+  {name:'铚傝湝',cat:'闆堕楗枡',gi:58,giLevel:'mid',calPer100:321,serve:'涓嶅缓璁棩甯搁鐢?,bgAdvice:'铚傝湝铏界劧"澶╃劧"锛屼絾鏈川杩樻槸绯栵紙鏋滅硸+钁¤悇绯栵級锛屼細鐩存帴鍗囬珮琛€绯栥€傜硸鍓嶆湡涓嶅缓璁綔涓烘棩甯哥敎鍛冲墏銆?,bpAdvice:'灏戦噺铚傝湝瀵硅鍘嬪奖鍝嶄笉澶э紝浣嗕笉寤鸿涓轰簡"鍏荤敓"鍒绘剰鍚冭渹铚溿€?,tip:'涓庡叾鍚冭渹铚滐紝涓嶅閫氳繃鍧囪　楗鑾峰彇钀ュ吇銆?},
+
+  // 鏇村甯歌椋熺墿
+  {name:'绱柉',cat:'涓婚',gi:48,giLevel:'low',calPer100:82,serve:'涓瓑澶у皬1涓紙绾?50g锛?,bgAdvice:'绱柉GI鍊间綆浜庣孩钖紝瀵屽惈鑺遍潚绱狅紙鎶楁哀鍖栫墿璐級锛屾湁鍔╀簬鍑忓皯鐐庣棁鍙嶅簲銆傜硸鍓嶆湡涓嶉敊鐨勭矖绮€夋嫨銆?,bpAdvice:'绱柉楂橀捑浣庨挔锛岃姳闈掔礌淇濇姢琛€绠★紝鏈夊姪浜庤鍘嬪仴搴枫€?,tip:'钂哥潃鍚冩渶濂斤紝涓嶈鍔犵硸銆?},
+  {name:'灞辫嵂',cat:'钄彍',gi:38,giLevel:'low',calPer100:57,serve:'100-150g锛堢害10cm闀夸竴娈碉級',bgAdvice:'灞辫嵂GI鍊间綆锛屽惈鏈夐粡娑茶泲鐧藉拰鑶抽绾ょ淮锛屾湁鍔╀簬寤剁紦绯栧垎鍚告敹銆備紶缁熷尰瀛﹁涓哄北鑽湁鍋ヨ劸鍏昏儍鐨勪綔鐢ㄣ€?,bpAdvice:'灞辫嵂鍚捑涓板瘜锛岄粡娑茶泲鐧芥湁鍔╀簬闄嶄綆鑳嗗浐閱囥€?,tip:'灞辫嵂灞炰簬钖被锛屽悆浜嗚閫傚綋鍑忓皯涓婚閲忋€?},
+  {name:'娲嬭懕',cat:'钄彍',gi:10,giLevel:'low',calPer100:40,serve:'50-80g锛堢害鍗婁釜锛?,bgAdvice:'娲嬭懕GI鍊兼瀬浣庯紝鍚湁纭寲鐗╁拰妲茬毊绱狅紝鐮旂┒鍙戠幇鏈夊姪浜庢敼鍠勮儼宀涚礌鏁忔劅鎬с€?,bpAdvice:'娲嬭懕瀵硅鍘嬫湁鏄庣‘鐨勭泭澶勶紝妲茬毊绱犳湁鍔╀簬琛€绠¤垝寮狅紝澶╃劧闄嶈鍘嬨€?,tip:'鐢熷悆闄嶅帇鏁堟灉鏈€濂斤紙鍑夋媽锛夛紝浣嗚儍涓嶅ソ鐨勫彲浠ョ倰鐔熷悆銆?},
+  {name:'鏈ㄨ€?,cat:'钄彍',gi:10,giLevel:'low',calPer100:27,serve:'10-15g锛堝共閲嶏紝娉″彂鍚庣害100g锛?,bgAdvice:'鏈ㄨ€矴I鍊兼瀬浣庯紝瀵屽惈鑶抽绾ょ淮鍜屾鐗╄兌璐ㄣ€傜儹閲忔瀬浣庯紝鏄硸鍓嶆湡瀹夊叏鐨勫ソ椋熸潗銆?,bpAdvice:'鏈ㄨ€虫湁鍔╀簬闄嶄綆琛€娑查粡绋犲害锛屽蹇冭绠′繚鎶ゆ湁鐩娿€?,tip:'骞叉湪鑰虫场鍙戜笉瑕佽秴杩?灏忔椂锛岄伩鍏嶇粏鑿屾粙鐢熴€?},
+  {name:'鍐摐',cat:'钄彍',gi:15,giLevel:'low',calPer100:11,serve:'150-200g锛堢害涓€纰楋級',bgAdvice:'鍐摐鍑犱箮涓嶅惈绯栵紝姘村垎鏋侀珮锛岀儹閲忔瀬浣庯紝鏄硸鍓嶆湡鏈€瀹夊叏鐨勮敩鑿滀箣涓€銆?,bpAdvice:'鍐摐鏈夊埄灏挎秷鑲跨殑浣滅敤锛屾湁鍔╀簬杈呭姪闄嶅帇銆傞挔鍚噺鏋佷綆銆?,tip:'鍐摐鐓叉堡娓呮贰涓嶆补鑵伙紝閫傚悎绯栧墠鏈熷拰楂樿鍘嬩汉缇ゃ€?},
+  {name:'棣欒弴',cat:'钄彍',gi:10,giLevel:'low',calPer100:26,serve:'50-80g锛堢害5-8鏈碉級',bgAdvice:'棣欒弴GI鍊兼瀬浣庯紝瀵屽惈棣欒弴澶氱硸锛堜竴绉嵨?钁¤仛绯栵級锛屾湁鍔╀簬璋冭妭鍏嶇柅鍔熻兘锛屽琛€绯栨棤褰卞搷銆?,bpAdvice:'棣欒弴鍚捑鍜岄害瑙掑浐閱囷紙鍦ㄤ綋鍐呰浆鍖栦负缁寸敓绱燚锛夛紝瀵硅鍘嬫湁鐩娿€?,tip:'骞查鑿囨瘮椴滈鑿囬鍛虫洿娴擄紝钀ュ吇宸埆涓嶅ぇ銆?},
+  {name:'鑺掓灉',cat:'姘存灉',gi:51,giLevel:'low',calPer100:60,serve:'鍗婁釜涓瓑澶у皬锛堢害100g锛?,bgAdvice:'鑺掓灉GI鍊间腑绛夊亸浣庯紝浣嗗惈绯栭噺涓嶇畻浣庛€傜硸鍓嶆湡瑕佹帶鍒堕噺锛屼竴娆′笉瓒呰繃鍗婁釜銆?,bpAdvice:'鑺掓灉瀵屽惈尾-鑳¤悵鍗滅礌鍜岀淮鐢熺礌C锛屽蹇冭绠℃湁鐩娿€?,tip:'鑺掓灉灞炰簬鐑甫姘存灉锛岀硸鍒嗗亸澶氾紝涓嶈璐銆?},
+  {name:'妯辨',cat:'姘存灉',gi:22,giLevel:'low',calPer100:63,serve:'涓€灏忕锛堢害100g锛岀害15棰楋級',bgAdvice:'妯辨GI鍊奸潪甯镐綆锛屾槸绯栧墠鏈熷ソ鏈嬪弸銆傚瘜鍚姳闈掔礌鍜屾姉姘у寲鐗┿€?,bpAdvice:'妯辨鍚捑涓板瘜锛岃姳闈掔礌鏈夊姪浜庨檷浣庣値鐥囧拰琛€鍘嬨€?,tip:'妯辨瀛ｈ妭鎬х煭锛岃秮鏂伴矞鍚冩渶濂姐€?},
+  {name:'鑽夎帗',cat:'姘存灉',gi:40,giLevel:'low',calPer100:32,serve:'涓€灏忕锛堢害150g锛岀害8-10棰楋級',bgAdvice:'鑽夎帗GI鍊间綆锛屽惈绯栭噺涓嶉珮锛屽瘜鍚淮鐢熺礌C鍜岃姳闈掔礌銆傜硸鍓嶆湡鍙互鏀惧績鍚冪殑浣庣硸姘存灉銆?,bpAdvice:'鑽夎帗楂橀捑浣庨挔锛屽瘜鍚姉姘у寲鐗╋紝瀵瑰績琛€绠′繚鎶ゆ湁鐩娿€?,tip:'鑽夎帗鍐滆嵂娈嬬暀鍙兘杈冨锛岃璁ょ湡娓呮礂銆?},
+  {name:'鐏緳鏋?,cat:'姘存灉',gi:45,giLevel:'low',calPer100:55,serve:'鍗婁釜锛堢害200g锛?,bgAdvice:'鐏緳鏋淕I鍊艰緝浣庯紝鏋滆倝涓殑灏忛粦绫藉瘜鍚笉楗卞拰鑴傝偑閰稿拰绾ょ淮銆備絾绾㈠績鐏緳鏋滄瘮鐧藉績鍚硸鐣ラ珮銆?,bpAdvice:'鐏緳鏋滃惈閽惧拰闀侊紝鏈夊姪浜庤绠″仴搴枫€?,tip:'鐏緳鏋滅殑绫芥槸鑶抽绾ょ淮鐨勯噸瑕佹潵婧愩€?},
+  {name:'缇婅倝',cat:'鑲夌被',gi:0,giLevel:'low',calPer100:203,serve:'50-75g',bgAdvice:'缇婅倝涓嶅惈纰虫按锛屽琛€绯栨棤鐩存帴褰卞搷銆備絾鑴傝偑鍚噺杈冮珮锛岃鎺у埗閲忓拰棰戠巼銆?,bpAdvice:'缇婅倝楗卞拰鑴傝偑杈冨锛岃鍘嬮珮鐨勪汉瑕侀€傞噺銆傚啲澶╁悆缇婅倝鏆栬韩锛屼絾瑕佸皯鍠濈緤姹わ紙鐩愬拰鍢屽懁楂橈級銆?,tip:'閫夌槮缇婅倝閮ㄤ綅锛屽缇婅吙鑲夈€?},
+  {name:'楦倝',cat:'鑲夌被',gi:0,giLevel:'low',calPer100:240,serve:'50-75g',bgAdvice:'楦倝涓嶅惈纰虫按锛屼笉褰卞搷琛€绯栥€備絾楦毊鑴傝偑寰堥珮锛屽悆楦倝瑕佸幓鐨€?,bpAdvice:'楦倝鎬у噳锛岃剛鑲互涓嶉ケ鍜岃剛鑲吀涓轰富锛屾瘮鐚倝绋嶅ソ銆備絾鍚屾牱瑕佸幓鐨噺鑴傘€?,tip:'鎺ㄨ崘楦兏鑲夛紙鍘荤毊锛夛紝鏄腑鑲変腑鏈€鐦︾殑閮ㄤ綅銆?},
+  {name:'璞嗚厫骞?,cat:'璞嗙被',gi:25,giLevel:'low',calPer100:140,serve:'50-80g锛堢害3-4鍧楋級',bgAdvice:'璞嗚厫骞睪I鍊煎緢浣庯紝铔嬬櫧璐ㄥ惈閲忔瘮璞嗚厫鏇撮珮锛屾槸绯栧墠鏈熸柟渚跨殑楂樿泲鐧介浂椋熴€?,bpAdvice:'娉ㄦ剰璞嗚厫骞插姞宸ヨ繃绋嬩腑鍙兘娣诲姞杈冨鐩愶紝閫夎喘鏃剁湅閽犲惈閲忋€?,tip:'閫夊師鍛宠眴鑵愬共锛屼笉瑕侀€変簲棣欍€侀夯杈ｇ瓑璋冨懗閲嶇殑銆?},
+  {name:'绾㈣眴',cat:'璞嗙被',gi:30,giLevel:'low',calPer100:324,serve:'25-30g锛堝共閲嶏級',bgAdvice:'绾㈣眴GI鍊间綆锛屽瘜鍚泲鐧藉拰绾ょ淮銆備絾娉ㄦ剰绾㈣眴娌欙紙鍔犵硸锛夊拰绾㈣眴姹わ紙涓嶅姞绯栵級瀵硅绯栧奖鍝嶅ぉ宸湴鍒€?,bpAdvice:'绾㈣眴楂橀捑浣庨挔锛屽埄灏挎秷鑲匡紝瀵硅鍘嬫帶鍒跺弸濂姐€?,tip:'鐓孩璞嗘堡涓嶈鍔犵硸锛屽彲浠ュ拰钖忕背涓€璧风叜銆?},
+  {name:'鏍告',cat:'闆堕楗枡',gi:14,giLevel:'low',calPer100:654,serve:'涓€灏忔妸锛堢害20-30g锛?-4涓級',bgAdvice:'鏍告GI鍊兼瀬浣庯紝瀵屽惈鍋ュ悍鑴傝偑銆備絾鐑噺寰堥珮锛屾瘡澶╀竴灏忔妸鍗冲彲銆?,bpAdvice:'鏍告涓殑Omega-3鏈夊姪浜庝繚鎶ゅ績琛€绠★紝闄嶄綆鐐庣棁銆?,tip:'鍘熷懗鐢熸牳妗冩渶濂斤紝涓嶈鐩愮剹鎴栫硸闇滅殑銆?},
+  {name:'鏉忎粊',cat:'闆堕楗枡',gi:10,giLevel:'low',calPer100:579,serve:'涓€灏忔妸锛堢害15-20g锛?0-15棰楋級',bgAdvice:'鏉忎粊GI鍊兼瀬浣庯紝瀵屽惈缁寸敓绱燛鍜岄晛锛屾湁鍔╀簬鏀瑰杽鑳板矝绱犳晱鎰熸€с€傛瘡澶╀竴灏忔妸銆?,bpAdvice:'鏉忎粊瀵屽惈涓嶉ケ鍜岃剛鑲拰闀侊紝鏈夊姪浜庤垝寮犺绠°€侀檷浣庤鍘嬨€?,tip:'閫夊師鍛崇敓鏉忎粊锛岄伩寮€鐩愮剹鐨勩€?},
+  {name:'鍐版穱娣?,cat:'闆堕楗枡',gi:60,giLevel:'mid',calPer100:207,serve:'涓嶅缓璁鐢?,bgAdvice:'鍐版穱娣嬪惈澶ч噺绯栧拰鑴傝偑锛屽崌绯栧張蹇張楂樸€傝€屼笖鍐板喎椋熺墿鍙兘鍒烘縺琛€绯栨尝鍔ㄦ洿鍓х儓銆?,bpAdvice:'鍐版穱娣嬩腑鐨勫ザ娌瑰惈澶ч噺楗卞拰鑴傝偑锛屽蹇冭绠′笉鍙嬪ソ銆?,tip:'鎯冲悆鍑夌殑锛屽彲浠ヨ嚜宸卞喕涓€浜涙棤绯栭吀濂舵媽钃濊帗锛屽仴搴峰張瑙ｆ殤銆?},
+  {name:'鐧界爞绯?,cat:'闆堕楗枡',gi:65,giLevel:'mid',calPer100:400,serve:'閬垮厤浣跨敤',bgAdvice:'绾硸锛堣敆绯栵級浼氱洿鎺ュ揩閫熷崌楂樿绯栥€傜硸鍓嶆湡鏃ュ父鐑归オ鍜岄ギ鍝佷腑搴斿敖閲忛伩鍏嶆坊鍔犮€?,bpAdvice:'杩囬噺绯栧垎鎽勫叆浼氶€氳繃澶氱閫斿緞鍗囬珮琛€鍘嬶細澧炲姞浣撻噸銆佷績杩涚値鐥囥€佸姞閫熻绠¤€佸寲銆?,tip:'浠ｇ硸锛堝璧よ棑绯栭唶銆佺敎鑿婄硸鑻凤級鍙互鍋跺皵鏇夸唬锛屼絾鏈€濂借繕鏄煿鍏诲皯鍚冪敎鐨勪範鎯€?},
+
+  // 鏇村琛ュ厖
+  {name:'灏忕背鍗楃摐绮?,cat:'涓婚',gi:75,giLevel:'high',calPer100:38,serve:'涓€灏忕锛堢害200ml锛?,bgAdvice:'铏界劧灏忕背鍜屽崡鐡滃悇鑷兘杩樼畻鍋ュ悍锛屼絾鐓垚绮ュ悗GI鍊间細鍗囬珮銆傚枬绮ュ崌绯栧揩锛屽缓璁皯鍠濓紝鎴栨惌閰嶈泲鐧介鐗╀竴璧枫€?,bpAdvice:'涓嶈鍔犵洂锛屾竻娣″枬銆?,tip:'绮ョ被鍗囩硸蹇紝涓嶅缓璁硸鍓嶆湡浜虹兢缁忓父鍠濈播銆?},
+  {name:'娌规潯',cat:'涓婚',gi:75,giLevel:'high',calPer100:388,serve:'涓嶅缓璁鐢?,bgAdvice:'娌规潯鏄?绮惧埗纰虫按+澶ч噺娌硅剛"鐨勭粍鍚堬紝鍗囩硸鍙堝揩鍙堥珮锛岀儹閲忔瀬楂樸€傜硸鍓嶆湡搴斾弗鏍奸伩鍏嶃€?,bpAdvice:'娌规潯鍚补閲忔瀬楂橈紝涓斿弽澶嶄娇鐢ㄧ殑娌圭偢娌瑰惈鏈夊鐗╄川锛屽琛€绠′激瀹冲ぇ銆?,tip:'鍋跺皵鎯冲悆娌圭偢椋熷搧锛屼紭鍏堥€夌┖姘旂偢閿呭仛鐨勩€?},
+  {name:'鑺辩敓',cat:'璞嗙被',gi:14,giLevel:'low',calPer100:563,serve:'涓€灏忔妸锛堢害20g锛岀害20-30绮掞級',bgAdvice:'鑺辩敓GI鍊兼瀬浣庯紝鍚仴搴疯剛鑲拰铔嬬櫧銆備絾鐑噺瀵嗗害楂橈紝鍚冨浼氶暱鑳栥€?,bpAdvice:'鑺辩敓鍚笉楗卞拰鑴傝偑閰稿拰绮炬皑閰革紝鏈夊姪浜庤绠¤垝寮犮€備絾鍚屾牱瑕佹帶鍒堕噺銆?,tip:'姘寸叜鑺辩敓姣旀补鐐歌姳鐢熷仴搴峰緱澶氾紝涔板師鍛崇叜鑺辩敓銆?},
+  {name:'鑺卞嵎',cat:'涓婚',gi:80,giLevel:'high',calPer100:221,serve:'30-50g锛堢害鍗婁釜锛?,bgAdvice:'鑺卞嵎鍜岄澶寸被浼硷紝GI鍊奸珮銆傚鏋滃姞浜嗚懕鑺卞拰鐩愯繕濂斤紝鏈変簺杩樺埛浜嗘补锛岀儹閲忔洿楂樸€?,bpAdvice:'鑺卞嵎閫氬父鍚洂锛屾敞鎰忛噺銆?,tip:'鏈€濂介€夊叏楹﹁姳鍗凤紝鎴栬€呰嚜宸卞湪瀹跺仛灏戞补灏戠洂鐗堟湰銆?},
+
+  // 鏇村钄彍
+  {name:'鐢熻彍',cat:'钄彍',gi:15,giLevel:'low',calPer100:13,serve:'100-150g锛堢害涓€灏忕洏锛?,bgAdvice:'鐢熻彍GI鍊兼瀬浣庯紝鍑犱箮鍏ㄦ槸姘村垎鍜岀氦缁达紝鐑噺鏋佷綆锛屾槸绯栧墠鏈熷畨鍏ㄨ敩鑿溿€?,bpAdvice:'鐢熻彍鍚捑锛屾按鍒嗗ぇ锛屽琛€鍘嬪弸濂姐€?,tip:'鐢熷悆鎴栨竻鐐掗兘寰堝ソ锛屾槸娌欐媺鐨勫ソ鍩哄簳銆?},
+  {name:'鑾寸瑡',cat:'钄彍',gi:15,giLevel:'low',calPer100:14,serve:'100-150g锛堢害涓€灏忕洏锛?,bgAdvice:'鑾寸瑡GI鍊兼瀬浣庯紝娓呮贰鐖藉彛銆傚瘜鍚捑鍜岃喅椋熺氦缁达紝瀵硅绯栧嚑涔庢棤褰卞搷銆?,bpAdvice:'鑾寸瑡鍚捑涓板瘜锛屾湁鍒╁翱闄嶅帇浣滅敤銆?,tip:'鑾寸瑡鍙惰惀鍏绘瘮鑼庢洿涓板瘜锛屽埆涓㈡帀锛屽彲浠ヤ竴璧风倰鎴栧仛姹ゃ€?},
+  {name:'鑾茶棔',cat:'钄彍',gi:38,giLevel:'low',calPer100:73,serve:'80-100g锛堢害5-6鐗囷級',bgAdvice:'鑾茶棔GI鍊艰緝浣庯紝浣嗘穩绮夊惈閲忔瘮涓€鑸敩鑿滈珮锛岀硸鍓嶆湡鍚冭棔瑕侀€傚綋鍑忓皯涓婚閲忋€?,bpAdvice:'鑾茶棔瀵屽惈閽惧拰缁寸敓绱燙锛屽琛€绠℃湁鐩娿€傛敞鎰忎笉瑕佸悆绯栭唻钘曠墖锛堝姞绯栵級銆?,tip:'娓呯倰鎴栫倴姹ゆ渶濂斤紝閬垮厤绯栭唻鍋氭硶銆?},
+  {name:'璞嗚娊',cat:'钄彍',gi:15,giLevel:'low',calPer100:18,serve:'100-150g锛堢害涓€灏忕洏锛?,bgAdvice:'缁胯眴鑺藉拰榛勮眴鑺紾I鍊兼瀬浣庯紝瀵屽惈缁寸敓绱燙鍜岃喅椋熺氦缁淬€傜儹閲忔瀬浣庯紝鏄硸鍓嶆湡瀹夊叏椋熸潗銆?,bpAdvice:'璞嗚娊鍚捑锛岀儹閲忎綆锛屽琛€鍘嬪弸濂姐€?,tip:'鑷繁鍦ㄥ鍙戣眴鑺芥洿鏂伴矞瀹夊叏銆?},
+  {name:'闈掓',cat:'钄彍',gi:15,giLevel:'low',calPer100:22,serve:'80-100g锛堢害1-2涓級',bgAdvice:'闈掓GI鍊兼瀬浣庯紝缁寸敓绱燙鍚噺鏄瀛愮殑3鍊嶃€備笉杈ｆ垨寰荆鐨勯潚妞掗€傚悎绯栧墠鏈熴€?,bpAdvice:'闈掓瀵屽惈缁寸敓绱燙鍜岄捑锛屾湁鍔╀簬琛€绠′繚鎶ゃ€?,tip:'闈掓蹇倰淇濈暀钀ュ吇锛屼笉瑕佺倰澶箙銆?},
+  {name:'鑼艰捒',cat:'钄彍',gi:15,giLevel:'low',calPer100:21,serve:'100-150g锛堢害涓€灏忕洏锛?,bgAdvice:'鑼艰捒GI鍊兼瀬浣庯紝瀵屽惈鑶抽绾ょ淮鍜屽绉嶇淮鐢熺礌锛屾槸绯栧墠鏈熺殑瀹夊叏缁垮彾鑿溿€?,bpAdvice:'鑼艰捒鍚捑鍜屾尌鍙戞补锛屾湁鍔╀簬鑸掑紶琛€绠°€?,tip:'娓呯倰鎴栨懂鐏攨閮藉緢閫傚悎銆?},
+  {name:'绌哄績鑿?,cat:'钄彍',gi:15,giLevel:'low',calPer100:20,serve:'100-150g锛堢害涓€灏忕洏锛?,bgAdvice:'绌哄績鑿淕I鍊兼瀬浣庯紝鐑噺浣庢按鍒嗗ぇ锛屽琛€绯栧嚑涔庢棤褰卞搷銆?,bpAdvice:'绌哄績鑿滃惈閽惧拰闀侊紝鏈夊姪浜庤鍘嬫帶鍒躲€?,tip:'钂滆搲绌哄績鑿滄槸缁忓吀鍋氭硶锛屽皯娌瑰皯鐩愩€?},
+  {name:'闊彍',cat:'钄彍',gi:15,giLevel:'low',calPer100:26,serve:'50-80g锛堢害涓€灏忔妸锛?,bgAdvice:'闊彍GI鍊兼瀬浣庯紝鍚～鍖栫墿鍜岃喅椋熺氦缁达紝瀵硅绯栨棤褰卞搷銆?,bpAdvice:'闊彍涓殑纭寲鐗╂湁鍔╀簬闄嶄綆琛€鑴傦紝浣嗛煭鑿滃惈閽犳瘮涓€鑸敩鑿滅◢楂橈紝娉ㄦ剰鐑归オ鏃跺皯鍔犵洂銆?,tip:'闊彍鐐掕泲鏄笉閿欑殑鎼厤锛岃泲鐧借川+钄彍銆?},
+  {name:'绉嬭懙',cat:'钄彍',gi:20,giLevel:'low',calPer100:31,serve:'80-100g锛堢害5-8鏍癸級',bgAdvice:'绉嬭懙GI鍊兼瀬浣庯紝瀵屽惈鍙憾鎬ц喅椋熺氦缁达紙榛忔恫锛夛紝鑳藉欢缂撶硸鍒嗗惛鏀躲€侀檷浣庨鍚庤绯栥€?,bpAdvice:'绉嬭懙涓殑榛忔恫鍜岄捑瀵硅绠℃湁淇濇姢浣滅敤銆?,tip:'鐧界伡绉嬭懙铇稿皯璁搁叡娌瑰氨寰堢編鍛炽€?},
+
+  // 鏇村姘存灉
+  {name:'鑿犺悵',cat:'姘存灉',gi:59,giLevel:'mid',calPer100:41,serve:'2-3灏忓潡锛堢害80g锛?,bgAdvice:'鑿犺悵GI鍊间腑绛夛紝鍚硸閲忎笉绠楅珮銆備絾鏈変簺浜哄悆鑿犺悵鍚庤绯栧弽搴旇緝澶э紝寤鸿灏戦噺灏濊瘯銆?,bpAdvice:'鑿犺悵鍚彔钀濊泲鐧介叾鍜岄捑锛屾湁鍔╂秷鍖栧拰闄嶅帇銆?,tip:'涓嶈绌鸿吂鍚冭彔钀濓紝閰稿害杈冮珮鍙兘鍒烘縺鑳冦€?},
+  {name:'鏈ㄧ摐',cat:'姘存灉',gi:58,giLevel:'mid',calPer100:39,serve:'鍗婁釜灏忔湪鐡滐紙绾?50g锛?,bgAdvice:'鏈ㄧ摐GI鍊间腑绛夊亸浣庯紝鍚湪鐡滆泲鐧介叾鏈夊姪娑堝寲銆傜硸鍓嶆湡鍙互閫傞噺鍚冦€?,bpAdvice:'鏈ㄧ摐鍚捑涓板瘜锛岀淮鐢熺礌C鍚噺楂橈紝瀵瑰績琛€绠″弸濂姐€?,tip:'閫変笉澶啛鐨勬湪鐡滐紝GI鍊间細鏇翠綆涓€浜涖€?},
+  {name:'姒磋幉',cat:'姘存灉',gi:49,giLevel:'low',calPer100:147,serve:'1-2鐡ｏ紙绾?0-80g锛?,bgAdvice:'姒磋幉铏界劧GI鍊间笉绠楅珮锛屼絾鐑噺鍜岀⒊姘村瘑搴﹀緢楂橈紝绯栧墠鏈熻涓ユ牸鎺у埗閲忥紝涓€娆′笉瓒呰繃2灏忕摚銆?,bpAdvice:'姒磋幉鍚捑鍜屽绉嶇淮鐢熺礌锛屼絾鐑噺澶珮涓嶅疁澶氬悆銆?,tip:'姒磋幉鏄?姘存灉涔嬬帇"涔熸槸"鐑噺涔嬬帇"锛岀硸鍓嶆湡娴呭皾杈勬銆?},
+  {name:'鏌犳',cat:'姘存灉',gi:20,giLevel:'low',calPer100:37,serve:'1-2鐗囨场姘达紙绾?0g锛?,bgAdvice:'鏌犳GI鍊兼瀬浣庯紝鏌犳姘村嚑涔庝笉鍚硸锛屾槸绯栧墠鏈熷畨鍏ㄧ殑楗搧閫夋嫨銆?,bpAdvice:'鏌犳瀵屽惈缁寸敓绱燙鍜屾煚妾吀锛屾湁鍔╀簬琛€绠″脊鎬с€?,tip:'鏌犳姘翠笉瑕佸姞绯栨垨铚傝湝锛岀函鏌犳鐗囨场姘存渶濂姐€?},
+  {name:'鑽旀灊',cat:'姘存灉',gi:57,giLevel:'mid',calPer100:71,serve:'5-8棰楋紙绾?0g锛?,bgAdvice:'鑽旀灊GI鍊间腑绛夛紝浣嗙硸鍒嗗惈閲忚緝楂橈紙浠ユ灉绯栦负涓伙級銆傜硸鍓嶆湡瑕佷弗鏍兼帶鍒讹紝涓€娆′笉瓒呰繃8棰椼€?,bpAdvice:'鑽旀灊鍚捑锛屼絾绯栧垎楂樺鏄撳鑷磋绯栨尝鍔ㄣ€?,tip:'鑽旀灊鍚硸閲忛珮锛屼笉瑕佺┖鑵瑰悆锛屼篃涓嶈涓€娆″悆澶銆?},
+  {name:'鏋囨澐',cat:'姘存灉',gi:35,giLevel:'low',calPer100:41,serve:'5-6棰楋紙绾?00g锛?,bgAdvice:'鏋囨澐GI鍊间綆锛屽惈绯栭噺閫備腑锛屾槸绯栧墠鏈熸瘮杈冨畨鍏ㄧ殑鏃朵护姘存灉銆?,bpAdvice:'鏋囨澐鍚捑鍜屛?鑳¤悵鍗滅礌锛屾湁鐩婂仴搴枫€?,tip:'瀛ｈ妭鎬х煭锛岃秮鏂伴矞閫傞噺鍚冦€?},
+  {name:'鍝堝瘑鐡?,cat:'姘存灉',gi:65,giLevel:'mid',calPer100:34,serve:'涓€灏忓潡锛堢害100g锛?,bgAdvice:'鍝堝瘑鐡淕I鍊间腑绛夊亸楂橈紝浣嗘按鍒嗗ぇ鎬荤⒊姘翠笉绠楀銆傜硸鍓嶆湡瑕佹帶鍒跺垎閲忋€?,bpAdvice:'鍝堝瘑鐡滈珮閽句綆閽狅紝鏈夊埄灏夸綔鐢紝瀵硅鍘嬫湁涓€瀹氬ソ澶勩€?,tip:'鍝堝瘑鐡滆櫧鐒跺緢鐢滐紝涓昏鍚灉绯栵紝GI鍊煎弽鑰屾瘮瑗跨摐浣庛€?},
+
+  // 鏇村鑲夌被娴烽矞
+  {name:'浜旇姳鑲?,cat:'鑲夌被',gi:0,giLevel:'low',calPer100:395,serve:'涓嶅缓璁硸鍓嶆湡椋熺敤',bgAdvice:'浜旇姳鑲夎剛鑲惈閲忔瀬楂橈紙绾?7%锛夛紝铏界劧GI鍊间负0涓嶅奖鍝嶈绯栵紝浣嗛珮鑴傝偑浼氬鑷磋儼宀涚礌鎶垫姉澧炲姞锛岄棿鎺ュ崌楂樿绯栥€?,bpAdvice:'浜旇姳鑲夌殑楗卞拰鑴傝偑浼氬崌楂樿儐鍥洪唶銆佸姞閲嶈绠¤礋鎷咃紝琛€鍘嬮珮鐨勪汉涓嶅缓璁悆銆?,tip:'鎯冲悆鐚倝鐨勮瘽閫夌尓閲岃剨鎴栫尓鑵胯倝锛岃剛鑲皯寰堝銆?},
+  {name:'甯﹂奔',cat:'鑲夌被',gi:0,giLevel:'low',calPer100:127,serve:'100-150g锛堢害1-2娈碉級',bgAdvice:'甯﹂奔涓嶅惈纰虫按锛孏I鍊间负0銆傚瘜鍚紭璐ㄨ泲鐧藉拰涓嶉ケ鍜岃剛鑲吀锛屾槸绯栧墠鏈熸帹鑽愮殑娴烽奔銆?,bpAdvice:'甯﹂奔鐨凮mega-3鏈夊姪浜庝繚鎶ゅ績琛€绠°€侀檷浣庣敇娌逛笁閰€?,tip:'鎺ㄨ崘娓呰捀甯﹂奔锛岄伩鍏嶇孩鐑э紙鍔犵硸锛夋垨娌圭偢銆?},
+  {name:'楸块奔',cat:'鑲夌被',gi:0,giLevel:'low',calPer100:75,serve:'80-100g锛堢害涓€灏忕洏锛?,bgAdvice:'楸块奔楂樿泲鐧戒綆鑴傝偑锛孏I鍊间负0锛屽琛€绯栨棤褰卞搷銆備絾鑳嗗浐閱囧惈閲忓亸楂橈紝閫傞噺椋熺敤鍗冲彲銆?,bpAdvice:'楸块奔鐨勮儐鍥洪唶涓昏闆嗕腑鍦ㄥ唴鑴忓拰杞锛屽悆鑲夐儴鍒嗗奖鍝嶄笉澶с€備絾閾佹澘楸块奔閰辨枡鐩愬垎楂橈紝娉ㄦ剰鎺х洂銆?,tip:'鐧界伡楸块奔铇稿皯璁搁叡娌规渶鍋ュ悍銆?},
+  {name:'涓夋枃楸?,cat:'鑲夌被',gi:0,giLevel:'low',calPer100:208,serve:'80-100g锛堢害涓€灏忓潡锛?,bgAdvice:'涓夋枃楸间笉鍚⒊姘达紝瀵屽惈Omega-3鑴傝偑閰革紙EPA/DHA锛夛紝鏈夊姪浜庢敼鍠勮儼宀涚礌鏁忔劅鎬э紝鏄硸鍓嶆湡鏋佸ソ鐨勮泲鐧芥潵婧愩€?,bpAdvice:'涓夋枃楸肩殑Omega-3鑳介檷浣庣値鐥囥€佷繚鎶よ绠°€侀檷浣庤鍘嬶紝鏄?鎶ゅ績椋熺墿"棣栭€夈€?,tip:'鎺ㄨ崘鍒鸿韩锛堟柊椴滃畨鍏ㄧ殑鍓嶆彁涓嬶級鎴栨竻钂革紝閬垮厤娌圭厧銆?},
+  {name:'铔よ湂',cat:'鑲夌被',gi:0,giLevel:'low',calPer100:56,serve:'100-150g锛堝甫澹崇害鍗婃枻锛?,bgAdvice:'铔よ湂楂樿泲鐧戒綆鑴傦紝GI鍊间负0锛屼笉褰卞搷琛€绯栥€備絾璐濆３绫绘捣椴滃槍鍛よ緝楂橈紝鐥涢鎮ｈ€呮敞鎰忋€?,bpAdvice:'铔よ湂鍚攲鍜岀墰纾洪吀锛屾湁鍔╄绠″仴搴枫€備絾閽犲惈閲忚緝楂橈紝鐑归オ鏃跺皯鍔犵洂銆?,tip:'娓呰捀鎴栧仛姹ゆ渶椴滅編锛屼笉鐢ㄥお澶氳皟鍛炽€?},
+  {name:'鐚倽',cat:'鑲夌被',gi:0,giLevel:'low',calPer100:129,serve:'30-50g锛堢害2-3鐗囷級锛屾瘡鍛ㄤ笉瓒呰繃1娆?,bgAdvice:'鐚倽涓嶅惈纰虫按锛孏I鍊间负0銆傚瘜鍚搧鍜岀淮鐢熺礌A锛屼絾鑳嗗浐閱囬珮锛岀硸鍓嶆湡瑕佷弗鏍兼帶鍒堕鐜囧拰鍒嗛噺銆?,bpAdvice:'鐚倽鑳嗗浐閱囧惈閲忓緢楂橈紙绾?00mg/100g锛夛紝琛€鍘嬪拰琛€鑴傞珮鐨勪汉瑕佹洿鍔犳敞鎰忋€?,tip:'璐鐨勪汉鍙€傞噺鍚冪尓鑲濊ˉ閾侊紝浣嗕笉瑕佹瘡鍛ㄩ兘鍚冦€?},
+
+  // 鏇村涓婚
+  {name:'楗哄瓙',cat:'涓婚',gi:45,giLevel:'low',calPer100:210,serve:'6-8涓紙绾?50g锛?,bgAdvice:'楗哄瓙鐨凣I鍊煎彇鍐充簬棣呮枡鍜岀毊鐨勫帤搴︺€傝彍鑲夐姣旂函鑲夐鍗囩硸鎱紝钖勭毊姣斿帤鐨ソ銆傛€荤殑鏉ヨ楗哄瓙鏄硸鍓嶆湡姣旇緝鍙嬪ソ鐨勪富椋熷舰寮忋€?,bpAdvice:'楗哄瓙棣呯殑鐩愬垎瑕佹敞鎰忥紝灏戣樃閰辨补鍜岄唻浠ュ鐨勮樃鏂欍€?,tip:'鑷繁鍖呴ズ瀛愬彲浠ュ鏀捐敩鑿滃皯鏀捐倝锛岀毊鎿€钖勪竴鐐广€?},
+  {name:'棣勯エ',cat:'涓婚',gi:45,giLevel:'low',calPer100:180,serve:'8-10涓紙绾?50g锛?,bgAdvice:'棣勯エ鍜岄ズ瀛愮被浼硷紝GI鍊煎亸浣庛€備絾棣勯エ姹ら€氬父鍚洂鍜屽懗绮捐緝澶氾紝灏戝枬姹ゆ洿濂姐€?,bpAdvice:'娉ㄦ剰棣勯エ姹ら噷鐨勭洂鍒嗗拰鍛崇簿锛屽琛€鍘嬩笉鍙嬪ソ銆?,tip:'鍚冮楗ㄦ椂鎼厤涓€鐩橀潚鑿滐紝钀ュ吇鏇村潎琛°€?},
+  {name:'鍖呭瓙',cat:'涓婚',gi:65,giLevel:'mid',calPer100:225,serve:'1涓腑绛夊ぇ灏忥紙绾?0g锛?,bgAdvice:'鑲夊寘瀛怗I鍊间腑绛夛紝浣嗛潰鐨槸绮剧櫧闈紝鑲夐鍙兘鍚緝澶氳偉鑲夈€傜礌鍖呭瓙锛堣彍澶氳倝灏戯級鍗囩硸鏇存參銆?,bpAdvice:'鍖呭瓙棣呯殑璋冨懗鏂欑洂鍒嗕笉浣庯紝娉ㄦ剰鎺у埗閲忋€?,tip:'閫夌礌棣呭寘瀛愭垨钂搁ズ锛屾瘮鑲夊寘瀛愭洿鍋ュ悍銆?},
+  {name:'鐑чゼ',cat:'涓婚',gi:72,giLevel:'high',calPer100:320,serve:'鍗婁釜锛堢害40g锛?,bgAdvice:'鐑чゼGI鍊奸珮锛屽挨鍏舵槸娌归叆鐑чゼ锛屾补鑴?绮鹃潰鍙岄噸璐熸媴銆傜硸鍓嶆湡灏介噺灏戝悆銆?,bpAdvice:'鐑чゼ鍒朵綔涓細鍔犱笉灏戞补鍜岀洂锛屽琛€绯栬鍘嬮兘涓嶅弸濂姐€?,tip:'鍋跺皵鍚冩棤娌圭殑鐧藉悏棣嶆垨鍙戦潰楗间細姣旀补閰ョ儳楗煎ソ寰堝銆?},
+  {name:'绮藉瓙',cat:'涓婚',gi:80,giLevel:'high',calPer100:180,serve:'鍗婁釜锛堢害50g锛?,bgAdvice:'绯背绮藉瓙鐨凣I鍊煎緢楂橈紝绯背姣斿ぇ绫虫洿瀹规槗娑堝寲鍚告敹锛屽崌绯栧揩閫熴€傜硸鍓嶆湡寤鸿娴呭皾杈勬銆?,bpAdvice:'鑲夌步鍚緝澶氳偉鑲夊拰鐩愬垎锛岀孩鏋ｇ步鍔犱簡绯栵紝閮藉琛€鍘嬪拰琛€绯栦笉鍒┿€?,tip:'绔崍鑺傚悆涓€涓皬鐨勮В瑙ｉ灏卞ソ锛屾惌閰嶅ぇ閲忚敩鑿滀竴璧峰悆銆?},
+  {name:'鎰忓ぇ鍒╅潰',cat:'涓婚',gi:44,giLevel:'low',calPer100:131,serve:'50-75g锛堝共閲嶏級',bgAdvice:'鎰忓ぇ鍒╅潰鐨凣I鍊兼瘮涓紡闈㈡潯浣庡緢澶氾紝鍥犱负鎰忛潰鐢ㄧ殑鏉滃叞灏忛害铔嬬櫧璐ㄥ惈閲忛珮銆佺粨鏋勭揣瀵嗭紝娑堝寲鍚告敹鎱€傛槸绯栧墠鏈熶笉閿欑殑闈㈤閫夋嫨銆?,bpAdvice:'鎰忛潰鏈韩瀵硅鍘嬪弸濂斤紝浣嗛叡鏂欙紙灏ゅ叾濂舵补閰憋級鍚洂鍜岃剛鑲锛屽缓璁敤鐣寗閰便€?,tip:'閫夌暘鑼勮倝閰辨剰闈紝涓嶈閫夊ザ娌瑰煿鏍归叡銆?},
+
+  // 鏇村璞嗗埗鍝?  {name:'鑵愮',cat:'璞嗙被',gi:20,giLevel:'low',calPer100:459,serve:'20-30g锛堝共閲嶏紝娉″彂鍚庣害60g锛?,bgAdvice:'鑵愮鏄眴娴嗙叜娌稿悗琛ㄩ潰鐨勮杽鑶滃埗鎴愶紝铔嬬櫧鍚噺寰堥珮锛堢害45%锛夛紝GI鍊兼瀬浣庛€備絾鐑噺瀵嗗害楂橈紝娉ㄦ剰鍒嗛噺銆?,bpAdvice:'鑵愮楂樿泲鐧戒綆閽狅紝鏄紭璐ㄦ鐗╄泲鐧姐€備絾娌圭偢鑵愮鍗风儹閲忕炕鍊嶏紝瑕侀伩鍏嶃€?,tip:'鍑夋媽鑵愮鎴栬厫绔圭儳鑲夐兘鏄笉閿欑殑鎼厤銆?},
+  {name:'姣涜眴',cat:'璞嗙被',gi:15,giLevel:'low',calPer100:131,serve:'涓€灏忕锛堢害100g锛屽甫澹崇害200g锛?,bgAdvice:'姣涜眴鏄湭鎴愮啛鐨勯粍璞嗭紝GI鍊兼瀬浣庯紝瀵屽惈妞嶇墿铔嬬櫧鍜岃喅椋熺氦缁淬€傛槸绯栧墠鏈熷緢濂界殑闆堕鎴栦笅閰掕彍锛堝綋鐒朵笉瑕佸枬閰掞級銆?,bpAdvice:'姣涜眴楂橀捑浣庨挔锛屽瘜鍚ぇ璞嗗紓榛勯叜锛屽琛€鍘嬪弸濂姐€?,tip:'鐩愭按鐓瘺璞嗗嵆鍙紝涓嶈鍔犲お澶氱洂銆?},
+  {name:'璞嗙毊',cat:'璞嗙被',gi:20,giLevel:'low',calPer100:409,serve:'30-50g锛堢害鍗婂紶锛?,bgAdvice:'璞嗙毊GI鍊兼瀬浣庯紝铔嬬櫧璐ㄥ惈閲忛珮銆傜儹閲忚櫧楂樹絾鎺у埗濂藉垎閲忓嵆鍙紝瀵硅绯栧嚑涔庢棤褰卞搷銆?,bpAdvice:'璞嗙毊鍔犲伐杩囩▼涓彲鑳藉姞娌瑰拰鐩愶紝鑷繁鍦ㄥ鍑夋媽鍙互鎺у埗銆?,tip:'鍑夋媽璞嗙毊涓濇槸澶忓ぉ娓呯埥鐨勫ソ鍑夎彍銆?},
+  {name:'铓曡眴',cat:'璞嗙被',gi:40,giLevel:'low',calPer100:335,serve:'20-30g锛堝共閲嶏級',bgAdvice:'铓曡眴GI鍊艰緝浣庯紝瀵屽惈妞嶇墿铔嬬櫧銆備絾铓曡眴鐥呮偅鑰咃紙涓€绉嶉仐浼犵梾锛夌粷瀵逛笉鑳藉悆锛屾櫘閫氫汉鍚冧篃瑕佹敞鎰忛噺銆?,bpAdvice:'铓曡眴鍚乏鏃嬪宸达紙涓€绉嶅ぉ鐒跺寲鍚堢墿锛夛紝瀵硅鍘嬫湁涓€瀹氬奖鍝嶏紝灏戦噺鍚冩病鍏崇郴銆?,tip:'娌圭偢铓曡眴锛堝叞鑺辫眴锛夌儹閲忕炕鍑犲€嶏紝涓嶆帹鑽愩€?},
+
+  // 鏇村闆堕楗搧
+  {name:'鍟ら厭',cat:'闆堕楗枡',gi:90,giLevel:'high',calPer100:32,serve:'涓嶅缓璁ギ鐢?,bgAdvice:'鍟ら厭琚О涓?娑蹭綋闈㈠寘"锛孏I鍊煎緢楂橈紝浼氬揩閫熷崌楂樿绯栥€傜┖鑵瑰枬鍟ら厭灏ゅ叾鍗遍櫓锛堝彲鑳藉鑷翠綆琛€绯栧悗鍙堝弽寮癸級銆傜硸鍓嶆湡搴旈伩鍏嶃€?,bpAdvice:'鍟ら厭鍚厭绮惧拰澶ч噺鐑噺锛屼細瀵艰嚧琛€鍘嬪崌楂樺拰浣撻噸澧炲姞銆?,tip:'绀句氦鍦哄悎鍙互閫夋嫨鏃犵硸鑻忔墦姘翠唬鏇垮暏閰掋€?},
+  {name:'鐧介厭',cat:'闆堕楗枡',gi:0,giLevel:'low',calPer100:298,serve:'涓嶅缓璁ギ鐢?,bgAdvice:'铏界劧鐧介厭GI鍊间负0锛屼絾閰掔簿浼氬共鎵拌倽鑴忕殑绯栦唬璋紝鍙兘瀵艰嚧寤惰繜鎬т綆琛€绯栵紙鍠濋厭鍚庡嚑灏忔椂琛€绯栭闄嶏級銆傜硸鍓嶆湡涓嶅缓璁ギ鐢ㄣ€?,bpAdvice:'閰掔簿浼氬埡婵€琛€绠℃敹缂┿€佸崌楂樿鍘嬨€傞暱鏈熼ギ閰掓槸楂樿鍘嬬殑閲嶈璇卞洜銆?,tip:'濡傛灉瀹炲湪鎺ㄤ笉鎺夛紝鐢峰＋涓€澶╀笉瓒呰繃25g閰掔簿锛堢害1涓ょ櫧閰掞級锛屼笖蹇呴』閰嶈彍銆?},
+  {name:'鏋告潪',cat:'闆堕楗枡',gi:35,giLevel:'low',calPer100:349,serve:'10-15绮掞紙绾?g锛夋场姘?,bgAdvice:'鏋告潪GI鍊煎亸浣庯紝鍚湁鏋告潪澶氱硸锛堜竴绉嶅ぉ鐒舵椿鎬ф垚鍒嗭級锛岀爺绌跺彂鐜板彲鑳藉琛€绯栬皟鑺傛湁鐩娿€備絾鍚ぉ鐒剁硸鍒嗭紝娉℃按灏戦噺鍗冲彲銆?,bpAdvice:'鏋告潪涓殑鑺︿竵鍜屾灨鏉炲绯栨湁鍔╀簬淇濇姢琛€绠★紝浼犵粺鍖诲璁や负鏈夌泭鑲濊偩銆?,tip:'娉℃按鍠濆嚑绮掑嵆鍙紝涓嶈鍍忓悆钁¤悇骞查偅鏍峰ぇ閲忓悆銆?},
+  {name:'鏃犵硸鑻忔墦姘?,cat:'闆堕楗枡',gi:0,giLevel:'low',calPer100:0,serve:'闅忔剰楗敤锛堟瘡澶╀笉瓒呰繃1L锛?,bgAdvice:'鏃犵硸鑻忔墦姘翠笉鍚硸銆佷笉鍚⒊姘达紝GI鍊间负0锛屽琛€绯栧畬鍏ㄦ棤褰卞搷銆傛槸绯栧墠鏈熸浛浠ｇ敎楗枡鐨勫ソ閫夋嫨銆?,bpAdvice:'鑻忔墦姘村惈閽犻噺涓嶉珮锛屽琛€鍘嬪熀鏈棤褰卞搷銆備絾鍚７閰哥殑鑻忔墦姘翠笉瀹滆繃閲忋€?,tip:'鍙互鍔犱竴鐗囨煚妾垨钖勮嵎鍙跺鍔犻鍛炽€?},
+  {name:'澶ф灒',cat:'闆堕楗枡',gi:50,giLevel:'low',calPer100:276,serve:'2-3棰楋紙绾?0g锛?,bgAdvice:'椴滄灒GI鍊间腑绛夊亸浣庯紝浣嗗惈绯栭噺楂橈紙灏ゅ叾鏄共鏋ｏ紝鍚硸閲忓彲杈?0%浠ヤ笂锛夈€傜硸鍓嶆湡鍚冧竴涓ら鍙互锛屼絾鍒綋闆堕澶ч噺鍚冦€?,bpAdvice:'澶ф灒瀵屽惈缁寸敓绱燙鍜岄搧锛屽姘旇鏈夌泭銆備絾绯栧垎澶珮涓嶅疁澶氬悆銆?,tip:'娉℃按鎴栫叜绮ユ斁涓や笁棰楄皟鍛冲嵆鍙紝涓嶈鐩存帴鍚冨共鏋ｅ綋闆堕銆?},
+  {name:'灞辨',cat:'闆堕楗枡',gi:40,giLevel:'low',calPer100:102,serve:'3-5棰楅矞灞辨锛堢害30g锛?,bgAdvice:'灞辨GI鍊艰緝浣庯紝鍚北妤傞吀鍜屾灉鑳讹紝鏈夊姪浜庢秷鍖栧拰琛€鑴傝皟鑺傘€備絾灞辨鍒跺搧锛堝北妤傜墖銆佹灉涓圭毊锛夊姞浜嗗緢澶氱硸锛岃閬垮厤銆?,bpAdvice:'灞辨涓殑榛勯叜绫荤墿璐ㄦ湁杞诲害闄嶅帇鍜岄檷鑴備綔鐢ㄣ€?,tip:'鍚冮矞灞辨鎴栧北妤傚共娉℃按锛屼笉瑕佸悆鍔犵硸鐨勫北妤傞浂椋熴€?},
+
+  // ===== 瀹跺父鑿?=====
+  {name:'鐣寗鐐掕泲',cat:'瀹跺父鑿?,gi:25,giLevel:'low',calPer100:85,serve:'涓€浠斤紙绾?00g锛?,bgAdvice:'鐣寗鐐掕泲鏄粡鍏稿甯歌彍銆傜暘鑼凣I鍊间綆锛岄浮铔嬭泲鐧借川涓板瘜锛屾暣浣撳崌绯栬礋鑽峰緢浣庛€備絾濡傛灉鍔犵硸锛堝緢澶氬搴仛娉曚細鍔犵硸鎻愰矞锛夛紝GI褰卞搷浼氬鍔狅紒',bpAdvice:'杩欓亾鑿滃琛€鍘嬪弸濂斤紝鐣寗鍚捑锛岄浮铔嬭泲鐧借川涓板瘜銆備絾娉ㄦ剰涓嶈鏀惧お澶氭补鍜岀硸銆?,tip:'绯栧墠鏈熷仛鐣寗鐐掕泲涓嶈鍔犵硸锛岀敤鐔熼€忕殑鐣寗鏈韩鐨勭敎鍛冲氨澶熶簡銆?},
+  {name:'绾㈢儳鑲?,cat:'瀹跺父鑿?,gi:20,giLevel:'low',calPer100:305,serve:'2-3鍧楃槮鑲夛紙绾?0g锛夛紝鍋跺皵瑙ｉ',bgAdvice:'绾㈢儳鑲夎櫧鐒禛I鍊间綆锛屼絾楂樿剛鑲紙灏ゅ叾楗卞拰鑴傝偑锛変細鍔犻噸鑳板矝绱犳姷鎶椼€備笖绾㈢儳鍋氭硶闇€瑕佸ぇ閲忕硸锛堢倰绯栬壊+璋冨懗锛夛紝闂存帴澧炲姞纰虫按鎽勫叆銆?,bpAdvice:'绾㈢儳鑲変娇鐢ㄤ簲鑺辫倝锛岄ケ鍜岃剛鑲拰閽犲惈閲忛兘楂橈紝涓嶅埄浜庤鍘嬫帶鍒躲€?,tip:'鎯冲悆绾㈢儳鍙ｆ劅鍙互璇曡瘯绾㈢儳楦¤吙锛堝幓鐨級锛岃剛鑲皯寰堝銆?},
+  {name:'娓呰捀楸?,cat:'瀹跺父鑿?,gi:0,giLevel:'low',calPer100:95,serve:'涓€鏉′腑绛夐奔锛堢害300g锛夛紝2-3浜轰唤',bgAdvice:'娓呰捀楸煎嚑涔庝笉鍚⒊姘达紝GI鍊间负0銆傛槸鏈€鍋ュ悍鐨勯奔绫荤児楗柟寮忥紝楸艰倝铔嬬櫧浼樿川锛屽琛€绯栨棤褰卞搷銆?,bpAdvice:'娓呰捀鍋氭硶娌瑰皯鐩愬皯锛堜富瑕侀潬钂搁奔璞夋补锛夛紝鏄珮琛€鍘嬩汉缇ょ殑棣栭€夐奔绫诲仛娉曘€?,tip:'钂搁奔鏈€鍚庢穻鐨勭儹娌硅灏戯紝涓€鍕哄嵆鍙€?},
+  {name:'楹诲﹩璞嗚厫',cat:'瀹跺父鑿?,gi:20,giLevel:'low',calPer100:110,serve:'鍗婄锛堢害100g锛?,bgAdvice:'璞嗚厫GI鍊间綆锛岄夯濠嗚眴鑵愮殑纰虫按鏉ヨ嚜灏戦噺娣€绮夊嬀鑺★紝鏁翠綋鍗囩硸褰卞搷寰堝皬銆備絾楹昏荆璋冨懗鍙兘鍒烘縺椋熸瀵艰嚧澶氬悆涓婚銆?,bpAdvice:'楹诲﹩璞嗚厫鍚緝澶氭补鍜岃眴鐡ｉ叡锛堥珮閽狅級锛岄珮琛€鍘嬩汉缇よ娉ㄦ剰銆傚彲浠ュ湪瀹跺仛鍑忔补鍑忕洂鐗堛€?,tip:'鍦ㄥ鍋氬皯鏀炬补鍜岃眴鐡ｉ叡锛屽鏀捐懕鑺辨彁棣欍€?},
+  {name:'瀹繚楦′竵',cat:'瀹跺父鑿?,gi:35,giLevel:'low',calPer100:160,serve:'涓€浠斤紙绾?50g锛?,bgAdvice:'瀹繚楦′竵涓浮鑳歌倝铔嬬櫧璐ㄤ赴瀵岋紝鑺辩敓鍚仴搴疯剛鑲€備絾浼犵粺鍋氭硶浼氬姞绯栧拰娣€绮夊嬀鑺★紝鍔犱笂鑺辩敓鐑噺楂橈紝鎬讳綋鍗囩硸褰卞搷涓嶅ぇ浣嗚娉ㄦ剰鍒嗛噺銆?,bpAdvice:'瀹繚楦′竵閰辨枡涓惈閰辨补鍜岀洂锛岃姳鐢熻儐鍥洪唶涓嶉珮浣嗙儹閲忛珮銆?,tip:'鍦ㄥ鍋氬彲浠ュ皯鏀捐姳鐢熴€佸皯娌广€佷笉鍔犵硸銆?},
+  {name:'闈掓鑲変笣',cat:'瀹跺父鑿?,gi:15,giLevel:'low',calPer100:95,serve:'涓€浠斤紙绾?50g锛?,bgAdvice:'闈掓鑲変笣鍗囩硸褰卞搷寰堝皬銆傞潚妞扜I鍊兼瀬浣庯紝鐦﹁倝涓濊泲鐧戒赴瀵屻€備絾娉ㄦ剰楗簵鍋氭硶閫氬父娌瑰銆佹穩绮夊嬀鑺″銆?,bpAdvice:'鑲変笣鍜岃皟鍛虫枡鍚挔锛屾敞鎰忔帶鐩愩€傞潚妞掑瘜鍚淮鐢熺礌C淇濇姢琛€绠°€?,tip:'鍦ㄥ鍋氱敤灏戦噺娌规粦鑲変笣锛岄潚妞掕剢鐐掍笉瑕佽繃鐏€?},
+  {name:'楸奸鑲変笣',cat:'瀹跺父鑿?,gi:40,giLevel:'low',calPer100:155,serve:'鍗婄锛堢害100g锛?,bgAdvice:'楸奸鑲変笣GI鍊间笉楂橈紝涓昏铔嬬櫧鏉ヨ嚜鑲変笣銆備絾楸奸姹佸惈绯栵紙鐧界硸+閱嬶級锛屼細澧炲姞纰虫按鍜岀儹閲忋€傚缓璁湪瀹跺仛鏃跺噺灏戞垨鍘绘帀鐧界硸銆?,bpAdvice:'楸奸姹佸惈閰辨补鍜岃眴鐡ｉ叡锛岄挔鍚噺涓嶄綆锛屾敞鎰忔帶鐩愩€?,tip:'鍦ㄥ鍋?鏃犵硸鐗?楸奸鑲変笣锛岀敤鏈ㄨ€冲拰鑳¤悵鍗滀笣澧炲姞鍙ｆ劅鍜岃惀鍏汇€?},
+  {name:'鍥為攨鑲?,cat:'瀹跺父鑿?,gi:20,giLevel:'low',calPer100:250,serve:'3-4鐗囪倝锛堢害50g锛夛紝鍋跺皵瑙ｉ',bgAdvice:'鍥為攨鑲変娇鐢ㄤ簲鑺辫倝鎴栧悗鑷€鑲夛紝鑴傝偑鍚噺楂樸€傝櫧鐒跺琛€绯栫洿鎺ュ奖鍝嶄笉澶э紝浣嗛珮鑴傝偑浼氬姞閲嶈儼宀涚礌鎶垫姉銆?,bpAdvice:'鍥為攨鑲夋补澶с€佽眴鐡ｉ叡鍜革紝瀵硅鍘嬫帶鍒朵笉鍒┿€傚睘浜?鍋跺皵鍚冧竴娆″彲浠?鐨勮彍銆?,tip:'鐢ㄧ槮鑲変唬鏇夸簲鑺辫倝鍋氬洖閿呰倝锛岃挏鑻楀鏀撅紝娌瑰拰璞嗙摚閰卞皯鏀俱€?},
+  {name:'姘寸叜楸?,cat:'瀹跺父鑿?,gi:15,giLevel:'low',calPer100:135,serve:'涓€灏忕锛堢害150g锛?,bgAdvice:'姘寸叜楸艰泲鐧藉惈閲忛珮锛岄奔鑲夊琛€绯栨棤褰卞搷銆備絾姘寸叜楸煎叾瀹炴槸鐢ㄥぇ閲忕儹娌规祰鐨勶紝娌硅剛鍚噺寰堥珮锛屼細闂存帴褰卞搷琛€绯栥€?,bpAdvice:'姘寸叜楸兼渶鍚庢祰鐨勯偅灞傛补鍚ぇ閲忕儹閲忓拰閽狅紙鏉ヨ嚜姹ゅ簳锛夛紝瀵硅鍘嬩笉鍙嬪ソ銆?,tip:'鍦ㄥ鍋?杞荤増"姘寸叜楸硷紝灏戞补灏戠洂锛屽鏀捐眴鑺藉拰闈掕彍鍨簳銆?},
+  {name:'骞茬吀璞嗚',cat:'瀹跺父鑿?,gi:30,giLevel:'low',calPer100:110,serve:'涓€灏忕洏锛堢害100g锛?,bgAdvice:'璞嗚GI鍊间綆锛屽共鐓稿仛娉曡櫧鐢ㄦ补杈冨浣嗘暣浣撶⒊姘翠笉楂橈紝瀵硅绯栧奖鍝嶅皬銆?,bpAdvice:'娉ㄦ剰鐩愬垎锛屽共鐓歌皟鍛抽€氬父闇€瑕侀叡娌瑰拰鐩愩€傚彲浠ュ湪瀹跺仛灏戠洂鐗堛€?,tip:'骞茬吀鐨勫叧閿槸璞嗚瑕佺啛閫忥紙鐢熻眴瑙掓湁姣掞級锛屽彲浠ョ敤灏戦噺娌规參鎱㈢吀銆?},
+  {name:'钂滆搲瑗垮叞鑺?,cat:'瀹跺父鑿?,gi:10,giLevel:'low',calPer100:45,serve:'涓€灏忕锛堢害150g锛?,bgAdvice:'杩欐槸绯栧墠鏈熷嚑涔庡畬缇庣殑鑿滆偞銆傝タ鍏拌姳GI鍊兼瀬浣庯紝钂滆搲鎻愪緵椋庡懗涓嶅纰虫按銆傚琛€绯栧嚑涔庨浂褰卞搷銆?,bpAdvice:'钂滆搲鏈夊姪琛€绠″仴搴凤紝瑗垮叞鑺卞瘜鍚姉姘у寲鐗╄川銆傚皯娌瑰揩鐐掑嵆鍙€?,tip:'姘村紑鍚庣劘瑗垮叞鑺?0绉掑啀鐐掞紝棰滆壊缈犵豢鍙ｆ劅鑴嗗銆?},
+  {name:'鍑夋媽榛勭摐',cat:'瀹跺父鑿?,gi:10,giLevel:'low',calPer100:25,serve:'涓€鏍归粍鐡滐紙绾?00g锛?,bgAdvice:'鍑夋媽榛勭摐鏄硸鍓嶆湡鏈€瀹夊叏鐨勫噳鑿滐紝榛勭摐鍑犱箮涓嶅惈绯栵紝瀵硅绯栭浂褰卞搷銆?,bpAdvice:'鍑夋媽鏃跺皯鏀鹃叡娌瑰拰鐩愶紝鐢ㄩ唻鍜岃挏鏈彁鍛炽€傞唻鏈韩杩樻湁鍔╀簬闄嶄綆椁愬悗琛€绯栥€?,tip:'鎷嶉粍鐡滄瘮鍒囬粍鐡滄洿瀹规槗鍏ュ懗锛岀敤绫抽唻姣旈檲閱嬫洿娓呯埥銆?},
+  {name:'绱彍铔嬭姳姹?,cat:'瀹跺父鑿?,gi:5,giLevel:'low',calPer100:20,serve:'涓€纰楋紙绾?50ml锛?,bgAdvice:'绱彍铔嬭姳姹I鍊兼瀬浣庯紝绱彍鍑犱箮鏃犵⒊姘达紝楦¤泲鎻愪緵铔嬬櫧璐ㄣ€傛槸绯栧墠鏈熼妗屼笂瀹夊叏鐨勬堡鍝併€?,bpAdvice:'绱彍鍚捑鍜岀锛屽琛€鍘嬫棤瀹炽€傛敞鎰忔堡閲岀洂瑕佸皯鏀俱€?,tip:'鍙互鍦ㄦ堡閲屽姞鐐硅眴鑵愪竵鍜岃櫨鐨紝钀ュ吇鏇翠赴瀵屻€?},
+  {name:'瑗跨孩鏌胯泲姹?,cat:'瀹跺父鑿?,gi:10,giLevel:'low',calPer100:25,serve:'涓€纰楋紙绾?50ml锛?,bgAdvice:'瑗跨孩鏌胯泲姹ゅ崌绯栧奖鍝嶅緢灏忋€傝タ绾㈡熆GI鍊间綆锛岄浮铔嬭泲鐧借川涓板瘜銆備笉鍔犵硸鐨勮タ绾㈡熆铔嬫堡鏄硸鍓嶆湡鐞嗘兂鐨勬堡鍝併€?,bpAdvice:'瑗跨孩鏌夸腑鐨勭暘鑼勭孩绱犲蹇冭绠℃湁鐩婏紝灏戞补灏戠洂鐨勮泲姹ゅ琛€鍘嬫棤璐熸媴銆?,tip:'瑗跨孩鏌垮厛鐐掑嚭姹佸啀鍔犳按锛屾堡鑹茬孩浜懗閬撴祿閮併€?},
+  {name:'閱嬫簻鐧借彍',cat:'瀹跺父鑿?,gi:15,giLevel:'low',calPer100:35,serve:'涓€灏忕洏锛堢害150g锛?,bgAdvice:'閱嬫簻鐧借彍鏄硸鍓嶆湡鐨勫ソ鑿溿€傜櫧鑿淕I鍊兼瀬浣庯紝閱嬫湁鍔╀簬鍑忕紦椁愬悗琛€绯栦笂鍗囬€熷害銆?,bpAdvice:'閱嬫簻鍋氭硶鐢ㄦ补鍜岀洂閮戒笉澶氾紝瀵硅鍘嬪弸濂姐€傞唻杩樿兘澧炲姞椋庡懗鍑忓皯鐩愮殑浣跨敤銆?,tip:'鐢ㄧ背閱嬫垨鐧介唻閮藉彲浠ワ紝鍑洪攨鍓嶆穻涓€鐐归唻淇濈暀閰稿懗鍜岃惀鍏汇€?},
+  {name:'鍦颁笁椴?,cat:'瀹跺父鑿?,gi:55,giLevel:'mid',calPer100:140,serve:'鍗婄锛堢害100g锛?,bgAdvice:'鍦颁笁椴滐紙鍦熻眴銆佽寗瀛愩€侀潚妞掞級涓湡璞咷I鍊间腑绛夛紝涓斾紶缁熷仛娉曞厛鐐稿悗鐐掞紝鍚告补閲忓ぇ銆傝櫧鐒惰敩鑿滄湰韬笉閿欙紝浣嗙児楗柟寮忚杩欓亾鑿滅儹閲忓拰娌硅剛鍋忛珮銆?,bpAdvice:'娌圭偢+璋冨懗鏂欙紝閽犲惈閲忚緝楂樸€傝寗瀛愬惛娌硅兘鍔涘己锛屽蹇冭绠¤礋鎷呰緝澶с€?,tip:'鍦ㄥ鍋?杞荤増"鍦颁笁椴滐細灏戞补鐓庝唬鏇挎补鐐革紝澶氭斁闈掓灏戞斁鍦熻眴銆?},
+  {name:'鏈ㄩ』鑲?,cat:'瀹跺父鑿?,gi:20,giLevel:'low',calPer100:105,serve:'涓€浠斤紙绾?50g锛?,bgAdvice:'鏈ㄩ』鑲夛紙鏈ㄨ€炽€侀浮铔嬨€佽倝鐗囥€侀粍鑺辫彍锛夌殑椋熸潗鎼厤闈炲父鍚堢悊銆傝泲鐧?钄彍涓轰富锛屽崌绯栧奖鍝嶅緢灏忋€傛湪鑰冲拰榛勮姳鑿滈兘鏄綆GI椋熸潗銆?,bpAdvice:'鏈ㄨ€虫湁鍔╅檷浣庤娑查粡绋犲害锛屽蹇冭绠℃湁鐩娿€傛敞鎰忓皯娌瑰皯鐩愮児楗€?,tip:'杩欐槸绯栧墠鏈熼潪甯告帹鑽愮殑瀹跺父鑿滐紝钀ュ吇鍧囪　鍙堝ソ鍚冦€?},
+  {name:'鍙箰楦＄繀',cat:'瀹跺父鑿?,gi:45,giLevel:'low',calPer100:180,serve:'2-3涓紙绾?0g锛夛紝鍋跺皵鍚?,bgAdvice:'鍙箰楦＄繀鐨勯浮缈呮湰韬泲鐧借川涓板瘜锛屼絾鐑硅皟鐢ㄧ殑鍙箰鍚湁澶ч噺绯栧垎锛堜竴缃愬彲涔愮害35g绯栵級锛屼細琚浮鑲夊惛鏀朵竴閮ㄥ垎銆傜硸鍓嶆湡涓嶅缓璁父鍚冦€?,bpAdvice:'鍙箰鐨勭硸鍒嗗拰楦＄繀鐨勮剛鑲杩欓亾鑿滅儹閲忚緝楂橈紝瀵硅鍘嬫帶鍒舵棤鐩娿€?,tip:'鍙互璇曡瘯鐢ㄦ棤绯栧彲涔愭垨鍟ら厭+閰辨补浠ｆ浛鍙箰锛屽噺灏戠硸鍒嗘憚鍏ャ€?},
+  {name:'绾㈢儳楦″潡',cat:'瀹跺父鑿?,gi:25,giLevel:'low',calPer100:150,serve:'涓€灏忕锛堢害150g锛?,bgAdvice:'楦¤倝鏈韩瀵硅绯栨棤褰卞搷銆傜孩鐑у仛娉曚細鍔犲皯閲忓啺绯栫倰绯栬壊锛岀硸閲忔瘮杈冨彲鎺с€傚鏋滀笉鐢ㄧ硸鍙敤鑰佹娊涓婅壊灏辨洿濂戒簡銆?,bpAdvice:'楦¤倝浣庤剛锛堝幓鐨級锛岀孩鐑ф眮鐨勭洂鍒嗚娉ㄦ剰銆傚鏀鹃鑿囧拰鍦熻眴涓€璧风儳鏇翠赴瀵屻€?,tip:'楦″潡鍏堢劘姘村幓琛€娌紝鐑у嚭鏉ョ殑姹ゆ眮鏇存竻浜€?},
+  {name:'钁辩垎缇婅倝',cat:'瀹跺父鑿?,gi:15,giLevel:'low',calPer100:165,serve:'涓€灏忕洏锛堢害100g锛?,bgAdvice:'缇婅倝鍜岃懕閮藉琛€绯栨棤鐩存帴褰卞搷銆傞珮铔嬬櫧楂樿惀鍏伙紝浣嗙緤鑲夎剛鑲惈閲忎笉浣庯紝娉ㄦ剰閫夌槮鑲夐儴鍒嗐€?,bpAdvice:'澶ц懕鍚～鍖栫墿鏈夊姪琛€绠″仴搴枫€備絾缇婅倝楗卞拰鑴傝偑楂橈紝琛€鍘嬮珮鐨勪汉瑕侀€傞噺銆?,tip:'閫夌緤鑵胯倝鎴栫緤閲岃剨锛屽ぇ鐏揩鐐掗攣浣忔按鍒嗭紝鍙ｆ劅瀚╂粦銆?},
+  {name:'鐧界伡铏?,cat:'瀹跺父鑿?,gi:0,giLevel:'low',calPer100:80,serve:'8-10鍙紙绾?50g锛?,bgAdvice:'鐧界伡铏炬槸绯栧墠鏈熷畬缇庣殑娴烽矞鍋氭硶銆傝櫨鏈韩纰虫按涓洪浂锛岀櫧鐏间笉鍔犵硸涓嶅姞娌癸紝瀵硅绯栭浂褰卞搷銆?,bpAdvice:'铏鹃珮铔嬬櫧浣庤剛锛屽琛€鍘嬪弸濂姐€傝樃鏂欑敤鐢熸娊+灏戣鑺ユ湯鍗冲彲锛屼笉瑕佸お澶氶叡娌广€?,tip:'铏剧嚎涓€瀹氳鍘绘帀锛屾按寮€鍚庝笅閿呯叜鍒板彉绾㈠嵆鍙紝涓嶈鐓€併€?},
+  {name:'绯栭唻閲岃剨',cat:'瀹跺父鑿?,gi:55,giLevel:'mid',calPer100:250,serve:'涓嶅缓璁硸鍓嶆湡缁忓父鍚?,bgAdvice:'绯栭唻閲岃剨鏄?绯?娌圭偢"鐨勭粍鍚堬紝铏戒互鐦﹁倝涓轰富浣嗘寕绯婃补鐐稿悗鍐嶈９绯栭唻姹侊紝GI鍊间笉浣庛€傜硸鍓嶆湡鍋跺皵鍚冧竴涓ゆ鍙互锛屼笉瑕佸父鍚冦€?,bpAdvice:'娌圭偢鍜岀硸閱嬫眮閮藉琛€鍘嬫帶鍒朵笉鍒╋紝杩欓亾鑿滃蹇冭绠¤礋鎷呰緝澶с€?,tip:'濡傛灉寰堟兂鍚冿紝鍦ㄥ鍋氬彲浠ヨ瘯璇曠┖姘旂偢閿呯増+浠ｇ硸鐗堢硸閱嬫眮銆?},
+  {name:'閰歌荆鍦熻眴涓?,cat:'瀹跺父鑿?,gi:55,giLevel:'mid',calPer100:70,serve:'涓€灏忕洏锛堢害100g锛?,bgAdvice:'鍦熻眴涓滸I鍊间腑绛夛紝浣嗛唻鍜岃荆妞掓湁鍔╀簬鍑忕紦鍗囩硸銆傝繖閬撹彍浣滀负閰嶈彍闂涓嶅ぇ锛屼絾涓嶈鎷挎潵褰撲富椋燂紙鍏夊悆涓€鐩樺湡璞嗕笣涓嶅悆楗級銆?,bpAdvice:'閱嬪琛€绠℃湁鐩婏紝杈ｆ绱犺兘淇冭繘浠ｈ阿銆傛敞鎰忕倰鍦熻眴涓濈殑娌瑰拰鐩愪笉瑕佸お澶氥€?,tip:'鍦熻眴涓濆垏濂藉悗娉′竴涓嬪喎姘村幓鎺夎〃闈㈡穩绮夛紝鐐掑嚭鏉ユ洿鑴嗐€丟I鍊间篃鏇翠綆銆?},
+  {name:'铓濇补鐢熻彍',cat:'瀹跺父鑿?,gi:10,giLevel:'low',calPer100:35,serve:'涓€灏忕洏锛堢害150g锛?,bgAdvice:'铓濇补鐢熻彍鏄硸鍓嶆湡寰堝ソ鐨勮敩鑿滃仛娉曘€傜敓鑿淕I鍊兼瀬浣庯紝铓濇补鎻愰矞銆傛敞鎰忚殱娌规湰韬惈绯栧拰鐩愶紝鐢ㄩ噺瑕佸皯銆?,bpAdvice:'铓濇补閽犲惈閲忚緝楂橈紝娣嬪皯璁稿嵆鍙€傜敓鑿滃琛€鍘嬫棤褰卞搷銆?,tip:'鐢熻彍鐒按5绉掔珛鍒绘崬鍑猴紝淇濇寔鑴嗗鍙ｆ劅銆?},
+  {name:'鐚倝鐐栫矇鏉?,cat:'瀹跺父鑿?,gi:65,giLevel:'mid',calPer100:180,serve:'鍗婄锛堢害100g锛?,bgAdvice:'绮夋潯锛堢孩钖矇/鍦熻眴绮夛級鐨凣I鍊艰緝楂橈紝鐚倝鐨勮剛鑲篃浼氬鍔犺儼宀涚礌鎶垫姉銆傝繖閬撹彍鐑噺鍋忛珮銆佺⒊姘翠篃鍋忛珮銆傜硸鍓嶆湡瑕佹帶鍒跺垎閲忋€?,bpAdvice:'鐚倝鐨勯ケ鍜岃剛鑲?绮夋潯鐨勭⒊姘?姹ゆ眮閲岀殑鐩愶紝瀵逛笁楂樹汉缇や笉澶弸濂姐€?,tip:'鍙互澶氭斁鐧借彍鍜岃眴鑵愶紝灏戞斁绮夋潯鍜岃偉鑲夈€?},
+  {name:'钂滄偿鐧借倝',cat:'瀹跺父鑿?,gi:10,giLevel:'low',calPer100:280,serve:'3-4鐗囷紙绾?0g锛夛紝鍋跺皵鍚?,bgAdvice:'钂滄偿鐧借倝浣跨敤鐚悗鑷€鑲夛紙浜屽垁鑲夛級锛岃剛鑲惈閲忚緝楂樹絾纰虫按涓洪浂锛屽琛€绯栧奖鍝嶅緢灏忋€傚ぇ钂滄湁鍔╀簬鏀瑰杽鑳板矝绱犳晱鎰熸€с€?,bpAdvice:'鐧借倝鑴傝偑鍚噺杈冮珮锛岃挏娉ラ叡娌规眮鍚挔锛屾敞鎰忔帶鍒躲€?,tip:'澶氭斁钂滄偿銆佸皯娣嬬孩娌癸紝鐢ㄧ槮鑲変唬鏇胯偉鑲夐儴鍒嗐€?},
+  {name:'棣欒弴闈掕彍',cat:'瀹跺父鑿?,gi:10,giLevel:'low',calPer100:35,serve:'涓€灏忕洏锛堢害150g锛?,bgAdvice:'棣欒弴鍜岄潚鑿滐紙涓婃捣闈?娌硅彍锛夐兘鏄瀬浣嶨I椋熸潗锛岃繖閬撹彍瀵硅绯栧嚑涔庨浂褰卞搷銆傝崵绱犳惌閰嶄腑鐨勫畬缇庣礌鑿溿€?,bpAdvice:'棣欒弴鍚捑鏈夊姪闄嶅帇锛岄潚鑿滃瘜鍚氦缁村拰缁寸敓绱犮€傚皯娌瑰揩鐐掑嵆鍙€?,tip:'棣欒弴鍏堢吀鍑洪鍛冲啀涓嬮潚鑿滐紝鍛抽亾鏇存湁灞傛銆?},
+  {name:'钂告按铔?,cat:'瀹跺父鑿?,gi:15,giLevel:'low',calPer100:60,serve:'涓€灏忕锛堢害150g锛?,bgAdvice:'钂告按铔嬶紙楦¤泲缇癸級纰虫按鍖栧悎鐗╁惈閲忓緢浣庯紝GI鍊兼瀬浣庛€傝泲鐧借川涓板瘜锛屽彛鎰熻蒋瀚╋紝鏄硸鍓嶆湡寰堥€傚悎鐨勫甯歌彍銆?,bpAdvice:'楦¤泲钀ュ吇濂斤紝钂哥殑鍋氭硶涓嶅姞澶氫綑娌硅剛锛屽琛€鍘嬫棤璐熸媴銆傛穻灏戣鐢熸娊鍗冲彲銆?,tip:'钂歌泲鏃剁敤娓╂按锛?0掳C宸﹀彸锛夛紝铔嬫按姣斾緥1:1.5锛岃捀鍑烘潵鐨勮泲缇规渶瀚╂粦銆?},
+  {name:'鎺掗姹?,cat:'瀹跺父鑿?,gi:10,giLevel:'low',calPer100:50,serve:'涓€纰楋紙绾?50ml锛屽惈2-3鍧楁帓楠級',bgAdvice:'鎺掗姹ゆ湰韬⒊姘村緢浣庛€備絾寰堝浜哄枩娆㈠湪姹ら噷鍔犵帀绫炽€佽儭钀濆崪銆佸湡璞嗙瓑锛屼細澧炲姞纰虫按銆傚枬姹や负涓汇€佸悆鑲変负杈呫€?,bpAdvice:'鎺掗姹よ〃闈㈢殑娌硅鎾囨帀锛屾堡閲岀殑鐩愯灏戞斁銆傚彲浠ョ敤娴峰甫鎴栧啲鐡滀竴璧风叜澧炲姞椋庡懗銆?,tip:'鎺掗鍏堢劘姘村幓鎺夎娌拰閮ㄥ垎鑴傝偑锛屾堡浼氭洿娓呫€?},
+  {name:'楦¤泲鐏岄ゼ',cat:'瀹跺父鑿?,gi:68,giLevel:'mid',calPer100:260,serve:'鍗婁釜锛堢害100g锛夛紝鍋跺皵鍚?,bgAdvice:'楦¤泲鐏岄ゼ鏄簿鐧介潰+娌?楦¤泲鐨勭粍鍚堬紝GI鍊间腑绛夊亸楂樸€傞潰楗兼补鐐告垨娌圭厧鐨勫仛娉曞鍔犱簡涓嶅繀瑕佺殑鐑噺銆傜硸鍓嶆湡鍋跺皵褰撴棭椁愬彲浠ワ紝涓嶈缁忓父鍚冦€?,bpAdvice:'楗肩殑娌瑰拰鐩愯鎺у埗锛屽埗浣滆繃绋嬩腑鏀剧殑娌硅剛瀵硅鍘嬩笉鍙嬪ソ銆?,tip:'鍦ㄥ鑷繁鍋氬彲浠ョ敤鍏ㄩ害闈㈢矇銆佸皯娌圭厧锛屽鐏屼竴涓浮铔嬪鍔犺泲鐧借川銆?},
+
+  // 鏇村涓婚
+  {name:'鐐搁叡闈?,cat:'涓婚',gi:65,giLevel:'mid',calPer100:185,serve:'涓€灏忕锛堢害200g锛?,bgAdvice:'鐐搁叡闈㈢殑闈㈡潯GI鍊煎亸楂橈紝浣嗙偢閰变腑鐨勯粍璞嗛叡鍜岃倝涓佹彁渚涗簡铔嬬櫧鍜岃剛鑲紝鏁翠綋鍗囩硸閫熷害姣旂函闈㈡潯鎱€傚叧閿槸閰辫灏戞斁銆佽彍鐮侊紙榛勭摐涓濄€佽眴鑺界瓑锛夎澶氭斁銆?,bpAdvice:'鐐搁叡鐨勭洂鍒嗗緢楂橈紙榛勮眴閰?鐢滈潰閰憋級锛屽琛€鍘嬩笉鍙嬪ソ銆傚湪瀹跺仛鍙互鍑忛叡銆佸鏀捐彍鐮併€?,tip:'澶氭斁榛勭摐涓濄€佽眴鑺姐€佽悵鍗滀笣绛夎彍鐮侊紝灏戞斁閰卞拰闈紝鍙樻垚"浠ヨ彍涓轰富銆佷互闈负杈?銆?},
+  {name:'鎵撳崵闈?,cat:'涓婚',gi:60,giLevel:'mid',calPer100:150,serve:'涓€灏忕锛堢害200g锛?,bgAdvice:'鎵撳崵闈㈢殑鍗ゆ眮閫氬父鍚湁鏈ㄨ€炽€侀浮铔嬨€佽倝鐗囩瓑锛屽鍔犱簡铔嬬櫧璐ㄥ拰绾ょ淮锛屾瘮绾潰鏉″崌绯栨參銆備絾鍕捐姟锛堟穩绮夛級浼氬鍔犵⒊姘达紝娉ㄦ剰鍗ゆ眮鐨勯噺銆?,bpAdvice:'鍗ゆ眮涓殑鐩愬垎瑕佹敞鎰忥紙閰辨补+鐩愶級锛屽皯鍚冨崵姹佸彲浠ュ噺灏戦挔鎽勫叆銆?,tip:'鍗ゅ瓙閲岀殑鏈ㄨ€冲拰楦¤泲鏄ソ涓滆タ锛岄潰鏉″皯鍚冦€佸崵瀛愬鐩涖€?},
+  {name:'绾㈣柉绮?,cat:'涓婚',gi:62,giLevel:'mid',calPer100:42,serve:'涓€灏忕锛堢害200ml锛?,bgAdvice:'绾㈣柉鏈韩鏄腑浣嶨I椋熺墿锛屼絾鐓垚绮ュ悗GI鍊间細鏈夋墍涓婂崌銆傜孩钖播姣旂函鐧界背绮ュ崌绯栨參锛屼絾浠嶈娉ㄦ剰鎺у埗閲忋€?,bpAdvice:'绾㈣柉楂橀捑浣庨挔锛屾湁鍔╀簬鎺掗挔闄嶅帇銆備笉瑕佸姞绯栥€?,tip:'鎼厤涓€涓按鐓泲鍜屽噳鎷岃彍涓€璧峰悆锛岄檷浣庢€诲崌绯栬礋鑽枫€?},
+  {name:'鐕曢害绮?,cat:'涓婚',gi:50,giLevel:'low',calPer100:52,serve:'涓€灏忕锛堢害250ml锛?,bgAdvice:'鐕曢害绮I鍊艰緝浣庯紝瀵屽惈尾-钁¤仛绯栵紙鍙憾鎬х氦缁达級锛岃兘鏄捐憲鍑忕紦琛€绯栦笂鍗囥€傛槸绯栧墠鏈熼潪甯告帹鑽愮殑鏃╅绮ュ搧銆?,bpAdvice:'鐕曢害涓殑鍙憾鎬х氦缁存湁鍔╀簬闄嶄綆鑳嗗浐閱囷紝瀵瑰績琛€绠″仴搴锋湁鐩娿€?,tip:'鐢ㄥ師鍛崇嚂楹︾墖鐓紝涓嶈鐢ㄥ嵆椋熸垨璋冨懗鐨勩€傚彲浠ュ姞鍑犻钃濊帗鎴栧皯閲忓潥鏋滃鍔犻鍛炽€?},
+  {name:'鏉傜伯楗?,cat:'涓婚',gi:50,giLevel:'low',calPer100:130,serve:'涓€灏忕锛堢害150g锛?,bgAdvice:'鏉傜伯楗槸绯栧墠鏈熸渶鎺ㄨ崘鐨勪富椋熷舰寮忋€傛贩鍚堢硻绫炽€佺嚂楹︺€佸皬绫炽€佺孩璞嗙瓑澶氱璋风墿鍜岃眴绫伙紝GI鍊兼瘮绾櫧绫抽キ浣庡緢澶氾紝鑶抽绾ょ淮涓板瘜銆侀ケ鑵规劅寮恒€?,bpAdvice:'鏉傜伯涓殑閽俱€侀晛绛夌熆鐗╄川鏈夊姪浜庤鍘嬫帶鍒躲€傝眴绫昏泲鐧戒篃鏈夌泭蹇冭绠°€?,tip:'鏉傜伯鍜岃眴绫婚渶瑕佹彁鍓嶆蹈娉★紝鍙ｆ劅鏇村ソ銆傜櫧绫充笌鏉傜伯姣斾緥浠?:1寮€濮嬶紝閫愭笎璋冩暣鍒?:1銆?},
+  {name:'鑺嬪ご',cat:'涓婚',gi:48,giLevel:'low',calPer100:56,serve:'涓瓑澶у皬鍗婁釜锛堢害100g锛?,bgAdvice:'鑺嬪ごGI鍊间綆锛屽瘜鍚喅椋熺氦缁村拰閽俱€備絾鑺嬪ご灞炰簬钖被涓婚锛岀⒊姘村惈閲忎笉浣庯紝鍚冧簡鑺嬪ご瑕佸噺灏戠背楗殑閲忋€?,bpAdvice:'鑺嬪ご楂橀捑浣庨挔锛岄粡娑茶泲鐧芥湁鍔╀簬闄嶄綆鑳嗗浐閱囥€?,tip:'娓呰捀鑺嬪ご铇稿皯璁哥敓鎶芥渶濂斤紝涓嶈鍋氭嫈涓濊妺澶达紙澶ч噺鍔犵硸锛夈€?},
+  {name:'閰搁潰鍖?,cat:'涓婚',gi:45,giLevel:'low',calPer100:230,serve:'1-2鐗囷紙绾?0g锛?,bgAdvice:'閰搁潰鍖咃紙澶╃劧閰垫瘝闈㈠寘锛夌殑GI鍊兼瘮鏅€氶潰鍖呬綆寰堝銆傚彂閰佃繃绋嬩腑浜х敓鐨勬湁鏈洪吀鑳藉噺缂撴穩绮夋秷鍖栭€熷害銆侀檷浣庨鍚庤绯栧弽搴斻€傛槸绯栧墠鏈熸渶濂界殑闈㈠寘閫夋嫨銆?,bpAdvice:'閰搁潰鍖呭彂閰佃繃绋嬩腑閮ㄥ垎鐩愯娑堣€楋紝瀵硅鍘嬫瘮鏅€氶潰鍖呮洿鍙嬪ソ銆?,tip:'鐪熸鐨勯吀闈㈠寘鐢ㄥぉ鐒堕叺姣嶅彂閰碉紝涓嶆槸鍔犱簡閱嬬殑"浼吀闈㈠寘"銆傜湅閰嶆枡琛細鍙湁闈㈢矇銆佹按銆佺洂銆佸ぉ鐒堕叺姣嶃€?},
+
+  // 铔嬬被锛堢嫭绔嬪垎绫伙級
+  {name:'鐓浮铔?,cat:'铔嬬被',gi:0,giLevel:'low',calPer100:155,serve:'1涓紙绾?0g锛?,bgAdvice:'鐓浮铔婫I鍊间负0锛屽琛€绯栭浂褰卞搷銆傝泲鐧戒紭璐ㄣ€佽泲榛勫惈鍗电７鑴傘€傛按鐓仛娉曟棤娌规棤绯栵紝鏄硸鍓嶆湡鏈€鎺ㄨ崘鐨勮泲绫诲仛娉曘€?,bpAdvice:'楦¤泲鑳嗗浐閱囧澶у鏁颁汉褰卞搷鏈夐檺锛屾瘡澶?涓按鐓泲瀵硅鍘嬫棤璐熸媴銆?,tip:'鐓?鍒嗛挓锛堣泲榛勫垰鍑濆浐锛夊彛鎰熸渶浣筹紝钀ュ吇淇濈暀鏈€濂姐€?},
+  {name:'鐓庨浮铔?,cat:'铔嬬被',gi:0,giLevel:'low',calPer100:196,serve:'1涓紙绾?0g锛?,bgAdvice:'鐓庨浮铔婫I鍊间负0锛屼絾姣旂叜铔嬪浜嗕笉灏戞补銆傜敤涓嶇矘閿呭皯娌圭厧姣斾紶缁熸补鐓庡ソ寰堝銆?,bpAdvice:'鐓庤泲鐢ㄧ殑娌瑰拰鐩愪細澧炲姞鐑噺鍜岄挔鎽勫叆锛屽琛€鍘嬫湁涓€瀹氬奖鍝嶃€?,tip:'鐢ㄤ笉绮橀攨鍒疯杽钖勪竴灞傛补鍗冲彲锛屾垨璇曡瘯姘寸厧铔嬶紙鐢ㄦ按浠ｆ浛娌癸級銆?},
+  {name:'鐐掗浮铔?,cat:'铔嬬被',gi:10,giLevel:'low',calPer100:150,serve:'1-2涓泲鐨勯噺锛堢害100g锛?,bgAdvice:'鐐掗浮铔婫I鍊兼瀬浣庯紝瀵硅绯栧嚑涔庢棤褰卞搷銆傜函鐐掕泲涓嶅姞绯栵紝纰虫按寰堝皯銆傚鏋滃姞浜嗙暘鑼勬垨闊彍涓€璧风倰灏辨洿濂戒簡銆?,bpAdvice:'鐐掕泲鏃舵补閲忚鎺у埗锛屽皯鏀剧洂銆傚拰钄彍涓€璧风倰锛堥煭鑿滅倰铔嬨€佺暘鑼勭倰铔嬶級鏇存湁钀ュ吇銆?,tip:'铔嬫恫閲屽姞涓€鐐圭偣姘存垨鐗涘ザ锛岀倰鍑烘潵鏇村婊戙€?},
+  {name:'鑼跺彾铔?,cat:'铔嬬被',gi:5,giLevel:'low',calPer100:145,serve:'1涓紙绾?0g锛?,bgAdvice:'鑼跺彾铔婫I鍊兼瀬浣庛€傝尪鍙朵腑鐨勮尪澶氶厷鏈夋姉姘у寲浣滅敤銆傜叜鍒惰繃绋嬩腑涓嶅姞娌癸紝鐑噺涓嶉珮锛屼絾浼氬惛鏀舵堡姹佷腑鐨勭洂鍒嗐€?,bpAdvice:'鑼跺彾铔嬬殑姹ゆ眮閫氬父鍚緝澶氶叡娌瑰拰鐩愶紝铔嬪３瑁傜紳瓒婂鐨勮尪鍙惰泲瓒婂捀銆傞珮琛€鍘嬩汉缇ゆ敞鎰忎笉瑕佸悆澶捀鐨勮尪鍙惰泲銆?,tip:'鑷繁鍦ㄥ鍋氬彲浠ユ帶鍒剁洂閲忥紝姣斿闈拱鐨勬竻娣°€?},
+  {name:'鍗よ泲',cat:'铔嬬被',gi:5,giLevel:'low',calPer100:150,serve:'1涓紙绾?0g锛?,bgAdvice:'鍗よ泲GI鍊兼瀬浣庛€傚崵姹佷腑閫氬父鍚硸锛堝啺绯栦笂鑹诧級锛屼絾铔嬫湰韬惛鏀剁殑绯栧緢灏戙€傛暣浣撳琛€绯栧奖鍝嶆瀬灏忋€?,bpAdvice:'鍗ゆ眮鍚緝澶氶叡娌癸紙楂橀挔锛夛紝鍗よ泲浼氭瘮鐓泲鍜稿緢澶氾紝楂樿鍘嬩汉缇ゆ敞鎰忋€?,tip:'鍗よ泲铏藉ソ鍚冿紝浣嗙洂鍒嗕笉浣庯紝鍋跺皵鍚冧竴涓や釜瑙ｉ鍗冲彲銆?},
+  {name:'鑽峰寘铔?,cat:'铔嬬被',gi:0,giLevel:'low',calPer100:140,serve:'1-2涓紙绾?00g锛?,bgAdvice:'姘寸叜鑽峰寘铔嬶紙姘存尝铔嬶級GI鍊间负0锛屾棤娌规棤绯栵紝鍜岀叜楦¤泲涓€鏍锋槸绯栧墠鏈熸渶鎺ㄨ崘鐨勮泲绫诲仛娉曘€?,bpAdvice:'姘寸叜鑽峰寘铔嬪琛€鍘嬫棤璐熸媴锛屽鏋滅敤娌圭厧鑽峰寘铔嬪垯鐑噺楂樹竴浜涖€?,tip:'姘村紑鍚庤浆灏忕伀锛屽湪姘撮噷鍔犱竴鐐圭櫧閱嬶紝铔嬬櫧鏇村鏄撳嚌鍥烘垚褰€?},
+  {name:'铔嬬倰楗?,cat:'铔嬬被',gi:65,giLevel:'mid',calPer100:180,serve:'鍗婄锛堢害100g锛?,bgAdvice:'铔嬬倰楗殑GI鍊煎彇鍐充簬绫抽キ鐨勫灏戙€傜背楗?娌逛竴璧风倰锛岀儹閲忓拰纰虫按閮戒笉浣庛€傚鏋滃鏀捐泲鍜岃敩鑿滐紙鑳¤悵鍗滀竵銆侀潚璞嗙瓑锛夊皯鏀鹃キ锛屽崌绯栦細鏇存參銆?,bpAdvice:'鐐掗キ鏃舵补鍜岀洂瑕佹帶鍒讹紝椁愰鐨勮泲鐐掗キ閫氬父娌瑰緢澶с€?,tip:'鍦ㄥ鐢ㄧ硻绫抽キ鍋氳泲鐐掗キ锛屽鏀捐泲鍜岃敩鑿滀竵锛屽皯鏀炬补鐩愩€?},
+
+  // 鐢滅摐绫?  {name:'棣欑摐',cat:'姘存灉',gi:62,giLevel:'mid',calPer100:30,serve:'鍗婁釜灏忛鐡滐紙绾?50g锛?,bgAdvice:'棣欑摐GI鍊间腑绛夛紝浣嗘按鍒嗗ぇ銆佹€荤⒊姘翠笉绠楅珮銆傜硸鍓嶆湡鍙互閫傞噺鍚冿紝涓€娆′笉瓒呰繃鍗婁釜銆?,bpAdvice:'棣欑摐楂橀捑浣庨挔锛屾按鍒嗕赴瀵岋紝鏈変竴瀹氱殑鍒╁翱鍜岄檷鍘嬩綔鐢ㄣ€?,tip:'閫変笉澶啛閫忕殑棣欑摐锛孏I鍊间細鏇翠綆涓€浜涖€?},
+  {name:'鐧藉叞鐡?,cat:'姘存灉',gi:60,giLevel:'mid',calPer100:28,serve:'涓€灏忓潡锛堢害150g锛?,bgAdvice:'鐧藉叞鐡淕I鍊间腑绛夛紝姘村垎鍚噺楂橈紝鎬荤⒊姘翠綆銆傚拰鍝堝瘑鐡滅被浼硷紝鎺у埗鍒嗛噺鍗冲彲銆?,bpAdvice:'鐧藉叞鐡滃瘜鍚捑鍜屾按鍒嗭紝鏈夊埄灏夸綔鐢紝瀵硅鍘嬫湁涓€瀹氬ソ澶勩€?,tip:'鐧藉叞鐡滃緢鐢滀絾涓昏鏄灉绯栵紝閫傞噺鍚冧笉浼氬墽鐑堝奖鍝嶈绯栥€?},
+  {name:'缃戠汗鐡?,cat:'姘存灉',gi:60,giLevel:'mid',calPer100:32,serve:'涓€灏忓潡锛堢害150g锛?,bgAdvice:'缃戠汗鐡滐紙鏃ユ湰鐢滅摐锛塆I鍊间腑绛夛紝鍚硸閲忔瘮鏅€氶鐡滅暐楂樸€傜硸鍓嶆湡瑕侀€傚綋鍑忓皯鍒嗛噺銆?,bpAdvice:'鍚捑涓板瘜锛屽琛€鍘嬪弸濂姐€備絾绯栧垎姣斾竴鑸敎鐡滈珮锛屼笉鍙椋熴€?,tip:'璐典笖鐢滐紝鍋跺皵鍝佸皾涓€灏忓潡鍗冲彲銆?},
+  {name:'鐜夎尮鐡?,cat:'姘存灉',gi:58,giLevel:'mid',calPer100:28,serve:'涓€灏忓潡锛堢害150g锛?,bgAdvice:'鐜夎尮鐡滐紙鐜夎弴鐢滅摐锛塆I鍊间腑绛夛紝姘村垎澶с€佺儹閲忎綆銆傝倝璐ㄨ蒋绯敎缇庯紝绯栧墠鏈熷彲閫傞噺鍚冿紝涓€娆′笉瓒呰繃涓€灏忓潡銆?,bpAdvice:'鍚捑涓板瘜锛屾按鍒嗗厖瓒筹紝鏈変竴瀹氱殑鍒╁翱浣滅敤锛屽琛€鍘嬪弸濂姐€?,tip:'鐜夎尮鐡滄垚鐔熷悗鐡滆倝浼氬彉杞彉鐢滐紝鍐伴晣鍚庡彛鎰熸洿濂姐€?},
+
+  // 娴烽矞绫伙紙鏂板垎绫伙級
+  {name:'铻冭煿',cat:'娴烽矞',gi:0,giLevel:'low',calPer100:95,serve:'1-2鍙紙绾?00g甯﹀３锛?,bgAdvice:'铻冭煿GI鍊间负0锛岄珮铔嬬櫧浣庤剛锛屽琛€绯栨棤褰卞搷銆傝煿鑲夐矞缇庤惀鍏讳赴瀵屻€備絾锜归粍/锜硅啅鑳嗗浐閱囧惈閲忔瀬楂橈紝瑕佸皯鍚冦€?,bpAdvice:'铻冭煿鏈韩瀵硅鍘嬫棤瀹筹紝浣嗗悆锜规椂甯歌樃濮滈唻姹侊紙鍚洂锛夛紝娉ㄦ剰铇告枡涓嶈澶銆?,tip:'娓呰捀澶ч椄锜规渶缁忓吀锛屼絾锜归粍鑳嗗浐閱囬珮锛屼竴娆?-2鍙嵆鍙€?},
+  {name:'鐢熻殱',cat:'娴烽矞',gi:0,giLevel:'low',calPer100:60,serve:'3-5鍙紙绾?00g鑲夛級',bgAdvice:'鐢熻殱锛堢墶铔庯級GI鍊间负0锛岄珮铔嬬櫧浣庤剛锛屽瘜鍚攲銆傚琛€绯栨棤褰卞搷銆傜⒊鐑ゆ垨娓呰捀閮藉緢閫傚悎绯栧墠鏈熴€?,bpAdvice:'鐢熻殱瀵屽惈閿屽拰鐗涚：閰革紝鏈夊姪浜庡績琛€绠″仴搴枫€傝挏钃夌儰鐢熻殱鐨勬补鍜岀洂瑕佹敞鎰忋€?,tip:'娓呰捀鐢熻殱铇稿皯璁搁叡娌规渶鍋ュ悍锛屾瘮钂滆搲鐑ょ増鏈綆鑴傘€?},
+  {name:'鎵囪礉',cat:'娴烽矞',gi:0,giLevel:'low',calPer100:90,serve:'5-8涓紙绾?00g鑲夛級',bgAdvice:'鎵囪礉GI鍊间负0锛岄珮铔嬬櫧浣庤剛锛屽瘜鍚墰纾洪吀銆傚琛€绯栨棤褰卞搷銆?,bpAdvice:'鎵囪礉鏌憋紙闂３鑲岋級铔嬬櫧鍚噺寰堥珮锛岃剛鑲瀬浣庛€備絾钂滆搲绮変笣钂告墖璐濅腑鐨勭矇涓濅細澧炲姞纰虫按銆?,tip:'娓呰捀鎵囪礉鏈€鍋ュ悍锛屽皯鏀剧矇涓濆拰钂滆搲娌广€?},
+  {name:'闈掑彛',cat:'娴烽矞',gi:0,giLevel:'low',calPer100:80,serve:'10-15涓紙绾?00g鑲夛級',bgAdvice:'闈掑彛锛堣椿璐?娴疯櫣锛塆I鍊间负0锛岃泲鐧藉惈閲忛珮銆傚瘜鍚搧鍜孊12銆傚琛€绯栨棤褰卞搷銆?,bpAdvice:'闈掑彛浣庤剛浣庨挔锛屽瘜鍚玂mega-3锛屽蹇冭绠℃湁淇濇姢浣滅敤銆?,tip:'鐧借憽钀勯厭鐓潚鍙ｅ緢缁忓吀锛堥厭绮句細鎸ュ彂锛屼絾绯栧墠鏈熷缓璁敤娓呰捀锛夈€?},
+  {name:'榫欒櫨',cat:'娴烽矞',gi:0,giLevel:'low',calPer100:90,serve:'鍗婂彧锛堢害150g鑲夛級',bgAdvice:'榫欒櫨GI鍊间负0锛岄珮铔嬬櫧鏋佷綆鑴傘€傚琛€绯栨棤褰卞搷銆備絾浠锋牸璐碉紝涓嶆槸鏃ュ父椋熸潗銆?,bpAdvice:'榫欒櫨铔嬬櫧浼樿川锛屽琛€鍘嬫棤褰卞搷銆傛竻钂告垨鐧界伡鏈€鍋ュ悍銆?,tip:'涓嶈铇稿お澶氶粍娌规垨閰辨枡锛屾竻钂稿悗铇镐竴鐐圭偣鐢熸娊灏卞緢椴滅編銆?},
+  {name:'鐨毊铏?,cat:'娴烽矞',gi:0,giLevel:'low',calPer100:85,serve:'5-8鍙紙绾?50g鑲夛級',bgAdvice:'鐨毊铏撅紙铏捐泟锛塆I鍊间负0锛屽拰鏅€氳櫨绫讳技锛岄珮铔嬬櫧浣庤剛锛屽琛€绯栨棤褰卞搷銆?,bpAdvice:'鐨毊铏惧惈鐗涚：閰稿拰Omega-3锛屾湁鐩婂績琛€绠°€傛竻钂告垨鐧界伡鏈€鍋ュ悍銆?,tip:'姣嶇毊鐨櫨鏈夎櫨榛勶紙铏剧苯锛夋洿棣欙紝浣嗚儐鍥洪唶姣斿叕鐨勯珮涓€浜涖€?},
+  {name:'娴峰弬',cat:'娴烽矞',gi:0,giLevel:'low',calPer100:25,serve:'1-2鏉★紙绾?0g骞插彂鍚庯級',bgAdvice:'娴峰弬GI鍊间负0锛岃泲鐧藉惈閲忛珮锛堜富瑕佹槸鑳跺師铔嬬櫧锛夛紝鍑犱箮鏃犺剛鑲€傚琛€绯栨棤褰卞搷銆?,bpAdvice:'娴峰弬鍚捣鍙傜殏鑻峰拰榛忓绯栵紝浼犵粺璁や负鏈夌泭琛€绠″仴搴峰拰鍏嶇柅鍔涖€備絾鐩愭笉娴峰弬閽犲惈閲忓緢楂橈紝瑕侀€夋贰骞叉捣鍙傝嚜宸卞彂銆?,tip:'娴峰弬鏈韩鏃犲懗锛岄潬姹ゆ眮璋冨懗銆傚缓璁竻娣＄児楗紙钁辩儳灏戞补銆佸皬绫虫捣鍙傜播涓嶅姞鐩愶級銆?},
+  {name:'椴嶉奔',cat:'娴烽矞',gi:0,giLevel:'low',calPer100:82,serve:'1-2鍙紙绾?0g鑲夛級',bgAdvice:'椴嶉奔GI鍊间负0锛岄珮铔嬬櫧浣庤剛锛屽琛€绯栨棤褰卞搷銆備絾椴嶆眮閫氬父鍚緝澶氱洂鍜岀硸锛屾竻钂告瘮绾㈢儳鏇撮€傚悎绯栧墠鏈熴€?,bpAdvice:'椴滈矋楸兼湰韬琛€鍘嬫棤瀹筹紝浣嗗共椴嶇殑娑ㄥ彂杩囩▼鍙兘鐢ㄥ埌纰辨按銆傛竻钂搁矞椴嶆瘮绾㈢儳鏇村仴搴枫€?,tip:'椴滈矋楸煎垏鐗囨竻钂告垨鐧界伡灏卞緢濂斤紝涓嶉渶瑕佸帤閲嶇殑鑺℃眮銆?},
+  {name:'铔忓瓙',cat:'娴烽矞',gi:0,giLevel:'low',calPer100:50,serve:'10-15鍙紙绾?00g鑲夛級',bgAdvice:'铔忓瓙GI鍊间负0锛岄珮铔嬬櫧鏋佷綆鑴傦紝瀵硅绯栨棤褰卞搷銆傛槸鎬т环姣旈珮鐨勬棩甯告捣椴溿€?,bpAdvice:'铔忓瓙鍚攲鍜岀锛屽蹇冭绠℃湁鐩娿€備絾鍜岃洡铚婁竴鏍烽挔鍚噺涓嶄綆锛岀児楗椂灏戝姞鐩愩€?,tip:'钁卞鐐掕洀瀛愬揩鐐掑嵆鍙紝涓嶈涔呯叜鍙樿€併€傜倰涔嬪墠鍚愬噣娌欏瓙銆?},
+  {name:'娴疯灪',cat:'娴烽矞',gi:0,giLevel:'low',calPer100:80,serve:'3-5涓紙绾?0g鑲夛級',bgAdvice:'娴疯灪GI鍊间负0锛岃泲鐧藉惈閲忛珮锛屽琛€绯栨棤褰卞搷銆備絾娴疯灪鑴戯紙鍐呰剰閮ㄥ垎锛夎儐鍥洪唶楂橈紝鍚冭倝涓嶅悆鍐呰剰銆?,bpAdvice:'娴疯灪鑲夊惈鐗涚：閰革紝鏈夌泭蹇冭绠°€傜櫧鐏兼捣铻鸿樃灏戣鐢熸娊鏈€鍋ュ悍銆?,tip:'娴疯灪涓€瀹氳鐓啛鐓€忥紝閬垮厤瀵勭敓铏闄┿€?},
+
+  // 鑽嗚姤锛堣敩鑿滐級
+  {name:'鑽嗚姤',cat:'钄彍',gi:10,giLevel:'low',calPer100:25,serve:'50-80g锛堢害涓€灏忔妸锛?,bgAdvice:'鑽嗚姤鏄竴绉嶇壒鑹查鑽夎敩鑿滐紙娌冲崡绛夊湴甯歌锛夛紝GI鍊兼瀬浣庯紝鐑噺鏋佷綆銆傚瘜鍚尌鍙戞补鍜屽绉嶇淮鐢熺礌锛屽琛€绯栧嚑涔庢棤褰卞搷銆傚噳鎷屾垨鍋氭堡閮介€傚悎绯栧墠鏈熴€?,bpAdvice:'鑽嗚姤涓殑鎸ュ彂娌规湁杞诲害鑸掑紶琛€绠＄殑浣滅敤锛屽琛€鍘嬫棤瀹炽€?,tip:'鍑夋媽鑽嗚姤鏄澶╃殑娓呯埥灏忚彍锛屼篃鍙互鍋氳崋鑺ラ浮铔嬫堡銆?},
+];
+
+// ==================== 宸ュ叿鍑芥暟 ====================
+function formatDate(d) {
+  const m = d.getMonth() + 1;
+  const day = d.getDate();
+  return d.getFullYear() + '-' + (m < 10 ? '0' : '') + m + '-' + (day < 10 ? '0' : '') + day;
+}
+
+function parseDate(str) {
+  const parts = str.split('-');
+  return new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+}
+
+function confirmDialog(msg) {
+  return window.confirm(msg);
+}
+
+// ==================== Tab 鍒囨崲 ====================
+let currentTab = 'tab-bp';
+let bpMorningChartInstance = null;
+let bpEveningChartInstance = null;
+let glucoseChartInstance = null;
+
+function switchTab(tabId, navEl) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  if (navEl) navEl.classList.add('active');
+  currentTab = tabId;
+
+  if (tabId === 'tab-bp') {
+    setTimeout(() => {
+      renderBPMorningChart();
+      renderBPEveningChart();
+    }, 200);
+  }
+  if (tabId === 'tab-glucose') {
+    setTimeout(() => {
+      renderGlucoseChart();
+    }, 200);
+  }
+  if (tabId === 'tab-food') {
+    renderDailyTips();
+  }
+  if (tabId === 'tab-settings') {
+    loadSettingsToForm();
+  }
+}
+
+// ==================== Toast ====================
+function showToast(msg, duration) {
+  if (duration === undefined) duration = 2000;
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timeout);
+  t._timeout = setTimeout(function() { t.classList.remove('show'); }, duration);
+}
+
+// ==================== Tab 1: 姣忔棩璁板綍 ====================
+function getTodayStr() {
+  return formatDate(new Date());
+}
+
+function getActiveDateInput() {
+  var all = document.querySelectorAll('#recordDate');
+  for (var i = 0; i < all.length; i++) {
+    if (all[i].offsetParent !== null) return all[i];
+  }
+  return all[0];
+}
+
+function setAllDateInputs(val) {
+  document.querySelectorAll('#recordDate').forEach(function(el) { el.value = val; });
+}
+
+function initDate() {
+  var el = getActiveDateInput();
+  if (el && !el.value) el.value = getTodayStr();
+  setAllDateInputs(el ? el.value : getTodayStr());
+  loadDayRecords();
+}
+
+function goToToday() {
+  setAllDateInputs(getTodayStr());
+  loadDayRecords();
+}
+
+function changeDate(delta) {
+  var el = getActiveDateInput();
+  if (!el) return;
+  var d = parseDate(el.value);
+  d.setDate(d.getDate() + delta);
+  var newVal = formatDate(d);
+  setAllDateInputs(newVal);
+  loadDayRecords();
+}
+
+function loadDayRecords() {
+  var date = getActiveDateInput().value;
+
+  // Clear inputs
+  ['bpMorningSys','bpMorningDia','bpEveningSys','bpEveningDia','glucoseFasting','glucosePostmeal'].forEach(function(id) {
+    document.getElementById(id).value = '';
+  });
+  // Clear status
+  ['bpMorningStatus','bpEveningStatus','glucoseFastingStatus','glucosePostmealStatus'].forEach(function(id) {
+    var el = document.getElementById(id);
+    el.classList.remove('show', 'normal', 'abnormal');
+  });
+
+  // Load saved records for this date
+  var s = settings;
+  records.forEach(function(r) {
+    if (r.date !== date) return;
+    if (r.type === 'bp_morning') {
+      document.getElementById('bpMorningSys').value = r.systolic || '';
+      document.getElementById('bpMorningDia').value = r.diastolic || '';
+      checkBP('bpMorning', r.systolic, r.diastolic, s);
+    } else if (r.type === 'bp_evening') {
+      document.getElementById('bpEveningSys').value = r.systolic || '';
+      document.getElementById('bpEveningDia').value = r.diastolic || '';
+      checkBP('bpEvening', r.systolic, r.diastolic, s);
+    } else if (r.type === 'glucose_fasting') {
+      document.getElementById('glucoseFasting').value = r.glucose || '';
+      checkGlucose('glucoseFasting', r.glucose, s.glucose_fasting_min, s.glucose_fasting_max);
+    } else if (r.type === 'glucose_postmeal') {
+      document.getElementById('glucosePostmeal').value = r.glucose || '';
+      checkGlucose('glucosePostmeal', r.glucose, 3.9, s.glucose_postmeal_max);
+    }
+  });
+
+  // Load dinner record for this date
+  loadDinnerForDate(date);
+}
+
+function getOrCreateRecord(date, type) {
+  for (var i = 0; i < records.length; i++) {
+    if (records[i].date === date && records[i].type === type) return records[i];
+  }
+  var r = { date: date, type: type, timestamp: Date.now() };
+  records.push(r);
+  return r;
+}
+
+function saveBP() {
+  var date = document.getElementById('recordDate').value;
+  if (!date) { showToast('璇峰厛閫夋嫨鏃ユ湡'); return; }
+
+  var settings = loadSettings();
+
+  // Morning BP
+  var mSys = parseFloat(document.getElementById('bpMorningSys').value);
+  var mDia = parseFloat(document.getElementById('bpMorningDia').value);
+  if (!isNaN(mSys) || !isNaN(mDia)) {
+    if (isNaN(mSys) || isNaN(mDia)) { showToast('璇峰悓鏃跺～鍐欐敹缂╁帇鍜岃垝寮犲帇'); return; }
+    var r = getOrCreateRecord(date, 'bp_morning');
+    r.systolic = mSys;
+    r.diastolic = mDia;
+    r.timestamp = Date.now();
+    checkBP('bpMorning', mSys, mDia, settings);
+  }
+
+  // Evening BP
+  var eSys = parseFloat(document.getElementById('bpEveningSys').value);
+  var eDia = parseFloat(document.getElementById('bpEveningDia').value);
+  if (!isNaN(eSys) || !isNaN(eDia)) {
+    if (isNaN(eSys) || isNaN(eDia)) { showToast('璇峰悓鏃跺～鍐欐敹缂╁帇鍜岃垝寮犲帇'); return; }
+    var r2 = getOrCreateRecord(date, 'bp_evening');
+    r2.systolic = eSys;
+    r2.diastolic = eDia;
+    r2.timestamp = Date.now();
+    checkBP('bpEvening', eSys, eDia, settings);
+  }
+
+  if (isNaN(mSys) && isNaN(eSys)) { showToast('璇疯嚦灏戝～鍐欎竴缁勮鍘嬫暟鎹?); return; }
+
+  saveRecords(records);
+  showToast('琛€鍘嬭褰曞凡淇濆瓨锛?);
+}
+
+function saveGlucose() {
+  var date = document.getElementById('recordDate').value;
+  if (!date) { showToast('璇峰厛閫夋嫨鏃ユ湡'); return; }
+
+  var settings = loadSettings();
+
+  var fasting = parseFloat(document.getElementById('glucoseFasting').value);
+  var postmeal = parseFloat(document.getElementById('glucosePostmeal').value);
+
+  if (isNaN(fasting) && isNaN(postmeal)) { showToast('璇疯嚦灏戝～鍐欎竴缁勮绯栨暟鎹?); return; }
+
+  if (!isNaN(fasting)) {
+    var r = getOrCreateRecord(date, 'glucose_fasting');
+    r.glucose = fasting;
+    r.timestamp = Date.now();
+    checkGlucose('glucoseFasting', fasting, settings.glucose_fasting_min, settings.glucose_fasting_max);
+  }
+
+  if (!isNaN(postmeal)) {
+    var r2 = getOrCreateRecord(date, 'glucose_postmeal');
+    r2.glucose = postmeal;
+    r2.timestamp = Date.now();
+    checkGlucose('glucosePostmeal', postmeal, 3.9, settings.glucose_postmeal_max);
+  }
+
+  saveRecords(records);
+  showToast('琛€绯栬褰曞凡淇濆瓨锛?);
+}
+
+function checkBP(prefix, sys, dia, s) {
+  var el = document.getElementById(prefix + 'Status');
+  if (sys > s.bp_systolic_max || dia > s.bp_diastolic_max) {
+    el.className = 'record-result show abnormal';
+    el.textContent = '鈿狅笍 琛€鍘嬪亸楂橈紒鏀剁缉鍘嬫垨鑸掑紶鍘嬭秴杩囦簡姝ｅ父鑼冨洿锛屽缓璁叧娉ㄥ苟鍜ㄨ鍖荤敓銆?;
+  } else if (sys < s.bp_systolic_min || dia < s.bp_diastolic_min) {
+    el.className = 'record-result show abnormal';
+    el.textContent = '鈿狅笍 琛€鍘嬪亸浣庯紒濡傛灉鎸佺画鍋忎綆骞朵即鏈夊ご鏅曠瓑鐥囩姸锛岃鍜ㄨ鍖荤敓銆?;
+  } else {
+    el.className = 'record-result show normal';
+    el.textContent = '鉁?琛€鍘嬫甯革紝缁х画淇濇寔锛?;
+  }
+}
+
+function checkGlucose(prefix, glu, min, max) {
+  var el = document.getElementById(prefix + 'Status');
+  if (glu > max) {
+    el.className = 'record-result show abnormal';
+    el.textContent = '鈿狅笍 琛€绯栧亸楂橈紒瓒呰繃浜嗘甯歌寖鍥达紝璇锋敞鎰忛ギ椋熷苟鍜ㄨ鍖荤敓銆?;
+  } else if (glu < min) {
+    el.className = 'record-result show abnormal';
+    el.textContent = '鈿狅笍 琛€绯栧亸浣庯紒鍙兘鍑虹幇浣庤绯栫棁鐘讹紝璇锋敞鎰忓強鏃惰繘椋熴€?;
+  } else {
+    el.className = 'record-result show normal';
+    el.textContent = '鉁?琛€绯栨甯革紝缁х画淇濇寔锛?;
+  }
+}
+
+// ==================== Tab 2: 瓒嬪娍鍥捐〃 ====================
+function getRecordsInPeriod(days) {
+  var cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - days + 1);
+  cutoff.setHours(0, 0, 0, 0);
+  return records.filter(function(r) {
+    return parseDate(r.date) >= cutoff;
+  }).sort(function(a, b) {
+    return parseDate(a.date) - parseDate(b.date);
+  });
+}
+
+function getBPMorningDatasets(days) {
+  var recs = getRecordsInPeriod(days);
+  var labels = [];
+  var sysData = [];
+  var diaData = [];
+
+  recs.forEach(function(r) {
+    if (r.type === 'bp_morning') {
+      labels.push(r.date);
+      sysData.push(r.systolic);
+      diaData.push(r.diastolic);
+    }
+  });
+
+  return { labels: labels, sysData: sysData, diaData: diaData };
+}
+
+function getBPEveningDatasets(days) {
+  var recs = getRecordsInPeriod(days);
+  var labels = [];
+  var sysData = [];
+  var diaData = [];
+
+  recs.forEach(function(r) {
+    if (r.type === 'bp_evening') {
+      labels.push(r.date);
+      sysData.push(r.systolic);
+      diaData.push(r.diastolic);
+    }
+  });
+
+  return { labels: labels, sysData: sysData, diaData: diaData };
+}
+
+function getGlucoseDatasets(days) {
+  var recs = getRecordsInPeriod(days);
+  var labels = [];
+  var fastingData = [];
+  var postmealData = [];
+
+  var dateMap = {};
+  recs.forEach(function(r) {
+    if (!dateMap[r.date]) dateMap[r.date] = {};
+    if (r.type === 'glucose_fasting' || r.type === 'glucose_postmeal') {
+      dateMap[r.date][r.type] = r;
+    }
+  });
+
+  var sortedDates = Object.keys(dateMap).sort();
+  sortedDates.forEach(function(d) {
+    var fast = dateMap[d].glucose_fasting;
+    var post = dateMap[d].glucose_postmeal;
+
+    if (fast) {
+      labels.push(d + ' 绌鸿吂');
+      fastingData.push(fast.glucose);
+      postmealData.push(null); // offset for alignment
+    }
+    if (post) {
+      labels.push(d + ' 椁愬悗');
+      fastingData.push(null);
+      postmealData.push(post.glucose);
+    }
+    if (fast && post) {
+      // Replace last two entries with aligned data
+      labels.pop(); labels.pop();
+      fastingData.pop(); fastingData.pop();
+      postmealData.pop(); postmealData.pop();
+      labels.push(d);
+      fastingData.push(fast.glucose);
+      postmealData.push(post.glucose);
+    }
+  });
+
+  return { labels: labels, fastingData: fastingData, postmealData: postmealData };
+}
+
+function renderBPMorningChart() {
+  var periodBtns = document.querySelectorAll('#bpPeriod button');
+  var days = 7;
+  periodBtns.forEach(function(b) { if (b.classList.contains('active')) days = parseInt(b.dataset.period); });
+
+  var data = getBPMorningDatasets(days);
+
+  if (data.labels.length === 0) {
+    document.getElementById('bpMorningChart').style.display = 'none';
+    document.getElementById('bpMorningNoData').style.display = 'block';
+    document.getElementById('bpMorningStats').innerHTML = '';
+    return;
+  }
+
+  document.getElementById('bpMorningChart').style.display = 'block';
+  document.getElementById('bpMorningNoData').style.display = 'none';
+
+  var ctx = document.getElementById('bpMorningChart').getContext('2d');
+  if (bpMorningChartInstance) bpMorningChartInstance.destroy();
+
+  var s = loadSettings();
+
+  bpMorningChartInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: data.labels,
+      datasets: [
+        {
+          label: '鏀剁缉鍘?,
+          data: data.sysData,
+          borderColor: '#E74C3C',
+          backgroundColor: 'rgba(231,76,60,0.1)',
+          borderWidth: 2.5,
+          pointRadius: 4,
+          pointBackgroundColor: '#E74C3C',
+          tension: 0.3
+        },
+        {
+          label: '鑸掑紶鍘?,
+          data: data.diaData,
+          borderColor: '#5BA4CF',
+          backgroundColor: 'rgba(91,164,207,0.1)',
+          borderWidth: 2.5,
+          pointRadius: 4,
+          pointBackgroundColor: '#5BA4CF',
+          tension: 0.3
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { font: { size: 14 }, usePointStyle: true, padding: 20 } }
+      },
+      scales: {
+        y: {
+          min: 40,
+          max: 180,
+          ticks: { font: { size: 13 } },
+          grid: { color: '#ECF0F1' }
+        },
+        x: {
+          ticks: { font: { size: 11 }, maxRotation: 45 }
+        }
+      }
+    }
+  });
+
+  // Stats
+  var allSys = data.sysData;
+  var allDia = data.diaData;
+  var sysAvg = (allSys.reduce(function(a,b){return a+b;},0)/allSys.length).toFixed(1);
+  var diaAvg = (allDia.reduce(function(a,b){return a+b;},0)/allDia.length).toFixed(1);
+  var sysHigh = allSys.filter(function(v){return v > s.bp_systolic_max;}).length;
+  var diaHigh = allDia.filter(function(v){return v > s.bp_diastolic_max;}).length;
+
+  document.getElementById('bpMorningStats').innerHTML =
+    '<div class="stat-item"><div class="stat-value">' + sysAvg + '</div><div class="stat-label">骞冲潎鏀剁缉鍘?/div></div>' +
+    '<div class="stat-item"><div class="stat-value">' + diaAvg + '</div><div class="stat-label">骞冲潎鑸掑紶鍘?/div></div>' +
+    '<div class="stat-item' + (sysHigh+diaHigh>0?' warn':'') + '"><div class="stat-value">' + (sysHigh+diaHigh) + '</div><div class="stat-label">瓒呮爣娆℃暟</div></div>';
+}
+
+function renderBPEveningChart() {
+  var periodBtns = document.querySelectorAll('#bpPeriod button');
+  var days = 7;
+  periodBtns.forEach(function(b) { if (b.classList.contains('active')) days = parseInt(b.dataset.period); });
+
+  var data = getBPEveningDatasets(days);
+
+  if (data.labels.length === 0) {
+    document.getElementById('bpEveningChart').style.display = 'none';
+    document.getElementById('bpEveningNoData').style.display = 'block';
+    document.getElementById('bpEveningStats').innerHTML = '';
+    return;
+  }
+
+  document.getElementById('bpEveningChart').style.display = 'block';
+  document.getElementById('bpEveningNoData').style.display = 'none';
+
+  var ctx = document.getElementById('bpEveningChart').getContext('2d');
+  if (bpEveningChartInstance) bpEveningChartInstance.destroy();
+
+  var s = loadSettings();
+
+  bpEveningChartInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: data.labels,
+      datasets: [
+        {
+          label: '鏀剁缉鍘?,
+          data: data.sysData,
+          borderColor: '#E74C3C',
+          backgroundColor: 'rgba(231,76,60,0.1)',
+          borderWidth: 2.5,
+          pointRadius: 4,
+          pointBackgroundColor: '#E74C3C',
+          tension: 0.3
+        },
+        {
+          label: '鑸掑紶鍘?,
+          data: data.diaData,
+          borderColor: '#5BA4CF',
+          backgroundColor: 'rgba(91,164,207,0.1)',
+          borderWidth: 2.5,
+          pointRadius: 4,
+          pointBackgroundColor: '#5BA4CF',
+          tension: 0.3
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { font: { size: 14 }, usePointStyle: true, padding: 20 } }
+      },
+      scales: {
+        y: {
+          min: 40,
+          max: 180,
+          ticks: { font: { size: 13 } },
+          grid: { color: '#ECF0F1' }
+        },
+        x: {
+          ticks: { font: { size: 11 }, maxRotation: 45 }
+        }
+      }
+    }
+  });
+
+  // Stats
+  var allSys = data.sysData;
+  var allDia = data.diaData;
+  var sysAvg = (allSys.reduce(function(a,b){return a+b;},0)/allSys.length).toFixed(1);
+  var diaAvg = (allDia.reduce(function(a,b){return a+b;},0)/allDia.length).toFixed(1);
+  var sysHigh = allSys.filter(function(v){return v > s.bp_systolic_max;}).length;
+  var diaHigh = allDia.filter(function(v){return v > s.bp_diastolic_max;}).length;
+
+  document.getElementById('bpEveningStats').innerHTML =
+    '<div class="stat-item"><div class="stat-value">' + sysAvg + '</div><div class="stat-label">骞冲潎鏀剁缉鍘?/div></div>' +
+    '<div class="stat-item"><div class="stat-value">' + diaAvg + '</div><div class="stat-label">骞冲潎鑸掑紶鍘?/div></div>' +
+    '<div class="stat-item' + (sysHigh+diaHigh>0?' warn':'') + '"><div class="stat-value">' + (sysHigh+diaHigh) + '</div><div class="stat-label">瓒呮爣娆℃暟</div></div>';
+}
+
+function renderGlucoseChart() {
+  var periodBtns = document.querySelectorAll('#glucosePeriod button');
+  var days = 7;
+  periodBtns.forEach(function(b) { if (b.classList.contains('active')) days = parseInt(b.dataset.period); });
+
+  var data = getGlucoseDatasets(days);
+
+  if (data.labels.length === 0) {
+    document.getElementById('glucoseChart').style.display = 'none';
+    document.getElementById('glucoseNoData').style.display = 'block';
+    document.getElementById('glucoseStats').innerHTML = '';
+    return;
+  }
+
+  document.getElementById('glucoseChart').style.display = 'block';
+  document.getElementById('glucoseNoData').style.display = 'none';
+
+  var ctx = document.getElementById('glucoseChart').getContext('2d');
+  if (glucoseChartInstance) glucoseChartInstance.destroy();
+
+  var s = loadSettings();
+
+  glucoseChartInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: data.labels,
+      datasets: [
+        {
+          label: '绌鸿吂琛€绯?,
+          data: data.fastingData,
+          borderColor: '#F39C12',
+          backgroundColor: 'rgba(243,156,18,0.1)',
+          borderWidth: 2.5,
+          pointRadius: 4,
+          pointBackgroundColor: '#F39C12',
+          tension: 0.3,
+          spanGaps: false
+        },
+        {
+          label: '椁愬悗2h琛€绯?,
+          data: data.postmealData,
+          borderColor: '#E74C3C',
+          backgroundColor: 'rgba(231,76,60,0.1)',
+          borderWidth: 2.5,
+          pointRadius: 4,
+          pointBackgroundColor: '#E74C3C',
+          tension: 0.3,
+          spanGaps: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { font: { size: 14 }, usePointStyle: true, padding: 20 } }
+      },
+      scales: {
+        y: {
+          min: 2,
+          max: 15,
+          ticks: { font: { size: 13 } },
+          grid: { color: '#ECF0F1' }
+        },
+        x: {
+          ticks: { font: { size: 11 }, maxRotation: 45 }
+        }
+      }
+    }
+  });
+
+  var allFasting = data.fastingData.filter(function(v){return v !== null;});
+  var allPostmeal = data.postmealData.filter(function(v){return v !== null;});
+  var fastAvg = allFasting.length > 0 ? (allFasting.reduce(function(a,b){return a+b;},0)/allFasting.length).toFixed(1) : '--';
+  var postAvg = allPostmeal.length > 0 ? (allPostmeal.reduce(function(a,b){return a+b;},0)/allPostmeal.length).toFixed(1) : '--';
+  var overCount = allFasting.filter(function(v){return v > s.glucose_fasting_max;}).length +
+                  allPostmeal.filter(function(v){return v > s.glucose_postmeal_max;}).length;
+
+  document.getElementById('glucoseStats').innerHTML =
+    '<div class="stat-item"><div class="stat-value">' + fastAvg + '</div><div class="stat-label">骞冲潎绌鸿吂琛€绯?/div></div>' +
+    '<div class="stat-item"><div class="stat-value">' + postAvg + '</div><div class="stat-label">骞冲潎椁愬悗琛€绯?/div></div>' +
+    '<div class="stat-item' + (overCount>0?' warn':'') + '"><div class="stat-value">' + overCount + '</div><div class="stat-label">瓒呮爣娆℃暟</div></div>';
+
+  // Show dinner records for dates in the chart period
+  renderGlucoseDinnerContext(days);
+}
+
+function renderGlucoseDinnerContext(days) {
+  var cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - days + 1);
+  cutoff.setHours(0, 0, 0, 0);
+
+  var allDinners = loadDinnerRecords();
+  var allRecs = getRecordsInPeriod(days);
+
+  // Build glucose lookup: date -> { postmeal, fasting }
+  var glucoseByDate = {};
+  allRecs.forEach(function(r) {
+    if (!glucoseByDate[r.date]) glucoseByDate[r.date] = {};
+    if (r.type === 'glucose_postmeal') glucoseByDate[r.date].postmeal = r.glucose;
+    if (r.type === 'glucose_fasting') glucoseByDate[r.date].fasting = r.glucose;
+  });
+
+  // Also look up next-day fasting from all records (global)
+  var allTimeRecords = loadRecords();
+  var fastingByDateAll = {};
+  allTimeRecords.forEach(function(r) {
+    if (r.type === 'glucose_fasting') fastingByDateAll[r.date] = r.glucose;
+  });
+
+  // Collect dates that have dinner or glucose data in the period
+  var relevantDates = {};
+  Object.keys(glucoseByDate).forEach(function(d) {
+    if (parseDate(d) >= cutoff) relevantDates[d] = true;
+  });
+  Object.keys(allDinners).forEach(function(d) {
+    if (parseDate(d) >= cutoff) relevantDates[d] = true;
+  });
+
+  var sortedDates = Object.keys(relevantDates).sort();
+  var contextEl = document.getElementById('glucoseDinnerContext');
+
+  if (sortedDates.length === 0) {
+    contextEl.innerHTML = '';
+    return;
+  }
+
+  var s = loadSettings();
+
+  // Helper: get next day's date string
+  function getNextDate(dateStr) {
+    var d = parseDate(dateStr);
+    d.setDate(d.getDate() + 1);
+    return formatDate(d);
+  }
+
+  var rows = '';
+  sortedDates.forEach(function(date) {
+    var dinner = allDinners[date];
+    var g = glucoseByDate[date] || {};
+    var postmeal = g.postmeal;
+    var nextFasting = fastingByDateAll[getNextDate(date)];
+
+    var dinnerText = (dinner && dinner.length > 0) ? '馃嵔锔?' + dinner.join('銆?) : '<span style="color:var(--text-light);">鏈褰曟櫄椁?/span>';
+    var postmealText = postmeal !== undefined
+      ? '<span style="color:' + (postmeal > s.glucose_postmeal_max ? 'var(--red)' : 'var(--green)') + ';font-weight:600;">' + postmeal + '</span>'
+      : '<span style="color:var(--text-light);">--</span>';
+    var nextFastingText = nextFasting !== undefined
+      ? '<span style="color:' + (nextFasting > s.glucose_fasting_max ? 'var(--red)' : 'var(--green)') + ';font-weight:600;">' + nextFasting + '</span>'
+      : '<span style="color:var(--text-light);">--</span>';
+
+    rows +=
+      '<div style="display:flex;align-items:flex-start;gap:6px;padding:10px 0;border-bottom:1px solid var(--gray-border);font-size:var(--font-sm);">' +
+        '<div style="min-width:75px;font-weight:600;line-height:1.4;">' + date + '</div>' +
+        '<div style="flex:1;line-height:1.4;">' + dinnerText + '</div>' +
+        '<div style="min-width:65px;text-align:center;line-height:1.4;">' +
+          '<div style="font-size:11px;color:var(--text-light);">椁愬悗2h</div>' +
+          '<div>' + postmealText + '</div>' +
+        '</div>' +
+        '<div style="min-width:65px;text-align:center;line-height:1.4;">' +
+          '<div style="font-size:11px;color:var(--text-light);">娆℃棩绌鸿吂</div>' +
+          '<div>' + nextFastingText + '</div>' +
+        '</div>' +
+      '</div>';
+  });
+
+  if (rows) {
+    contextEl.innerHTML = '<div class="dinner-context" style="margin-top:12px;">' +
+      '<strong>馃搵 鏅氶涓庤绯栧鐓?/strong>' +
+      '<div style="margin-top:4px;font-size:11px;color:var(--text-light);">鏄ㄦ櫄鏅氶 鈫?椁愬悗2h琛€绯?鈫?浠婃棭绌鸿吂琛€绯?/div>' +
+      '<div style="margin-top:6px;">' + rows + '</div>' +
+      '<div style="margin-top:6px;font-size:12px;color:var(--text-light);">馃挕 鏅氶鍚冧粈涔堟槸褰卞搷绗簩澶╃┖鑵硅绯栫殑鍏抽敭鍥犵礌銆傝瀵熶笉鍚屾櫄椁愭惌閰嶅悗娆℃棩绌鸿吂琛€绯栫殑鍙樺寲锛屾壘鍒伴€傚悎鑷繁鐨勬櫄椁愭柟妗堛€?/div>' +
+      '</div>';
+  } else {
+    contextEl.innerHTML = '';
+  }
+}
+
+function switchBPPeriod(days, btn) {
+  document.querySelectorAll('#bpPeriod button').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderBPMorningChart();
+  renderBPEveningChart();
+}
+
+function switchGlucosePeriod(days, btn) {
+  document.querySelectorAll('#glucosePeriod button').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderGlucoseChart();
+}
+
+// ==================== 鏅氶璁板綍 ====================
+var DINNER_STORAGE = 'lz_dinner_records';
+var currentDinnerFoods = [];
+
+function loadDinnerRecords() {
+  try { return JSON.parse(localStorage.getItem(DINNER_STORAGE)) || {}; }
+  catch(e) { return {}; }
+}
+
+function saveDinnerRecords(data) {
+  localStorage.setItem(DINNER_STORAGE, JSON.stringify(data));
+}
+
+function loadDinnerForDate(date) {
+  var allDinners = loadDinnerRecords();
+  currentDinnerFoods = allDinners[date] || [];
+  renderDinnerTags();
+}
+
+function saveDinner() {
+  var date = getActiveDateInput().value;
+  if (!date) { showToast('璇峰厛閫夋嫨鏃ユ湡'); return; }
+  var allDinners = loadDinnerRecords();
+  allDinners[date] = currentDinnerFoods.slice();
+  saveDinnerRecords(allDinners);
+  showToast('鏅氶璁板綍宸蹭繚瀛橈紒');
+}
+
+function onDinnerSearch() {
+  var query = document.getElementById('dinnerSearch').value.trim().toLowerCase();
+  var dropdown = document.getElementById('dinnerAutocomplete');
+
+  if (!query) {
+    dropdown.classList.remove('show');
+    return;
+  }
+
+  var canonicalNames = typeof resolveFoodQuery === 'function' ? resolveFoodQuery(query) : [query];
+
+  var matches = foodDB.filter(function(f) {
+    if (f.name.toLowerCase().indexOf(query) !== -1) return true;
+    for (var i = 0; i < canonicalNames.length; i++) {
+      if (f.name.toLowerCase().indexOf(canonicalNames[i].toLowerCase()) !== -1) return true;
+    }
+    for (var alias in foodAliases) {
+      if (foodAliases[alias] === f.name) {
+        if (alias.indexOf(query) !== -1 || query.indexOf(alias) !== -1) return true;
+      }
+    }
+    return false;
+  }).slice(0, 6);
+
+  if (matches.length === 0) {
+    dropdown.classList.remove('show');
+    return;
+  }
+
+  dropdown.innerHTML = matches.map(function(f) {
+    var giBadge = f.giLevel === 'low' ? '<span class="badge badge-gi-low">浣嶨I</span>' :
+                  (f.giLevel === 'mid' ? '<span class="badge badge-gi-mid">涓璆I</span>' :
+                   '<span class="badge badge-gi-high">楂楪I</span>');
+    return '<div class="dinner-autocomplete-item" onclick="addDinnerFood(\'' +
+           f.name.replace(/'/g, "\\'") + '\')">' +
+           '<span>' + f.name + '</span>' + giBadge + '</div>';
+  }).join('');
+
+  dropdown.classList.add('show');
+}
+
+function addDinnerFood(foodName) {
+  if (currentDinnerFoods.indexOf(foodName) === -1) {
+    currentDinnerFoods.push(foodName);
+  }
+  document.getElementById('dinnerSearch').value = '';
+  document.getElementById('dinnerAutocomplete').classList.remove('show');
+  renderDinnerTags();
+}
+
+function removeDinnerFood(index) {
+  currentDinnerFoods.splice(index, 1);
+  renderDinnerTags();
+}
+
+function renderDinnerTags() {
+  var container = document.getElementById('dinnerTags');
+  if (!container) return;
+  if (currentDinnerFoods.length === 0) {
+    container.innerHTML = '<span class="empty-hint">杩樻病鏈夎褰曚粖鏅氱殑鏅氶</span>';
+    return;
+  }
+  container.innerHTML = currentDinnerFoods.map(function(f, i) {
+    return '<span class="dinner-tag">' + f +
+           '<button class="remove-tag" onclick="removeDinnerFood(' + i + ')">鉁?/button></span>';
+  }).join('');
+}
+
+// Close autocompletes when clicking outside
+document.addEventListener('click', function(e) {
+  // Dinner autocomplete
+  var dinnerWrap = document.querySelector('.dinner-search-wrap');
+  if (dinnerWrap && !dinnerWrap.contains(e.target)) {
+    var dd = document.getElementById('dinnerAutocomplete');
+    if (dd) dd.classList.remove('show');
+  }
+  // Food autocomplete
+  var searchBox = document.querySelector('.search-box');
+  if (searchBox && !searchBox.contains(e.target)) {
+    var fd = document.getElementById('foodAutocomplete');
+    if (fd) fd.classList.remove('show');
+  }
+});
+
+// ==================== 椋熺墿鍒悕鏄犲皠 ====================
+var foodAliases = {
+  // 瀹跺父鑿滃埆鍚?  '瑗跨孩鏌跨倰楦¤泲': '鐣寗鐐掕泲', '瑗跨孩鏌跨倰铔?: '鐣寗鐐掕泲', '鐣寗鐐掗浮铔?: '鐣寗鐐掕泲',
+  '鐣寗铔嬭姳姹?: '瑗跨孩鏌胯泲姹?, '鐣寗楦¤泲姹?: '瑗跨孩鏌胯泲姹?,
+  '楦¤泲缇?: '钂告按铔?, '钂搁浮铔?: '钂告按铔?, '姘磋捀铔?: '钂告按铔?,
+  '钂滆搲瑗胯摑鑺?: '钂滆搲瑗垮叞鑺?,
+  '鎷嶉粍鐡?: '鍑夋媽榛勭摐',
+  '閱嬫簻澶х櫧鑿?: '閱嬫簻鐧借彍', '閱嬬啒鐧借彍': '閱嬫簻鐧借彍',
+  '绾㈢儳鎺掗': '绾㈢儳鑲?, '鎺掗': '鎺掗姹?,
+  // 钄彍鍒悕
+  '鐣寗': '瑗跨孩鏌?, '娲嬫熆瀛?: '瑗跨孩鏌?,
+  '娲嬭妺': '鍦熻眴', '椹搩钖?: '鍦熻眴', '鍦拌泲': '鍦熻眴', '灞辫嵂铔?: '鍦熻眴',
+  '鍦扮摐': '绾㈣柉', '鐣柉': '绾㈣柉', '鐢樿柉': '绾㈣柉', '鐧借柉': '绾㈣柉', '绾㈣嫊': '绾㈣柉',
+  '鑻炶胺': '鐜夌背', '绮熺背': '灏忕背', '妫掑瓙': '鐜夌背', '鐜夎渶榛?: '鐜夌背',
+  '娣北': '灞辫嵂', '钖摚': '灞辫嵂',
+  '鑺辨ぐ鑿?: '瑗垮叞鑺?, '闈掕姳鑿?: '瑗垮叞鑺?, '瑗胯摑鑺?: '瑗垮叞鑺?,
+  '绾㈣悵鍗?: '鑳¤悵鍗?,
+  '闈掔摐': '榛勭摐',
+  '鍦嗚懕': '娲嬭懕', '钁卞ご': '娲嬭懕', '鐨娊瀛?: '娲嬭懕',
+  '鍑夌摐': '鑻︾摐',
+  '鐭摐': '鑼勫瓙',
+  '鍊摐': '鍗楃摐', '鍖楃摐': '鍗楃摐',
+  '閫氬績鑿?: '绌哄績鑿?, '钑硅彍': '绌哄績鑿?, '閫氳彍': '绌哄績鑿?,
+  '鐨囧笣鑿?: '鑼艰捒', '钃捒': '鑼艰捒',
+  '鐢熻彍蹇?: '鐢熻彍', '鐜荤拑鐢熻彍': '鐢熻彍',
+  '闈掕彍': '鐧借彍', '娌硅彍': '鐧借彍', '涓婃捣闈?: '鐧借彍',
+  '鐏妞?: '闈掓', '鏌垮瓙妞?: '闈掓', '鐢滄': '闈掓',
+  '绉嬭懙鑽?: '绉嬭懙', '缇婅璞?: '绉嬭懙',
+  '鑾磋嫞': '鑾寸瑡', '闈掔瑡': '鑾寸瑡',
+  // 姘存灉鍒悕
+  '濂囧紓鏋?: '鐚曠尨妗?, '闃虫': '鐚曠尨妗?,
+  '鍑ゆⅷ': '鑿犺悵', '榛勬ⅷ': '鑿犺悵',
+  '杞﹀帢瀛?: '妯辨',
+  '澹鍟ゆⅷ': '鑽夎帗',
+  '鍝堣湝鐡?: '鍝堝瘑鐡?,
+  '铚滅摐': '鍝堝瘑鐡?,
+  '瑗挎煔': '鏌氬瓙', '钁¤悇鏌?: '鏌氬瓙',
+  '姗樺瓙': '姗欏瓙', '妗斿瓙': '姗欏瓙', '鏌戞': '姗欏瓙',
+  '鎻愬瓙': '钁¤悇',
+  '鑺箰': '鐣煶姒?,
+  // 鑲夌被娴烽矞鍒悕
+  '鍒€楸?: '甯﹂奔',
+  '鑺辩敳': '铔よ湂', '鑺辫洡': '铔よ湂', '鏂囪洡': '铔よ湂',
+  '涓夌汗楸?: '涓夋枃楸?, '椴戦奔': '涓夋枃楸?,
+  '鐚ぇ娌?: '浜旇姳鑲?, '鑲ヨ倝': '浜旇姳鑲?,
+  '楦″瓙': '楦¤泲', '楦″嵉': '楦¤泲',
+  '鐗涗钩': '鐗涘ザ',
+  // 璞嗗埗鍝佸埆鍚?  '璞嗗共': '璞嗚厫骞?, '棣欏共': '璞嗚厫骞?, '璞嗚厫涔?: '璞嗚厫骞?,
+  '璞嗚姳': '璞嗚厫', '姘磋眴鑵?: '璞嗚厫',
+  '璞嗕钩': '璞嗘祮', '璞嗗ザ': '璞嗘祮',
+  '澶ц眴': '榛勮眴',
+  // 涓婚鍒悕
+  '姘撮ズ': '楗哄瓙',
+  '鎶勬墜': '棣勯エ', '浜戝悶': '棣勯エ',
+  '棣?: '棣掑ご', '钂搁': '棣掑ご', '鐧介': '棣掑ご',
+  '鎰忛潰': '鎰忓ぇ鍒╅潰', '鎰忓ぇ鍒╅潰鏉?: '鎰忓ぇ鍒╅潰', '閫氬績绮?: '鎰忓ぇ鍒╅潰',
+  '鐧介キ': '鐧界背楗?, '澶х背楗?: '鐧界背楗?,
+  '绋€楗?: '灏忕背绮?, '鐧界播': '灏忕背绮?,
+  '闈?: '闈㈡潯', '鍒囬潰': '闈㈡潯',
+  '楹︾墖': '鐕曢害', '鐕曢害鐗?: '鐕曢害',
+  '鍏ㄩ害鍖?: '鍏ㄩ害闈㈠寘',
+  '閿呰创': '楗哄瓙',
+  // 闆堕楗搧鍒悕
+  '鐧界硸': '鐧界爞绯?, '钄楃硸': '鐧界爞绯?, '鐮傜硸': '鐧界爞绯?,
+  '浼樻牸': '閰稿ザ', '閰镐钩': '閰稿ザ', '浼橀叒涔?: '閰稿ザ',
+  '钀借姳鐢?: '鑺辩敓', '闀跨敓鏋?: '鑺辩敓',
+  '鏋ｅ瓙': '澶ф灒', '绾㈡灒': '澶ф灒', '骞叉灒': '澶ф灒',
+  '鏋告潪瀛?: '鏋告潪',
+  '鍙箰楗枡': '鍙箰', '鍙彛鍙箰': '鍙箰',
+  '鍟ら厭': '鍟ら厭', '榛勬堡': '鍟ら厭',
+  '鐧介厭': '鐧介厭', '鐑ч厭': '鐧介厭', '鑰佺櫧骞?: '鐧介厭',
+  '鑻忔墦姘?: '鏃犵硸鑻忔墦姘?, '姘旀场姘?: '鏃犵硸鑻忔墦姘?,
+  '闆硶': '鍐版穱娣?, '鍐版': '鍐版穱娣?, '鍐版縺鍑?: '鍐版穱娣?,
+  '钖潯': '钖墖', '鐐歌柉鏉?: '钖墖',
+  '鏈卞彜鍔?: '宸у厠鍔?,
+  // 鏂板姞闈㈤
+  '鐐搁叡闈?: '鐐搁叡闈?, '鏉傞叡闈?: '鐐搁叡闈?, '鍖椾含鐐搁叡闈?: '鐐搁叡闈?,
+  '鎵撳崵闈?: '鎵撳崵闈?, '澶у崵闈?: '鎵撳崵闈?,
+  // 绮ラキ
+  '鍦扮摐绮?: '绾㈣柉绮?, '鐣柉绮?: '绾㈣柉绮?, '绾㈣嫊绮?: '绾㈣柉绮?,
+  '楹︾墖绮?: '鐕曢害绮?, '鐕曢害绋€楗?: '鐕曢害绮?,
+  '绮楃伯楗?: '鏉傜伯楗?, '浜旇胺楗?: '鏉傜伯楗?, '澶氳胺楗?: '鏉傜伯楗?,
+  // 闈㈠寘
+  '閰哥闈㈠寘': '閰搁潰鍖?, '澶╃劧閰垫瘝闈㈠寘': '閰搁潰鍖?, '閰搁潰鍥㈤潰鍖?: '閰搁潰鍖?, '鑰侀潰闈㈠寘': '閰搁潰鍖?,
+  // 鑺嬪ご
+  '鑺嬭壙': '鑺嬪ご', '鑺嬩粩': '鑺嬪ご', '棣欒妺': '鑺嬪ご',
+  // 铔嬬被
+  '姘寸叜铔?: '鐓浮铔?, '鐧界叜铔?: '鐓浮铔?,
+  '鐓庤泲': '鐓庨浮铔?, '娌圭厧铔?: '鐓庨浮铔?,
+  '鐐掕泲': '鐐掗浮铔?, '鎽婇浮铔?: '鐐掗浮铔?,
+  '鑼惰泲': '鑼跺彾铔?, '浜旈鑼跺彾铔?: '鑼跺彾铔?,
+  '鍗ゆ按铔?: '鍗よ泲', '鍗ら浮铔?: '鍗よ泲',
+  '姘存尝铔?: '鑽峰寘铔?, '鍗ц泲': '鑽峰寘铔?, '姘寸叜鑽峰寘铔?: '鑽峰寘铔?,
+  '铔嬬倰楗?: '铔嬬倰楗?, '鎵窞鐐掗キ': '铔嬬倰楗?,
+  // 鐢滅摐
+  '鐢滅摐': '棣欑摐', '姊ㄧ摐': '棣欑摐', '灏忛鐡?: '棣欑摐',
+  '鍏板窞鐡?: '鐧藉叞鐡?, '鐧藉叞棣欑摐': '鐧藉叞鐡?,
+  '鏃ユ湰鐢滅摐': '缃戠汗鐡?, '铚滅摐': '缃戠汗鐡?,
+  '鐜夎弴鐡?: '鐜夎尮鐡?, '鐜夎弴鐢滅摐': '鐜夎尮鐡?, '鐜夎尮鐢滅摐': '鐜夎尮鐡?,
+  // 娴烽矞
+  '锜?: '铻冭煿', '澶ч椄锜?: '铻冭煿', '姊瓙锜?: '铻冭煿', '娌宠煿': '铻冭煿',
+  '鐗¤泿': '鐢熻殱', '铓?: '鐢熻殱', '娴疯泿瀛?: '鐢熻殱',
+  '甯﹀瓙': '鎵囪礉', '椴滆礉': '鎵囪礉',
+  '璐昏礉': '闈掑彛', '娴疯櫣': '闈掑彛', '娣¤彍': '闈掑彛', '闈掑彛璐?: '闈掑彛',
+  '婢抽緳': '榫欒櫨', '澶ч緳铏?: '榫欒櫨', '灏忛緳铏?: '榫欒櫨',
+  '铏捐泟': '鐨毊铏?, '婵戝翱铏?: '鐨毊铏?, '铏剧埇瀛?: '鐨毊铏?, '鐞电惗铏?: '鐨毊铏?,
+  '娴峰弬': '娴峰弬', '鍒哄弬': '娴峰弬',
+  '椴嶉奔': '椴嶉奔', '椴滈矋': '椴嶉奔', '骞查矋': '椴嶉奔',
+  '铔忓瓙': '铔忓瓙', '绔硅洀': '铔忓瓙', '铔?: '铔忓瓙',
+  '娴疯灪': '娴疯灪', '棣欒灪': '娴疯灪', '铻鸿倝': '娴疯灪',
+  // 鍏朵粬鍒悕
+  '榛戞湪鑰?: '鏈ㄨ€?, '浜戣€?: '鏈ㄨ€?,
+  '鐧芥湪鑰?: '鏈ㄨ€?, '閾惰€?: '鏈ㄨ€?,
+  '铚傝湝': '铚傝湝', '铚滅硸': '铚傝湝',
+  '鑽嗚姤': '鑽嗚姤', '鑽嗚彍': '鑽嗚姤', '鍋囪嫃': '鑽嗚姤'
+};
+
+// Helper: find canonical names for a query
+function resolveFoodQuery(query) {
+  var results = [query]; // Always include the raw query
+  // Check exact alias match
+  if (foodAliases[query]) {
+    results.push(foodAliases[query]);
+  }
+  // Check partial matches 鈥?if query is part of an alias, resolve it
+  for (var alias in foodAliases) {
+    if (alias.includes(query) && results.indexOf(foodAliases[alias]) === -1) {
+      results.push(foodAliases[alias]);
+    }
+  }
+  return results;
+}
+
+// ==================== Tab 3: 椋熺墿鏌ヨ ====================
+function filterFoods() {
+  var query = document.getElementById('foodSearch').value.trim().toLowerCase();
+
+  if (!query) {
+    hideFoodAutocomplete();
+    return;
+  }
+
+  var canonicalNames = resolveFoodQuery(query);
+
+  var filtered = foodDB.filter(function(f) {
+    // Direct name match
+    if (f.name.toLowerCase().indexOf(query) !== -1) return true;
+    // Check if food name matches any canonical name
+    for (var i = 0; i < canonicalNames.length; i++) {
+      if (f.name.toLowerCase().indexOf(canonicalNames[i].toLowerCase()) !== -1) return true;
+    }
+    // Check if any alias maps to this food and contains or is contained by query
+    for (var alias in foodAliases) {
+      if (foodAliases[alias] === f.name) {
+        if (alias.indexOf(query) !== -1 || query.indexOf(alias) !== -1) return true;
+      }
+    }
+    return false;
+  });
+
+  showFoodAutocomplete(filtered);
+}
+
+function showFoodAutocomplete(filtered) {
+  var dd = document.getElementById('foodAutocomplete');
+  if (filtered.length === 0) {
+    dd.innerHTML = '<div class="autocomplete-empty">娌℃湁鎵惧埌鍖归厤鐨勯鐗╋紝璇曡瘯鍏朵粬鍏抽敭璇嶅惂~</div>';
+    dd.classList.add('show');
+    return;
+  }
+
+  dd.innerHTML = filtered.map(function(f) {
+    var giBadgeClass = f.giLevel === 'low' ? 'badge-gi-low' : (f.giLevel === 'mid' ? 'badge-gi-mid' : 'badge-gi-high');
+    var giLabel = f.giLevel === 'low' ? '浣嶨I' : (f.giLevel === 'mid' ? '涓璆I' : '楂楪I');
+    return '<div class="autocomplete-item" onclick="openFoodDetail(\'' +
+           f.name.replace(/'/g, "\\'") + '\')">' +
+      '<div>' +
+        '<div class="item-name">' + f.name + '</div>' +
+        '<div class="item-meta" style="margin-top:2px;">' + f.cat + ' 路 ' + f.calPer100 + '鍗冨崱/100g</div>' +
+      '</div>' +
+      '<span class="badge ' + giBadgeClass + '">' + giLabel + ' GI:' + f.gi + '</span>' +
+    '</div>';
+  }).join('');
+
+  dd.classList.add('show');
+}
+
+function hideFoodAutocomplete() {
+  var dd = document.getElementById('foodAutocomplete');
+  if (dd) dd.classList.remove('show');
+}
+
+function openFoodDetail(foodName) {
+  var f = null;
+  for (var i = 0; i < foodDB.length; i++) {
+    if (foodDB[i].name === foodName) { f = foodDB[i]; break; }
+  }
+  if (!f) return;
+  hideFoodAutocomplete();
+  showFoodDetailFromObj(f);
+}
+
+function showFoodDetailFromObj(f) {
+  var giBadgeClass = f.giLevel === 'low' ? 'badge-gi-low' : (f.giLevel === 'mid' ? 'badge-gi-mid' : 'badge-gi-high');
+  var giLabel = f.giLevel === 'low' ? '浣嶨I' : (f.giLevel === 'mid' ? '涓璆I' : '楂楪I');
+  var bgClass = '';
+  if (f.giLevel === 'high' || f.serve.indexOf('涓嶅缓璁?) !== -1) bgClass = ' warning';
+  else if (f.giLevel === 'low' && f.serve.indexOf('涓嶅缓璁?) === -1) bgClass = ' safe';
+
+  var html =
+    '<div class="food-detail-header">' +
+      '<h2>' + f.name + '</h2>' +
+      '<span class="badge ' + giBadgeClass + '" style="font-size:var(--font-md);padding:6px 16px;">' + giLabel + ' 鈥?GI鍊? ' + f.gi + '</span>' +
+    '</div>' +
+    '<div class="food-detail-grid">' +
+      '<div class="food-detail-item"><div class="value">' + f.gi + '</div><div class="label">GI鍊硷紙鍗囩硸鎸囨暟锛?/div></div>' +
+      '<div class="food-detail-item"><div class="value">' + f.calPer100 + '</div><div class="label">姣?00g鐑噺锛堝崈鍗★級</div></div>' +
+      '<div class="food-detail-item"><div class="value">' + f.cat + '</div><div class="label">椋熺墿鍒嗙被</div></div>' +
+      '<div class="food-detail-item"><div class="value" style="font-size:var(--font-md);">' + f.serve + '</div><div class="label">寤鸿姣忔鎽勫叆閲?/div></div>' +
+    '</div>' +
+    '<div class="food-advice' + bgClass + '">' +
+      '<strong>馃└ 瀵硅绯栫殑褰卞搷锛?/strong><br>' + f.bgAdvice +
+    '</div>' +
+    '<div class="food-advice">' +
+      '<strong>馃挀 瀵硅鍘嬬殑褰卞搷锛?/strong><br>' + f.bpAdvice +
+    '</div>' +
+    '<div style="background:#E8F4FD;border-radius:var(--radius-sm);padding:14px 16px;font-size:var(--font-md);line-height:1.7;">' +
+      '<strong>馃挕 绯栧墠鏈熼ギ椋熷缓璁細</strong><br>' + f.tip +
+    '</div>';
+
+  document.getElementById('foodModalContent').innerHTML = html;
+  document.getElementById('foodModal').classList.add('show');
+}
+
+function closeFoodModal() {
+  document.getElementById('foodModal').classList.remove('show');
+}
+
+// ==================== 姣忔棩楗寤鸿 ====================
+var dailyTips = [
+  { title: 'GI鍊兼槸浠€涔堬紵', icon: '馃摉', text: 'GI锛堝崌绯栨寚鏁帮級鍙嶆槧椋熺墿鍚冧笅鍘诲悗琛€绯栦笂鍗囩殑蹇參銆侴I鈮?5涓轰綆GI锛?6-69涓轰腑GI锛屸墺70涓洪珮GI銆傜硸鍓嶆湡寤鸿澶氶€変綆GI椋熺墿銆? },
+  { title: '鍚冮キ椤哄簭鏈夎绌?, icon: '馃嵔锔?, text: '寤鸿鎸夈€岃敩鑿?鈫?铔嬬櫧璐紙鑲?铔?璞嗭級 鈫?涓婚銆嶇殑椤哄簭鍚冦€傚厛鍚冭敩鑿滃拰铔嬬櫧璐ㄥ彲浠ュ噺缂撳悗缁富椋熺殑鍗囩硸閫熷害銆? },
+  { title: '绮楃伯鏇夸唬娉?, icon: '馃尵', text: '鐧界背楗彲浠ョ敤1/3绯欑背鎴栫嚂楹︽浛鎹紝GI鍊奸檷浣庣殑鍚屾椂鍙ｆ劅宸埆涓嶅ぇ銆傛參鎱㈠鍔犵矖绮瘮渚嬶紝鑲犻亾涔熼渶瑕佹椂闂撮€傚簲銆? },
+  { title: '姘存灉搴旇浠€涔堟椂鍊欏悆锛?, icon: '馃崕', text: '姘存灉寤鸿鍦ㄤ袱椁愪箣闂村悆锛堜笂鍗?0鐐规垨涓嬪崍3鐐癸級锛屼笉瑕侀キ鍚庨┈涓婂悆銆傞キ鍚庤绯栧凡缁忓湪涓婂崌锛屽啀鍔犳按鏋滀細鍙犲姞鍗囬珮銆? },
+  { title: '鎺х洂灏辨槸鎺ц鍘?, icon: '馃', text: '姣忓ぉ椋熺洂涓嶈秴杩?鍏嬶紙绾︿竴鍟ら厭鐡剁洊锛夈€傞叡娌广€佽殱娌广€佸懗绮鹃兘鍚ぇ閲忛挔锛屾斁浜嗚繖浜涘氨瑕佸皯鏀剧洂銆? },
+  { title: '鍠濈播鏈夐櫡闃?, icon: '馃ィ', text: '绮ョ叜寰楄秺鐑傦紝鍗囩硸瓒婂揩銆傚嵆浣挎槸灏忕背绮ャ€佹潅绮播锛岀叜涔呬簡GI鍊间篃涓嶄綆銆傚鏋滃枩娆㈠枬绮ワ紝涓嶈鐓お鐑傦紝鎼厤楦¤泲鍜岃敩鑿滀竴璧枫€? },
+  { title: '杩愬姩鏄渶濂界殑闄嶇硸鑽?, icon: '馃毝', text: '楗悗鏁ｆ20-30鍒嗛挓鑳芥樉钁楅檷浣庨鍚庤绯栥€備笉闇€瑕佸墽鐑堣繍鍔紝鎱㈡參璧板氨鏈夋晥鏋溿€傛瘡澶╃疮璁℃琛?000-8000姝ヤ负浣炽€? },
+  { title: '璇绘噦椋熷搧鏍囩', icon: '馃彿锔?, text: '涔板寘瑁呴鍝佹椂鐪嬮厤鏂欒〃锛屾帓绗竴鐨勬槸鍚噺鏈€楂樼殑銆傚鏋滅櫧鐮傜硸銆佹灉钁＄硸娴嗘帓鍦ㄥ墠涓変綅锛岀硸鍓嶆湡鎱庝拱銆? },
+  { title: '澶栧嚭灏遍灏忚创澹?, icon: '馃崪', text: '椁愰鐨勮彍閫氬父娌瑰ぇ鐩愬銆傚彲浠ヨ涓€纰楁竻姘达紝鎶婅彍娑竴涓嬪啀鍚冦€傚厛鍚冨噳鎷岃彍锛堝皯閰憋級锛屽啀鍚冪儹鑿滐紝绫抽キ鏈€鍚庡悆銆? },
+  { title: '瓒抽噺楗按寰堥噸瑕?, icon: '馃挧', text: '姣忓ぉ鍠?500-1700ml姘达紙绾?-8鏉級銆傚厖瓒崇殑姘村垎鏈夊姪浜庤偩鑴忔帓鍑哄浣欑殑绯栧垎銆傚皯鍠濆惈绯栭ギ鏂欙紝鐧藉紑姘存槸鏈€濂界殑閫夋嫨銆? },
+  { title: '鐔涔熶細鍗囬珮琛€绯?, icon: '馃槾', text: '鐫＄湢涓嶈冻浼氳韬綋鍒嗘硨鏇村鍘嬪姏婵€绱狅紝瀵艰嚧绗簩澶╄绯栧亸楂樸€傚缓璁瘡鏅?1鐐瑰墠鍏ョ潯锛屼繚璇?-8灏忔椂鐫＄湢銆? },
+  { title: '鑶抽绾ょ淮鏄ソ鏈嬪弸', icon: '馃ガ', text: '姣忓ぉ鍚冨500g钄彍锛堝叾涓竴鍗婁负缁垮彾鑿滐級锛岃喅椋熺氦缁磋兘寤剁紦绯栧垎鍚告敹銆佸鍔犻ケ鑵规劅銆傞鑹茶秺娣辩殑钄彍钀ュ吇瓒婂ソ銆? },
+  { title: '鍧氭灉铏藉ソ鍒椽澶?, icon: '馃', text: '鏍告銆佹潖浠佺瓑鍧氭灉瀵屽惈鍋ュ悍鑴傝偑锛孏I鍊兼瀬浣庛€備絾瀹冧滑鐑噺楂橈紝姣忓ぉ涓€灏忔妸锛堢害20-30g锛夊氨澶熶簡锛岄€夊師鍛崇殑涓嶈鐩愮剹銆? },
+  { title: '鍘嬪姏绠＄悊涔熼噸瑕?, icon: '馃', text: '闀挎湡鐒﹁檻鍜屽帇鍔涗細鍗囬珮琛€绯栧拰琛€鍘嬨€傛瘡澶╄姳10鍒嗛挓鍋氭繁鍛煎惛銆佸惉鍚煶涔愭垨鍑洪棬璧拌蛋锛屽琛€绯栨帶鍒舵湁瀹炲疄鍦ㄥ湪鐨勫府鍔┿€? },
+  { title: '鏃犵硸鈮犳棤瀹?, icon: '鈿狅笍', text: '"鏃犵硸"楗煎共鍙兘娌℃湁鍔犺敆绯栵紝浣嗕粛鐒剁敱绮惧埗闈㈢矇鍜屾补鑴傚埗鎴愶紝鐑噺鍜屽崌绯栬兘鍔涗笉瀹瑰皬瑙戙€備笉瑕佽"鏃犵硸"鏍囩杩锋儜銆? },
+  { title: '浼樿川铔嬬櫧鎬庝箞閫?, icon: '馃', text: '铔嬬櫧璐ㄧ殑浼樺厛绾э細楸艰倝 > 绂借倝 > 铔嬬被 > 璞嗗埗鍝?> 绾㈣倝銆傛瘡鍛ㄥ悆楸?-3娆★紝绾㈣倝锛堢尓鐗涚緤鑲夛級涓嶈秴杩?娆°€? },
+  { title: '鏃╅瑕佸悆濂?, icon: '馃寘', text: '涓嶅悆鏃╅浼氬鑷村崍椁愬悗琛€绯栨洿楂樸€傚ソ鐨勬棭椁愬簲璇ュ寘鍚細浼樿川铔嬬櫧锛堥浮铔?鐗涘ザ锛? 绮楃伯涓婚 + 涓€浠借敩鑿溿€? },
+  { title: '灏戦澶氶鏈夐亾鐞?, icon: '鈴?, text: '涓夐瀹氭椂瀹氶噺锛屾瘡椁愪竷鍏垎楗便€傚鏋滀袱椁愰棿闅旇秴杩?灏忔椂锛屽彲浠ュ姞涓€娆″皬鍔犻锛堝涓€涓嫻鏋滄垨涓€灏忔澂閰稿ザ锛夛紝閬垮厤浣庤绯栥€? },
+  { title: '缁嗗毤鎱㈠捊闄嶈绯?, icon: '馃Ψ', text: '姣忓彛楗毤20-30涓嬶紝涓€椤块キ鍚?0鍒嗛挓浠ヤ笂銆傚悆寰楁參鑳借澶ц剳鍙婃椂鏀跺埌"楗变簡"鐨勪俊鍙凤紝閬垮厤鍚冨锛屼篃鑳藉噺缂撹绯栦笂鍗囥€? },
+  { title: '鎴掔儫闄愰厭', icon: '馃毉', text: '鍚哥儫浼氭崯浼よ绠°€佸姞閲嶈儼宀涚礌鎶垫姉銆傞厭绮句細骞叉壈鑲濊剰鐨勮绯栬皟鑺傦紝绌鸿吂楗厭灏ゅ叾鍗遍櫓銆傜硸鍓嶆湡寤鸿鎴掔儫銆佷弗鏍奸檺閰掋€? }
+];
+
+function renderDailyTips() {
+  var container = document.getElementById('dailyTips');
+  if (!container) return;
+
+  // Pick tips based on day of year
+  var now = new Date();
+  var dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+  var idx1 = dayOfYear % dailyTips.length;
+  var idx2 = (dayOfYear + 7) % dailyTips.length;
+  var idx3 = (dayOfYear + 14) % dailyTips.length;
+
+  var selectedTips = [dailyTips[idx1], dailyTips[idx2], dailyTips[idx3]];
+
+  var months = now.getMonth() + 1;
+  var days = now.getDate();
+  var weekdays = ['鏃?, '涓€', '浜?, '涓?, '鍥?, '浜?, '鍏?];
+  var weekday = weekdays[now.getDay()];
+
+  container.innerHTML =
+    '<h3>馃挕 浠婃棩楗寤鸿</h3>' +
+    selectedTips.map(function(t) {
+      return '<div class="tip-card">' +
+        '<div class="tip-title"><span class="tip-icon">' + t.icon + '</span>' + t.title + '</div>' +
+        '<div class="tip-text">' + t.text + '</div>' +
+      '</div>';
+    }).join('') +
+    '<div class="tip-date">馃搮 ' + months + '鏈? + days + '鏃?鏄熸湡' + weekday + ' 路 姣忓ぉ3鏉★紝姣忓ぉ鏇存柊</div>';
+}
+
+// ==================== Tab 4: 璁剧疆 ====================
+function loadSettingsToForm() {
+  var s = loadSettings();
+  document.getElementById('setBpSysMax').value = s.bp_systolic_max;
+  document.getElementById('setBpDiaMax').value = s.bp_diastolic_max;
+  document.getElementById('setGluFastingMax').value = s.glucose_fasting_max;
+  document.getElementById('setGluPostmealMax').value = s.glucose_postmeal_max;
+  document.getElementById('setRemindBpMorning').value = s.reminder_morning_bp;
+  document.getElementById('setRemindBpEvening').value = s.reminder_evening_bp;
+  document.getElementById('setRemindGluFasting').value = s.reminder_fasting_glucose;
+  document.getElementById('setRemindGluPostmeal').value = s.reminder_postmeal_glucose;
+}
+
+function saveSettings() {
+  settings = {
+    bp_systolic_max: parseInt(document.getElementById('setBpSysMax').value) || 140,
+    bp_diastolic_max: parseInt(document.getElementById('setBpDiaMax').value) || 90,
+    bp_systolic_min: 90,
+    bp_diastolic_min: 60,
+    glucose_fasting_max: parseFloat(document.getElementById('setGluFastingMax').value) || 6.1,
+    glucose_fasting_min: 3.9,
+    glucose_postmeal_max: parseFloat(document.getElementById('setGluPostmealMax').value) || 7.8,
+    reminder_morning_bp: document.getElementById('setRemindBpMorning').value || '08:00',
+    reminder_evening_bp: document.getElementById('setRemindBpEvening').value || '20:00',
+    reminder_fasting_glucose: document.getElementById('setRemindGluFasting').value || '07:30',
+    reminder_postmeal_glucose: document.getElementById('setRemindGluPostmeal').value || '20:30'
+  };
+  saveSettingsToStore(settings);
+  showToast('璁剧疆宸蹭繚瀛橈紒');
+}
+
+function exportData() {
+  var data = {
+    records: loadRecords(),
+    settings: loadSettings(),
+    exportDate: new Date().toISOString()
+  };
+  var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = '鑰佸乏鍋ュ悍鏁版嵁_澶囦唤_' + getTodayStr() + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('鏁版嵁宸插鍑猴紒');
+}
+
+function importData(event) {
+  var file = event.target.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      var data = JSON.parse(e.target.result);
+      if (!data.records || !Array.isArray(data.records)) {
+        showToast('鏂囦欢鏍煎紡涓嶆纭紒');
+        return;
+      }
+      if (!confirmDialog('鍗冲皢瀵煎叆 ' + data.records.length + ' 鏉¤褰曪紝鐜版湁鏁版嵁灏嗚瑕嗙洊銆傜‘瀹氱户缁悧锛?)) return;
+      saveRecords(data.records);
+      if (data.settings) saveSettingsToStore(data.settings);
+      records = loadRecords();
+      settings = loadSettings();
+      showToast('鏁版嵁瀵煎叆鎴愬姛锛佸叡瀵煎叆 ' + data.records.length + ' 鏉¤褰?);
+      loadDayRecords();
+      loadSettingsToForm();
+    } catch(err) {
+      showToast('鏂囦欢瑙ｆ瀽澶辫触锛岃妫€鏌ユ枃浠舵槸鍚︽纭€?);
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+function clearAllData() {
+  if (!confirmDialog('鈿狅笍 纭畾瑕佹竻闄ゅ叏閮ㄦ暟鎹悧锛熻繖涓搷浣滄棤娉曟挙閿€锛乗n\n寤鸿鍏堝鍑烘暟鎹浠姐€?)) return;
+  if (!confirmDialog('鍐嶆纭锛氱湡鐨勮娓呴櫎鍏ㄩ儴鍋ュ悍璁板綍鍜岃缃悧锛?)) return;
+  localStorage.removeItem(STORAGE_KEY_RECORDS);
+  localStorage.removeItem(STORAGE_KEY_SETTINGS);
+  records = [];
+  settings = loadSettings();
+  showToast('鍏ㄩ儴鏁版嵁宸叉竻闄?);
+  loadDayRecords();
+  loadSettingsToForm();
+}
+
+// ==================== 鎻愰啋绯荤粺 ====================
+let lastReminderDate = '';
+let reminderInterval = null;
+
+function checkReminders() {
+  if (!('Notification' in window)) return;
+
+  var now = new Date();
+  var todayStr = formatDate(now);
+  var currentTime = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
+
+  // Only check once per minute per reminder type
+  if (todayStr === lastReminderDate && currentTime === (window._lastCheckTime || '')) return;
+  window._lastCheckTime = currentTime;
+
+  var s = loadSettings();
+
+  var reminders = [
+    { time: s.reminder_morning_bp, msg: '鈽€锔?鑰佸乏锛岃娴嬫棭涓婅鍘嬪暒锛佽寰楀厛瀹夐潤浼戞伅5鍒嗛挓鍐嶆祴閲忓摝~', key: 'mbp' },
+    { time: s.reminder_evening_bp, msg: '馃寵 鑰佸乏锛屾櫄涓婂暒锛屾祴涓€涓嬭鍘嬪惂锛佺潯鍓?灏忔椂娴嬮噺鏈€鍑唦', key: 'ebp' },
+    { time: s.reminder_fasting_glucose, msg: '馃寘 鏃╀笂濂斤紒璁板緱绌鸿吂娴嬭绯栧摝锛堣捣搴婂悗銆佸悆鏃╅キ鍓嶏級~', key: 'fgl' },
+    { time: s.reminder_postmeal_glucose, msg: '馃嵔锔?鏅氶キ鍚?灏忔椂鍟︼紝璇ユ祴椁愬悗琛€绯栦簡~', key: 'pgl' }
+  ];
+
+  reminders.forEach(function(r) {
+    if (r.time === currentTime) {
+      // Check if already reminded today
+      var reminded = JSON.parse(localStorage.getItem('lz_reminded_' + todayStr) || '[]');
+      if (reminded.indexOf(r.key) !== -1) return;
+
+      if (Notification.permission === 'granted') {
+        new Notification('鑰佸乏鍋ュ悍妫€娴?, { body: r.msg, icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="80" font-size="80">馃挋</text></svg>', requireInteraction: true });
+      } else if (Notification.permission === 'default') {
+        Notification.requestPermission();
+      }
+
+      reminded.push(r.key);
+      localStorage.setItem('lz_reminded_' + todayStr, JSON.stringify(reminded));
+    }
+  });
+
+  // Reset reminded list on new day
+  if (todayStr !== lastReminderDate) {
+    localStorage.removeItem('lz_reminded_' + lastReminderDate);
+    lastReminderDate = todayStr;
+  }
+}
+
+function startReminderSystem() {
+  if (reminderInterval) return;
+  lastReminderDate = formatDate(new Date());
+
+  if ('Notification' in window && Notification.permission === 'default') {
+    // Show a prompt to enable notifications after first interaction
+    document.addEventListener('click', function requestNotif() {
+      Notification.requestPermission();
+      document.removeEventListener('click', requestNotif);
+    }, { once: true });
+  }
+
+  reminderInterval = setInterval(checkReminders, 30000); // Check every 30 seconds
+  checkReminders();
+}
+
+// ==================== 鍒濆鍖?====================
+function init() {
+  initDate();
+  renderDailyTips();
+  loadSettingsToForm();
+
+  // Start reminder system with a delay to avoid spamming on page load
+  setTimeout(startReminderSystem, 3000);
+}
+
+// Handle page becoming visible again (e.g. switching tabs)
+document.addEventListener('visibilitychange', function() {
+  if (!document.hidden) {
+    if (currentTab === 'tab-bp') {
+      renderBPMorningChart();
+      renderBPEveningChart();
+    }
+    if (currentTab === 'tab-glucose') {
+      renderGlucoseChart();
+    }
+  }
+});
+
+// Init on load
+window.addEventListener('DOMContentLoaded', init);
+
+// Register Service Worker for PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').catch(function() {});
+  });
+}
+</script>
+</body>
+</html>
