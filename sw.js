@@ -1,6 +1,7 @@
-// Service Worker for 鑰佸乏鍋ュ悍妫€娴?// Cache-first strategy for offline support
+// Service Worker for 老左健康检测
+// Cache-first strategy for offline support
 
-var CACHE_NAME = 'lz-health-v1-20260527';
+var CACHE_NAME = 'lz-health-v2';
 
 var URLS_TO_CACHE = [
   './',
@@ -91,7 +92,7 @@ self.addEventListener('fetch', function(event) {
           return caches.match('./index.html');
         }
         // For other requests, just fail
-        return new Response('缃戠粶涓嶅彲鐢紝璇锋鏌ョ綉缁滆繛鎺ュ悗閲嶈瘯銆?, {
+        return new Response('网络不可用，请检查网络连接后重试。', {
           status: 503,
           headers: { 'Content-Type': 'text/plain; charset=utf-8' }
         });
