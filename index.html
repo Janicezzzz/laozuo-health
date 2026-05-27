@@ -6,10 +6,10 @@
 <meta name="theme-color" content="#5BA4CF">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="鑰佸乏鍋ュ悍妫€娴?>
+<meta name="apple-mobile-web-app-title" content="老左健康检测">
 <meta name="format-detection" content="telephone=no">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='38' fill='%235BA4CF'/><text y='130' x='96' text-anchor='middle' font-size='108'>馃挋</text></svg>">
-<title>鑰佸乏鍋ュ悍妫€娴?/title>
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='38' fill='%235BA4CF'/><text y='130' x='96' text-anchor='middle' font-size='108'>💙</text></svg>">
+<title>老左健康检测</title>
 <link rel="manifest" href="manifest.json">
 <style>
 :root {
@@ -826,39 +826,39 @@ input:focus, select:focus {
 <div class="app-container">
   <!-- Header -->
   <header class="app-header">
-    <h1>鑰佸乏鍋ュ悍妫€娴?/h1>
-    <div class="subtitle">璁板綍鍋ュ悍 路 绉戝楗</div>
+    <h1>老左健康检测</h1>
+    <div class="subtitle">记录健康 · 科学饮食</div>
   </header>
 
   <!-- Main Content -->
   <main class="main-content" id="mainContent">
 
-    <!-- Tab 1: 琛€鍘嬬鐞?-->
+    <!-- Tab 1: 血压管理 -->
     <section class="tab-content active" id="tab-bp">
-      <!-- 鏃ユ湡閫夋嫨 -->
+      <!-- 日期选择 -->
       <div class="card">
-        <div class="card-title"><span class="icon">馃搮</span>閫夋嫨鏃ユ湡</div>
+        <div class="card-title"><span class="icon">📅</span>选择日期</div>
         <div style="display:flex;gap:10px;align-items:center;">
-          <button class="btn btn-secondary btn-sm" onclick="changeDate(-1)">鈼€ 鍓嶄竴澶?/button>
+          <button class="btn btn-secondary btn-sm" onclick="changeDate(-1)">◀ 前一天</button>
           <input type="date" id="recordDate" style="flex:1;text-align:center;" onchange="loadDayRecords()">
-          <button class="btn btn-secondary btn-sm" onclick="changeDate(1)">鍚庝竴澶?鈻?/button>
+          <button class="btn btn-secondary btn-sm" onclick="changeDate(1)">后一天 ▶</button>
         </div>
-        <button class="btn btn-outline btn-sm" style="width:100%;margin-top:10px;" onclick="goToToday()">鍥炲埌浠婂ぉ</button>
+        <button class="btn btn-outline btn-sm" style="width:100%;margin-top:10px;" onclick="goToToday()">回到今天</button>
       </div>
 
-      <!-- 琛€鍘嬪綍鍏?-->
+      <!-- 血压录入 -->
       <div class="card">
-        <div class="card-title"><span class="icon">馃挀</span>琛€鍘嬭褰?/div>
+        <div class="card-title"><span class="icon">💓</span>血压记录</div>
 
         <div style="margin-bottom:16px;">
-          <div style="font-weight:600;margin-bottom:8px;color:var(--blue);">鈽€锔?鏃╀笂琛€鍘?/div>
+          <div style="font-weight:600;margin-bottom:8px;color:var(--blue);">☀️ 早上血压</div>
           <div class="form-row">
             <div class="input-unit">
-              <input type="number" id="bpMorningSys" placeholder="鏀剁缉鍘? min="60" max="250">
+              <input type="number" id="bpMorningSys" placeholder="收缩压" min="60" max="250">
               <span class="unit">mmHg</span>
             </div>
             <div class="input-unit">
-              <input type="number" id="bpMorningDia" placeholder="鑸掑紶鍘? min="30" max="150">
+              <input type="number" id="bpMorningDia" placeholder="舒张压" min="30" max="150">
               <span class="unit">mmHg</span>
             </div>
           </div>
@@ -866,132 +866,134 @@ input:focus, select:focus {
         </div>
 
         <div style="margin-bottom:8px;">
-          <div style="font-weight:600;margin-bottom:8px;color:var(--blue);">馃寵 鏅氫笂琛€鍘?/div>
+          <div style="font-weight:600;margin-bottom:8px;color:var(--blue);">🌙 晚上血压</div>
           <div class="form-row">
             <div class="input-unit">
-              <input type="number" id="bpEveningSys" placeholder="鏀剁缉鍘? min="60" max="250">
+              <input type="number" id="bpEveningSys" placeholder="收缩压" min="60" max="250">
               <span class="unit">mmHg</span>
             </div>
             <div class="input-unit">
-              <input type="number" id="bpEveningDia" placeholder="鑸掑紶鍘? min="30" max="150">
+              <input type="number" id="bpEveningDia" placeholder="舒张压" min="30" max="150">
               <span class="unit">mmHg</span>
             </div>
           </div>
           <div id="bpEveningStatus" class="record-result"></div>
         </div>
 
-        <button class="btn btn-primary" onclick="saveBP()">馃捑 淇濆瓨琛€鍘嬭褰?/button>
+        <button class="btn btn-primary" onclick="saveBP()">💾 保存血压记录</button>
       </div>
 
-      <!-- 琛€鍘嬭秼鍔垮浘琛?-->
+      <!-- 血压趋势图表 -->
       <div class="card">
-        <div class="card-title"><span class="icon">馃搳</span>琛€鍘嬭秼鍔?/div>
+        <div class="card-title"><span class="icon">📊</span>血压趋势</div>
         <div class="chart-period" id="bpPeriod">
-          <button data-period="7" class="active" onclick="switchBPPeriod(7, this)">鏈€杩?澶?/button>
-          <button data-period="30" onclick="switchBPPeriod(30, this)">30澶?/button>
-          <button data-period="90" onclick="switchBPPeriod(90, this)">90澶?/button>
+          <button data-period="7" class="active" onclick="switchBPPeriod(7, this)">最近7天</button>
+          <button data-period="30" onclick="switchBPPeriod(30, this)">30天</button>
+          <button data-period="90" onclick="switchBPPeriod(90, this)">90天</button>
         </div>
         <div style="margin-bottom:20px;">
-          <div style="font-weight:600;margin-bottom:10px;color:var(--blue);">鈽€锔?鏃╀笂琛€鍘?/div>
+          <div style="font-weight:600;margin-bottom:10px;color:var(--blue);">☀️ 早上血压</div>
           <div class="chart-container"><canvas id="bpMorningChart"></canvas></div>
           <div id="bpMorningNoData" class="no-data" style="display:none;">
-            <div class="icon">馃搵</div>
-            <div>鏆傛棤鏃╀笂琛€鍘嬫暟鎹?/div>
+            <div class="icon">📋</div>
+            <div>暂无早上血压数据</div>
           </div>
           <div class="stats-row" id="bpMorningStats"></div>
         </div>
         <div>
-          <div style="font-weight:600;margin-bottom:10px;color:var(--blue);">馃寵 鏅氫笂琛€鍘?/div>
+          <div style="font-weight:600;margin-bottom:10px;color:var(--blue);">🌙 晚上血压</div>
           <div class="chart-container"><canvas id="bpEveningChart"></canvas></div>
           <div id="bpEveningNoData" class="no-data" style="display:none;">
-            <div class="icon">馃搵</div>
-            <div>鏆傛棤鏅氫笂琛€鍘嬫暟鎹?/div>
+            <div class="icon">📋</div>
+            <div>暂无晚上血压数据</div>
           </div>
           <div class="stats-row" id="bpEveningStats"></div>
         </div>
       </div>
     </section>
 
-    <!-- Tab 2: 琛€绯栫鐞?-->
+    <!-- Tab 2: 血糖管理 -->
     <section class="tab-content" id="tab-glucose">
-      <!-- 鏃ユ湡閫夋嫨 -->
+      <!-- 日期选择 -->
       <div class="card">
-        <div class="card-title"><span class="icon">馃搮</span>閫夋嫨鏃ユ湡</div>
+        <div class="card-title"><span class="icon">📅</span>选择日期</div>
         <div style="display:flex;gap:10px;align-items:center;">
-          <button class="btn btn-secondary btn-sm" onclick="changeDate(-1)">鈼€ 鍓嶄竴澶?/button>
+          <button class="btn btn-secondary btn-sm" onclick="changeDate(-1)">◀ 前一天</button>
           <input type="date" id="recordDate" style="flex:1;text-align:center;" onchange="loadDayRecords()">
-          <button class="btn btn-secondary btn-sm" onclick="changeDate(1)">鍚庝竴澶?鈻?/button>
+          <button class="btn btn-secondary btn-sm" onclick="changeDate(1)">后一天 ▶</button>
         </div>
-        <button class="btn btn-outline btn-sm" style="width:100%;margin-top:10px;" onclick="goToToday()">鍥炲埌浠婂ぉ</button>
+        <button class="btn btn-outline btn-sm" style="width:100%;margin-top:10px;" onclick="goToToday()">回到今天</button>
       </div>
 
-      <!-- 琛€绯栧綍鍏?-->
+      <!-- 血糖录入 -->
       <div class="card">
-        <div class="card-title"><span class="icon">馃└</span>琛€绯栬褰?/div>
+        <div class="card-title"><span class="icon">🩸</span>血糖记录</div>
 
         <div style="margin-bottom:16px;">
-          <div style="font-weight:600;margin-bottom:8px;color:var(--blue);">馃寘 绌鸿吂琛€绯栵紙鏃╀笂璧峰簥鍚庯級</div>
+          <div style="font-weight:600;margin-bottom:8px;color:var(--blue);">🌅 空腹血糖（早上起床后）</div>
           <div class="input-unit">
-            <input type="number" id="glucoseFasting" placeholder="绌鸿吂琛€绯栧€? min="2" max="30" step="0.1">
+            <input type="number" id="glucoseFasting" placeholder="空腹血糖值" min="2" max="30" step="0.1">
             <span class="unit">mmol/L</span>
           </div>
           <div id="glucoseFastingStatus" class="record-result"></div>
         </div>
 
         <div style="margin-bottom:8px;">
-          <div style="font-weight:600;margin-bottom:8px;color:var(--blue);">馃嵔锔?鏅氶キ鍚?灏忔椂琛€绯?/div>
+          <div style="font-weight:600;margin-bottom:8px;color:var(--blue);">🍽️ 晚饭后2小时血糖</div>
           <div class="input-unit">
-            <input type="number" id="glucosePostmeal" placeholder="椁愬悗2h琛€绯栧€? min="2" max="30" step="0.1">
+            <input type="number" id="glucosePostmeal" placeholder="餐后2h血糖值" min="2" max="30" step="0.1">
             <span class="unit">mmol/L</span>
           </div>
           <div id="glucosePostmealStatus" class="record-result"></div>
         </div>
 
-        <button class="btn btn-primary" onclick="saveGlucose()">馃捑 淇濆瓨琛€绯栬褰?/button>
+        <button class="btn btn-primary" onclick="saveGlucose()">💾 保存血糖记录</button>
       </div>
 
-      <!-- 鏅氶璁板綍 -->
+      <!-- 晚餐记录 -->
       <div class="card">
-        <div class="card-title"><span class="icon">馃嵔锔?/span>褰撴棩鏅氶璁板綍</div>
+        <div class="card-title"><span class="icon">🍽️</span>当日晚餐记录</div>
         <div class="guide-banner" style="margin-bottom:12px;">
-          馃挕 璁板綍浠婃櫄鍚冧簡浠€涔堬紝瀵圭収椁愬悗琛€绯栧€硷紝甯姪鎵惧嚭褰卞搷琛€绯栫殑椋熺墿銆?        </div>
+          💡 记录今晚吃了什么，对照餐后血糖值，帮助找出影响血糖的食物。
+        </div>
         <div class="dinner-search-wrap">
-          <input type="text" id="dinnerSearch" placeholder="鎼滅储椋熺墿娣诲姞鍒版櫄椁?.." oninput="onDinnerSearch()" onfocus="onDinnerSearch()" autocomplete="off">
+          <input type="text" id="dinnerSearch" placeholder="搜索食物添加到晚餐..." oninput="onDinnerSearch()" onfocus="onDinnerSearch()" autocomplete="off">
           <div class="dinner-autocomplete" id="dinnerAutocomplete"></div>
         </div>
         <div class="dinner-tags" id="dinnerTags">
-          <span class="empty-hint">杩樻病鏈夎褰曚粖鏅氱殑鏅氶</span>
+          <span class="empty-hint">还没有记录今晚的晚餐</span>
         </div>
-        <button class="btn btn-primary" onclick="saveDinner()">馃捑 淇濆瓨鏅氶璁板綍</button>
+        <button class="btn btn-primary" onclick="saveDinner()">💾 保存晚餐记录</button>
       </div>
 
-      <!-- 琛€绯栬秼鍔垮浘琛?-->
+      <!-- 血糖趋势图表 -->
       <div class="card">
-        <div class="card-title"><span class="icon">馃搱</span>琛€绯栬秼鍔?/div>
+        <div class="card-title"><span class="icon">📈</span>血糖趋势</div>
         <div class="chart-period" id="glucosePeriod">
-          <button data-period="7" class="active" onclick="switchGlucosePeriod(7, this)">鏈€杩?澶?/button>
-          <button data-period="30" onclick="switchGlucosePeriod(30, this)">30澶?/button>
-          <button data-period="90" onclick="switchGlucosePeriod(90, this)">90澶?/button>
+          <button data-period="7" class="active" onclick="switchGlucosePeriod(7, this)">最近7天</button>
+          <button data-period="30" onclick="switchGlucosePeriod(30, this)">30天</button>
+          <button data-period="90" onclick="switchGlucosePeriod(90, this)">90天</button>
         </div>
         <div class="chart-container"><canvas id="glucoseChart"></canvas></div>
         <div id="glucoseNoData" class="no-data" style="display:none;">
-          <div class="icon">馃搵</div>
-          <div>鏆傛棤琛€绯栨暟鎹紝璇峰厛褰曞叆</div>
+          <div class="icon">📋</div>
+          <div>暂无血糖数据，请先录入</div>
         </div>
         <div class="stats-row" id="glucoseStats"></div>
         <div id="glucoseDinnerContext"></div>
       </div>
     </section>
 
-    <!-- Tab 3: 椋熺墿鏌ヨ -->
+    <!-- Tab 3: 食物查询 -->
     <section class="tab-content" id="tab-food">
       <div class="card">
-        <div class="card-title"><span class="icon">馃崥</span>椋熺墿鏌ヨ</div>
+        <div class="card-title"><span class="icon">🍚</span>食物查询</div>
         <div class="guide-banner">
-          馃挕 <strong>浣跨敤璇存槑锛?/strong>杈撳叆椋熺墿鍚嶇О鎴栭€夋嫨鍒嗙被锛屾煡鐪嬮鐗╃殑GI鍊笺€佸琛€绯栬鍘嬬殑褰卞搷锛屼互鍙婄硸鍓嶆湡鐨勯ギ椋熷缓璁€侴I鍊艰秺浣庯紝瀵硅绯栧奖鍝嶈秺灏忋€?        </div>
+          💡 <strong>使用说明：</strong>输入食物名称或选择分类，查看食物的GI值、对血糖血压的影响，以及糖前期的饮食建议。GI值越低，对血糖影响越小。
+        </div>
         <div class="search-box">
-          <span class="search-icon">馃攳</span>
-          <input type="text" id="foodSearch" placeholder="杈撳叆椋熺墿鍚嶇О锛屽锛氱背楗€佽嫻鏋?.." oninput="filterFoods()" onfocus="filterFoods()" autocomplete="off">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="foodSearch" placeholder="输入食物名称，如：米饭、苹果..." oninput="filterFoods()" onfocus="filterFoods()" autocomplete="off">
           <div class="autocomplete-dropdown" id="foodAutocomplete"></div>
         </div>
 
@@ -999,99 +1001,100 @@ input:focus, select:focus {
       </div>
     </section>
 
-    <!-- Tab 4: 璁剧疆 -->
+    <!-- Tab 4: 设置 -->
     <section class="tab-content" id="tab-settings">
       <div class="card">
-        <div class="card-title"><span class="icon">鈿欙笍</span>璁剧疆</div>
+        <div class="card-title"><span class="icon">⚙️</span>设置</div>
 
         <div class="setting-section">
-          <h3>馃搹 姝ｅ父鍊艰寖鍥?/h3>
+          <h3>📏 正常值范围</h3>
           <div class="setting-item">
             <div>
-              <div class="setting-label">鏀剁缉鍘嬩笂闄?/div>
-              <div class="setting-desc">姝ｅ父: 90鈥?40 mmHg</div>
+              <div class="setting-label">收缩压上限</div>
+              <div class="setting-desc">正常: 90–140 mmHg</div>
             </div>
             <div class="range-group">
-              <span>90 鈥?/span>
+              <span>90 –</span>
               <input type="number" id="setBpSysMax" min="100" max="200" value="140">
               <span>mmHg</span>
             </div>
           </div>
           <div class="setting-item">
             <div>
-              <div class="setting-label">鑸掑紶鍘嬩笂闄?/div>
-              <div class="setting-desc">姝ｅ父: 60鈥?0 mmHg</div>
+              <div class="setting-label">舒张压上限</div>
+              <div class="setting-desc">正常: 60–90 mmHg</div>
             </div>
             <div class="range-group">
-              <span>60 鈥?/span>
+              <span>60 –</span>
               <input type="number" id="setBpDiaMax" min="60" max="130" value="90">
               <span>mmHg</span>
             </div>
           </div>
           <div class="setting-item">
             <div>
-              <div class="setting-label">绌鸿吂琛€绯栦笂闄?/div>
-              <div class="setting-desc">姝ｅ父: 3.9鈥?.1 mmol/L</div>
+              <div class="setting-label">空腹血糖上限</div>
+              <div class="setting-desc">正常: 3.9–6.1 mmol/L</div>
             </div>
             <input type="number" id="setGluFastingMax" min="4" max="15" step="0.1" value="6.1">
           </div>
           <div class="setting-item">
             <div>
-              <div class="setting-label">椁愬悗2h琛€绯栦笂闄?/div>
-              <div class="setting-desc">姝ｅ父: &lt;7.8 mmol/L</div>
+              <div class="setting-label">餐后2h血糖上限</div>
+              <div class="setting-desc">正常: &lt;7.8 mmol/L</div>
             </div>
             <input type="number" id="setGluPostmealMax" min="5" max="20" step="0.1" value="7.8">
           </div>
         </div>
 
         <div class="setting-section">
-          <h3>鈴?姣忔棩鎻愰啋鏃堕棿</h3>
+          <h3>⏰ 每日提醒时间</h3>
           <div class="guide-banner">
-            馃挕 鍒拌揪璁惧畾鏃堕棿鏃讹紝娴忚鍣ㄤ細寮瑰嚭閫氱煡鎻愰啋銆傚悓鏃跺缓璁湪鎵嬫満绯荤粺闂归挓涓篃璁剧疆鐩稿悓鏃堕棿浣滀负鍏滃簳銆?          </div>
+            💡 到达设定时间时，浏览器会弹出通知提醒。同时建议在手机系统闹钟中也设置相同时间作为兜底。
+          </div>
           <div class="setting-item">
-            <div class="setting-label">鈽€锔?鏃╀笂琛€鍘?/div>
+            <div class="setting-label">☀️ 早上血压</div>
             <input type="time" id="setRemindBpMorning" value="08:00">
           </div>
           <div class="setting-item">
-            <div class="setting-label">馃寵 鏅氫笂琛€鍘?/div>
+            <div class="setting-label">🌙 晚上血压</div>
             <input type="time" id="setRemindBpEvening" value="20:00">
           </div>
           <div class="setting-item">
-            <div class="setting-label">馃寘 绌鸿吂琛€绯?/div>
+            <div class="setting-label">🌅 空腹血糖</div>
             <input type="time" id="setRemindGluFasting" value="07:30">
           </div>
           <div class="setting-item">
-            <div class="setting-label">馃嵔锔?鏅氶キ鍚?h琛€绯?/div>
+            <div class="setting-label">🍽️ 晚饭后2h血糖</div>
             <input type="time" id="setRemindGluPostmeal" value="20:30">
           </div>
         </div>
 
         <div class="setting-section">
-          <h3>馃捑 鏁版嵁绠＄悊</h3>
+          <h3>💾 数据管理</h3>
           <div style="display:flex;gap:10px;flex-wrap:wrap;">
-            <button class="btn btn-outline btn-sm" onclick="exportData()">馃摜 瀵煎嚭鏁版嵁</button>
-            <button class="btn btn-outline btn-sm" onclick="document.getElementById('importFile').click()">馃摛 瀵煎叆鏁版嵁</button>
-            <button class="btn btn-danger btn-sm" onclick="clearAllData()">馃棏锔?娓呴櫎鍏ㄩ儴鏁版嵁</button>
+            <button class="btn btn-outline btn-sm" onclick="exportData()">📥 导出数据</button>
+            <button class="btn btn-outline btn-sm" onclick="document.getElementById('importFile').click()">📤 导入数据</button>
+            <button class="btn btn-danger btn-sm" onclick="clearAllData()">🗑️ 清除全部数据</button>
           </div>
           <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importData(event)">
         </div>
 
         <div style="margin-top:20px;text-align:center;">
-          <button class="btn btn-primary" onclick="saveSettings()">馃捑 淇濆瓨璁剧疆</button>
+          <button class="btn btn-primary" onclick="saveSettings()">💾 保存设置</button>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-title"><span class="icon">鈩癸笍</span>鍏充簬</div>
+        <div class="card-title"><span class="icon">ℹ️</span>关于</div>
         <div style="font-size:var(--font-sm);color:var(--text-light);line-height:1.8;">
-          <p><strong>鑰佸乏鍋ュ悍妫€娴?/strong> v1.0</p>
-          <p>涓撲负绯栧墠鏈熶汉缇よ璁＄殑鍋ュ悍绠＄悊宸ュ叿銆?/p>
-          <p style="margin-top:4px;font-size:12px;">鍙戝竷鏃ユ湡锛?026-05-27 路 椋熺墿搴擄細175+绉?路 鏀寔绂荤嚎浣跨敤</p>
-          <p style="margin-top:8px;"><strong>鍋ュ悍鏍囧噯鍙傝€冿細</strong></p>
-          <p>鈥?琛€鍘嬫爣鍑嗗弬鑰冦€婁腑鍥介珮琛€鍘嬮槻娌绘寚鍗椼€?/p>
-          <p>鈥?琛€绯栨爣鍑嗗弬鑰冦€婁腑鍥?鍨嬬硸灏跨梾闃叉不鎸囧崡銆?/p>
-          <p>鈥?GI鍊兼暟鎹弬鑰冦€婁腑鍥介鐗╂垚鍒嗚〃銆嬪強鍥介檯GI鏁版嵁搴?/p>
-          <p style="margin-top:8px;color:var(--red);"><strong>鈿狅笍 鍏嶈矗澹版槑锛?/strong>鏈伐鍏蜂粎渚涘弬鑰冿紝涓嶈兘鏇夸唬涓撲笟鍖荤枟寤鸿銆傚鏈夊仴搴烽棶棰樿鍙婃椂灏卞尰銆?/p>
+          <p><strong>老左健康检测</strong> v1.0</p>
+          <p>专为糖前期人群设计的健康管理工具。</p>
+          <p style="margin-top:4px;font-size:12px;">发布日期：2026-05-27 · 食物库：175+种 · 支持离线使用</p>
+          <p style="margin-top:8px;"><strong>健康标准参考：</strong></p>
+          <p>• 血压标准参考《中国高血压防治指南》</p>
+          <p>• 血糖标准参考《中国2型糖尿病防治指南》</p>
+          <p>• GI值数据参考《中国食物成分表》及国际GI数据库</p>
+          <p style="margin-top:8px;color:var(--red);"><strong>⚠️ 免责声明：</strong>本工具仅供参考，不能替代专业医疗建议。如有健康问题请及时就医。</p>
         </div>
       </div>
     </section>
@@ -1100,13 +1103,16 @@ input:focus, select:focus {
   <!-- Bottom Navigation -->
   <nav class="bottom-nav">
     <button class="nav-item active" data-tab="tab-bp" onclick="switchTab('tab-bp', this)">
-      <span class="nav-icon">馃挀</span>琛€鍘?    </button>
+      <span class="nav-icon">💓</span>血压
+    </button>
     <button class="nav-item" data-tab="tab-glucose" onclick="switchTab('tab-glucose', this)">
-      <span class="nav-icon">馃└</span>琛€绯?    </button>
+      <span class="nav-icon">🩸</span>血糖
+    </button>
     <button class="nav-item" data-tab="tab-food" onclick="switchTab('tab-food', this)">
-      <span class="nav-icon">馃崥</span>鏌ラ鐗?    </button>
+      <span class="nav-icon">🍚</span>查食物
+    </button>
     <button class="nav-item" data-tab="tab-settings" onclick="switchTab('tab-settings', this)">
-      <span class="nav-icon">鈿欙笍</span>璁剧疆
+      <span class="nav-icon">⚙️</span>设置
     </button>
   </nav>
 </div>
@@ -1123,7 +1129,7 @@ input:focus, select:focus {
 <div class="toast" id="toast"></div>
 
 <script>
-// ==================== 鏁版嵁妯″瀷 ====================
+// ==================== 数据模型 ====================
 const STORAGE_KEY_RECORDS = 'lz_health_records';
 const STORAGE_KEY_SETTINGS = 'lz_settings';
 
@@ -1163,220 +1169,223 @@ function saveSettingsToStore(settings) {
 let records = loadRecords();
 let settings = loadSettings();
 
-// ==================== 椋熺墿鏁版嵁搴?====================
+// ==================== 食物数据库 ====================
 const foodDB = [
-  // 涓婚
-  {name:'鐧界背楗?,cat:'涓婚',gi:83,giLevel:'high',calPer100:116,serve:'50-75g锛堢害鍗婄锛?,bgAdvice:'鐧界背楗璆I鍊奸珮锛屽悆鍚庤绯栦笂鍗囪緝蹇€傚缓璁斁鍑変竴鐐瑰啀鍚冿紝鎼厤钄彍鍜岃泲鐧借川涓€璧峰悆鍙互鍑忕紦鍗囩硸閫熷害銆傜硸鍓嶆湡姣忛寤鸿涓嶈秴杩囧崐纰椼€?,bpAdvice:'绫抽キ鏈韩瀵硅鍘嬪奖鍝嶈緝灏忥紝浣嗚娉ㄦ剰鎼厤鑿滆偞鐨勭洂鍒嗐€?,tip:'鍙互璇曡瘯鐢ㄧ硻绫虫垨鐕曢害鏇夸唬閮ㄥ垎鐧界背锛孏I鍊兼洿浣庯紝鏇存湁楗辫吂鎰熴€?},
-  {name:'棣掑ご',cat:'涓婚',gi:88,giLevel:'high',calPer100:223,serve:'30-50g锛堢害鍗婁釜锛?,bgAdvice:'棣掑ご鐨凣I鍊煎緢楂橈紝娑堝寲鍚告敹蹇紝瀹规槗寮曡捣琛€绯栧揩閫熶笂鍗囥€傜硸鍓嶆湡涓嶅缓璁┖鑵瑰悆锛屽彲浠ユ惌閰嶈敩鑿滃拰楦¤泲涓€璧峰悆銆?,bpAdvice:'棣掑ご鍚挔閲忚緝浣庯紝瀵硅鍘嬫棤涓嶈壇褰卞搷銆?,tip:'寤鸿閫夋嫨鍏ㄩ害棣掑ご鎴栨潅绮澶达紝GI鍊间細浣庝竴浜涖€?},
-  {name:'闈㈡潯',cat:'涓婚',gi:82,giLevel:'high',calPer100:110,serve:'50-75g锛堝共閲嶇害涓€灏忔妸锛?,bgAdvice:'闈㈡潯GI鍊煎亸楂橈紝浣嗘瘮棣掑ご绋嶅ソ銆傜叜寰楃‖涓€鐐癸紙寮圭墮鍙ｆ劅锛夋瘮鐓儌鐨勯潰鏉″崌绯栨洿鎱€?,bpAdvice:'娉ㄦ剰闈㈡堡閲岀殑鐩愬垎锛屽缓璁皯鍠濇堡銆?,tip:'鎺ㄨ崘鑽為害闈㈡垨鍏ㄩ害闈㈡潯锛屽崌绯栭€熷害鏇存參銆?},
-  {name:'灏忕背绮?,cat:'涓婚',gi:72,giLevel:'high',calPer100:46,serve:'涓€灏忕锛堢害200ml锛?,bgAdvice:'灏忕背绮ヨ櫧鐒舵槸绮楃伯锛屼絾鐓垚绮ュ悗GI鍊间笉浣庛€傚缓璁笉瑕佺叜澶儌锛屽彲浠ュ姞涓€浜涚嚂楹︿竴璧风叜闄嶄綆鍗囩硸閫熷害銆?,bpAdvice:'灏忕背瀵屽惈閽撅紝鏈夊姪浜庣淮鎸佹甯歌鍘嬨€?,tip:'绮ョ被鍗囩硸蹇紝绯栧墠鏈熷枬绮ヨ鎺у埗閲忥紝涓嶈绌鸿吂鍠濄€?},
-  {name:'鐕曢害',cat:'涓婚',gi:55,giLevel:'low',calPer100:377,serve:'30-40g锛堢害3-4鍕猴級',bgAdvice:'鐕曢害鏄綆GI椋熺墿锛屽瘜鍚彲婧舵€ц喅椋熺氦缁达紙尾-钁¤仛绯栵級锛岃兘鏈夋晥鍑忕紦琛€绯栦笂鍗囬€熷害锛屾槸绯栧墠鏈熷緢濂界殑涓婚閫夋嫨銆?,bpAdvice:'鐕曢害涓殑鑶抽绾ょ淮鏈夊姪浜庨檷浣庤儐鍥洪唶锛屽蹇冭绠″仴搴锋湁鐩娿€?,tip:'閫夋嫨鍘熷懗鐕曢害鐗囷紝涓嶈閫夐€熸憾鎴栬皟鍛崇殑锛岄偅浜涘線寰€鍔犱簡绯栥€?},
-  {name:'鍏ㄩ害闈㈠寘',cat:'涓婚',gi:50,giLevel:'low',calPer100:246,serve:'1-2鐗囷紙绾?0g锛?,bgAdvice:'鍏ㄩ害闈㈠寘GI鍊艰緝浣庯紝瀵屽惈鑶抽绾ょ淮锛屾瘮鐧介潰鍖呮洿閫傚悎绯栧墠鏈熶汉缇ゃ€備絾瑕佹敞鎰忕湅閰嶆枡琛紝閫夊叏楹︾矇鎺掔涓€鐨勩€?,bpAdvice:'鍏ㄩ害椋熷搧鍚捑鍜岄晛锛屾湁鍔╀簬琛€鍘嬫帶鍒躲€?,tip:'鏈変簺"鍏ㄩ害闈㈠寘"瀹為檯涓婃坊鍔犱簡寰堝绯栧拰娌癸紝璐拱鏃惰鐪嬫竻閰嶆枡琛ㄣ€?},
-  {name:'鐜夌背',cat:'涓婚',gi:55,giLevel:'low',calPer100:112,serve:'涓瓑澶у皬1鏍癸紙绾?00g锛?,bgAdvice:'鐜夌背灞炰簬涓綆GI椋熺墿锛屽瘜鍚喅椋熺氦缁村拰B鏃忕淮鐢熺礌銆傛按鐓帀绫虫瘮鐑ょ帀绫冲崌绯栨洿鎱€?,bpAdvice:'鐜夌背鍚捑涓板瘜锛屾湁鍔╀簬鎺掗挔闄嶅帇銆?,tip:'鐢滅帀绫冲拰绯帀绫矴I鍊间笉鍚岋紝绯帀绫矴I鍊兼洿楂橈紝绯栧墠鏈熷缓璁€夌敎鐜夌背銆?},
-  {name:'绾㈣柉',cat:'涓婚',gi:54,giLevel:'low',calPer100:86,serve:'涓瓑澶у皬1涓紙绾?50g锛?,bgAdvice:'绾㈣柉GI鍊间腑绛夊亸浣庯紝瀵屽惈鑶抽绾ょ淮銆備絾瑕佹敞鎰忥紝鐑ょ孩钖瘮钂哥孩钖崌绯栧揩锛屽洜涓虹儰鍒惰繃绋嬩腑娣€绮夋洿瀹规槗琚惛鏀躲€?,bpAdvice:'绾㈣柉楂橀捑浣庨挔锛屾槸楂樿鍘嬩汉缇ょ殑鐞嗘兂椋熺墿銆?,tip:'绾㈣柉鐨瘜鍚氦缁达紝娲楀噣鍚庡彲浠ュ甫鐨悆銆?},
-  {name:'灏忕背',cat:'涓婚',gi:71,giLevel:'high',calPer100:361,serve:'30-50g锛堝共閲嶏級',bgAdvice:'灏忕背鏄矖绮紝GI鍊兼瘮鐧界背楗暐浣庝絾浠嶅睘楂楪I銆傚仛鎴愬共楗瘮鐓播鍗囩硸鎱€?,bpAdvice:'灏忕背瀵屽惈B鏃忕淮鐢熺礌鍜岀熆鐗╄川锛岃惀鍏诲叏闈€?,tip:'灏忕背鍜屽ぇ绫虫贩鍚堢叜楗紝鏃㈣兘闄嶄綆鎬籊I鍊硷紝鍙ｆ劅涔熷ソ銆?},
-  {name:'绯欑背楗?,cat:'涓婚',gi:56,giLevel:'mid',calPer100:123,serve:'50-75g锛堢害鍗婄锛?,bgAdvice:'绯欑背楗瘮鐧界背楗璆I鍊间綆寰堝锛屾槸绯栧墠鏈熷緢濂界殑涓婚鏇夸唬銆傚瘜鍚喅椋熺氦缁达紝楗辫吂鎰熷己銆?,bpAdvice:'绯欑背淇濈暀浜嗙背绯犲眰锛屽瘜鍚晛鍜岄捑锛屾湁鐩婂績琛€绠″仴搴枫€?,tip:'鍒氬紑濮嬪悆绯欑背鍙互鍜岀櫧绫虫贩鍚堬紝閫愭笎澧炲姞绯欑背姣斾緥銆?},
-  {name:'鍦熻眴',cat:'涓婚',gi:62,giLevel:'mid',calPer100:81,serve:'涓瓑澶у皬1涓紙绾?50g锛?,bgAdvice:'鍦熻眴GI鍊间腑绛夛紝浣嗗仛娉曞緢鍏抽敭銆傝捀鐓湡璞咷I鍊艰緝浣庯紝鍦熻眴娉ュ拰鐐歌柉鏉I鍊煎緢楂樸€傛斁鍑夊悗鍚冨崌绯栨洿鎱€?,bpAdvice:'鍦熻眴瀵屽惈閽撅紝鏈夊姪浜庨檷琛€鍘嬶紝浣嗙偢钖潯鍚洂鍜屾补鑴傚锛岃閬垮厤銆?,tip:'鍦熻眴灞炰簬涓婚绫伙紝鍚冧簡鍦熻眴瑕佺浉搴斿噺灏戠背楗殑閲忋€?},
+  // 主食
+  {name:'白米饭',cat:'主食',gi:83,giLevel:'high',calPer100:116,serve:'50-75g（约半碗）',bgAdvice:'白米饭GI值高，吃后血糖上升较快。建议放凉一点再吃，搭配蔬菜和蛋白质一起吃可以减缓升糖速度。糖前期每餐建议不超过半碗。',bpAdvice:'米饭本身对血压影响较小，但要注意搭配菜肴的盐分。',tip:'可以试试用糙米或燕麦替代部分白米，GI值更低，更有饱腹感。'},
+  {name:'馒头',cat:'主食',gi:88,giLevel:'high',calPer100:223,serve:'30-50g（约半个）',bgAdvice:'馒头的GI值很高，消化吸收快，容易引起血糖快速上升。糖前期不建议空腹吃，可以搭配蔬菜和鸡蛋一起吃。',bpAdvice:'馒头含钠量较低，对血压无不良影响。',tip:'建议选择全麦馒头或杂粮馒头，GI值会低一些。'},
+  {name:'面条',cat:'主食',gi:82,giLevel:'high',calPer100:110,serve:'50-75g（干重约一小把）',bgAdvice:'面条GI值偏高，但比馒头稍好。煮得硬一点（弹牙口感）比煮烂的面条升糖更慢。',bpAdvice:'注意面汤里的盐分，建议少喝汤。',tip:'推荐荞麦面或全麦面条，升糖速度更慢。'},
+  {name:'小米粥',cat:'主食',gi:72,giLevel:'high',calPer100:46,serve:'一小碗（约200ml）',bgAdvice:'小米粥虽然是粗粮，但煮成粥后GI值不低。建议不要煮太烂，可以加一些燕麦一起煮降低升糖速度。',bpAdvice:'小米富含钾，有助于维持正常血压。',tip:'粥类升糖快，糖前期喝粥要控制量，不要空腹喝。'},
+  {name:'燕麦',cat:'主食',gi:55,giLevel:'low',calPer100:377,serve:'30-40g（约3-4勺）',bgAdvice:'燕麦是低GI食物，富含可溶性膳食纤维（β-葡聚糖），能有效减缓血糖上升速度，是糖前期很好的主食选择。',bpAdvice:'燕麦中的膳食纤维有助于降低胆固醇，对心血管健康有益。',tip:'选择原味燕麦片，不要选速溶或调味的，那些往往加了糖。'},
+  {name:'全麦面包',cat:'主食',gi:50,giLevel:'low',calPer100:246,serve:'1-2片（约50g）',bgAdvice:'全麦面包GI值较低，富含膳食纤维，比白面包更适合糖前期人群。但要注意看配料表，选全麦粉排第一的。',bpAdvice:'全麦食品含钾和镁，有助于血压控制。',tip:'有些"全麦面包"实际上添加了很多糖和油，购买时要看清配料表。'},
+  {name:'玉米',cat:'主食',gi:55,giLevel:'low',calPer100:112,serve:'中等大小1根（约200g）',bgAdvice:'玉米属于中低GI食物，富含膳食纤维和B族维生素。水煮玉米比烤玉米升糖更慢。',bpAdvice:'玉米含钾丰富，有助于排钠降压。',tip:'甜玉米和糯玉米GI值不同，糯玉米GI值更高，糖前期建议选甜玉米。'},
+  {name:'红薯',cat:'主食',gi:54,giLevel:'low',calPer100:86,serve:'中等大小1个（约150g）',bgAdvice:'红薯GI值中等偏低，富含膳食纤维。但要注意，烤红薯比蒸红薯升糖快，因为烤制过程中淀粉更容易被吸收。',bpAdvice:'红薯高钾低钠，是高血压人群的理想食物。',tip:'红薯皮富含纤维，洗净后可以带皮吃。'},
+  {name:'小米',cat:'主食',gi:71,giLevel:'high',calPer100:361,serve:'30-50g（干重）',bgAdvice:'小米是粗粮，GI值比白米饭略低但仍属高GI。做成干饭比煮粥升糖慢。',bpAdvice:'小米富含B族维生素和矿物质，营养全面。',tip:'小米和大米混合煮饭，既能降低总GI值，口感也好。'},
+  {name:'糙米饭',cat:'主食',gi:56,giLevel:'mid',calPer100:123,serve:'50-75g（约半碗）',bgAdvice:'糙米饭比白米饭GI值低很多，是糖前期很好的主食替代。富含膳食纤维，饱腹感强。',bpAdvice:'糙米保留了米糠层，富含镁和钾，有益心血管健康。',tip:'刚开始吃糙米可以和白米混合，逐渐增加糙米比例。'},
+  {name:'土豆',cat:'主食',gi:62,giLevel:'mid',calPer100:81,serve:'中等大小1个（约150g）',bgAdvice:'土豆GI值中等，但做法很关键。蒸煮土豆GI值较低，土豆泥和炸薯条GI值很高。放凉后吃升糖更慢。',bpAdvice:'土豆富含钾，有助于降血压，但炸薯条含盐和油脂多，要避免。',tip:'土豆属于主食类，吃了土豆要相应减少米饭的量。'},
 
-  // 钄彍
-  {name:'鑿犺彍',cat:'钄彍',gi:15,giLevel:'low',calPer100:23,serve:'100-200g锛堢害涓€灏忕洏锛?,bgAdvice:'鑿犺彍GI鍊兼瀬浣庯紝鍑犱箮涓嶅奖鍝嶈绯栥€傚瘜鍚喅椋熺氦缁淬€侀搧鍜屽绉嶇淮鐢熺礌锛屾槸绯栧墠鏈熺悊鎯宠敩鑿溿€?,bpAdvice:'鑿犺彍瀵屽惈閽惧拰闀侊紝鏈夊姪浜庤绠¤垝寮犮€侀檷浣庤鍘嬨€備絾鑿犺彍鑽夐吀杈冮珮锛岃偩缁撶煶鎮ｈ€呰閫傞噺銆?,tip:'鐒按鍙互鍘婚櫎閮ㄥ垎鑽夐吀锛屼繚鐣欒惀鍏汇€?},
-  {name:'瑗跨孩鏌?,cat:'钄彍',gi:30,giLevel:'low',calPer100:19,serve:'1-2涓腑绛夊ぇ灏忥紙绾?00g锛?,bgAdvice:'瑗跨孩鏌縂I鍊间綆锛屽惈绯栭噺灏戯紝瀵屽惈鐣寗绾㈢礌鍜岀淮鐢熺礌C锛屾槸绯栧墠鏈熺殑瀹夊叏椋熺墿銆?,bpAdvice:'瑗跨孩鏌垮瘜鍚捑锛屾湁鍔╀簬鎺掗挔闄嶅帇銆傜暘鑼勭孩绱犲蹇冭绠℃湁淇濇姢浣滅敤銆?,tip:'鐔熷悆瑗跨孩鏌跨暘鑼勭孩绱犲惛鏀舵洿濂斤紝鐢熷悆缁寸敓绱燙淇濆瓨鏇村銆?},
-  {name:'榛勭摐',cat:'钄彍',gi:15,giLevel:'low',calPer100:15,serve:'1鏍癸紙绾?00g锛?,bgAdvice:'榛勭摐鍑犱箮涓嶅惈绯栵紝姘村垎楂樼儹閲忎綆锛屾槸绯栧墠鏈熼潪甯稿畨鍏ㄧ殑钄彍锛屽彲浠ユ斁蹇冨悆銆?,bpAdvice:'榛勭摐鍚捑锛屾湁鍒╁翱浣滅敤锛屽鎺у埗琛€鍘嬫湁鐩娿€?,tip:'榛勭摐鐨惀鍏讳赴瀵岋紝娲楀噣鍚庡缓璁甫鐨悆銆?},
-  {name:'瑗垮叞鑺?,cat:'钄彍',gi:10,giLevel:'low',calPer100:34,serve:'100-150g锛堢害涓€灏忕锛?,bgAdvice:'瑗垮叞鑺辨槸"瓒呯骇钄彍"锛孏I鍊兼瀬浣庯紝瀵屽惈鑶抽绾ょ淮鍜屾姉姘у寲鐗╄川锛堣悵鍗滅～绱狅級锛岃兘甯姪鏀瑰杽鑳板矝绱犳晱鎰熸€с€?,bpAdvice:'瑗垮叞鑺卞惈閽惧拰鎶楁哀鍖栫墿璐紝瀵瑰績琛€绠′繚鎶や綔鐢ㄦ樉钁椼€?,tip:'娓呰捀鎴栧揩鐐掓渶鑳戒繚鐣欒惀鍏伙紝涓嶈鐓お涔呫€?},
-  {name:'鑼勫瓙',cat:'钄彍',gi:15,giLevel:'low',calPer100:21,serve:'100-200g锛堢害1鏍癸級',bgAdvice:'鑼勫瓙GI鍊煎緢浣庯紝瀵屽惈鑶抽绾ょ淮鍜岃姳闈掔礌銆備絾瑕佹敞鎰忓仛娉曗€斺€旂孩鐑ц寗瀛愩€佹补鐒栬寗瀛愬惛娌瑰锛屽鍔犱簡涓嶅繀瑕佺殑鐑噺銆?,bpAdvice:'鑼勫瓙涓殑鑺遍潚绱犲拰閽炬湁鍔╀簬淇濇姢琛€绠★紝浣嗛噸娌圭児楗細鎶垫秷杩欎簺濂藉銆?,tip:'鎺ㄨ崘娓呰捀鎴栧噳鎷岋紝灏戞补灏戠洂銆?},
-  {name:'鑳¤悵鍗?,cat:'钄彍',gi:39,giLevel:'low',calPer100:37,serve:'50-100g锛堢害鍗婃牴鍒?鏍癸級',bgAdvice:'寰堝浜轰互涓鸿儭钀濆崪鍚硸楂橈紝鍏跺疄瀹冪殑GI鍊间笉楂樸€傚瘜鍚?鑳¤悵鍗滅礌锛屽彲浠ユ斁蹇冨悆銆?,bpAdvice:'鑳¤悵鍗滀腑鐨勯捑鍜屾姉姘у寲鐗╄川鏈夌泭蹇冭绠″仴搴枫€?,tip:'鐔熷悆姣旂敓鍚兾?鑳¤悵鍗滅礌鍚告敹鐜囨洿楂樸€?},
-  {name:'鍗楃摐',cat:'钄彍',gi:75,giLevel:'high',calPer100:22,serve:'50-80g锛堢害涓€灏忓潡锛?,bgAdvice:'鍗楃摐鐨凣I鍊煎叾瀹炰笉浣庯紝浣嗗畠鐨勭⒊姘村惈閲忎笉楂樸€傞€傞噺鍚冮棶棰樹笉澶э紝浣嗕笉瑕佸ぇ閲忓悆锛屽挨鍏舵槸鑰佸崡鐡溿€?,bpAdvice:'鍗楃摐瀵屽惈閽惧拰鏋滆兌锛屾湁鍔╀簬鎺у埗琛€鍘嬪拰鑳嗗浐閱囥€?,tip:'瀚╁崡鐡滄瘮鑰佸崡鐡淕I鍊间綆锛屾洿鎺ㄨ崘銆?},
-  {name:'鑺硅彍',cat:'钄彍',gi:15,giLevel:'low',calPer100:14,serve:'100-150g锛堢害涓€灏忕洏锛?,bgAdvice:'鑺硅彍鐑噺鏋佷綆锛岃喅椋熺氦缁翠赴瀵岋紝瀵硅绯栧嚑涔庢病鏈夊奖鍝嶃€?,bpAdvice:'鑺硅彍鏄憲鍚嶇殑"闄嶅帇钄彍"锛屽惈鏈夎姽鑿滅礌锛堜竴绉嶅ぉ鐒堕檷鍘嬫垚鍒嗭級锛岄珮绾ょ淮涔熸湁鍔╀簬闄嶄綆鑳嗗浐閱囥€?,tip:'鑺硅彍鍙惰惀鍏绘瘮鑼庢洿涓板瘜锛屽埆涓㈡帀銆?},
-  {name:'鐧借彍',cat:'钄彍',gi:15,giLevel:'low',calPer100:13,serve:'150-200g锛堢害涓€鐩橈級',bgAdvice:'澶х櫧鑿淕I鍊兼瀬浣庯紝鍚硸閲忔瀬灏戯紝鍙互闅忔剰鍚冦€?,bpAdvice:'鐧借彍閽惧惈閲忛珮锛岄挔鍚噺浣庯紝鏈夊姪浜庢帶鍒惰鍘嬨€?,tip:'鐧借彍鏄啲瀛ｆ椂浠よ彍锛岃惀鍏诲ソ鍙堜究瀹溿€?},
-  {name:'鑻︾摐',cat:'钄彍',gi:15,giLevel:'low',calPer100:19,serve:'100-150g锛堢害鍗婃牴锛?,bgAdvice:'鑻︾摐鏄叕璁ょ殑"闄嶇硸钄彍"锛屽惈鏈夎嫤鐡滅殏鑻凤紙琚О涓?妞嶇墿鑳板矝绱?锛夛紝鏈夊姪浜庢敼鍠勮绯栦唬璋€侴I鍊兼瀬浣庛€?,bpAdvice:'鑻︾摐瀵硅鍘嬫棤涓嶈壇褰卞搷锛屾竻鐑В姣掋€?,tip:'鑻︾摐鐨勮嫤鍛虫潵鑷嫤鐡滅礌锛屾€曡嫤鍙互鍏堢敤鐩愯厡涓€涓嬪啀娲楁帀銆?},
+  // 蔬菜
+  {name:'菠菜',cat:'蔬菜',gi:15,giLevel:'low',calPer100:23,serve:'100-200g（约一小盘）',bgAdvice:'菠菜GI值极低，几乎不影响血糖。富含膳食纤维、铁和多种维生素，是糖前期理想蔬菜。',bpAdvice:'菠菜富含钾和镁，有助于血管舒张、降低血压。但菠菜草酸较高，肾结石患者要适量。',tip:'焯水可以去除部分草酸，保留营养。'},
+  {name:'西红柿',cat:'蔬菜',gi:30,giLevel:'low',calPer100:19,serve:'1-2个中等大小（约200g）',bgAdvice:'西红柿GI值低，含糖量少，富含番茄红素和维生素C，是糖前期的安全食物。',bpAdvice:'西红柿富含钾，有助于排钠降压。番茄红素对心血管有保护作用。',tip:'熟吃西红柿番茄红素吸收更好，生吃维生素C保存更多。'},
+  {name:'黄瓜',cat:'蔬菜',gi:15,giLevel:'low',calPer100:15,serve:'1根（约200g）',bgAdvice:'黄瓜几乎不含糖，水分高热量低，是糖前期非常安全的蔬菜，可以放心吃。',bpAdvice:'黄瓜含钾，有利尿作用，对控制血压有益。',tip:'黄瓜皮营养丰富，洗净后建议带皮吃。'},
+  {name:'西兰花',cat:'蔬菜',gi:10,giLevel:'low',calPer100:34,serve:'100-150g（约一小碗）',bgAdvice:'西兰花是"超级蔬菜"，GI值极低，富含膳食纤维和抗氧化物质（萝卜硫素），能帮助改善胰岛素敏感性。',bpAdvice:'西兰花含钾和抗氧化物质，对心血管保护作用显著。',tip:'清蒸或快炒最能保留营养，不要煮太久。'},
+  {name:'茄子',cat:'蔬菜',gi:15,giLevel:'low',calPer100:21,serve:'100-200g（约1根）',bgAdvice:'茄子GI值很低，富含膳食纤维和花青素。但要注意做法——红烧茄子、油焖茄子吸油多，增加了不必要的热量。',bpAdvice:'茄子中的花青素和钾有助于保护血管，但重油烹饪会抵消这些好处。',tip:'推荐清蒸或凉拌，少油少盐。'},
+  {name:'胡萝卜',cat:'蔬菜',gi:39,giLevel:'low',calPer100:37,serve:'50-100g（约半根到1根）',bgAdvice:'很多人以为胡萝卜含糖高，其实它的GI值不高。富含β-胡萝卜素，可以放心吃。',bpAdvice:'胡萝卜中的钾和抗氧化物质有益心血管健康。',tip:'熟吃比生吃β-胡萝卜素吸收率更高。'},
+  {name:'南瓜',cat:'蔬菜',gi:75,giLevel:'high',calPer100:22,serve:'50-80g（约一小块）',bgAdvice:'南瓜的GI值其实不低，但它的碳水含量不高。适量吃问题不大，但不要大量吃，尤其是老南瓜。',bpAdvice:'南瓜富含钾和果胶，有助于控制血压和胆固醇。',tip:'嫩南瓜比老南瓜GI值低，更推荐。'},
+  {name:'芹菜',cat:'蔬菜',gi:15,giLevel:'low',calPer100:14,serve:'100-150g（约一小盘）',bgAdvice:'芹菜热量极低，膳食纤维丰富，对血糖几乎没有影响。',bpAdvice:'芹菜是著名的"降压蔬菜"，含有芹菜素（一种天然降压成分），高纤维也有助于降低胆固醇。',tip:'芹菜叶营养比茎更丰富，别丢掉。'},
+  {name:'白菜',cat:'蔬菜',gi:15,giLevel:'low',calPer100:13,serve:'150-200g（约一盘）',bgAdvice:'大白菜GI值极低，含糖量极少，可以随意吃。',bpAdvice:'白菜钾含量高，钠含量低，有助于控制血压。',tip:'白菜是冬季时令菜，营养好又便宜。'},
+  {name:'苦瓜',cat:'蔬菜',gi:15,giLevel:'low',calPer100:19,serve:'100-150g（约半根）',bgAdvice:'苦瓜是公认的"降糖蔬菜"，含有苦瓜皂苷（被称为"植物胰岛素"），有助于改善血糖代谢。GI值极低。',bpAdvice:'苦瓜对血压无不良影响，清热解毒。',tip:'苦瓜的苦味来自苦瓜素，怕苦可以先用盐腌一下再洗掉。'},
 
-  // 姘存灉
-  {name:'鑻规灉',cat:'姘存灉',gi:36,giLevel:'low',calPer100:53,serve:'涓瓑澶у皬1涓紙绾?00g锛?,bgAdvice:'鑻规灉鏄綆GI姘存灉锛屽瘜鍚灉鑳讹紙涓€绉嶅彲婧舵€х氦缁达級锛岃兘鍑忕紦绯栧垎鍚告敹銆傚甫鐨悆鐨勭氦缁存洿澶氥€傜硸鍓嶆湡姣忓ぉ1涓病闂銆?,bpAdvice:'鑻规灉瀵屽惈閽惧拰澶氶厷绫绘姉姘у寲鐗╋紝鏈夊姪浜庨檷浣庤鍘嬪拰淇濇姢蹇冭绠°€?,tip:'鏈€濂藉湪涓ら涔嬮棿鍚冿紝涓嶈楗悗椹笂鍚冿紝閬垮厤琛€绯栧彔鍔犲崌楂樸€?},
-  {name:'棣欒晧',cat:'姘存灉',gi:52,giLevel:'low',calPer100:93,serve:'灏忛钑?鏍癸紙绾?00g锛?,bgAdvice:'棣欒晧GI鍊间腑绛夊亸浣庯紝浣嗙⒊姘村寲鍚堢墿鍚噺杈冮珮銆傜硸鍓嶆湡鍙互閫傞噺鍚冿紝浣嗕笉瑕佷竴娆″悆澶锛屽挨鍏舵槸鐔熼€忕殑棣欒晧銆?,bpAdvice:'棣欒晧鏄?楂橀捑姘存灉涔嬬帇"锛屾湁鍔╀簬闄嶄綆琛€鍘嬨€備絾鑲惧姛鑳戒笉濂界殑浜鸿鎺у埗閲忋€?,tip:'閫夌◢寰潚涓€鐐圭殑棣欒晧锛孏I鍊兼洿浣庛€?},
-  {name:'瑗跨摐',cat:'姘存灉',gi:72,giLevel:'high',calPer100:31,serve:'涓€灏忕墖锛堢害150g锛?,bgAdvice:'瑗跨摐GI鍊煎緢楂橈紝浣嗘按鍒嗗ぇ銆佹€荤⒊姘翠笉绠楅珮銆傜硸鍓嶆湡瑕佷弗鏍兼帶鍒堕噺锛屼竴娆′笉瓒呰繃涓€灏忕墖锛屼笉瑕佹Θ姹佸枬銆?,bpAdvice:'瑗跨摐鍚摐姘ㄩ吀锛堜竴绉嶆皑鍩洪吀锛夛紝鏈夊姪浜庤绠¤垝寮犮€備絾鍚硸杈冮珮锛屼笉瀹滃鍚冦€?,tip:'涓嶈鍚冨啺瑗跨摐锛佷綆娓╀細鍒烘縺琛€绯栨尝鍔ㄣ€?},
-  {name:'钁¤悇',cat:'姘存灉',gi:56,giLevel:'mid',calPer100:44,serve:'10-15棰楋紙绾?00g锛?,bgAdvice:'钁¤悇GI鍊间腑绛夛紝浣嗗鏄撲竴娆″悆澶氾紝涓嶇煡涓嶈鎽勫叆杩囧绯栧垎銆傚缓璁寜棰楁暟鎺у埗鍒嗛噺銆?,bpAdvice:'钁¤悇鐨拰绫戒腑鍚櫧钘滆姦閱囩瓑鎶楁哀鍖栫墿璐紝鏈夊姪浜庡績琛€绠′繚鎶ゃ€?,tip:'鍚冭憽钀勪笉鍚愯憽钀勭毊锛屼絾瑕佸悙钁¤悇绫姐€?},
-  {name:'鐚曠尨妗?,cat:'姘存灉',gi:50,giLevel:'low',calPer100:61,serve:'1-2涓紙绾?00g锛?,bgAdvice:'鐚曠尨妗僄I鍊间綆锛屽瘜鍚淮鐢熺礌C鍜岃喅椋熺氦缁达紝鏄硸鍓嶆湡闈炲父鎺ㄨ崘鐨勬按鏋溿€?,bpAdvice:'鐚曠尨妗冮珮閽句綆閽狅紝缁寸敓绱燙鍚噺鏋侀珮锛屾姉姘у寲淇濇姢琛€绠°€?,tip:'鐚曠尨妗冨甫鐨悆绾ょ淮鏇村锛堟礂鍑€缁掓瘺锛夈€?},
-  {name:'鏌氬瓙',cat:'姘存灉',gi:25,giLevel:'low',calPer100:42,serve:'2-3鐡ｏ紙绾?50g锛?,bgAdvice:'鏌氬瓙GI鍊煎緢浣庯紝鏄硸鍓嶆湡鏈€瀹夊叏鐨勬按鏋滀箣涓€銆傚瘜鍚淮鐢熺礌C鍜屾煔鐨嫹锛屾湁鍔╀簬鏀瑰杽鑳板矝绱犳晱鎰熸€с€?,bpAdvice:'鏌氬瓙鍚捑涓板瘜锛屾湁鍔╀簬琛€鍘嬫帶鍒躲€?,tip:'姝ｅ湪鍚冮檷鍘嬭嵂锛堝挨鍏舵槸閽欓€氶亾闃绘粸鍓傦級鐨勪汉鎱庡悆鏌氬瓙锛屼細澧炲己鑽晥锛?},
-  {name:'钃濊帗',cat:'姘存灉',gi:53,giLevel:'low',calPer100:57,serve:'涓€灏忔妸锛堢害50-80g锛?,bgAdvice:'钃濊帗GI鍊艰緝浣庯紝瀵屽惈鑺遍潚绱狅紙澶╃劧鎶楁哀鍖栧墏锛夛紝鐮旂┒鍙戠幇鏈夊姪浜庢敼鍠勮儼宀涚礌鏁忔劅鎬с€?,bpAdvice:'钃濊帗涓殑鑺遍潚绱犺兘淇濇姢琛€绠″脊鎬э紝闄嶄綆琛€鍘嬨€?,tip:'鍐峰喕钃濊帗钀ュ吇涓嶈緭鏂伴矞钃濊帗锛屼环鏍兼洿瀹炴儬銆?},
-  {name:'姗欏瓙',cat:'姘存灉',gi:43,giLevel:'low',calPer100:48,serve:'涓瓑澶у皬1涓紙绾?00g锛?,bgAdvice:'姗欏瓙鏄綆GI姘存灉锛屽瘜鍚淮鐢熺礌C鍜岃喅椋熺氦缁淬€傚缓璁悆瀹屾暣姘存灉锛屼笉瑕佹Θ姹侊紝鍥犱负鏋滄眮澶卞幓浜嗙氦缁翠笖鍗囩硸鏇村揩銆?,bpAdvice:'姗欏瓙涓殑缁寸敓绱燙鍜岀被榛勯叜鏈夊姪浜庝繚鎶よ绠°€?,tip:'鐧借壊鐨勬缁滀腑鍚湁绾ょ淮鍜屾姉姘у寲鐗╋紝涓嶇敤鍓ュ緱澶共鍑€銆?},
-  {name:'妗冨瓙',cat:'姘存灉',gi:28,giLevel:'low',calPer100:42,serve:'涓瓑澶у皬1涓紙绾?00g锛?,bgAdvice:'妗冨瓙GI鍊间綆锛屾按鍒嗗ぇ锛屽惈绯栭噺閫備腑銆傜硸鍓嶆湡鍙互鏀惧績鍚冦€?,bpAdvice:'妗冨瓙瀵屽惈閽撅紝瀵硅鍘嬫湁鐩娿€?,tip:'閫夎剢妗冩瘮杞鍗囩硸鏇存參銆?},
-  {name:'姊?,cat:'姘存灉',gi:33,giLevel:'low',calPer100:51,serve:'涓瓑澶у皬1涓紙绾?00g锛?,bgAdvice:'姊ㄦ槸浣嶨I姘存灉锛屽瘜鍚按鍒嗗拰绾ょ淮銆傜硸鍓嶆湡姣忓ぉ1涓病闂銆?,bpAdvice:'姊ㄥ惈閽句赴瀵岋紝姘村垎澶氾紝鏈変竴瀹氬埄灏夸綔鐢ㄣ€?,tip:'姊ㄧ毊钀ュ吇鏈€涓板瘜锛屾礂鍑€鍚庡甫鐨悆銆?},
+  // 水果
+  {name:'苹果',cat:'水果',gi:36,giLevel:'low',calPer100:53,serve:'中等大小1个（约200g）',bgAdvice:'苹果是低GI水果，富含果胶（一种可溶性纤维），能减缓糖分吸收。带皮吃的纤维更多。糖前期每天1个没问题。',bpAdvice:'苹果富含钾和多酚类抗氧化物，有助于降低血压和保护心血管。',tip:'最好在两餐之间吃，不要饭后马上吃，避免血糖叠加升高。'},
+  {name:'香蕉',cat:'水果',gi:52,giLevel:'low',calPer100:93,serve:'小香蕉1根（约100g）',bgAdvice:'香蕉GI值中等偏低，但碳水化合物含量较高。糖前期可以适量吃，但不要一次吃太多，尤其是熟透的香蕉。',bpAdvice:'香蕉是"高钾水果之王"，有助于降低血压。但肾功能不好的人要控制量。',tip:'选稍微青一点的香蕉，GI值更低。'},
+  {name:'西瓜',cat:'水果',gi:72,giLevel:'high',calPer100:31,serve:'一小片（约150g）',bgAdvice:'西瓜GI值很高，但水分大、总碳水不算高。糖前期要严格控制量，一次不超过一小片，不要榨汁喝。',bpAdvice:'西瓜含瓜氨酸（一种氨基酸），有助于血管舒张。但含糖较高，不宜多吃。',tip:'不要吃冰西瓜！低温会刺激血糖波动。'},
+  {name:'葡萄',cat:'水果',gi:56,giLevel:'mid',calPer100:44,serve:'10-15颗（约100g）',bgAdvice:'葡萄GI值中等，但容易一次吃多，不知不觉摄入过多糖分。建议按颗数控制分量。',bpAdvice:'葡萄皮和籽中含白藜芦醇等抗氧化物质，有助于心血管保护。',tip:'吃葡萄不吐葡萄皮，但要吐葡萄籽。'},
+  {name:'猕猴桃',cat:'水果',gi:50,giLevel:'low',calPer100:61,serve:'1-2个（约100g）',bgAdvice:'猕猴桃GI值低，富含维生素C和膳食纤维，是糖前期非常推荐的水果。',bpAdvice:'猕猴桃高钾低钠，维生素C含量极高，抗氧化保护血管。',tip:'猕猴桃带皮吃纤维更多（洗净绒毛）。'},
+  {name:'柚子',cat:'水果',gi:25,giLevel:'low',calPer100:42,serve:'2-3瓣（约150g）',bgAdvice:'柚子GI值很低，是糖前期最安全的水果之一。富含维生素C和柚皮苷，有助于改善胰岛素敏感性。',bpAdvice:'柚子含钾丰富，有助于血压控制。',tip:'正在吃降压药（尤其是钙通道阻滞剂）的人慎吃柚子，会增强药效！'},
+  {name:'蓝莓',cat:'水果',gi:53,giLevel:'low',calPer100:57,serve:'一小把（约50-80g）',bgAdvice:'蓝莓GI值较低，富含花青素（天然抗氧化剂），研究发现有助于改善胰岛素敏感性。',bpAdvice:'蓝莓中的花青素能保护血管弹性，降低血压。',tip:'冷冻蓝莓营养不输新鲜蓝莓，价格更实惠。'},
+  {name:'橙子',cat:'水果',gi:43,giLevel:'low',calPer100:48,serve:'中等大小1个（约200g）',bgAdvice:'橙子是低GI水果，富含维生素C和膳食纤维。建议吃完整水果，不要榨汁，因为果汁失去了纤维且升糖更快。',bpAdvice:'橙子中的维生素C和类黄酮有助于保护血管。',tip:'白色的橘络中含有纤维和抗氧化物，不用剥得太干净。'},
+  {name:'桃子',cat:'水果',gi:28,giLevel:'low',calPer100:42,serve:'中等大小1个（约200g）',bgAdvice:'桃子GI值低，水分大，含糖量适中。糖前期可以放心吃。',bpAdvice:'桃子富含钾，对血压有益。',tip:'选脆桃比软桃升糖更慢。'},
+  {name:'梨',cat:'水果',gi:33,giLevel:'low',calPer100:51,serve:'中等大小1个（约200g）',bgAdvice:'梨是低GI水果，富含水分和纤维。糖前期每天1个没问题。',bpAdvice:'梨含钾丰富，水分多，有一定利尿作用。',tip:'梨皮营养最丰富，洗净后带皮吃。'},
 
-  // 鑲夌被
-  {name:'楦¤兏鑲?,cat:'鑲夌被',gi:0,giLevel:'low',calPer100:133,serve:'100-150g锛堢害鎵嬫帉澶у皬锛?,bgAdvice:'楦¤兏鑲変笉鍚⒊姘达紝GI鍊间负0锛屽琛€绯栨棤鐩存帴褰卞搷銆傞珮铔嬬櫧浣庤剛鑲紝鏄硸鍓嶆湡浼樿川铔嬬櫧鏉ユ簮銆?,bpAdvice:'楦¤兏鑲変綆鑴備綆鑳嗗浐閱囷紝瀵硅鍘嬪弸濂姐€傛敞鎰忕児楗柟寮忥紝娓呰捀鎴栨按鐓渶濂姐€?,tip:'鍘荤毊鍚冿紝楦＄毊鑴傝偑鍚噺楂樸€?},
-  {name:'鐚槮鑲?,cat:'鑲夌被',gi:0,giLevel:'low',calPer100:143,serve:'50-75g锛堢害涓€鍓墤鍏嬬墝澶у皬锛?,bgAdvice:'鐦﹁倝涓嶅惈纰虫按锛屼笉褰卞搷琛€绯栥€備絾瑕佹帶鍒跺垎閲忥紝杩囧鐨勮泲鐧借川鍜岃剛鑲篃浼氶棿鎺ュ奖鍝嶈绯栥€?,bpAdvice:'閫夋嫨鐦︾尓鑲夛紝鍑忓皯楗卞拰鑴傝偑鎽勫叆銆傜児楗椂灏戞斁閰辨补鍜岀洂銆?,tip:'鐚倝鑴傝偑鍚噺杈冮珮锛岀孩鑲夋瘡鍛ㄥ缓璁笉瓒呰繃3娆°€?},
-  {name:'鐗涜倝',cat:'鑲夌被',gi:0,giLevel:'low',calPer100:125,serve:'50-75g锛堢害涓€鍓墤鍏嬬墝澶у皬锛?,bgAdvice:'鐗涜倝涓嶅惈纰虫按锛孏I鍊间负0銆傚瘜鍚搧鍜岄攲銆備絾绾㈣倝鎽勫叆杩囧涓庤儼宀涚礌鎶垫姉鏈夊叧锛屽缓璁€傞噺銆?,bpAdvice:'鐗涜倝涓殑楗卞拰鑴傝偑闇€娉ㄦ剰銆傞€夌墰鑵卞瓙銆佺墰閲岃剨绛夌槮鑲夐儴浣嶃€?,tip:'姣忓懆鍚冪孩鑲夛紙鐚墰缇婅倝锛夊缓璁笉瓒呰繃500g銆?},
-  {name:'楸艰倝',cat:'鑲夌被',gi:0,giLevel:'low',calPer100:104,serve:'100-150g锛堢害涓€鏉′腑绛夐奔锛?,bgAdvice:'楸艰倝涓嶅惈纰虫按锛孏I鍊间负0銆傚瘜鍚紭璐ㄨ泲鐧藉拰Omega-3鑴傝偑閰革紙灏ゅ叾鏄繁娴烽奔锛夛紝鏈夊姪浜庢敼鍠勮儼宀涚礌鏁忔劅鎬с€?,bpAdvice:'楸艰倝鏄?鎶ゅ績椋熺墿"锛孫mega-3鑳介檷浣庣敇娌逛笁閰€佷繚鎶よ绠★紝鏈夊埄浜庤鍘嬫帶鍒躲€傞潪甯告帹鑽愶紒',tip:'鎺ㄨ崘娓呰捀锛岄伩鍏嶆补鐐搞€傛繁娴烽奔锛堜笁鏂囬奔銆侀箔楸硷級Omega-3鍚噺鏇翠赴瀵屻€?},
-  {name:'铏?,cat:'鑲夌被',gi:0,giLevel:'low',calPer100:93,serve:'8-10鍙紙绾?00g锛?,bgAdvice:'铏句笉鍚⒊姘达紝GI鍊间负0銆傞珮铔嬬櫧浣庤剛鑲紝鏄硸鍓嶆湡鐞嗘兂鐨勬捣椴滆泲鐧芥潵婧愩€?,bpAdvice:'铏剧殑閽犲惈閲忚緝楂橈紝楂樿鍘嬩汉缇ゆ敞鎰忎笉瑕佸悆澶锛岀児楗椂涔熷皯鍔犵洂銆?,tip:'铏句粊寰堝ソ鍚冿紝浣嗚灏忓績鏈変汉瀵硅櫨杩囨晱銆?},
-  {name:'楦¤泲',cat:'鑲夌被',gi:0,giLevel:'low',calPer100:144,serve:'1涓紙绾?0g锛?,bgAdvice:'楦¤泲涓嶅惈纰虫按锛孏I鍊间负0銆備紭璐ㄨ泲鐧芥潵婧愶紝鐮旂┒鍙戠幇閫傞噺鍚冮浮铔嬩笉浼氬鍔犵硸灏跨梾椋庨櫓銆?,bpAdvice:'楦¤泲鍚儐鍥洪唶锛屼絾鐮旂┒鏄剧ず閫傞噺鍚冿紙姣忓ぉ1涓級瀵瑰ぇ澶氭暟浜鸿鍘嬪拰琛€鑴傚奖鍝嶄笉澶с€?,tip:'鎺ㄨ崘姘寸叜铔嬫垨钂歌泲锛屽皯娌圭児楗€?},
+  // 肉类
+  {name:'鸡胸肉',cat:'肉类',gi:0,giLevel:'low',calPer100:133,serve:'100-150g（约手掌大小）',bgAdvice:'鸡胸肉不含碳水，GI值为0，对血糖无直接影响。高蛋白低脂肪，是糖前期优质蛋白来源。',bpAdvice:'鸡胸肉低脂低胆固醇，对血压友好。注意烹饪方式，清蒸或水煮最好。',tip:'去皮吃，鸡皮脂肪含量高。'},
+  {name:'猪瘦肉',cat:'肉类',gi:0,giLevel:'low',calPer100:143,serve:'50-75g（约一副扑克牌大小）',bgAdvice:'瘦肉不含碳水，不影响血糖。但要控制分量，过多的蛋白质和脂肪也会间接影响血糖。',bpAdvice:'选择瘦猪肉，减少饱和脂肪摄入。烹饪时少放酱油和盐。',tip:'猪肉脂肪含量较高，红肉每周建议不超过3次。'},
+  {name:'牛肉',cat:'肉类',gi:0,giLevel:'low',calPer100:125,serve:'50-75g（约一副扑克牌大小）',bgAdvice:'牛肉不含碳水，GI值为0。富含铁和锌。但红肉摄入过多与胰岛素抵抗有关，建议适量。',bpAdvice:'牛肉中的饱和脂肪需注意。选牛腱子、牛里脊等瘦肉部位。',tip:'每周吃红肉（猪牛羊肉）建议不超过500g。'},
+  {name:'鱼肉',cat:'肉类',gi:0,giLevel:'low',calPer100:104,serve:'100-150g（约一条中等鱼）',bgAdvice:'鱼肉不含碳水，GI值为0。富含优质蛋白和Omega-3脂肪酸（尤其是深海鱼），有助于改善胰岛素敏感性。',bpAdvice:'鱼肉是"护心食物"，Omega-3能降低甘油三酯、保护血管，有利于血压控制。非常推荐！',tip:'推荐清蒸，避免油炸。深海鱼（三文鱼、鲭鱼）Omega-3含量更丰富。'},
+  {name:'虾',cat:'肉类',gi:0,giLevel:'low',calPer100:93,serve:'8-10只（约100g）',bgAdvice:'虾不含碳水，GI值为0。高蛋白低脂肪，是糖前期理想的海鲜蛋白来源。',bpAdvice:'虾的钠含量较高，高血压人群注意不要吃太多，烹饪时也少加盐。',tip:'虾仁很好吃，但要小心有人对虾过敏。'},
+  {name:'鸡蛋',cat:'肉类',gi:0,giLevel:'low',calPer100:144,serve:'1个（约50g）',bgAdvice:'鸡蛋不含碳水，GI值为0。优质蛋白来源，研究发现适量吃鸡蛋不会增加糖尿病风险。',bpAdvice:'鸡蛋含胆固醇，但研究显示适量吃（每天1个）对大多数人血压和血脂影响不大。',tip:'推荐水煮蛋或蒸蛋，少油烹饪。'},
 
-  // 璞嗙被
-  {name:'榛勮眴',cat:'璞嗙被',gi:18,giLevel:'low',calPer100:390,serve:'25-30g锛堝共閲嶏紝绾︿袱鍕猴級',bgAdvice:'榛勮眴GI鍊兼瀬浣庯紝瀵屽惈妞嶇墿铔嬬櫧鍜岃喅椋熺氦缁达紝鏄硸鍓嶆湡浼樿川铔嬬櫧鏉ユ簮銆傝眴鍒跺搧瀵硅绯栨帶鍒堕潪甯稿ソ銆?,bpAdvice:'榛勮眴瀵屽惈閽俱€侀晛鍜屽ぇ璞嗗紓榛勯叜锛屾湁鍔╀簬闄嶄綆琛€鍘嬪拰鑳嗗浐閱囥€?,tip:'骞茶眴GI鍊间綆锛屼絾鐓啛鍚庡埆鍔犵硸銆?},
-  {name:'缁胯眴',cat:'璞嗙被',gi:27,giLevel:'low',calPer100:329,serve:'25-30g锛堝共閲嶏級',bgAdvice:'缁胯眴GI鍊煎緢浣庯紝瀵屽惈鑶抽绾ょ淮銆備絾娉ㄦ剰涓嶈鐓垚缁胯眴娌欙紙鍔犵硸锛夛紝閭ｆ牱琛€绯栧奖鍝嶅畬鍏ㄤ笉鍚屻€?,bpAdvice:'缁胯眴娓呯儹瑙ｆ瘨锛屾湁鍒╁翱浣滅敤锛屽琛€鍘嬫棤涓嶈壇褰卞搷銆?,tip:'澶忓ぉ鍠濈豢璞嗘堡涓嶈鍔犵硸銆?},
-  {name:'璞嗚厫',cat:'璞嗙被',gi:32,giLevel:'low',calPer100:73,serve:'100-150g锛堢害鍗婂潡锛?,bgAdvice:'璞嗚厫GI鍊间綆锛岃泲鐧藉惈閲忛珮锛屽惈閽欎赴瀵岋紝鏄硸鍓嶆湡闈炲父鎺ㄨ崘鐨勯鐗┿€?,bpAdvice:'璞嗚厫浣庤剛浣庨挔锛屽惈閽欏拰闀侊紝瀵瑰績琛€绠″仴搴锋湁鐩娿€?,tip:'鍖楄眴鑵愶紙鑰佽眴鑵愶級姣斿崡璞嗚厫锛堝璞嗚厫锛夎泲鐧借川鍜岄挋鍚噺鏇撮珮銆?},
-  {name:'璞嗘祮',cat:'璞嗙被',gi:34,giLevel:'low',calPer100:31,serve:'涓€鏉紙绾?50ml锛?,bgAdvice:'璞嗘祮GI鍊间綆锛屾槸寰堝ソ鐨勯ギ鍝侀€夋嫨銆備絾娉ㄦ剰鈥斺€斾笉瑕佸姞绯栵紒鏃犵硸璞嗘祮鎵嶆槸绯栧墠鏈熷ソ浼欎即銆?,bpAdvice:'璞嗘祮鍚ぇ璞嗚泲鐧藉拰寮傞粍閰紝瀵硅鍘嬪拰琛€鑴傛湁鐩娿€?,tip:'鑷繁鎵撶殑璞嗘祮姣斾拱鐨勬洿鍋ュ悍锛屽彲浠ヨ繛璞嗘福涓€璧峰枬澧炲姞绾ょ淮銆?},
+  // 豆类
+  {name:'黄豆',cat:'豆类',gi:18,giLevel:'low',calPer100:390,serve:'25-30g（干重，约两勺）',bgAdvice:'黄豆GI值极低，富含植物蛋白和膳食纤维，是糖前期优质蛋白来源。豆制品对血糖控制非常好。',bpAdvice:'黄豆富含钾、镁和大豆异黄酮，有助于降低血压和胆固醇。',tip:'干豆GI值低，但煮熟后别加糖。'},
+  {name:'绿豆',cat:'豆类',gi:27,giLevel:'low',calPer100:329,serve:'25-30g（干重）',bgAdvice:'绿豆GI值很低，富含膳食纤维。但注意不要煮成绿豆沙（加糖），那样血糖影响完全不同。',bpAdvice:'绿豆清热解毒，有利尿作用，对血压无不良影响。',tip:'夏天喝绿豆汤不要加糖。'},
+  {name:'豆腐',cat:'豆类',gi:32,giLevel:'low',calPer100:73,serve:'100-150g（约半块）',bgAdvice:'豆腐GI值低，蛋白含量高，含钙丰富，是糖前期非常推荐的食物。',bpAdvice:'豆腐低脂低钠，含钙和镁，对心血管健康有益。',tip:'北豆腐（老豆腐）比南豆腐（嫩豆腐）蛋白质和钙含量更高。'},
+  {name:'豆浆',cat:'豆类',gi:34,giLevel:'low',calPer100:31,serve:'一杯（约250ml）',bgAdvice:'豆浆GI值低，是很好的饮品选择。但注意——不要加糖！无糖豆浆才是糖前期好伙伴。',bpAdvice:'豆浆含大豆蛋白和异黄酮，对血压和血脂有益。',tip:'自己打的豆浆比买的更健康，可以连豆渣一起喝增加纤维。'},
 
-  // 濂跺埗鍝?  {name:'鐗涘ザ',cat:'濂跺埗鍝?,gi:27,giLevel:'low',calPer100:54,serve:'涓€鏉紙绾?50ml锛?,bgAdvice:'鐗涘ザGI鍊煎緢浣庯紝瀵屽惈浼樿川铔嬬櫧鍜岄挋銆傜爺绌跺彂鐜板ザ鍒跺搧鎽勫叆涓庤緝浣庣殑2鍨嬬硸灏跨梾椋庨櫓鐩稿叧銆傚缓璁€変綆鑴傛垨鑴辫剛鐗涘ザ銆?,bpAdvice:'鐗涘ザ涓殑閽欏拰閽炬湁鍔╀簬琛€鍘嬫帶鍒躲€備綆鑴傚ザ瀵瑰績琛€绠℃洿鍙嬪ソ銆?,tip:'涔崇硸涓嶈€愬彈鍙互閫夋棤涔崇硸鐗涘ザ鎴栭吀濂躲€?},
-  {name:'閰稿ザ',cat:'濂跺埗鍝?,gi:35,giLevel:'low',calPer100:61,serve:'涓€灏忔澂锛堢害150ml锛?,bgAdvice:'閰稿ザGI鍊艰緝浣庯紝鍚湁鐩婄敓鑿岋紝鏈夊姪浜庤偁閬撳仴搴枫€備絾涓€瀹氳閫夋棤绯栨垨鍘熷懗閰稿ザ锛佸競鍞灉鍛抽吀濂跺惈绯栭噺寰堥珮銆?,bpAdvice:'閰稿ザ涓殑鐩婄敓鑿屽拰閽欐湁鐩婃暣浣撳仴搴凤紝瀵硅鍘嬪奖鍝嶄笉澶с€?,tip:'鎺ㄨ崘甯岃厞閰稿ザ锛岃泲鐧借川鍚噺鏇撮珮锛岀⒊姘存洿浣庛€?},
-  {name:'濂堕叒',cat:'濂跺埗鍝?,gi:0,giLevel:'low',calPer100:328,serve:'涓€灏忕墖锛堢害20g锛?,bgAdvice:'濂堕叒GI鍊兼瀬浣庯紝铔嬬櫧鍜岄挋鍚噺楂樸€備絾鐑噺鍜岄ケ鍜岃剛鑲緝楂橈紝瑕佹帶鍒堕噺銆?,bpAdvice:'濂堕叒鍚挔杈冮珮锛岄珮琛€鍘嬩汉缇よ鐗瑰埆娉ㄦ剰鎺у埗鎽勫叆閲忋€?,tip:'閫変綆鑴備綆閽犵殑濂堕叒鍝佺锛屽鑼呭眿濂堕叒锛坈ottage cheese锛夈€?},
+  // 奶制品
+  {name:'牛奶',cat:'奶制品',gi:27,giLevel:'low',calPer100:54,serve:'一杯（约250ml）',bgAdvice:'牛奶GI值很低，富含优质蛋白和钙。研究发现奶制品摄入与较低的2型糖尿病风险相关。建议选低脂或脱脂牛奶。',bpAdvice:'牛奶中的钙和钾有助于血压控制。低脂奶对心血管更友好。',tip:'乳糖不耐受可以选无乳糖牛奶或酸奶。'},
+  {name:'酸奶',cat:'奶制品',gi:35,giLevel:'low',calPer100:61,serve:'一小杯（约150ml）',bgAdvice:'酸奶GI值较低，含有益生菌，有助于肠道健康。但一定要选无糖或原味酸奶！市售果味酸奶含糖量很高。',bpAdvice:'酸奶中的益生菌和钙有益整体健康，对血压影响不大。',tip:'推荐希腊酸奶，蛋白质含量更高，碳水更低。'},
+  {name:'奶酪',cat:'奶制品',gi:0,giLevel:'low',calPer100:328,serve:'一小片（约20g）',bgAdvice:'奶酪GI值极低，蛋白和钙含量高。但热量和饱和脂肪较高，要控制量。',bpAdvice:'奶酪含钠较高，高血压人群要特别注意控制摄入量。',tip:'选低脂低钠的奶酪品种，如茅屋奶酪（cottage cheese）。'},
 
-  // 闆堕楗枡
-  {name:'鍙箰',cat:'闆堕楗枡',gi:63,giLevel:'mid',calPer100:42,serve:'涓嶅缓璁ギ鐢?,bgAdvice:'涓€缃愬彲涔愬惈绾?5g绯栵紙绾?鍧楁柟绯栵級锛屼細杩呴€熸帹楂樿绯栥€傜硸鍓嶆湡寮虹儓寤鸿閬垮厤銆傚嵆浣挎槸"鏃犵硸"鍙箰锛屼汉宸ョ敎鍛冲墏涔熷彲鑳藉奖鍝嶈偁閬撹弻缇ゃ€?,bpAdvice:'鍙箰鍚７閰稿拰鍜栧暋鍥狅紝瀵硅鍘嬫棤鐩娿€傞儴鍒嗗彲涔愬惈閽犱篃杈冮珮銆?,tip:'瀹炲湪鎯冲枬鐢滅殑锛屽彲浠ュ枬鏃犵硸鑻忔墦姘村姞涓€鐗囨煚妾€?},
-  {name:'姗欐眮',cat:'闆堕楗枡',gi:50,giLevel:'low',calPer100:45,serve:'涓嶅缓璁ギ鐢?,bgAdvice:'鍗充娇鏄矞姒ㄦ姹侊紝澶卞幓浜嗘按鏋滅殑绾ょ淮鍚庡崌绯栭€熷害杩滃揩浜庡悆姗欏瓙銆備竴鏉姹佺浉褰撲簬3-4涓瀛愮殑绯栧垎锛屽嵈灏戜簡楗辫吂鎰熴€?,bpAdvice:'鏋滄眮鍚捑浣嗙硸鍒嗛珮锛屽琛€鍘嬪ソ澶勪笉濡傚悆瀹屾暣姘存灉銆?,tip:'鍚冩按鏋滐紝涓嶈鍠濇灉姹佲€斺€旇繖鏄硸鍓嶆湡楗鐨勯粍閲戞硶鍒欍€?},
-  {name:'楗煎共',cat:'闆堕楗枡',gi:70,giLevel:'high',calPer100:435,serve:'涓嶅缓璁鐢?,bgAdvice:'甯傚敭楗煎共閫氬父鐢辩簿鐧介潰绮夈€佺硸鍜屽ぇ閲忔补鑴傚埗鎴愶紝GI鍊奸珮銆佺儹閲忛珮銆傜硸鍓嶆湡灏介噺涓嶅悆銆?,bpAdvice:'楗煎共涓殑浜洪€犲ザ娌癸紙鍙嶅紡鑴傝偑锛夊蹇冭绠℃瀬涓烘湁瀹筹紝杩樹細鍗囬珮琛€鍘嬨€?,tip:'鎯冲悆闆堕鍙€夊嚑棰楀師鍛冲潥鏋滐紝钀ュ吇鍙堝仴搴枫€?},
-  {name:'铔嬬硶',cat:'闆堕楗枡',gi:65,giLevel:'mid',calPer100:347,serve:'涓嶅缓璁鐢?,bgAdvice:'铔嬬硶鍚ぇ閲忕硸鍜岀簿鍒剁⒊姘达紝琛€绯栧弽搴斿墽鐑堛€傚嵆浣挎槸鏃犵硸铔嬬硶锛岀簿鍒堕潰绮夊拰娌硅剛涔熶細闂存帴褰卞搷琛€绯栥€?,bpAdvice:'铔嬬硶涓殑榛勬补鍜屼汉閫犲ザ娌瑰惈澶ч噺楗卞拰鑴傝偑鍜屽弽寮忚剛鑲紝瀵硅鍘嬪拰蹇冭绠′笉鍒┿€?,tip:'鍋跺皵鍚冧竴灏忓潡瑙ｉ鍙互锛屼絾瑕佺畻濂?棰勭畻"锛屽綋澶╁噺灏戝叾浠栦富椋熴€?},
-  {name:'宸у厠鍔?,cat:'闆堕楗枡',gi:49,giLevel:'low',calPer100:546,serve:'榛戝阀1-2灏忓潡锛堢害10-15g锛?,bgAdvice:'鍙彲鍚噺70%浠ヤ笂鐨勯粦宸у厠鍔汫I鍊艰緝浣庯紝鍙彲澶氶厷鏈夊姪浜庢敼鍠勮儼宀涚礌鏁忔劅鎬с€備絾鐑噺寰堥珮锛岃涓ユ牸鎺у埗閲忋€?,bpAdvice:'榛戝阀鍏嬪姏涓殑榛勭兎閱囨湁鍔╀簬鑸掑紶琛€绠°€佽交搴﹂檷浣庤鍘嬨€備絾浠呴檺楂樺彲鍙惈閲忕殑榛戝阀銆?,tip:'閫夊彲鍙惈閲忊墺70%鐨勯粦宸у厠鍔涳紝鐗涘ザ宸у厠鍔涘拰鐧藉阀鍏嬪姏閮芥槸"绯?娌?鐨勭粍鍚堬紝涓嶆帹鑽愩€?},
-  {name:'钖墖',cat:'闆堕楗枡',gi:56,giLevel:'mid',calPer100:536,serve:'涓嶅缓璁鐢?,bgAdvice:'钖墖鏄?纰虫按+娌硅剛"鐨勫弻閲嶆墦鍑伙紝鐑噺鏋侀珮锛屽琛€绯栧奖鍝嶅ぇ銆備竴灏忚钖墖绛変簬涓€澶х楗殑鐑噺銆?,bpAdvice:'钖墖鍚洂閲忔瀬楂橈紝涓€琚嬭柉鐗囩殑閽犲惈閲忓彲鑳借秴杩囦竴澶╂帹鑽愰噺鐨勪竴鍗娿€傞珮琛€鍘嬩汉缇ゅ繀椤昏繙绂汇€?,tip:'鎯冲悆鑴嗚剢鐨勯浂椋燂紝鍙互鑷繁鐢ㄥ井娉㈢倝鍋氭棤娌硅柉鐗囷紙鍒囪杽鐗囷紝鎾掑皯璁哥洂锛夈€?},
-  {name:'鍧氭灉锛堟牳妗冿級',cat:'闆堕楗枡',gi:14,giLevel:'low',calPer100:654,serve:'涓€灏忔妸锛堢害20-30g锛?-4涓牳妗冿級',bgAdvice:'鏍告GI鍊兼瀬浣庯紝瀵屽惈鍋ュ悍鐨勪笉楗卞拰鑴傝偑鍜岃喅椋熺氦缁达紝瀵硅绯栧嚑涔庢棤褰卞搷銆備絾鐑噺楂橈紝娉ㄦ剰鎺у埗閲忋€?,bpAdvice:'鏍告瀵屽惈Omega-3鑴傝偑閰革紙伪-浜氶夯閰革級锛屾湁鍔╀簬闄嶄綆鐐庣棁銆佷繚鎶ゅ績琛€绠°€傛瘡澶╀竴灏忔妸瀵硅鍘嬫湁鐩娿€?,tip:'閫夊師鍛冲潥鏋滐紝涓嶈閫夌洂鐒楁垨绯栭湝鐨勩€?},
-  {name:'铚傝湝',cat:'闆堕楗枡',gi:58,giLevel:'mid',calPer100:321,serve:'涓嶅缓璁棩甯搁鐢?,bgAdvice:'铚傝湝铏界劧"澶╃劧"锛屼絾鏈川杩樻槸绯栵紙鏋滅硸+钁¤悇绯栵級锛屼細鐩存帴鍗囬珮琛€绯栥€傜硸鍓嶆湡涓嶅缓璁綔涓烘棩甯哥敎鍛冲墏銆?,bpAdvice:'灏戦噺铚傝湝瀵硅鍘嬪奖鍝嶄笉澶э紝浣嗕笉寤鸿涓轰簡"鍏荤敓"鍒绘剰鍚冭渹铚溿€?,tip:'涓庡叾鍚冭渹铚滐紝涓嶅閫氳繃鍧囪　楗鑾峰彇钀ュ吇銆?},
+  // 零食饮料
+  {name:'可乐',cat:'零食饮料',gi:63,giLevel:'mid',calPer100:42,serve:'不建议饮用',bgAdvice:'一罐可乐含约35g糖（约7块方糖），会迅速推高血糖。糖前期强烈建议避免。即使是"无糖"可乐，人工甜味剂也可能影响肠道菌群。',bpAdvice:'可乐含磷酸和咖啡因，对血压无益。部分可乐含钠也较高。',tip:'实在想喝甜的，可以喝无糖苏打水加一片柠檬。'},
+  {name:'橙汁',cat:'零食饮料',gi:50,giLevel:'low',calPer100:45,serve:'不建议饮用',bgAdvice:'即使是鲜榨橙汁，失去了水果的纤维后升糖速度远快于吃橙子。一杯橙汁相当于3-4个橙子的糖分，却少了饱腹感。',bpAdvice:'果汁含钾但糖分高，对血压好处不如吃完整水果。',tip:'吃水果，不要喝果汁——这是糖前期饮食的黄金法则。'},
+  {name:'饼干',cat:'零食饮料',gi:70,giLevel:'high',calPer100:435,serve:'不建议食用',bgAdvice:'市售饼干通常由精白面粉、糖和大量油脂制成，GI值高、热量高。糖前期尽量不吃。',bpAdvice:'饼干中的人造奶油（反式脂肪）对心血管极为有害，还会升高血压。',tip:'想吃零食可选几颗原味坚果，营养又健康。'},
+  {name:'蛋糕',cat:'零食饮料',gi:65,giLevel:'mid',calPer100:347,serve:'不建议食用',bgAdvice:'蛋糕含大量糖和精制碳水，血糖反应剧烈。即使是无糖蛋糕，精制面粉和油脂也会间接影响血糖。',bpAdvice:'蛋糕中的黄油和人造奶油含大量饱和脂肪和反式脂肪，对血压和心血管不利。',tip:'偶尔吃一小块解馋可以，但要算好"预算"，当天减少其他主食。'},
+  {name:'巧克力',cat:'零食饮料',gi:49,giLevel:'low',calPer100:546,serve:'黑巧1-2小块（约10-15g）',bgAdvice:'可可含量70%以上的黑巧克力GI值较低，可可多酚有助于改善胰岛素敏感性。但热量很高，要严格控制量。',bpAdvice:'黑巧克力中的黄烷醇有助于舒张血管、轻度降低血压。但仅限高可可含量的黑巧。',tip:'选可可含量≥70%的黑巧克力，牛奶巧克力和白巧克力都是"糖+油"的组合，不推荐。'},
+  {name:'薯片',cat:'零食饮料',gi:56,giLevel:'mid',calPer100:536,serve:'不建议食用',bgAdvice:'薯片是"碳水+油脂"的双重打击，热量极高，对血糖影响大。一小袋薯片等于一大碗饭的热量。',bpAdvice:'薯片含盐量极高，一袋薯片的钠含量可能超过一天推荐量的一半。高血压人群必须远离。',tip:'想吃脆脆的零食，可以自己用微波炉做无油薯片（切薄片，撒少许盐）。'},
+  {name:'坚果（核桃）',cat:'零食饮料',gi:14,giLevel:'low',calPer100:654,serve:'一小把（约20-30g，3-4个核桃）',bgAdvice:'核桃GI值极低，富含健康的不饱和脂肪和膳食纤维，对血糖几乎无影响。但热量高，注意控制量。',bpAdvice:'核桃富含Omega-3脂肪酸（α-亚麻酸），有助于降低炎症、保护心血管。每天一小把对血压有益。',tip:'选原味坚果，不要选盐焗或糖霜的。'},
+  {name:'蜂蜜',cat:'零食饮料',gi:58,giLevel:'mid',calPer100:321,serve:'不建议日常食用',bgAdvice:'蜂蜜虽然"天然"，但本质还是糖（果糖+葡萄糖），会直接升高血糖。糖前期不建议作为日常甜味剂。',bpAdvice:'少量蜂蜜对血压影响不大，但不建议为了"养生"刻意吃蜂蜜。',tip:'与其吃蜂蜜，不如通过均衡饮食获取营养。'},
 
-  // 鏇村甯歌椋熺墿
-  {name:'绱柉',cat:'涓婚',gi:48,giLevel:'low',calPer100:82,serve:'涓瓑澶у皬1涓紙绾?50g锛?,bgAdvice:'绱柉GI鍊间綆浜庣孩钖紝瀵屽惈鑺遍潚绱狅紙鎶楁哀鍖栫墿璐級锛屾湁鍔╀簬鍑忓皯鐐庣棁鍙嶅簲銆傜硸鍓嶆湡涓嶉敊鐨勭矖绮€夋嫨銆?,bpAdvice:'绱柉楂橀捑浣庨挔锛岃姳闈掔礌淇濇姢琛€绠★紝鏈夊姪浜庤鍘嬪仴搴枫€?,tip:'钂哥潃鍚冩渶濂斤紝涓嶈鍔犵硸銆?},
-  {name:'灞辫嵂',cat:'钄彍',gi:38,giLevel:'low',calPer100:57,serve:'100-150g锛堢害10cm闀夸竴娈碉級',bgAdvice:'灞辫嵂GI鍊间綆锛屽惈鏈夐粡娑茶泲鐧藉拰鑶抽绾ょ淮锛屾湁鍔╀簬寤剁紦绯栧垎鍚告敹銆備紶缁熷尰瀛﹁涓哄北鑽湁鍋ヨ劸鍏昏儍鐨勪綔鐢ㄣ€?,bpAdvice:'灞辫嵂鍚捑涓板瘜锛岄粡娑茶泲鐧芥湁鍔╀簬闄嶄綆鑳嗗浐閱囥€?,tip:'灞辫嵂灞炰簬钖被锛屽悆浜嗚閫傚綋鍑忓皯涓婚閲忋€?},
-  {name:'娲嬭懕',cat:'钄彍',gi:10,giLevel:'low',calPer100:40,serve:'50-80g锛堢害鍗婁釜锛?,bgAdvice:'娲嬭懕GI鍊兼瀬浣庯紝鍚湁纭寲鐗╁拰妲茬毊绱狅紝鐮旂┒鍙戠幇鏈夊姪浜庢敼鍠勮儼宀涚礌鏁忔劅鎬с€?,bpAdvice:'娲嬭懕瀵硅鍘嬫湁鏄庣‘鐨勭泭澶勶紝妲茬毊绱犳湁鍔╀簬琛€绠¤垝寮狅紝澶╃劧闄嶈鍘嬨€?,tip:'鐢熷悆闄嶅帇鏁堟灉鏈€濂斤紙鍑夋媽锛夛紝浣嗚儍涓嶅ソ鐨勫彲浠ョ倰鐔熷悆銆?},
-  {name:'鏈ㄨ€?,cat:'钄彍',gi:10,giLevel:'low',calPer100:27,serve:'10-15g锛堝共閲嶏紝娉″彂鍚庣害100g锛?,bgAdvice:'鏈ㄨ€矴I鍊兼瀬浣庯紝瀵屽惈鑶抽绾ょ淮鍜屾鐗╄兌璐ㄣ€傜儹閲忔瀬浣庯紝鏄硸鍓嶆湡瀹夊叏鐨勫ソ椋熸潗銆?,bpAdvice:'鏈ㄨ€虫湁鍔╀簬闄嶄綆琛€娑查粡绋犲害锛屽蹇冭绠′繚鎶ゆ湁鐩娿€?,tip:'骞叉湪鑰虫场鍙戜笉瑕佽秴杩?灏忔椂锛岄伩鍏嶇粏鑿屾粙鐢熴€?},
-  {name:'鍐摐',cat:'钄彍',gi:15,giLevel:'low',calPer100:11,serve:'150-200g锛堢害涓€纰楋級',bgAdvice:'鍐摐鍑犱箮涓嶅惈绯栵紝姘村垎鏋侀珮锛岀儹閲忔瀬浣庯紝鏄硸鍓嶆湡鏈€瀹夊叏鐨勮敩鑿滀箣涓€銆?,bpAdvice:'鍐摐鏈夊埄灏挎秷鑲跨殑浣滅敤锛屾湁鍔╀簬杈呭姪闄嶅帇銆傞挔鍚噺鏋佷綆銆?,tip:'鍐摐鐓叉堡娓呮贰涓嶆补鑵伙紝閫傚悎绯栧墠鏈熷拰楂樿鍘嬩汉缇ゃ€?},
-  {name:'棣欒弴',cat:'钄彍',gi:10,giLevel:'low',calPer100:26,serve:'50-80g锛堢害5-8鏈碉級',bgAdvice:'棣欒弴GI鍊兼瀬浣庯紝瀵屽惈棣欒弴澶氱硸锛堜竴绉嵨?钁¤仛绯栵級锛屾湁鍔╀簬璋冭妭鍏嶇柅鍔熻兘锛屽琛€绯栨棤褰卞搷銆?,bpAdvice:'棣欒弴鍚捑鍜岄害瑙掑浐閱囷紙鍦ㄤ綋鍐呰浆鍖栦负缁寸敓绱燚锛夛紝瀵硅鍘嬫湁鐩娿€?,tip:'骞查鑿囨瘮椴滈鑿囬鍛虫洿娴擄紝钀ュ吇宸埆涓嶅ぇ銆?},
-  {name:'鑺掓灉',cat:'姘存灉',gi:51,giLevel:'low',calPer100:60,serve:'鍗婁釜涓瓑澶у皬锛堢害100g锛?,bgAdvice:'鑺掓灉GI鍊间腑绛夊亸浣庯紝浣嗗惈绯栭噺涓嶇畻浣庛€傜硸鍓嶆湡瑕佹帶鍒堕噺锛屼竴娆′笉瓒呰繃鍗婁釜銆?,bpAdvice:'鑺掓灉瀵屽惈尾-鑳¤悵鍗滅礌鍜岀淮鐢熺礌C锛屽蹇冭绠℃湁鐩娿€?,tip:'鑺掓灉灞炰簬鐑甫姘存灉锛岀硸鍒嗗亸澶氾紝涓嶈璐銆?},
-  {name:'妯辨',cat:'姘存灉',gi:22,giLevel:'low',calPer100:63,serve:'涓€灏忕锛堢害100g锛岀害15棰楋級',bgAdvice:'妯辨GI鍊奸潪甯镐綆锛屾槸绯栧墠鏈熷ソ鏈嬪弸銆傚瘜鍚姳闈掔礌鍜屾姉姘у寲鐗┿€?,bpAdvice:'妯辨鍚捑涓板瘜锛岃姳闈掔礌鏈夊姪浜庨檷浣庣値鐥囧拰琛€鍘嬨€?,tip:'妯辨瀛ｈ妭鎬х煭锛岃秮鏂伴矞鍚冩渶濂姐€?},
-  {name:'鑽夎帗',cat:'姘存灉',gi:40,giLevel:'low',calPer100:32,serve:'涓€灏忕锛堢害150g锛岀害8-10棰楋級',bgAdvice:'鑽夎帗GI鍊间綆锛屽惈绯栭噺涓嶉珮锛屽瘜鍚淮鐢熺礌C鍜岃姳闈掔礌銆傜硸鍓嶆湡鍙互鏀惧績鍚冪殑浣庣硸姘存灉銆?,bpAdvice:'鑽夎帗楂橀捑浣庨挔锛屽瘜鍚姉姘у寲鐗╋紝瀵瑰績琛€绠′繚鎶ゆ湁鐩娿€?,tip:'鑽夎帗鍐滆嵂娈嬬暀鍙兘杈冨锛岃璁ょ湡娓呮礂銆?},
-  {name:'鐏緳鏋?,cat:'姘存灉',gi:45,giLevel:'low',calPer100:55,serve:'鍗婁釜锛堢害200g锛?,bgAdvice:'鐏緳鏋淕I鍊艰緝浣庯紝鏋滆倝涓殑灏忛粦绫藉瘜鍚笉楗卞拰鑴傝偑閰稿拰绾ょ淮銆備絾绾㈠績鐏緳鏋滄瘮鐧藉績鍚硸鐣ラ珮銆?,bpAdvice:'鐏緳鏋滃惈閽惧拰闀侊紝鏈夊姪浜庤绠″仴搴枫€?,tip:'鐏緳鏋滅殑绫芥槸鑶抽绾ょ淮鐨勯噸瑕佹潵婧愩€?},
-  {name:'缇婅倝',cat:'鑲夌被',gi:0,giLevel:'low',calPer100:203,serve:'50-75g',bgAdvice:'缇婅倝涓嶅惈纰虫按锛屽琛€绯栨棤鐩存帴褰卞搷銆備絾鑴傝偑鍚噺杈冮珮锛岃鎺у埗閲忓拰棰戠巼銆?,bpAdvice:'缇婅倝楗卞拰鑴傝偑杈冨锛岃鍘嬮珮鐨勪汉瑕侀€傞噺銆傚啲澶╁悆缇婅倝鏆栬韩锛屼絾瑕佸皯鍠濈緤姹わ紙鐩愬拰鍢屽懁楂橈級銆?,tip:'閫夌槮缇婅倝閮ㄤ綅锛屽缇婅吙鑲夈€?},
-  {name:'楦倝',cat:'鑲夌被',gi:0,giLevel:'low',calPer100:240,serve:'50-75g',bgAdvice:'楦倝涓嶅惈纰虫按锛屼笉褰卞搷琛€绯栥€備絾楦毊鑴傝偑寰堥珮锛屽悆楦倝瑕佸幓鐨€?,bpAdvice:'楦倝鎬у噳锛岃剛鑲互涓嶉ケ鍜岃剛鑲吀涓轰富锛屾瘮鐚倝绋嶅ソ銆備絾鍚屾牱瑕佸幓鐨噺鑴傘€?,tip:'鎺ㄨ崘楦兏鑲夛紙鍘荤毊锛夛紝鏄腑鑲変腑鏈€鐦︾殑閮ㄤ綅銆?},
-  {name:'璞嗚厫骞?,cat:'璞嗙被',gi:25,giLevel:'low',calPer100:140,serve:'50-80g锛堢害3-4鍧楋級',bgAdvice:'璞嗚厫骞睪I鍊煎緢浣庯紝铔嬬櫧璐ㄥ惈閲忔瘮璞嗚厫鏇撮珮锛屾槸绯栧墠鏈熸柟渚跨殑楂樿泲鐧介浂椋熴€?,bpAdvice:'娉ㄦ剰璞嗚厫骞插姞宸ヨ繃绋嬩腑鍙兘娣诲姞杈冨鐩愶紝閫夎喘鏃剁湅閽犲惈閲忋€?,tip:'閫夊師鍛宠眴鑵愬共锛屼笉瑕侀€変簲棣欍€侀夯杈ｇ瓑璋冨懗閲嶇殑銆?},
-  {name:'绾㈣眴',cat:'璞嗙被',gi:30,giLevel:'low',calPer100:324,serve:'25-30g锛堝共閲嶏級',bgAdvice:'绾㈣眴GI鍊间綆锛屽瘜鍚泲鐧藉拰绾ょ淮銆備絾娉ㄦ剰绾㈣眴娌欙紙鍔犵硸锛夊拰绾㈣眴姹わ紙涓嶅姞绯栵級瀵硅绯栧奖鍝嶅ぉ宸湴鍒€?,bpAdvice:'绾㈣眴楂橀捑浣庨挔锛屽埄灏挎秷鑲匡紝瀵硅鍘嬫帶鍒跺弸濂姐€?,tip:'鐓孩璞嗘堡涓嶈鍔犵硸锛屽彲浠ュ拰钖忕背涓€璧风叜銆?},
-  {name:'鏍告',cat:'闆堕楗枡',gi:14,giLevel:'low',calPer100:654,serve:'涓€灏忔妸锛堢害20-30g锛?-4涓級',bgAdvice:'鏍告GI鍊兼瀬浣庯紝瀵屽惈鍋ュ悍鑴傝偑銆備絾鐑噺寰堥珮锛屾瘡澶╀竴灏忔妸鍗冲彲銆?,bpAdvice:'鏍告涓殑Omega-3鏈夊姪浜庝繚鎶ゅ績琛€绠★紝闄嶄綆鐐庣棁銆?,tip:'鍘熷懗鐢熸牳妗冩渶濂斤紝涓嶈鐩愮剹鎴栫硸闇滅殑銆?},
-  {name:'鏉忎粊',cat:'闆堕楗枡',gi:10,giLevel:'low',calPer100:579,serve:'涓€灏忔妸锛堢害15-20g锛?0-15棰楋級',bgAdvice:'鏉忎粊GI鍊兼瀬浣庯紝瀵屽惈缁寸敓绱燛鍜岄晛锛屾湁鍔╀簬鏀瑰杽鑳板矝绱犳晱鎰熸€с€傛瘡澶╀竴灏忔妸銆?,bpAdvice:'鏉忎粊瀵屽惈涓嶉ケ鍜岃剛鑲拰闀侊紝鏈夊姪浜庤垝寮犺绠°€侀檷浣庤鍘嬨€?,tip:'閫夊師鍛崇敓鏉忎粊锛岄伩寮€鐩愮剹鐨勩€?},
-  {name:'鍐版穱娣?,cat:'闆堕楗枡',gi:60,giLevel:'mid',calPer100:207,serve:'涓嶅缓璁鐢?,bgAdvice:'鍐版穱娣嬪惈澶ч噺绯栧拰鑴傝偑锛屽崌绯栧張蹇張楂樸€傝€屼笖鍐板喎椋熺墿鍙兘鍒烘縺琛€绯栨尝鍔ㄦ洿鍓х儓銆?,bpAdvice:'鍐版穱娣嬩腑鐨勫ザ娌瑰惈澶ч噺楗卞拰鑴傝偑锛屽蹇冭绠′笉鍙嬪ソ銆?,tip:'鎯冲悆鍑夌殑锛屽彲浠ヨ嚜宸卞喕涓€浜涙棤绯栭吀濂舵媽钃濊帗锛屽仴搴峰張瑙ｆ殤銆?},
-  {name:'鐧界爞绯?,cat:'闆堕楗枡',gi:65,giLevel:'mid',calPer100:400,serve:'閬垮厤浣跨敤',bgAdvice:'绾硸锛堣敆绯栵級浼氱洿鎺ュ揩閫熷崌楂樿绯栥€傜硸鍓嶆湡鏃ュ父鐑归オ鍜岄ギ鍝佷腑搴斿敖閲忛伩鍏嶆坊鍔犮€?,bpAdvice:'杩囬噺绯栧垎鎽勫叆浼氶€氳繃澶氱閫斿緞鍗囬珮琛€鍘嬶細澧炲姞浣撻噸銆佷績杩涚値鐥囥€佸姞閫熻绠¤€佸寲銆?,tip:'浠ｇ硸锛堝璧よ棑绯栭唶銆佺敎鑿婄硸鑻凤級鍙互鍋跺皵鏇夸唬锛屼絾鏈€濂借繕鏄煿鍏诲皯鍚冪敎鐨勪範鎯€?},
+  // 更多常见食物
+  {name:'紫薯',cat:'主食',gi:48,giLevel:'low',calPer100:82,serve:'中等大小1个（约150g）',bgAdvice:'紫薯GI值低于红薯，富含花青素（抗氧化物质），有助于减少炎症反应。糖前期不错的粗粮选择。',bpAdvice:'紫薯高钾低钠，花青素保护血管，有助于血压健康。',tip:'蒸着吃最好，不要加糖。'},
+  {name:'山药',cat:'蔬菜',gi:38,giLevel:'low',calPer100:57,serve:'100-150g（约10cm长一段）',bgAdvice:'山药GI值低，含有黏液蛋白和膳食纤维，有助于延缓糖分吸收。传统医学认为山药有健脾养胃的作用。',bpAdvice:'山药含钾丰富，黏液蛋白有助于降低胆固醇。',tip:'山药属于薯类，吃了要适当减少主食量。'},
+  {name:'洋葱',cat:'蔬菜',gi:10,giLevel:'low',calPer100:40,serve:'50-80g（约半个）',bgAdvice:'洋葱GI值极低，含有硫化物和槲皮素，研究发现有助于改善胰岛素敏感性。',bpAdvice:'洋葱对血压有明确的益处，槲皮素有助于血管舒张，天然降血压。',tip:'生吃降压效果最好（凉拌），但胃不好的可以炒熟吃。'},
+  {name:'木耳',cat:'蔬菜',gi:10,giLevel:'low',calPer100:27,serve:'10-15g（干重，泡发后约100g）',bgAdvice:'木耳GI值极低，富含膳食纤维和植物胶质。热量极低，是糖前期安全的好食材。',bpAdvice:'木耳有助于降低血液黏稠度，对心血管保护有益。',tip:'干木耳泡发不要超过4小时，避免细菌滋生。'},
+  {name:'冬瓜',cat:'蔬菜',gi:15,giLevel:'low',calPer100:11,serve:'150-200g（约一碗）',bgAdvice:'冬瓜几乎不含糖，水分极高，热量极低，是糖前期最安全的蔬菜之一。',bpAdvice:'冬瓜有利尿消肿的作用，有助于辅助降压。钠含量极低。',tip:'冬瓜煲汤清淡不油腻，适合糖前期和高血压人群。'},
+  {name:'香菇',cat:'蔬菜',gi:10,giLevel:'low',calPer100:26,serve:'50-80g（约5-8朵）',bgAdvice:'香菇GI值极低，富含香菇多糖（一种β-葡聚糖），有助于调节免疫功能，对血糖无影响。',bpAdvice:'香菇含钾和麦角固醇（在体内转化为维生素D），对血压有益。',tip:'干香菇比鲜香菇香味更浓，营养差别不大。'},
+  {name:'芒果',cat:'水果',gi:51,giLevel:'low',calPer100:60,serve:'半个中等大小（约100g）',bgAdvice:'芒果GI值中等偏低，但含糖量不算低。糖前期要控制量，一次不超过半个。',bpAdvice:'芒果富含β-胡萝卜素和维生素C，对心血管有益。',tip:'芒果属于热带水果，糖分偏多，不要贪多。'},
+  {name:'樱桃',cat:'水果',gi:22,giLevel:'low',calPer100:63,serve:'一小碗（约100g，约15颗）',bgAdvice:'樱桃GI值非常低，是糖前期好朋友。富含花青素和抗氧化物。',bpAdvice:'樱桃含钾丰富，花青素有助于降低炎症和血压。',tip:'樱桃季节性短，趁新鲜吃最好。'},
+  {name:'草莓',cat:'水果',gi:40,giLevel:'low',calPer100:32,serve:'一小碗（约150g，约8-10颗）',bgAdvice:'草莓GI值低，含糖量不高，富含维生素C和花青素。糖前期可以放心吃的低糖水果。',bpAdvice:'草莓高钾低钠，富含抗氧化物，对心血管保护有益。',tip:'草莓农药残留可能较多，要认真清洗。'},
+  {name:'火龙果',cat:'水果',gi:45,giLevel:'low',calPer100:55,serve:'半个（约200g）',bgAdvice:'火龙果GI值较低，果肉中的小黑籽富含不饱和脂肪酸和纤维。但红心火龙果比白心含糖略高。',bpAdvice:'火龙果含钾和镁，有助于血管健康。',tip:'火龙果的籽是膳食纤维的重要来源。'},
+  {name:'羊肉',cat:'肉类',gi:0,giLevel:'low',calPer100:203,serve:'50-75g',bgAdvice:'羊肉不含碳水，对血糖无直接影响。但脂肪含量较高，要控制量和频率。',bpAdvice:'羊肉饱和脂肪较多，血压高的人要适量。冬天吃羊肉暖身，但要少喝羊汤（盐和嘌呤高）。',tip:'选瘦羊肉部位，如羊腿肉。'},
+  {name:'鸭肉',cat:'肉类',gi:0,giLevel:'low',calPer100:240,serve:'50-75g',bgAdvice:'鸭肉不含碳水，不影响血糖。但鸭皮脂肪很高，吃鸭肉要去皮。',bpAdvice:'鸭肉性凉，脂肪以不饱和脂肪酸为主，比猪肉稍好。但同样要去皮减脂。',tip:'推荐鸭胸肉（去皮），是鸭肉中最瘦的部位。'},
+  {name:'豆腐干',cat:'豆类',gi:25,giLevel:'low',calPer100:140,serve:'50-80g（约3-4块）',bgAdvice:'豆腐干GI值很低，蛋白质含量比豆腐更高，是糖前期方便的高蛋白零食。',bpAdvice:'注意豆腐干加工过程中可能添加较多盐，选购时看钠含量。',tip:'选原味豆腐干，不要选五香、麻辣等调味重的。'},
+  {name:'红豆',cat:'豆类',gi:30,giLevel:'low',calPer100:324,serve:'25-30g（干重）',bgAdvice:'红豆GI值低，富含蛋白和纤维。但注意红豆沙（加糖）和红豆汤（不加糖）对血糖影响天差地别。',bpAdvice:'红豆高钾低钠，利尿消肿，对血压控制友好。',tip:'煮红豆汤不要加糖，可以和薏米一起煮。'},
+  {name:'核桃',cat:'零食饮料',gi:14,giLevel:'low',calPer100:654,serve:'一小把（约20-30g，3-4个）',bgAdvice:'核桃GI值极低，富含健康脂肪。但热量很高，每天一小把即可。',bpAdvice:'核桃中的Omega-3有助于保护心血管，降低炎症。',tip:'原味生核桃最好，不要盐焗或糖霜的。'},
+  {name:'杏仁',cat:'零食饮料',gi:10,giLevel:'low',calPer100:579,serve:'一小把（约15-20g，10-15颗）',bgAdvice:'杏仁GI值极低，富含维生素E和镁，有助于改善胰岛素敏感性。每天一小把。',bpAdvice:'杏仁富含不饱和脂肪和镁，有助于舒张血管、降低血压。',tip:'选原味生杏仁，避开盐焗的。'},
+  {name:'冰淇淋',cat:'零食饮料',gi:60,giLevel:'mid',calPer100:207,serve:'不建议食用',bgAdvice:'冰淇淋含大量糖和脂肪，升糖又快又高。而且冰冷食物可能刺激血糖波动更剧烈。',bpAdvice:'冰淇淋中的奶油含大量饱和脂肪，对心血管不友好。',tip:'想吃凉的，可以自己冻一些无糖酸奶拌蓝莓，健康又解暑。'},
+  {name:'白砂糖',cat:'零食饮料',gi:65,giLevel:'mid',calPer100:400,serve:'避免使用',bgAdvice:'纯糖（蔗糖）会直接快速升高血糖。糖前期日常烹饪和饮品中应尽量避免添加。',bpAdvice:'过量糖分摄入会通过多种途径升高血压：增加体重、促进炎症、加速血管老化。',tip:'代糖（如赤藓糖醇、甜菊糖苷）可以偶尔替代，但最好还是培养少吃甜的习惯。'},
 
-  // 鏇村琛ュ厖
-  {name:'灏忕背鍗楃摐绮?,cat:'涓婚',gi:75,giLevel:'high',calPer100:38,serve:'涓€灏忕锛堢害200ml锛?,bgAdvice:'铏界劧灏忕背鍜屽崡鐡滃悇鑷兘杩樼畻鍋ュ悍锛屼絾鐓垚绮ュ悗GI鍊间細鍗囬珮銆傚枬绮ュ崌绯栧揩锛屽缓璁皯鍠濓紝鎴栨惌閰嶈泲鐧介鐗╀竴璧枫€?,bpAdvice:'涓嶈鍔犵洂锛屾竻娣″枬銆?,tip:'绮ョ被鍗囩硸蹇紝涓嶅缓璁硸鍓嶆湡浜虹兢缁忓父鍠濈播銆?},
-  {name:'娌规潯',cat:'涓婚',gi:75,giLevel:'high',calPer100:388,serve:'涓嶅缓璁鐢?,bgAdvice:'娌规潯鏄?绮惧埗纰虫按+澶ч噺娌硅剛"鐨勭粍鍚堬紝鍗囩硸鍙堝揩鍙堥珮锛岀儹閲忔瀬楂樸€傜硸鍓嶆湡搴斾弗鏍奸伩鍏嶃€?,bpAdvice:'娌规潯鍚补閲忔瀬楂橈紝涓斿弽澶嶄娇鐢ㄧ殑娌圭偢娌瑰惈鏈夊鐗╄川锛屽琛€绠′激瀹冲ぇ銆?,tip:'鍋跺皵鎯冲悆娌圭偢椋熷搧锛屼紭鍏堥€夌┖姘旂偢閿呭仛鐨勩€?},
-  {name:'鑺辩敓',cat:'璞嗙被',gi:14,giLevel:'low',calPer100:563,serve:'涓€灏忔妸锛堢害20g锛岀害20-30绮掞級',bgAdvice:'鑺辩敓GI鍊兼瀬浣庯紝鍚仴搴疯剛鑲拰铔嬬櫧銆備絾鐑噺瀵嗗害楂橈紝鍚冨浼氶暱鑳栥€?,bpAdvice:'鑺辩敓鍚笉楗卞拰鑴傝偑閰稿拰绮炬皑閰革紝鏈夊姪浜庤绠¤垝寮犮€備絾鍚屾牱瑕佹帶鍒堕噺銆?,tip:'姘寸叜鑺辩敓姣旀补鐐歌姳鐢熷仴搴峰緱澶氾紝涔板師鍛崇叜鑺辩敓銆?},
-  {name:'鑺卞嵎',cat:'涓婚',gi:80,giLevel:'high',calPer100:221,serve:'30-50g锛堢害鍗婁釜锛?,bgAdvice:'鑺卞嵎鍜岄澶寸被浼硷紝GI鍊奸珮銆傚鏋滃姞浜嗚懕鑺卞拰鐩愯繕濂斤紝鏈変簺杩樺埛浜嗘补锛岀儹閲忔洿楂樸€?,bpAdvice:'鑺卞嵎閫氬父鍚洂锛屾敞鎰忛噺銆?,tip:'鏈€濂介€夊叏楹﹁姳鍗凤紝鎴栬€呰嚜宸卞湪瀹跺仛灏戞补灏戠洂鐗堟湰銆?},
+  // 更多补充
+  {name:'小米南瓜粥',cat:'主食',gi:75,giLevel:'high',calPer100:38,serve:'一小碗（约200ml）',bgAdvice:'虽然小米和南瓜各自都还算健康，但煮成粥后GI值会升高。喝粥升糖快，建议少喝，或搭配蛋白食物一起。',bpAdvice:'不要加盐，清淡喝。',tip:'粥类升糖快，不建议糖前期人群经常喝粥。'},
+  {name:'油条',cat:'主食',gi:75,giLevel:'high',calPer100:388,serve:'不建议食用',bgAdvice:'油条是"精制碳水+大量油脂"的组合，升糖又快又高，热量极高。糖前期应严格避免。',bpAdvice:'油条含油量极高，且反复使用的油炸油含有害物质，对血管伤害大。',tip:'偶尔想吃油炸食品，优先选空气炸锅做的。'},
+  {name:'花生',cat:'豆类',gi:14,giLevel:'low',calPer100:563,serve:'一小把（约20g，约20-30粒）',bgAdvice:'花生GI值极低，含健康脂肪和蛋白。但热量密度高，吃多会长胖。',bpAdvice:'花生含不饱和脂肪酸和精氨酸，有助于血管舒张。但同样要控制量。',tip:'水煮花生比油炸花生健康得多，买原味煮花生。'},
+  {name:'花卷',cat:'主食',gi:80,giLevel:'high',calPer100:221,serve:'30-50g（约半个）',bgAdvice:'花卷和馒头类似，GI值高。如果加了葱花和盐还好，有些还刷了油，热量更高。',bpAdvice:'花卷通常含盐，注意量。',tip:'最好选全麦花卷，或者自己在家做少油少盐版本。'},
 
-  // 鏇村钄彍
-  {name:'鐢熻彍',cat:'钄彍',gi:15,giLevel:'low',calPer100:13,serve:'100-150g锛堢害涓€灏忕洏锛?,bgAdvice:'鐢熻彍GI鍊兼瀬浣庯紝鍑犱箮鍏ㄦ槸姘村垎鍜岀氦缁达紝鐑噺鏋佷綆锛屾槸绯栧墠鏈熷畨鍏ㄨ敩鑿溿€?,bpAdvice:'鐢熻彍鍚捑锛屾按鍒嗗ぇ锛屽琛€鍘嬪弸濂姐€?,tip:'鐢熷悆鎴栨竻鐐掗兘寰堝ソ锛屾槸娌欐媺鐨勫ソ鍩哄簳銆?},
-  {name:'鑾寸瑡',cat:'钄彍',gi:15,giLevel:'low',calPer100:14,serve:'100-150g锛堢害涓€灏忕洏锛?,bgAdvice:'鑾寸瑡GI鍊兼瀬浣庯紝娓呮贰鐖藉彛銆傚瘜鍚捑鍜岃喅椋熺氦缁达紝瀵硅绯栧嚑涔庢棤褰卞搷銆?,bpAdvice:'鑾寸瑡鍚捑涓板瘜锛屾湁鍒╁翱闄嶅帇浣滅敤銆?,tip:'鑾寸瑡鍙惰惀鍏绘瘮鑼庢洿涓板瘜锛屽埆涓㈡帀锛屽彲浠ヤ竴璧风倰鎴栧仛姹ゃ€?},
-  {name:'鑾茶棔',cat:'钄彍',gi:38,giLevel:'low',calPer100:73,serve:'80-100g锛堢害5-6鐗囷級',bgAdvice:'鑾茶棔GI鍊艰緝浣庯紝浣嗘穩绮夊惈閲忔瘮涓€鑸敩鑿滈珮锛岀硸鍓嶆湡鍚冭棔瑕侀€傚綋鍑忓皯涓婚閲忋€?,bpAdvice:'鑾茶棔瀵屽惈閽惧拰缁寸敓绱燙锛屽琛€绠℃湁鐩娿€傛敞鎰忎笉瑕佸悆绯栭唻钘曠墖锛堝姞绯栵級銆?,tip:'娓呯倰鎴栫倴姹ゆ渶濂斤紝閬垮厤绯栭唻鍋氭硶銆?},
-  {name:'璞嗚娊',cat:'钄彍',gi:15,giLevel:'low',calPer100:18,serve:'100-150g锛堢害涓€灏忕洏锛?,bgAdvice:'缁胯眴鑺藉拰榛勮眴鑺紾I鍊兼瀬浣庯紝瀵屽惈缁寸敓绱燙鍜岃喅椋熺氦缁淬€傜儹閲忔瀬浣庯紝鏄硸鍓嶆湡瀹夊叏椋熸潗銆?,bpAdvice:'璞嗚娊鍚捑锛岀儹閲忎綆锛屽琛€鍘嬪弸濂姐€?,tip:'鑷繁鍦ㄥ鍙戣眴鑺芥洿鏂伴矞瀹夊叏銆?},
-  {name:'闈掓',cat:'钄彍',gi:15,giLevel:'low',calPer100:22,serve:'80-100g锛堢害1-2涓級',bgAdvice:'闈掓GI鍊兼瀬浣庯紝缁寸敓绱燙鍚噺鏄瀛愮殑3鍊嶃€備笉杈ｆ垨寰荆鐨勯潚妞掗€傚悎绯栧墠鏈熴€?,bpAdvice:'闈掓瀵屽惈缁寸敓绱燙鍜岄捑锛屾湁鍔╀簬琛€绠′繚鎶ゃ€?,tip:'闈掓蹇倰淇濈暀钀ュ吇锛屼笉瑕佺倰澶箙銆?},
-  {name:'鑼艰捒',cat:'钄彍',gi:15,giLevel:'low',calPer100:21,serve:'100-150g锛堢害涓€灏忕洏锛?,bgAdvice:'鑼艰捒GI鍊兼瀬浣庯紝瀵屽惈鑶抽绾ょ淮鍜屽绉嶇淮鐢熺礌锛屾槸绯栧墠鏈熺殑瀹夊叏缁垮彾鑿溿€?,bpAdvice:'鑼艰捒鍚捑鍜屾尌鍙戞补锛屾湁鍔╀簬鑸掑紶琛€绠°€?,tip:'娓呯倰鎴栨懂鐏攨閮藉緢閫傚悎銆?},
-  {name:'绌哄績鑿?,cat:'钄彍',gi:15,giLevel:'low',calPer100:20,serve:'100-150g锛堢害涓€灏忕洏锛?,bgAdvice:'绌哄績鑿淕I鍊兼瀬浣庯紝鐑噺浣庢按鍒嗗ぇ锛屽琛€绯栧嚑涔庢棤褰卞搷銆?,bpAdvice:'绌哄績鑿滃惈閽惧拰闀侊紝鏈夊姪浜庤鍘嬫帶鍒躲€?,tip:'钂滆搲绌哄績鑿滄槸缁忓吀鍋氭硶锛屽皯娌瑰皯鐩愩€?},
-  {name:'闊彍',cat:'钄彍',gi:15,giLevel:'low',calPer100:26,serve:'50-80g锛堢害涓€灏忔妸锛?,bgAdvice:'闊彍GI鍊兼瀬浣庯紝鍚～鍖栫墿鍜岃喅椋熺氦缁达紝瀵硅绯栨棤褰卞搷銆?,bpAdvice:'闊彍涓殑纭寲鐗╂湁鍔╀簬闄嶄綆琛€鑴傦紝浣嗛煭鑿滃惈閽犳瘮涓€鑸敩鑿滅◢楂橈紝娉ㄦ剰鐑归オ鏃跺皯鍔犵洂銆?,tip:'闊彍鐐掕泲鏄笉閿欑殑鎼厤锛岃泲鐧借川+钄彍銆?},
-  {name:'绉嬭懙',cat:'钄彍',gi:20,giLevel:'low',calPer100:31,serve:'80-100g锛堢害5-8鏍癸級',bgAdvice:'绉嬭懙GI鍊兼瀬浣庯紝瀵屽惈鍙憾鎬ц喅椋熺氦缁达紙榛忔恫锛夛紝鑳藉欢缂撶硸鍒嗗惛鏀躲€侀檷浣庨鍚庤绯栥€?,bpAdvice:'绉嬭懙涓殑榛忔恫鍜岄捑瀵硅绠℃湁淇濇姢浣滅敤銆?,tip:'鐧界伡绉嬭懙铇稿皯璁搁叡娌瑰氨寰堢編鍛炽€?},
+  // 更多蔬菜
+  {name:'生菜',cat:'蔬菜',gi:15,giLevel:'low',calPer100:13,serve:'100-150g（约一小盘）',bgAdvice:'生菜GI值极低，几乎全是水分和纤维，热量极低，是糖前期安全蔬菜。',bpAdvice:'生菜含钾，水分大，对血压友好。',tip:'生吃或清炒都很好，是沙拉的好基底。'},
+  {name:'莴笋',cat:'蔬菜',gi:15,giLevel:'low',calPer100:14,serve:'100-150g（约一小盘）',bgAdvice:'莴笋GI值极低，清淡爽口。富含钾和膳食纤维，对血糖几乎无影响。',bpAdvice:'莴笋含钾丰富，有利尿降压作用。',tip:'莴笋叶营养比茎更丰富，别丢掉，可以一起炒或做汤。'},
+  {name:'莲藕',cat:'蔬菜',gi:38,giLevel:'low',calPer100:73,serve:'80-100g（约5-6片）',bgAdvice:'莲藕GI值较低，但淀粉含量比一般蔬菜高，糖前期吃藕要适当减少主食量。',bpAdvice:'莲藕富含钾和维生素C，对血管有益。注意不要吃糖醋藕片（加糖）。',tip:'清炒或炖汤最好，避免糖醋做法。'},
+  {name:'豆芽',cat:'蔬菜',gi:15,giLevel:'low',calPer100:18,serve:'100-150g（约一小盘）',bgAdvice:'绿豆芽和黄豆芽GI值极低，富含维生素C和膳食纤维。热量极低，是糖前期安全食材。',bpAdvice:'豆芽含钾，热量低，对血压友好。',tip:'自己在家发豆芽更新鲜安全。'},
+  {name:'青椒',cat:'蔬菜',gi:15,giLevel:'low',calPer100:22,serve:'80-100g（约1-2个）',bgAdvice:'青椒GI值极低，维生素C含量是橙子的3倍。不辣或微辣的青椒适合糖前期。',bpAdvice:'青椒富含维生素C和钾，有助于血管保护。',tip:'青椒快炒保留营养，不要炒太久。'},
+  {name:'茼蒿',cat:'蔬菜',gi:15,giLevel:'low',calPer100:21,serve:'100-150g（约一小盘）',bgAdvice:'茼蒿GI值极低，富含膳食纤维和多种维生素，是糖前期的安全绿叶菜。',bpAdvice:'茼蒿含钾和挥发油，有助于舒张血管。',tip:'清炒或涮火锅都很适合。'},
+  {name:'空心菜',cat:'蔬菜',gi:15,giLevel:'low',calPer100:20,serve:'100-150g（约一小盘）',bgAdvice:'空心菜GI值极低，热量低水分大，对血糖几乎无影响。',bpAdvice:'空心菜含钾和镁，有助于血压控制。',tip:'蒜蓉空心菜是经典做法，少油少盐。'},
+  {name:'韭菜',cat:'蔬菜',gi:15,giLevel:'low',calPer100:26,serve:'50-80g（约一小把）',bgAdvice:'韭菜GI值极低，含硫化物和膳食纤维，对血糖无影响。',bpAdvice:'韭菜中的硫化物有助于降低血脂，但韭菜含钠比一般蔬菜稍高，注意烹饪时少加盐。',tip:'韭菜炒蛋是不错的搭配，蛋白质+蔬菜。'},
+  {name:'秋葵',cat:'蔬菜',gi:20,giLevel:'low',calPer100:31,serve:'80-100g（约5-8根）',bgAdvice:'秋葵GI值极低，富含可溶性膳食纤维（黏液），能延缓糖分吸收、降低餐后血糖。',bpAdvice:'秋葵中的黏液和钾对血管有保护作用。',tip:'白灼秋葵蘸少许酱油就很美味。'},
 
-  // 鏇村姘存灉
-  {name:'鑿犺悵',cat:'姘存灉',gi:59,giLevel:'mid',calPer100:41,serve:'2-3灏忓潡锛堢害80g锛?,bgAdvice:'鑿犺悵GI鍊间腑绛夛紝鍚硸閲忎笉绠楅珮銆備絾鏈変簺浜哄悆鑿犺悵鍚庤绯栧弽搴旇緝澶э紝寤鸿灏戦噺灏濊瘯銆?,bpAdvice:'鑿犺悵鍚彔钀濊泲鐧介叾鍜岄捑锛屾湁鍔╂秷鍖栧拰闄嶅帇銆?,tip:'涓嶈绌鸿吂鍚冭彔钀濓紝閰稿害杈冮珮鍙兘鍒烘縺鑳冦€?},
-  {name:'鏈ㄧ摐',cat:'姘存灉',gi:58,giLevel:'mid',calPer100:39,serve:'鍗婁釜灏忔湪鐡滐紙绾?50g锛?,bgAdvice:'鏈ㄧ摐GI鍊间腑绛夊亸浣庯紝鍚湪鐡滆泲鐧介叾鏈夊姪娑堝寲銆傜硸鍓嶆湡鍙互閫傞噺鍚冦€?,bpAdvice:'鏈ㄧ摐鍚捑涓板瘜锛岀淮鐢熺礌C鍚噺楂橈紝瀵瑰績琛€绠″弸濂姐€?,tip:'閫変笉澶啛鐨勬湪鐡滐紝GI鍊间細鏇翠綆涓€浜涖€?},
-  {name:'姒磋幉',cat:'姘存灉',gi:49,giLevel:'low',calPer100:147,serve:'1-2鐡ｏ紙绾?0-80g锛?,bgAdvice:'姒磋幉铏界劧GI鍊间笉绠楅珮锛屼絾鐑噺鍜岀⒊姘村瘑搴﹀緢楂橈紝绯栧墠鏈熻涓ユ牸鎺у埗閲忥紝涓€娆′笉瓒呰繃2灏忕摚銆?,bpAdvice:'姒磋幉鍚捑鍜屽绉嶇淮鐢熺礌锛屼絾鐑噺澶珮涓嶅疁澶氬悆銆?,tip:'姒磋幉鏄?姘存灉涔嬬帇"涔熸槸"鐑噺涔嬬帇"锛岀硸鍓嶆湡娴呭皾杈勬銆?},
-  {name:'鏌犳',cat:'姘存灉',gi:20,giLevel:'low',calPer100:37,serve:'1-2鐗囨场姘达紙绾?0g锛?,bgAdvice:'鏌犳GI鍊兼瀬浣庯紝鏌犳姘村嚑涔庝笉鍚硸锛屾槸绯栧墠鏈熷畨鍏ㄧ殑楗搧閫夋嫨銆?,bpAdvice:'鏌犳瀵屽惈缁寸敓绱燙鍜屾煚妾吀锛屾湁鍔╀簬琛€绠″脊鎬с€?,tip:'鏌犳姘翠笉瑕佸姞绯栨垨铚傝湝锛岀函鏌犳鐗囨场姘存渶濂姐€?},
-  {name:'鑽旀灊',cat:'姘存灉',gi:57,giLevel:'mid',calPer100:71,serve:'5-8棰楋紙绾?0g锛?,bgAdvice:'鑽旀灊GI鍊间腑绛夛紝浣嗙硸鍒嗗惈閲忚緝楂橈紙浠ユ灉绯栦负涓伙級銆傜硸鍓嶆湡瑕佷弗鏍兼帶鍒讹紝涓€娆′笉瓒呰繃8棰椼€?,bpAdvice:'鑽旀灊鍚捑锛屼絾绯栧垎楂樺鏄撳鑷磋绯栨尝鍔ㄣ€?,tip:'鑽旀灊鍚硸閲忛珮锛屼笉瑕佺┖鑵瑰悆锛屼篃涓嶈涓€娆″悆澶銆?},
-  {name:'鏋囨澐',cat:'姘存灉',gi:35,giLevel:'low',calPer100:41,serve:'5-6棰楋紙绾?00g锛?,bgAdvice:'鏋囨澐GI鍊间綆锛屽惈绯栭噺閫備腑锛屾槸绯栧墠鏈熸瘮杈冨畨鍏ㄧ殑鏃朵护姘存灉銆?,bpAdvice:'鏋囨澐鍚捑鍜屛?鑳¤悵鍗滅礌锛屾湁鐩婂仴搴枫€?,tip:'瀛ｈ妭鎬х煭锛岃秮鏂伴矞閫傞噺鍚冦€?},
-  {name:'鍝堝瘑鐡?,cat:'姘存灉',gi:65,giLevel:'mid',calPer100:34,serve:'涓€灏忓潡锛堢害100g锛?,bgAdvice:'鍝堝瘑鐡淕I鍊间腑绛夊亸楂橈紝浣嗘按鍒嗗ぇ鎬荤⒊姘翠笉绠楀銆傜硸鍓嶆湡瑕佹帶鍒跺垎閲忋€?,bpAdvice:'鍝堝瘑鐡滈珮閽句綆閽狅紝鏈夊埄灏夸綔鐢紝瀵硅鍘嬫湁涓€瀹氬ソ澶勩€?,tip:'鍝堝瘑鐡滆櫧鐒跺緢鐢滐紝涓昏鍚灉绯栵紝GI鍊煎弽鑰屾瘮瑗跨摐浣庛€?},
+  // 更多水果
+  {name:'菠萝',cat:'水果',gi:59,giLevel:'mid',calPer100:41,serve:'2-3小块（约80g）',bgAdvice:'菠萝GI值中等，含糖量不算高。但有些人吃菠萝后血糖反应较大，建议少量尝试。',bpAdvice:'菠萝含菠萝蛋白酶和钾，有助消化和降压。',tip:'不要空腹吃菠萝，酸度较高可能刺激胃。'},
+  {name:'木瓜',cat:'水果',gi:58,giLevel:'mid',calPer100:39,serve:'半个小木瓜（约150g）',bgAdvice:'木瓜GI值中等偏低，含木瓜蛋白酶有助消化。糖前期可以适量吃。',bpAdvice:'木瓜含钾丰富，维生素C含量高，对心血管友好。',tip:'选不太熟的木瓜，GI值会更低一些。'},
+  {name:'榴莲',cat:'水果',gi:49,giLevel:'low',calPer100:147,serve:'1-2瓣（约50-80g）',bgAdvice:'榴莲虽然GI值不算高，但热量和碳水密度很高，糖前期要严格控制量，一次不超过2小瓣。',bpAdvice:'榴莲含钾和多种维生素，但热量太高不宜多吃。',tip:'榴莲是"水果之王"也是"热量之王"，糖前期浅尝辄止。'},
+  {name:'柠檬',cat:'水果',gi:20,giLevel:'low',calPer100:37,serve:'1-2片泡水（约10g）',bgAdvice:'柠檬GI值极低，柠檬水几乎不含糖，是糖前期安全的饮品选择。',bpAdvice:'柠檬富含维生素C和柠檬酸，有助于血管弹性。',tip:'柠檬水不要加糖或蜂蜜，纯柠檬片泡水最好。'},
+  {name:'荔枝',cat:'水果',gi:57,giLevel:'mid',calPer100:71,serve:'5-8颗（约80g）',bgAdvice:'荔枝GI值中等，但糖分含量较高（以果糖为主）。糖前期要严格控制，一次不超过8颗。',bpAdvice:'荔枝含钾，但糖分高容易导致血糖波动。',tip:'荔枝含糖量高，不要空腹吃，也不要一次吃太多。'},
+  {name:'枇杷',cat:'水果',gi:35,giLevel:'low',calPer100:41,serve:'5-6颗（约100g）',bgAdvice:'枇杷GI值低，含糖量适中，是糖前期比较安全的时令水果。',bpAdvice:'枇杷含钾和β-胡萝卜素，有益健康。',tip:'季节性短，趁新鲜适量吃。'},
+  {name:'哈密瓜',cat:'水果',gi:65,giLevel:'mid',calPer100:34,serve:'一小块（约100g）',bgAdvice:'哈密瓜GI值中等偏高，但水分大总碳水不算多。糖前期要控制分量。',bpAdvice:'哈密瓜高钾低钠，有利尿作用，对血压有一定好处。',tip:'哈密瓜虽然很甜，主要含果糖，GI值反而比西瓜低。'},
 
-  // 鏇村鑲夌被娴烽矞
-  {name:'浜旇姳鑲?,cat:'鑲夌被',gi:0,giLevel:'low',calPer100:395,serve:'涓嶅缓璁硸鍓嶆湡椋熺敤',bgAdvice:'浜旇姳鑲夎剛鑲惈閲忔瀬楂橈紙绾?7%锛夛紝铏界劧GI鍊间负0涓嶅奖鍝嶈绯栵紝浣嗛珮鑴傝偑浼氬鑷磋儼宀涚礌鎶垫姉澧炲姞锛岄棿鎺ュ崌楂樿绯栥€?,bpAdvice:'浜旇姳鑲夌殑楗卞拰鑴傝偑浼氬崌楂樿儐鍥洪唶銆佸姞閲嶈绠¤礋鎷咃紝琛€鍘嬮珮鐨勪汉涓嶅缓璁悆銆?,tip:'鎯冲悆鐚倝鐨勮瘽閫夌尓閲岃剨鎴栫尓鑵胯倝锛岃剛鑲皯寰堝銆?},
-  {name:'甯﹂奔',cat:'鑲夌被',gi:0,giLevel:'low',calPer100:127,serve:'100-150g锛堢害1-2娈碉級',bgAdvice:'甯﹂奔涓嶅惈纰虫按锛孏I鍊间负0銆傚瘜鍚紭璐ㄨ泲鐧藉拰涓嶉ケ鍜岃剛鑲吀锛屾槸绯栧墠鏈熸帹鑽愮殑娴烽奔銆?,bpAdvice:'甯﹂奔鐨凮mega-3鏈夊姪浜庝繚鎶ゅ績琛€绠°€侀檷浣庣敇娌逛笁閰€?,tip:'鎺ㄨ崘娓呰捀甯﹂奔锛岄伩鍏嶇孩鐑э紙鍔犵硸锛夋垨娌圭偢銆?},
-  {name:'楸块奔',cat:'鑲夌被',gi:0,giLevel:'low',calPer100:75,serve:'80-100g锛堢害涓€灏忕洏锛?,bgAdvice:'楸块奔楂樿泲鐧戒綆鑴傝偑锛孏I鍊间负0锛屽琛€绯栨棤褰卞搷銆備絾鑳嗗浐閱囧惈閲忓亸楂橈紝閫傞噺椋熺敤鍗冲彲銆?,bpAdvice:'楸块奔鐨勮儐鍥洪唶涓昏闆嗕腑鍦ㄥ唴鑴忓拰杞锛屽悆鑲夐儴鍒嗗奖鍝嶄笉澶с€備絾閾佹澘楸块奔閰辨枡鐩愬垎楂橈紝娉ㄦ剰鎺х洂銆?,tip:'鐧界伡楸块奔铇稿皯璁搁叡娌规渶鍋ュ悍銆?},
-  {name:'涓夋枃楸?,cat:'鑲夌被',gi:0,giLevel:'low',calPer100:208,serve:'80-100g锛堢害涓€灏忓潡锛?,bgAdvice:'涓夋枃楸间笉鍚⒊姘达紝瀵屽惈Omega-3鑴傝偑閰革紙EPA/DHA锛夛紝鏈夊姪浜庢敼鍠勮儼宀涚礌鏁忔劅鎬э紝鏄硸鍓嶆湡鏋佸ソ鐨勮泲鐧芥潵婧愩€?,bpAdvice:'涓夋枃楸肩殑Omega-3鑳介檷浣庣値鐥囥€佷繚鎶よ绠°€侀檷浣庤鍘嬶紝鏄?鎶ゅ績椋熺墿"棣栭€夈€?,tip:'鎺ㄨ崘鍒鸿韩锛堟柊椴滃畨鍏ㄧ殑鍓嶆彁涓嬶級鎴栨竻钂革紝閬垮厤娌圭厧銆?},
-  {name:'铔よ湂',cat:'鑲夌被',gi:0,giLevel:'low',calPer100:56,serve:'100-150g锛堝甫澹崇害鍗婃枻锛?,bgAdvice:'铔よ湂楂樿泲鐧戒綆鑴傦紝GI鍊间负0锛屼笉褰卞搷琛€绯栥€備絾璐濆３绫绘捣椴滃槍鍛よ緝楂橈紝鐥涢鎮ｈ€呮敞鎰忋€?,bpAdvice:'铔よ湂鍚攲鍜岀墰纾洪吀锛屾湁鍔╄绠″仴搴枫€備絾閽犲惈閲忚緝楂橈紝鐑归オ鏃跺皯鍔犵洂銆?,tip:'娓呰捀鎴栧仛姹ゆ渶椴滅編锛屼笉鐢ㄥお澶氳皟鍛炽€?},
-  {name:'鐚倽',cat:'鑲夌被',gi:0,giLevel:'low',calPer100:129,serve:'30-50g锛堢害2-3鐗囷級锛屾瘡鍛ㄤ笉瓒呰繃1娆?,bgAdvice:'鐚倽涓嶅惈纰虫按锛孏I鍊间负0銆傚瘜鍚搧鍜岀淮鐢熺礌A锛屼絾鑳嗗浐閱囬珮锛岀硸鍓嶆湡瑕佷弗鏍兼帶鍒堕鐜囧拰鍒嗛噺銆?,bpAdvice:'鐚倽鑳嗗浐閱囧惈閲忓緢楂橈紙绾?00mg/100g锛夛紝琛€鍘嬪拰琛€鑴傞珮鐨勪汉瑕佹洿鍔犳敞鎰忋€?,tip:'璐鐨勪汉鍙€傞噺鍚冪尓鑲濊ˉ閾侊紝浣嗕笉瑕佹瘡鍛ㄩ兘鍚冦€?},
+  // 更多肉类海鲜
+  {name:'五花肉',cat:'肉类',gi:0,giLevel:'low',calPer100:395,serve:'不建议糖前期食用',bgAdvice:'五花肉脂肪含量极高（约37%），虽然GI值为0不影响血糖，但高脂肪会导致胰岛素抵抗增加，间接升高血糖。',bpAdvice:'五花肉的饱和脂肪会升高胆固醇、加重血管负担，血压高的人不建议吃。',tip:'想吃猪肉的话选猪里脊或猪腿肉，脂肪少很多。'},
+  {name:'带鱼',cat:'肉类',gi:0,giLevel:'low',calPer100:127,serve:'100-150g（约1-2段）',bgAdvice:'带鱼不含碳水，GI值为0。富含优质蛋白和不饱和脂肪酸，是糖前期推荐的海鱼。',bpAdvice:'带鱼的Omega-3有助于保护心血管、降低甘油三酯。',tip:'推荐清蒸带鱼，避免红烧（加糖）或油炸。'},
+  {name:'鱿鱼',cat:'肉类',gi:0,giLevel:'low',calPer100:75,serve:'80-100g（约一小盘）',bgAdvice:'鱿鱼高蛋白低脂肪，GI值为0，对血糖无影响。但胆固醇含量偏高，适量食用即可。',bpAdvice:'鱿鱼的胆固醇主要集中在内脏和软骨，吃肉部分影响不大。但铁板鱿鱼酱料盐分高，注意控盐。',tip:'白灼鱿鱼蘸少许酱油最健康。'},
+  {name:'三文鱼',cat:'肉类',gi:0,giLevel:'low',calPer100:208,serve:'80-100g（约一小块）',bgAdvice:'三文鱼不含碳水，富含Omega-3脂肪酸（EPA/DHA），有助于改善胰岛素敏感性，是糖前期极好的蛋白来源。',bpAdvice:'三文鱼的Omega-3能降低炎症、保护血管、降低血压，是"护心食物"首选。',tip:'推荐刺身（新鲜安全的前提下）或清蒸，避免油煎。'},
+  {name:'蛤蜊',cat:'肉类',gi:0,giLevel:'low',calPer100:56,serve:'100-150g（带壳约半斤）',bgAdvice:'蛤蜊高蛋白低脂，GI值为0，不影响血糖。但贝壳类海鲜嘌呤较高，痛风患者注意。',bpAdvice:'蛤蜊含锌和牛磺酸，有助血管健康。但钠含量较高，烹饪时少加盐。',tip:'清蒸或做汤最鲜美，不用太多调味。'},
+  {name:'猪肝',cat:'肉类',gi:0,giLevel:'low',calPer100:129,serve:'30-50g（约2-3片），每周不超过1次',bgAdvice:'猪肝不含碳水，GI值为0。富含铁和维生素A，但胆固醇高，糖前期要严格控制频率和分量。',bpAdvice:'猪肝胆固醇含量很高（约300mg/100g），血压和血脂高的人要更加注意。',tip:'贫血的人可适量吃猪肝补铁，但不要每周都吃。'},
 
-  // 鏇村涓婚
-  {name:'楗哄瓙',cat:'涓婚',gi:45,giLevel:'low',calPer100:210,serve:'6-8涓紙绾?50g锛?,bgAdvice:'楗哄瓙鐨凣I鍊煎彇鍐充簬棣呮枡鍜岀毊鐨勫帤搴︺€傝彍鑲夐姣旂函鑲夐鍗囩硸鎱紝钖勭毊姣斿帤鐨ソ銆傛€荤殑鏉ヨ楗哄瓙鏄硸鍓嶆湡姣旇緝鍙嬪ソ鐨勪富椋熷舰寮忋€?,bpAdvice:'楗哄瓙棣呯殑鐩愬垎瑕佹敞鎰忥紝灏戣樃閰辨补鍜岄唻浠ュ鐨勮樃鏂欍€?,tip:'鑷繁鍖呴ズ瀛愬彲浠ュ鏀捐敩鑿滃皯鏀捐倝锛岀毊鎿€钖勪竴鐐广€?},
-  {name:'棣勯エ',cat:'涓婚',gi:45,giLevel:'low',calPer100:180,serve:'8-10涓紙绾?50g锛?,bgAdvice:'棣勯エ鍜岄ズ瀛愮被浼硷紝GI鍊煎亸浣庛€備絾棣勯エ姹ら€氬父鍚洂鍜屽懗绮捐緝澶氾紝灏戝枬姹ゆ洿濂姐€?,bpAdvice:'娉ㄦ剰棣勯エ姹ら噷鐨勭洂鍒嗗拰鍛崇簿锛屽琛€鍘嬩笉鍙嬪ソ銆?,tip:'鍚冮楗ㄦ椂鎼厤涓€鐩橀潚鑿滐紝钀ュ吇鏇村潎琛°€?},
-  {name:'鍖呭瓙',cat:'涓婚',gi:65,giLevel:'mid',calPer100:225,serve:'1涓腑绛夊ぇ灏忥紙绾?0g锛?,bgAdvice:'鑲夊寘瀛怗I鍊间腑绛夛紝浣嗛潰鐨槸绮剧櫧闈紝鑲夐鍙兘鍚緝澶氳偉鑲夈€傜礌鍖呭瓙锛堣彍澶氳倝灏戯級鍗囩硸鏇存參銆?,bpAdvice:'鍖呭瓙棣呯殑璋冨懗鏂欑洂鍒嗕笉浣庯紝娉ㄦ剰鎺у埗閲忋€?,tip:'閫夌礌棣呭寘瀛愭垨钂搁ズ锛屾瘮鑲夊寘瀛愭洿鍋ュ悍銆?},
-  {name:'鐑чゼ',cat:'涓婚',gi:72,giLevel:'high',calPer100:320,serve:'鍗婁釜锛堢害40g锛?,bgAdvice:'鐑чゼGI鍊奸珮锛屽挨鍏舵槸娌归叆鐑чゼ锛屾补鑴?绮鹃潰鍙岄噸璐熸媴銆傜硸鍓嶆湡灏介噺灏戝悆銆?,bpAdvice:'鐑чゼ鍒朵綔涓細鍔犱笉灏戞补鍜岀洂锛屽琛€绯栬鍘嬮兘涓嶅弸濂姐€?,tip:'鍋跺皵鍚冩棤娌圭殑鐧藉悏棣嶆垨鍙戦潰楗间細姣旀补閰ョ儳楗煎ソ寰堝銆?},
-  {name:'绮藉瓙',cat:'涓婚',gi:80,giLevel:'high',calPer100:180,serve:'鍗婁釜锛堢害50g锛?,bgAdvice:'绯背绮藉瓙鐨凣I鍊煎緢楂橈紝绯背姣斿ぇ绫虫洿瀹规槗娑堝寲鍚告敹锛屽崌绯栧揩閫熴€傜硸鍓嶆湡寤鸿娴呭皾杈勬銆?,bpAdvice:'鑲夌步鍚緝澶氳偉鑲夊拰鐩愬垎锛岀孩鏋ｇ步鍔犱簡绯栵紝閮藉琛€鍘嬪拰琛€绯栦笉鍒┿€?,tip:'绔崍鑺傚悆涓€涓皬鐨勮В瑙ｉ灏卞ソ锛屾惌閰嶅ぇ閲忚敩鑿滀竴璧峰悆銆?},
-  {name:'鎰忓ぇ鍒╅潰',cat:'涓婚',gi:44,giLevel:'low',calPer100:131,serve:'50-75g锛堝共閲嶏級',bgAdvice:'鎰忓ぇ鍒╅潰鐨凣I鍊兼瘮涓紡闈㈡潯浣庡緢澶氾紝鍥犱负鎰忛潰鐢ㄧ殑鏉滃叞灏忛害铔嬬櫧璐ㄥ惈閲忛珮銆佺粨鏋勭揣瀵嗭紝娑堝寲鍚告敹鎱€傛槸绯栧墠鏈熶笉閿欑殑闈㈤閫夋嫨銆?,bpAdvice:'鎰忛潰鏈韩瀵硅鍘嬪弸濂斤紝浣嗛叡鏂欙紙灏ゅ叾濂舵补閰憋級鍚洂鍜岃剛鑲锛屽缓璁敤鐣寗閰便€?,tip:'閫夌暘鑼勮倝閰辨剰闈紝涓嶈閫夊ザ娌瑰煿鏍归叡銆?},
+  // 更多主食
+  {name:'饺子',cat:'主食',gi:45,giLevel:'low',calPer100:210,serve:'6-8个（约150g）',bgAdvice:'饺子的GI值取决于馅料和皮的厚度。菜肉馅比纯肉馅升糖慢，薄皮比厚皮好。总的来说饺子是糖前期比较友好的主食形式。',bpAdvice:'饺子馅的盐分要注意，少蘸酱油和醋以外的蘸料。',tip:'自己包饺子可以多放蔬菜少放肉，皮擀薄一点。'},
+  {name:'馄饨',cat:'主食',gi:45,giLevel:'low',calPer100:180,serve:'8-10个（约150g）',bgAdvice:'馄饨和饺子类似，GI值偏低。但馄饨汤通常含盐和味精较多，少喝汤更好。',bpAdvice:'注意馄饨汤里的盐分和味精，对血压不友好。',tip:'吃馄饨时搭配一盘青菜，营养更均衡。'},
+  {name:'包子',cat:'主食',gi:65,giLevel:'mid',calPer100:225,serve:'1个中等大小（约80g）',bgAdvice:'肉包子GI值中等，但面皮是精白面，肉馅可能含较多肥肉。素包子（菜多肉少）升糖更慢。',bpAdvice:'包子馅的调味料盐分不低，注意控制量。',tip:'选素馅包子或蒸饺，比肉包子更健康。'},
+  {name:'烧饼',cat:'主食',gi:72,giLevel:'high',calPer100:320,serve:'半个（约40g）',bgAdvice:'烧饼GI值高，尤其是油酥烧饼，油脂+精面双重负担。糖前期尽量少吃。',bpAdvice:'烧饼制作中会加不少油和盐，对血糖血压都不友好。',tip:'偶尔吃无油的白吉馍或发面饼会比油酥烧饼好很多。'},
+  {name:'粽子',cat:'主食',gi:80,giLevel:'high',calPer100:180,serve:'半个（约50g）',bgAdvice:'糯米粽子的GI值很高，糯米比大米更容易消化吸收，升糖快速。糖前期建议浅尝辄止。',bpAdvice:'肉粽含较多肥肉和盐分，红枣粽加了糖，都对血压和血糖不利。',tip:'端午节吃一个小的解解馋就好，搭配大量蔬菜一起吃。'},
+  {name:'意大利面',cat:'主食',gi:44,giLevel:'low',calPer100:131,serve:'50-75g（干重）',bgAdvice:'意大利面的GI值比中式面条低很多，因为意面用的杜兰小麦蛋白质含量高、结构紧密，消化吸收慢。是糖前期不错的面食选择。',bpAdvice:'意面本身对血压友好，但酱料（尤其奶油酱）含盐和脂肪多，建议用番茄酱。',tip:'选番茄肉酱意面，不要选奶油培根酱。'},
 
-  // 鏇村璞嗗埗鍝?  {name:'鑵愮',cat:'璞嗙被',gi:20,giLevel:'low',calPer100:459,serve:'20-30g锛堝共閲嶏紝娉″彂鍚庣害60g锛?,bgAdvice:'鑵愮鏄眴娴嗙叜娌稿悗琛ㄩ潰鐨勮杽鑶滃埗鎴愶紝铔嬬櫧鍚噺寰堥珮锛堢害45%锛夛紝GI鍊兼瀬浣庛€備絾鐑噺瀵嗗害楂橈紝娉ㄦ剰鍒嗛噺銆?,bpAdvice:'鑵愮楂樿泲鐧戒綆閽狅紝鏄紭璐ㄦ鐗╄泲鐧姐€備絾娌圭偢鑵愮鍗风儹閲忕炕鍊嶏紝瑕侀伩鍏嶃€?,tip:'鍑夋媽鑵愮鎴栬厫绔圭儳鑲夐兘鏄笉閿欑殑鎼厤銆?},
-  {name:'姣涜眴',cat:'璞嗙被',gi:15,giLevel:'low',calPer100:131,serve:'涓€灏忕锛堢害100g锛屽甫澹崇害200g锛?,bgAdvice:'姣涜眴鏄湭鎴愮啛鐨勯粍璞嗭紝GI鍊兼瀬浣庯紝瀵屽惈妞嶇墿铔嬬櫧鍜岃喅椋熺氦缁淬€傛槸绯栧墠鏈熷緢濂界殑闆堕鎴栦笅閰掕彍锛堝綋鐒朵笉瑕佸枬閰掞級銆?,bpAdvice:'姣涜眴楂橀捑浣庨挔锛屽瘜鍚ぇ璞嗗紓榛勯叜锛屽琛€鍘嬪弸濂姐€?,tip:'鐩愭按鐓瘺璞嗗嵆鍙紝涓嶈鍔犲お澶氱洂銆?},
-  {name:'璞嗙毊',cat:'璞嗙被',gi:20,giLevel:'low',calPer100:409,serve:'30-50g锛堢害鍗婂紶锛?,bgAdvice:'璞嗙毊GI鍊兼瀬浣庯紝铔嬬櫧璐ㄥ惈閲忛珮銆傜儹閲忚櫧楂樹絾鎺у埗濂藉垎閲忓嵆鍙紝瀵硅绯栧嚑涔庢棤褰卞搷銆?,bpAdvice:'璞嗙毊鍔犲伐杩囩▼涓彲鑳藉姞娌瑰拰鐩愶紝鑷繁鍦ㄥ鍑夋媽鍙互鎺у埗銆?,tip:'鍑夋媽璞嗙毊涓濇槸澶忓ぉ娓呯埥鐨勫ソ鍑夎彍銆?},
-  {name:'铓曡眴',cat:'璞嗙被',gi:40,giLevel:'low',calPer100:335,serve:'20-30g锛堝共閲嶏級',bgAdvice:'铓曡眴GI鍊艰緝浣庯紝瀵屽惈妞嶇墿铔嬬櫧銆備絾铓曡眴鐥呮偅鑰咃紙涓€绉嶉仐浼犵梾锛夌粷瀵逛笉鑳藉悆锛屾櫘閫氫汉鍚冧篃瑕佹敞鎰忛噺銆?,bpAdvice:'铓曡眴鍚乏鏃嬪宸达紙涓€绉嶅ぉ鐒跺寲鍚堢墿锛夛紝瀵硅鍘嬫湁涓€瀹氬奖鍝嶏紝灏戦噺鍚冩病鍏崇郴銆?,tip:'娌圭偢铓曡眴锛堝叞鑺辫眴锛夌儹閲忕炕鍑犲€嶏紝涓嶆帹鑽愩€?},
+  // 更多豆制品
+  {name:'腐竹',cat:'豆类',gi:20,giLevel:'low',calPer100:459,serve:'20-30g（干重，泡发后约60g）',bgAdvice:'腐竹是豆浆煮沸后表面的薄膜制成，蛋白含量很高（约45%），GI值极低。但热量密度高，注意分量。',bpAdvice:'腐竹高蛋白低钠，是优质植物蛋白。但油炸腐竹卷热量翻倍，要避免。',tip:'凉拌腐竹或腐竹烧肉都是不错的搭配。'},
+  {name:'毛豆',cat:'豆类',gi:15,giLevel:'low',calPer100:131,serve:'一小碗（约100g，带壳约200g）',bgAdvice:'毛豆是未成熟的黄豆，GI值极低，富含植物蛋白和膳食纤维。是糖前期很好的零食或下酒菜（当然不要喝酒）。',bpAdvice:'毛豆高钾低钠，富含大豆异黄酮，对血压友好。',tip:'盐水煮毛豆即可，不要加太多盐。'},
+  {name:'豆皮',cat:'豆类',gi:20,giLevel:'low',calPer100:409,serve:'30-50g（约半张）',bgAdvice:'豆皮GI值极低，蛋白质含量高。热量虽高但控制好分量即可，对血糖几乎无影响。',bpAdvice:'豆皮加工过程中可能加油和盐，自己在家凉拌可以控制。',tip:'凉拌豆皮丝是夏天清爽的好凉菜。'},
+  {name:'蚕豆',cat:'豆类',gi:40,giLevel:'low',calPer100:335,serve:'20-30g（干重）',bgAdvice:'蚕豆GI值较低，富含植物蛋白。但蚕豆病患者（一种遗传病）绝对不能吃，普通人吃也要注意量。',bpAdvice:'蚕豆含左旋多巴（一种天然化合物），对血压有一定影响，少量吃没关系。',tip:'油炸蚕豆（兰花豆）热量翻几倍，不推荐。'},
 
-  // 鏇村闆堕楗搧
-  {name:'鍟ら厭',cat:'闆堕楗枡',gi:90,giLevel:'high',calPer100:32,serve:'涓嶅缓璁ギ鐢?,bgAdvice:'鍟ら厭琚О涓?娑蹭綋闈㈠寘"锛孏I鍊煎緢楂橈紝浼氬揩閫熷崌楂樿绯栥€傜┖鑵瑰枬鍟ら厭灏ゅ叾鍗遍櫓锛堝彲鑳藉鑷翠綆琛€绯栧悗鍙堝弽寮癸級銆傜硸鍓嶆湡搴旈伩鍏嶃€?,bpAdvice:'鍟ら厭鍚厭绮惧拰澶ч噺鐑噺锛屼細瀵艰嚧琛€鍘嬪崌楂樺拰浣撻噸澧炲姞銆?,tip:'绀句氦鍦哄悎鍙互閫夋嫨鏃犵硸鑻忔墦姘翠唬鏇垮暏閰掋€?},
-  {name:'鐧介厭',cat:'闆堕楗枡',gi:0,giLevel:'low',calPer100:298,serve:'涓嶅缓璁ギ鐢?,bgAdvice:'铏界劧鐧介厭GI鍊间负0锛屼絾閰掔簿浼氬共鎵拌倽鑴忕殑绯栦唬璋紝鍙兘瀵艰嚧寤惰繜鎬т綆琛€绯栵紙鍠濋厭鍚庡嚑灏忔椂琛€绯栭闄嶏級銆傜硸鍓嶆湡涓嶅缓璁ギ鐢ㄣ€?,bpAdvice:'閰掔簿浼氬埡婵€琛€绠℃敹缂┿€佸崌楂樿鍘嬨€傞暱鏈熼ギ閰掓槸楂樿鍘嬬殑閲嶈璇卞洜銆?,tip:'濡傛灉瀹炲湪鎺ㄤ笉鎺夛紝鐢峰＋涓€澶╀笉瓒呰繃25g閰掔簿锛堢害1涓ょ櫧閰掞級锛屼笖蹇呴』閰嶈彍銆?},
-  {name:'鏋告潪',cat:'闆堕楗枡',gi:35,giLevel:'low',calPer100:349,serve:'10-15绮掞紙绾?g锛夋场姘?,bgAdvice:'鏋告潪GI鍊煎亸浣庯紝鍚湁鏋告潪澶氱硸锛堜竴绉嶅ぉ鐒舵椿鎬ф垚鍒嗭級锛岀爺绌跺彂鐜板彲鑳藉琛€绯栬皟鑺傛湁鐩娿€備絾鍚ぉ鐒剁硸鍒嗭紝娉℃按灏戦噺鍗冲彲銆?,bpAdvice:'鏋告潪涓殑鑺︿竵鍜屾灨鏉炲绯栨湁鍔╀簬淇濇姢琛€绠★紝浼犵粺鍖诲璁や负鏈夌泭鑲濊偩銆?,tip:'娉℃按鍠濆嚑绮掑嵆鍙紝涓嶈鍍忓悆钁¤悇骞查偅鏍峰ぇ閲忓悆銆?},
-  {name:'鏃犵硸鑻忔墦姘?,cat:'闆堕楗枡',gi:0,giLevel:'low',calPer100:0,serve:'闅忔剰楗敤锛堟瘡澶╀笉瓒呰繃1L锛?,bgAdvice:'鏃犵硸鑻忔墦姘翠笉鍚硸銆佷笉鍚⒊姘达紝GI鍊间负0锛屽琛€绯栧畬鍏ㄦ棤褰卞搷銆傛槸绯栧墠鏈熸浛浠ｇ敎楗枡鐨勫ソ閫夋嫨銆?,bpAdvice:'鑻忔墦姘村惈閽犻噺涓嶉珮锛屽琛€鍘嬪熀鏈棤褰卞搷銆備絾鍚７閰哥殑鑻忔墦姘翠笉瀹滆繃閲忋€?,tip:'鍙互鍔犱竴鐗囨煚妾垨钖勮嵎鍙跺鍔犻鍛炽€?},
-  {name:'澶ф灒',cat:'闆堕楗枡',gi:50,giLevel:'low',calPer100:276,serve:'2-3棰楋紙绾?0g锛?,bgAdvice:'椴滄灒GI鍊间腑绛夊亸浣庯紝浣嗗惈绯栭噺楂橈紙灏ゅ叾鏄共鏋ｏ紝鍚硸閲忓彲杈?0%浠ヤ笂锛夈€傜硸鍓嶆湡鍚冧竴涓ら鍙互锛屼絾鍒綋闆堕澶ч噺鍚冦€?,bpAdvice:'澶ф灒瀵屽惈缁寸敓绱燙鍜岄搧锛屽姘旇鏈夌泭銆備絾绯栧垎澶珮涓嶅疁澶氬悆銆?,tip:'娉℃按鎴栫叜绮ユ斁涓や笁棰楄皟鍛冲嵆鍙紝涓嶈鐩存帴鍚冨共鏋ｅ綋闆堕銆?},
-  {name:'灞辨',cat:'闆堕楗枡',gi:40,giLevel:'low',calPer100:102,serve:'3-5棰楅矞灞辨锛堢害30g锛?,bgAdvice:'灞辨GI鍊艰緝浣庯紝鍚北妤傞吀鍜屾灉鑳讹紝鏈夊姪浜庢秷鍖栧拰琛€鑴傝皟鑺傘€備絾灞辨鍒跺搧锛堝北妤傜墖銆佹灉涓圭毊锛夊姞浜嗗緢澶氱硸锛岃閬垮厤銆?,bpAdvice:'灞辨涓殑榛勯叜绫荤墿璐ㄦ湁杞诲害闄嶅帇鍜岄檷鑴備綔鐢ㄣ€?,tip:'鍚冮矞灞辨鎴栧北妤傚共娉℃按锛屼笉瑕佸悆鍔犵硸鐨勫北妤傞浂椋熴€?},
+  // 更多零食饮品
+  {name:'啤酒',cat:'零食饮料',gi:90,giLevel:'high',calPer100:32,serve:'不建议饮用',bgAdvice:'啤酒被称为"液体面包"，GI值很高，会快速升高血糖。空腹喝啤酒尤其危险（可能导致低血糖后又反弹）。糖前期应避免。',bpAdvice:'啤酒含酒精和大量热量，会导致血压升高和体重增加。',tip:'社交场合可以选择无糖苏打水代替啤酒。'},
+  {name:'白酒',cat:'零食饮料',gi:0,giLevel:'low',calPer100:298,serve:'不建议饮用',bgAdvice:'虽然白酒GI值为0，但酒精会干扰肝脏的糖代谢，可能导致延迟性低血糖（喝酒后几小时血糖骤降）。糖前期不建议饮用。',bpAdvice:'酒精会刺激血管收缩、升高血压。长期饮酒是高血压的重要诱因。',tip:'如果实在推不掉，男士一天不超过25g酒精（约1两白酒），且必须配菜。'},
+  {name:'枸杞',cat:'零食饮料',gi:35,giLevel:'low',calPer100:349,serve:'10-15粒（约5g）泡水',bgAdvice:'枸杞GI值偏低，含有枸杞多糖（一种天然活性成分），研究发现可能对血糖调节有益。但含天然糖分，泡水少量即可。',bpAdvice:'枸杞中的芦丁和枸杞多糖有助于保护血管，传统医学认为有益肝肾。',tip:'泡水喝几粒即可，不要像吃葡萄干那样大量吃。'},
+  {name:'无糖苏打水',cat:'零食饮料',gi:0,giLevel:'low',calPer100:0,serve:'随意饮用（每天不超过1L）',bgAdvice:'无糖苏打水不含糖、不含碳水，GI值为0，对血糖完全无影响。是糖前期替代甜饮料的好选择。',bpAdvice:'苏打水含钠量不高，对血压基本无影响。但含磷酸的苏打水不宜过量。',tip:'可以加一片柠檬或薄荷叶增加风味。'},
+  {name:'大枣',cat:'零食饮料',gi:50,giLevel:'low',calPer100:276,serve:'2-3颗（约20g）',bgAdvice:'鲜枣GI值中等偏低，但含糖量高（尤其是干枣，含糖量可达60%以上）。糖前期吃一两颗可以，但别当零食大量吃。',bpAdvice:'大枣富含维生素C和铁，对气血有益。但糖分太高不宜多吃。',tip:'泡水或煮粥放两三颗调味即可，不要直接吃干枣当零食。'},
+  {name:'山楂',cat:'零食饮料',gi:40,giLevel:'low',calPer100:102,serve:'3-5颗鲜山楂（约30g）',bgAdvice:'山楂GI值较低，含山楂酸和果胶，有助于消化和血脂调节。但山楂制品（山楂片、果丹皮）加了很多糖，要避免。',bpAdvice:'山楂中的黄酮类物质有轻度降压和降脂作用。',tip:'吃鲜山楂或山楂干泡水，不要吃加糖的山楂零食。'},
 
-  // ===== 瀹跺父鑿?=====
-  {name:'鐣寗鐐掕泲',cat:'瀹跺父鑿?,gi:25,giLevel:'low',calPer100:85,serve:'涓€浠斤紙绾?00g锛?,bgAdvice:'鐣寗鐐掕泲鏄粡鍏稿甯歌彍銆傜暘鑼凣I鍊间綆锛岄浮铔嬭泲鐧借川涓板瘜锛屾暣浣撳崌绯栬礋鑽峰緢浣庛€備絾濡傛灉鍔犵硸锛堝緢澶氬搴仛娉曚細鍔犵硸鎻愰矞锛夛紝GI褰卞搷浼氬鍔狅紒',bpAdvice:'杩欓亾鑿滃琛€鍘嬪弸濂斤紝鐣寗鍚捑锛岄浮铔嬭泲鐧借川涓板瘜銆備絾娉ㄦ剰涓嶈鏀惧お澶氭补鍜岀硸銆?,tip:'绯栧墠鏈熷仛鐣寗鐐掕泲涓嶈鍔犵硸锛岀敤鐔熼€忕殑鐣寗鏈韩鐨勭敎鍛冲氨澶熶簡銆?},
-  {name:'绾㈢儳鑲?,cat:'瀹跺父鑿?,gi:20,giLevel:'low',calPer100:305,serve:'2-3鍧楃槮鑲夛紙绾?0g锛夛紝鍋跺皵瑙ｉ',bgAdvice:'绾㈢儳鑲夎櫧鐒禛I鍊间綆锛屼絾楂樿剛鑲紙灏ゅ叾楗卞拰鑴傝偑锛変細鍔犻噸鑳板矝绱犳姷鎶椼€備笖绾㈢儳鍋氭硶闇€瑕佸ぇ閲忕硸锛堢倰绯栬壊+璋冨懗锛夛紝闂存帴澧炲姞纰虫按鎽勫叆銆?,bpAdvice:'绾㈢儳鑲変娇鐢ㄤ簲鑺辫倝锛岄ケ鍜岃剛鑲拰閽犲惈閲忛兘楂橈紝涓嶅埄浜庤鍘嬫帶鍒躲€?,tip:'鎯冲悆绾㈢儳鍙ｆ劅鍙互璇曡瘯绾㈢儳楦¤吙锛堝幓鐨級锛岃剛鑲皯寰堝銆?},
-  {name:'娓呰捀楸?,cat:'瀹跺父鑿?,gi:0,giLevel:'low',calPer100:95,serve:'涓€鏉′腑绛夐奔锛堢害300g锛夛紝2-3浜轰唤',bgAdvice:'娓呰捀楸煎嚑涔庝笉鍚⒊姘达紝GI鍊间负0銆傛槸鏈€鍋ュ悍鐨勯奔绫荤児楗柟寮忥紝楸艰倝铔嬬櫧浼樿川锛屽琛€绯栨棤褰卞搷銆?,bpAdvice:'娓呰捀鍋氭硶娌瑰皯鐩愬皯锛堜富瑕侀潬钂搁奔璞夋补锛夛紝鏄珮琛€鍘嬩汉缇ょ殑棣栭€夐奔绫诲仛娉曘€?,tip:'钂搁奔鏈€鍚庢穻鐨勭儹娌硅灏戯紝涓€鍕哄嵆鍙€?},
-  {name:'楹诲﹩璞嗚厫',cat:'瀹跺父鑿?,gi:20,giLevel:'low',calPer100:110,serve:'鍗婄锛堢害100g锛?,bgAdvice:'璞嗚厫GI鍊间綆锛岄夯濠嗚眴鑵愮殑纰虫按鏉ヨ嚜灏戦噺娣€绮夊嬀鑺★紝鏁翠綋鍗囩硸褰卞搷寰堝皬銆備絾楹昏荆璋冨懗鍙兘鍒烘縺椋熸瀵艰嚧澶氬悆涓婚銆?,bpAdvice:'楹诲﹩璞嗚厫鍚緝澶氭补鍜岃眴鐡ｉ叡锛堥珮閽狅級锛岄珮琛€鍘嬩汉缇よ娉ㄦ剰銆傚彲浠ュ湪瀹跺仛鍑忔补鍑忕洂鐗堛€?,tip:'鍦ㄥ鍋氬皯鏀炬补鍜岃眴鐡ｉ叡锛屽鏀捐懕鑺辨彁棣欍€?},
-  {name:'瀹繚楦′竵',cat:'瀹跺父鑿?,gi:35,giLevel:'low',calPer100:160,serve:'涓€浠斤紙绾?50g锛?,bgAdvice:'瀹繚楦′竵涓浮鑳歌倝铔嬬櫧璐ㄤ赴瀵岋紝鑺辩敓鍚仴搴疯剛鑲€備絾浼犵粺鍋氭硶浼氬姞绯栧拰娣€绮夊嬀鑺★紝鍔犱笂鑺辩敓鐑噺楂橈紝鎬讳綋鍗囩硸褰卞搷涓嶅ぇ浣嗚娉ㄦ剰鍒嗛噺銆?,bpAdvice:'瀹繚楦′竵閰辨枡涓惈閰辨补鍜岀洂锛岃姳鐢熻儐鍥洪唶涓嶉珮浣嗙儹閲忛珮銆?,tip:'鍦ㄥ鍋氬彲浠ュ皯鏀捐姳鐢熴€佸皯娌广€佷笉鍔犵硸銆?},
-  {name:'闈掓鑲変笣',cat:'瀹跺父鑿?,gi:15,giLevel:'low',calPer100:95,serve:'涓€浠斤紙绾?50g锛?,bgAdvice:'闈掓鑲変笣鍗囩硸褰卞搷寰堝皬銆傞潚妞扜I鍊兼瀬浣庯紝鐦﹁倝涓濊泲鐧戒赴瀵屻€備絾娉ㄦ剰楗簵鍋氭硶閫氬父娌瑰銆佹穩绮夊嬀鑺″銆?,bpAdvice:'鑲変笣鍜岃皟鍛虫枡鍚挔锛屾敞鎰忔帶鐩愩€傞潚妞掑瘜鍚淮鐢熺礌C淇濇姢琛€绠°€?,tip:'鍦ㄥ鍋氱敤灏戦噺娌规粦鑲変笣锛岄潚妞掕剢鐐掍笉瑕佽繃鐏€?},
-  {name:'楸奸鑲変笣',cat:'瀹跺父鑿?,gi:40,giLevel:'low',calPer100:155,serve:'鍗婄锛堢害100g锛?,bgAdvice:'楸奸鑲変笣GI鍊间笉楂橈紝涓昏铔嬬櫧鏉ヨ嚜鑲変笣銆備絾楸奸姹佸惈绯栵紙鐧界硸+閱嬶級锛屼細澧炲姞纰虫按鍜岀儹閲忋€傚缓璁湪瀹跺仛鏃跺噺灏戞垨鍘绘帀鐧界硸銆?,bpAdvice:'楸奸姹佸惈閰辨补鍜岃眴鐡ｉ叡锛岄挔鍚噺涓嶄綆锛屾敞鎰忔帶鐩愩€?,tip:'鍦ㄥ鍋?鏃犵硸鐗?楸奸鑲変笣锛岀敤鏈ㄨ€冲拰鑳¤悵鍗滀笣澧炲姞鍙ｆ劅鍜岃惀鍏汇€?},
-  {name:'鍥為攨鑲?,cat:'瀹跺父鑿?,gi:20,giLevel:'low',calPer100:250,serve:'3-4鐗囪倝锛堢害50g锛夛紝鍋跺皵瑙ｉ',bgAdvice:'鍥為攨鑲変娇鐢ㄤ簲鑺辫倝鎴栧悗鑷€鑲夛紝鑴傝偑鍚噺楂樸€傝櫧鐒跺琛€绯栫洿鎺ュ奖鍝嶄笉澶э紝浣嗛珮鑴傝偑浼氬姞閲嶈儼宀涚礌鎶垫姉銆?,bpAdvice:'鍥為攨鑲夋补澶с€佽眴鐡ｉ叡鍜革紝瀵硅鍘嬫帶鍒朵笉鍒┿€傚睘浜?鍋跺皵鍚冧竴娆″彲浠?鐨勮彍銆?,tip:'鐢ㄧ槮鑲変唬鏇夸簲鑺辫倝鍋氬洖閿呰倝锛岃挏鑻楀鏀撅紝娌瑰拰璞嗙摚閰卞皯鏀俱€?},
-  {name:'姘寸叜楸?,cat:'瀹跺父鑿?,gi:15,giLevel:'low',calPer100:135,serve:'涓€灏忕锛堢害150g锛?,bgAdvice:'姘寸叜楸艰泲鐧藉惈閲忛珮锛岄奔鑲夊琛€绯栨棤褰卞搷銆備絾姘寸叜楸煎叾瀹炴槸鐢ㄥぇ閲忕儹娌规祰鐨勶紝娌硅剛鍚噺寰堥珮锛屼細闂存帴褰卞搷琛€绯栥€?,bpAdvice:'姘寸叜楸兼渶鍚庢祰鐨勯偅灞傛补鍚ぇ閲忕儹閲忓拰閽狅紙鏉ヨ嚜姹ゅ簳锛夛紝瀵硅鍘嬩笉鍙嬪ソ銆?,tip:'鍦ㄥ鍋?杞荤増"姘寸叜楸硷紝灏戞补灏戠洂锛屽鏀捐眴鑺藉拰闈掕彍鍨簳銆?},
-  {name:'骞茬吀璞嗚',cat:'瀹跺父鑿?,gi:30,giLevel:'low',calPer100:110,serve:'涓€灏忕洏锛堢害100g锛?,bgAdvice:'璞嗚GI鍊间綆锛屽共鐓稿仛娉曡櫧鐢ㄦ补杈冨浣嗘暣浣撶⒊姘翠笉楂橈紝瀵硅绯栧奖鍝嶅皬銆?,bpAdvice:'娉ㄦ剰鐩愬垎锛屽共鐓歌皟鍛抽€氬父闇€瑕侀叡娌瑰拰鐩愩€傚彲浠ュ湪瀹跺仛灏戠洂鐗堛€?,tip:'骞茬吀鐨勫叧閿槸璞嗚瑕佺啛閫忥紙鐢熻眴瑙掓湁姣掞級锛屽彲浠ョ敤灏戦噺娌规參鎱㈢吀銆?},
-  {name:'钂滆搲瑗垮叞鑺?,cat:'瀹跺父鑿?,gi:10,giLevel:'low',calPer100:45,serve:'涓€灏忕锛堢害150g锛?,bgAdvice:'杩欐槸绯栧墠鏈熷嚑涔庡畬缇庣殑鑿滆偞銆傝タ鍏拌姳GI鍊兼瀬浣庯紝钂滆搲鎻愪緵椋庡懗涓嶅纰虫按銆傚琛€绯栧嚑涔庨浂褰卞搷銆?,bpAdvice:'钂滆搲鏈夊姪琛€绠″仴搴凤紝瑗垮叞鑺卞瘜鍚姉姘у寲鐗╄川銆傚皯娌瑰揩鐐掑嵆鍙€?,tip:'姘村紑鍚庣劘瑗垮叞鑺?0绉掑啀鐐掞紝棰滆壊缈犵豢鍙ｆ劅鑴嗗銆?},
-  {name:'鍑夋媽榛勭摐',cat:'瀹跺父鑿?,gi:10,giLevel:'low',calPer100:25,serve:'涓€鏍归粍鐡滐紙绾?00g锛?,bgAdvice:'鍑夋媽榛勭摐鏄硸鍓嶆湡鏈€瀹夊叏鐨勫噳鑿滐紝榛勭摐鍑犱箮涓嶅惈绯栵紝瀵硅绯栭浂褰卞搷銆?,bpAdvice:'鍑夋媽鏃跺皯鏀鹃叡娌瑰拰鐩愶紝鐢ㄩ唻鍜岃挏鏈彁鍛炽€傞唻鏈韩杩樻湁鍔╀簬闄嶄綆椁愬悗琛€绯栥€?,tip:'鎷嶉粍鐡滄瘮鍒囬粍鐡滄洿瀹规槗鍏ュ懗锛岀敤绫抽唻姣旈檲閱嬫洿娓呯埥銆?},
-  {name:'绱彍铔嬭姳姹?,cat:'瀹跺父鑿?,gi:5,giLevel:'low',calPer100:20,serve:'涓€纰楋紙绾?50ml锛?,bgAdvice:'绱彍铔嬭姳姹I鍊兼瀬浣庯紝绱彍鍑犱箮鏃犵⒊姘达紝楦¤泲鎻愪緵铔嬬櫧璐ㄣ€傛槸绯栧墠鏈熼妗屼笂瀹夊叏鐨勬堡鍝併€?,bpAdvice:'绱彍鍚捑鍜岀锛屽琛€鍘嬫棤瀹炽€傛敞鎰忔堡閲岀洂瑕佸皯鏀俱€?,tip:'鍙互鍦ㄦ堡閲屽姞鐐硅眴鑵愪竵鍜岃櫨鐨紝钀ュ吇鏇翠赴瀵屻€?},
-  {name:'瑗跨孩鏌胯泲姹?,cat:'瀹跺父鑿?,gi:10,giLevel:'low',calPer100:25,serve:'涓€纰楋紙绾?50ml锛?,bgAdvice:'瑗跨孩鏌胯泲姹ゅ崌绯栧奖鍝嶅緢灏忋€傝タ绾㈡熆GI鍊间綆锛岄浮铔嬭泲鐧借川涓板瘜銆備笉鍔犵硸鐨勮タ绾㈡熆铔嬫堡鏄硸鍓嶆湡鐞嗘兂鐨勬堡鍝併€?,bpAdvice:'瑗跨孩鏌夸腑鐨勭暘鑼勭孩绱犲蹇冭绠℃湁鐩婏紝灏戞补灏戠洂鐨勮泲姹ゅ琛€鍘嬫棤璐熸媴銆?,tip:'瑗跨孩鏌垮厛鐐掑嚭姹佸啀鍔犳按锛屾堡鑹茬孩浜懗閬撴祿閮併€?},
-  {name:'閱嬫簻鐧借彍',cat:'瀹跺父鑿?,gi:15,giLevel:'low',calPer100:35,serve:'涓€灏忕洏锛堢害150g锛?,bgAdvice:'閱嬫簻鐧借彍鏄硸鍓嶆湡鐨勫ソ鑿溿€傜櫧鑿淕I鍊兼瀬浣庯紝閱嬫湁鍔╀簬鍑忕紦椁愬悗琛€绯栦笂鍗囬€熷害銆?,bpAdvice:'閱嬫簻鍋氭硶鐢ㄦ补鍜岀洂閮戒笉澶氾紝瀵硅鍘嬪弸濂姐€傞唻杩樿兘澧炲姞椋庡懗鍑忓皯鐩愮殑浣跨敤銆?,tip:'鐢ㄧ背閱嬫垨鐧介唻閮藉彲浠ワ紝鍑洪攨鍓嶆穻涓€鐐归唻淇濈暀閰稿懗鍜岃惀鍏汇€?},
-  {name:'鍦颁笁椴?,cat:'瀹跺父鑿?,gi:55,giLevel:'mid',calPer100:140,serve:'鍗婄锛堢害100g锛?,bgAdvice:'鍦颁笁椴滐紙鍦熻眴銆佽寗瀛愩€侀潚妞掞級涓湡璞咷I鍊间腑绛夛紝涓斾紶缁熷仛娉曞厛鐐稿悗鐐掞紝鍚告补閲忓ぇ銆傝櫧鐒惰敩鑿滄湰韬笉閿欙紝浣嗙児楗柟寮忚杩欓亾鑿滅儹閲忓拰娌硅剛鍋忛珮銆?,bpAdvice:'娌圭偢+璋冨懗鏂欙紝閽犲惈閲忚緝楂樸€傝寗瀛愬惛娌硅兘鍔涘己锛屽蹇冭绠¤礋鎷呰緝澶с€?,tip:'鍦ㄥ鍋?杞荤増"鍦颁笁椴滐細灏戞补鐓庝唬鏇挎补鐐革紝澶氭斁闈掓灏戞斁鍦熻眴銆?},
-  {name:'鏈ㄩ』鑲?,cat:'瀹跺父鑿?,gi:20,giLevel:'low',calPer100:105,serve:'涓€浠斤紙绾?50g锛?,bgAdvice:'鏈ㄩ』鑲夛紙鏈ㄨ€炽€侀浮铔嬨€佽倝鐗囥€侀粍鑺辫彍锛夌殑椋熸潗鎼厤闈炲父鍚堢悊銆傝泲鐧?钄彍涓轰富锛屽崌绯栧奖鍝嶅緢灏忋€傛湪鑰冲拰榛勮姳鑿滈兘鏄綆GI椋熸潗銆?,bpAdvice:'鏈ㄨ€虫湁鍔╅檷浣庤娑查粡绋犲害锛屽蹇冭绠℃湁鐩娿€傛敞鎰忓皯娌瑰皯鐩愮児楗€?,tip:'杩欐槸绯栧墠鏈熼潪甯告帹鑽愮殑瀹跺父鑿滐紝钀ュ吇鍧囪　鍙堝ソ鍚冦€?},
-  {name:'鍙箰楦＄繀',cat:'瀹跺父鑿?,gi:45,giLevel:'low',calPer100:180,serve:'2-3涓紙绾?0g锛夛紝鍋跺皵鍚?,bgAdvice:'鍙箰楦＄繀鐨勯浮缈呮湰韬泲鐧借川涓板瘜锛屼絾鐑硅皟鐢ㄧ殑鍙箰鍚湁澶ч噺绯栧垎锛堜竴缃愬彲涔愮害35g绯栵級锛屼細琚浮鑲夊惛鏀朵竴閮ㄥ垎銆傜硸鍓嶆湡涓嶅缓璁父鍚冦€?,bpAdvice:'鍙箰鐨勭硸鍒嗗拰楦＄繀鐨勮剛鑲杩欓亾鑿滅儹閲忚緝楂橈紝瀵硅鍘嬫帶鍒舵棤鐩娿€?,tip:'鍙互璇曡瘯鐢ㄦ棤绯栧彲涔愭垨鍟ら厭+閰辨补浠ｆ浛鍙箰锛屽噺灏戠硸鍒嗘憚鍏ャ€?},
-  {name:'绾㈢儳楦″潡',cat:'瀹跺父鑿?,gi:25,giLevel:'low',calPer100:150,serve:'涓€灏忕锛堢害150g锛?,bgAdvice:'楦¤倝鏈韩瀵硅绯栨棤褰卞搷銆傜孩鐑у仛娉曚細鍔犲皯閲忓啺绯栫倰绯栬壊锛岀硸閲忔瘮杈冨彲鎺с€傚鏋滀笉鐢ㄧ硸鍙敤鑰佹娊涓婅壊灏辨洿濂戒簡銆?,bpAdvice:'楦¤倝浣庤剛锛堝幓鐨級锛岀孩鐑ф眮鐨勭洂鍒嗚娉ㄦ剰銆傚鏀鹃鑿囧拰鍦熻眴涓€璧风儳鏇翠赴瀵屻€?,tip:'楦″潡鍏堢劘姘村幓琛€娌紝鐑у嚭鏉ョ殑姹ゆ眮鏇存竻浜€?},
-  {name:'钁辩垎缇婅倝',cat:'瀹跺父鑿?,gi:15,giLevel:'low',calPer100:165,serve:'涓€灏忕洏锛堢害100g锛?,bgAdvice:'缇婅倝鍜岃懕閮藉琛€绯栨棤鐩存帴褰卞搷銆傞珮铔嬬櫧楂樿惀鍏伙紝浣嗙緤鑲夎剛鑲惈閲忎笉浣庯紝娉ㄦ剰閫夌槮鑲夐儴鍒嗐€?,bpAdvice:'澶ц懕鍚～鍖栫墿鏈夊姪琛€绠″仴搴枫€備絾缇婅倝楗卞拰鑴傝偑楂橈紝琛€鍘嬮珮鐨勪汉瑕侀€傞噺銆?,tip:'閫夌緤鑵胯倝鎴栫緤閲岃剨锛屽ぇ鐏揩鐐掗攣浣忔按鍒嗭紝鍙ｆ劅瀚╂粦銆?},
-  {name:'鐧界伡铏?,cat:'瀹跺父鑿?,gi:0,giLevel:'low',calPer100:80,serve:'8-10鍙紙绾?50g锛?,bgAdvice:'鐧界伡铏炬槸绯栧墠鏈熷畬缇庣殑娴烽矞鍋氭硶銆傝櫨鏈韩纰虫按涓洪浂锛岀櫧鐏间笉鍔犵硸涓嶅姞娌癸紝瀵硅绯栭浂褰卞搷銆?,bpAdvice:'铏鹃珮铔嬬櫧浣庤剛锛屽琛€鍘嬪弸濂姐€傝樃鏂欑敤鐢熸娊+灏戣鑺ユ湯鍗冲彲锛屼笉瑕佸お澶氶叡娌广€?,tip:'铏剧嚎涓€瀹氳鍘绘帀锛屾按寮€鍚庝笅閿呯叜鍒板彉绾㈠嵆鍙紝涓嶈鐓€併€?},
-  {name:'绯栭唻閲岃剨',cat:'瀹跺父鑿?,gi:55,giLevel:'mid',calPer100:250,serve:'涓嶅缓璁硸鍓嶆湡缁忓父鍚?,bgAdvice:'绯栭唻閲岃剨鏄?绯?娌圭偢"鐨勭粍鍚堬紝铏戒互鐦﹁倝涓轰富浣嗘寕绯婃补鐐稿悗鍐嶈９绯栭唻姹侊紝GI鍊间笉浣庛€傜硸鍓嶆湡鍋跺皵鍚冧竴涓ゆ鍙互锛屼笉瑕佸父鍚冦€?,bpAdvice:'娌圭偢鍜岀硸閱嬫眮閮藉琛€鍘嬫帶鍒朵笉鍒╋紝杩欓亾鑿滃蹇冭绠¤礋鎷呰緝澶с€?,tip:'濡傛灉寰堟兂鍚冿紝鍦ㄥ鍋氬彲浠ヨ瘯璇曠┖姘旂偢閿呯増+浠ｇ硸鐗堢硸閱嬫眮銆?},
-  {name:'閰歌荆鍦熻眴涓?,cat:'瀹跺父鑿?,gi:55,giLevel:'mid',calPer100:70,serve:'涓€灏忕洏锛堢害100g锛?,bgAdvice:'鍦熻眴涓滸I鍊间腑绛夛紝浣嗛唻鍜岃荆妞掓湁鍔╀簬鍑忕紦鍗囩硸銆傝繖閬撹彍浣滀负閰嶈彍闂涓嶅ぇ锛屼絾涓嶈鎷挎潵褰撲富椋燂紙鍏夊悆涓€鐩樺湡璞嗕笣涓嶅悆楗級銆?,bpAdvice:'閱嬪琛€绠℃湁鐩婏紝杈ｆ绱犺兘淇冭繘浠ｈ阿銆傛敞鎰忕倰鍦熻眴涓濈殑娌瑰拰鐩愪笉瑕佸お澶氥€?,tip:'鍦熻眴涓濆垏濂藉悗娉′竴涓嬪喎姘村幓鎺夎〃闈㈡穩绮夛紝鐐掑嚭鏉ユ洿鑴嗐€丟I鍊间篃鏇翠綆銆?},
-  {name:'铓濇补鐢熻彍',cat:'瀹跺父鑿?,gi:10,giLevel:'low',calPer100:35,serve:'涓€灏忕洏锛堢害150g锛?,bgAdvice:'铓濇补鐢熻彍鏄硸鍓嶆湡寰堝ソ鐨勮敩鑿滃仛娉曘€傜敓鑿淕I鍊兼瀬浣庯紝铓濇补鎻愰矞銆傛敞鎰忚殱娌规湰韬惈绯栧拰鐩愶紝鐢ㄩ噺瑕佸皯銆?,bpAdvice:'铓濇补閽犲惈閲忚緝楂橈紝娣嬪皯璁稿嵆鍙€傜敓鑿滃琛€鍘嬫棤褰卞搷銆?,tip:'鐢熻彍鐒按5绉掔珛鍒绘崬鍑猴紝淇濇寔鑴嗗鍙ｆ劅銆?},
-  {name:'鐚倝鐐栫矇鏉?,cat:'瀹跺父鑿?,gi:65,giLevel:'mid',calPer100:180,serve:'鍗婄锛堢害100g锛?,bgAdvice:'绮夋潯锛堢孩钖矇/鍦熻眴绮夛級鐨凣I鍊艰緝楂橈紝鐚倝鐨勮剛鑲篃浼氬鍔犺儼宀涚礌鎶垫姉銆傝繖閬撹彍鐑噺鍋忛珮銆佺⒊姘翠篃鍋忛珮銆傜硸鍓嶆湡瑕佹帶鍒跺垎閲忋€?,bpAdvice:'鐚倝鐨勯ケ鍜岃剛鑲?绮夋潯鐨勭⒊姘?姹ゆ眮閲岀殑鐩愶紝瀵逛笁楂樹汉缇や笉澶弸濂姐€?,tip:'鍙互澶氭斁鐧借彍鍜岃眴鑵愶紝灏戞斁绮夋潯鍜岃偉鑲夈€?},
-  {name:'钂滄偿鐧借倝',cat:'瀹跺父鑿?,gi:10,giLevel:'low',calPer100:280,serve:'3-4鐗囷紙绾?0g锛夛紝鍋跺皵鍚?,bgAdvice:'钂滄偿鐧借倝浣跨敤鐚悗鑷€鑲夛紙浜屽垁鑲夛級锛岃剛鑲惈閲忚緝楂樹絾纰虫按涓洪浂锛屽琛€绯栧奖鍝嶅緢灏忋€傚ぇ钂滄湁鍔╀簬鏀瑰杽鑳板矝绱犳晱鎰熸€с€?,bpAdvice:'鐧借倝鑴傝偑鍚噺杈冮珮锛岃挏娉ラ叡娌规眮鍚挔锛屾敞鎰忔帶鍒躲€?,tip:'澶氭斁钂滄偿銆佸皯娣嬬孩娌癸紝鐢ㄧ槮鑲変唬鏇胯偉鑲夐儴鍒嗐€?},
-  {name:'棣欒弴闈掕彍',cat:'瀹跺父鑿?,gi:10,giLevel:'low',calPer100:35,serve:'涓€灏忕洏锛堢害150g锛?,bgAdvice:'棣欒弴鍜岄潚鑿滐紙涓婃捣闈?娌硅彍锛夐兘鏄瀬浣嶨I椋熸潗锛岃繖閬撹彍瀵硅绯栧嚑涔庨浂褰卞搷銆傝崵绱犳惌閰嶄腑鐨勫畬缇庣礌鑿溿€?,bpAdvice:'棣欒弴鍚捑鏈夊姪闄嶅帇锛岄潚鑿滃瘜鍚氦缁村拰缁寸敓绱犮€傚皯娌瑰揩鐐掑嵆鍙€?,tip:'棣欒弴鍏堢吀鍑洪鍛冲啀涓嬮潚鑿滐紝鍛抽亾鏇存湁灞傛銆?},
-  {name:'钂告按铔?,cat:'瀹跺父鑿?,gi:15,giLevel:'low',calPer100:60,serve:'涓€灏忕锛堢害150g锛?,bgAdvice:'钂告按铔嬶紙楦¤泲缇癸級纰虫按鍖栧悎鐗╁惈閲忓緢浣庯紝GI鍊兼瀬浣庛€傝泲鐧借川涓板瘜锛屽彛鎰熻蒋瀚╋紝鏄硸鍓嶆湡寰堥€傚悎鐨勫甯歌彍銆?,bpAdvice:'楦¤泲钀ュ吇濂斤紝钂哥殑鍋氭硶涓嶅姞澶氫綑娌硅剛锛屽琛€鍘嬫棤璐熸媴銆傛穻灏戣鐢熸娊鍗冲彲銆?,tip:'钂歌泲鏃剁敤娓╂按锛?0掳C宸﹀彸锛夛紝铔嬫按姣斾緥1:1.5锛岃捀鍑烘潵鐨勮泲缇规渶瀚╂粦銆?},
-  {name:'鎺掗姹?,cat:'瀹跺父鑿?,gi:10,giLevel:'low',calPer100:50,serve:'涓€纰楋紙绾?50ml锛屽惈2-3鍧楁帓楠級',bgAdvice:'鎺掗姹ゆ湰韬⒊姘村緢浣庛€備絾寰堝浜哄枩娆㈠湪姹ら噷鍔犵帀绫炽€佽儭钀濆崪銆佸湡璞嗙瓑锛屼細澧炲姞纰虫按銆傚枬姹や负涓汇€佸悆鑲変负杈呫€?,bpAdvice:'鎺掗姹よ〃闈㈢殑娌硅鎾囨帀锛屾堡閲岀殑鐩愯灏戞斁銆傚彲浠ョ敤娴峰甫鎴栧啲鐡滀竴璧风叜澧炲姞椋庡懗銆?,tip:'鎺掗鍏堢劘姘村幓鎺夎娌拰閮ㄥ垎鑴傝偑锛屾堡浼氭洿娓呫€?},
-  {name:'楦¤泲鐏岄ゼ',cat:'瀹跺父鑿?,gi:68,giLevel:'mid',calPer100:260,serve:'鍗婁釜锛堢害100g锛夛紝鍋跺皵鍚?,bgAdvice:'楦¤泲鐏岄ゼ鏄簿鐧介潰+娌?楦¤泲鐨勭粍鍚堬紝GI鍊间腑绛夊亸楂樸€傞潰楗兼补鐐告垨娌圭厧鐨勫仛娉曞鍔犱簡涓嶅繀瑕佺殑鐑噺銆傜硸鍓嶆湡鍋跺皵褰撴棭椁愬彲浠ワ紝涓嶈缁忓父鍚冦€?,bpAdvice:'楗肩殑娌瑰拰鐩愯鎺у埗锛屽埗浣滆繃绋嬩腑鏀剧殑娌硅剛瀵硅鍘嬩笉鍙嬪ソ銆?,tip:'鍦ㄥ鑷繁鍋氬彲浠ョ敤鍏ㄩ害闈㈢矇銆佸皯娌圭厧锛屽鐏屼竴涓浮铔嬪鍔犺泲鐧借川銆?},
+  // ===== 家常菜 =====
+  {name:'番茄炒蛋',cat:'家常菜',gi:25,giLevel:'low',calPer100:85,serve:'一份（约200g）',bgAdvice:'番茄炒蛋是经典家常菜。番茄GI值低，鸡蛋蛋白质丰富，整体升糖负荷很低。但如果加糖（很多家庭做法会加糖提鲜），GI影响会增加！',bpAdvice:'这道菜对血压友好，番茄含钾，鸡蛋蛋白质丰富。但注意不要放太多油和糖。',tip:'糖前期做番茄炒蛋不要加糖，用熟透的番茄本身的甜味就够了。'},
+  {name:'红烧肉',cat:'家常菜',gi:20,giLevel:'low',calPer100:305,serve:'2-3块瘦肉（约50g），偶尔解馋',bgAdvice:'红烧肉虽然GI值低，但高脂肪（尤其饱和脂肪）会加重胰岛素抵抗。且红烧做法需要大量糖（炒糖色+调味），间接增加碳水摄入。',bpAdvice:'红烧肉使用五花肉，饱和脂肪和钠含量都高，不利于血压控制。',tip:'想吃红烧口感可以试试红烧鸡腿（去皮），脂肪少很多。'},
+  {name:'清蒸鱼',cat:'家常菜',gi:0,giLevel:'low',calPer100:95,serve:'一条中等鱼（约300g），2-3人份',bgAdvice:'清蒸鱼几乎不含碳水，GI值为0。是最健康的鱼类烹饪方式，鱼肉蛋白优质，对血糖无影响。',bpAdvice:'清蒸做法油少盐少（主要靠蒸鱼豉油），是高血压人群的首选鱼类做法。',tip:'蒸鱼最后淋的热油要少，一勺即可。'},
+  {name:'麻婆豆腐',cat:'家常菜',gi:20,giLevel:'low',calPer100:110,serve:'半碗（约100g）',bgAdvice:'豆腐GI值低，麻婆豆腐的碳水来自少量淀粉勾芡，整体升糖影响很小。但麻辣调味可能刺激食欲导致多吃主食。',bpAdvice:'麻婆豆腐含较多油和豆瓣酱（高钠），高血压人群要注意。可以在家做减油减盐版。',tip:'在家做少放油和豆瓣酱，多放葱花提香。'},
+  {name:'宫保鸡丁',cat:'家常菜',gi:35,giLevel:'low',calPer100:160,serve:'一份（约150g）',bgAdvice:'宫保鸡丁中鸡胸肉蛋白质丰富，花生含健康脂肪。但传统做法会加糖和淀粉勾芡，加上花生热量高，总体升糖影响不大但要注意分量。',bpAdvice:'宫保鸡丁酱料中含酱油和盐，花生胆固醇不高但热量高。',tip:'在家做可以少放花生、少油、不加糖。'},
+  {name:'青椒肉丝',cat:'家常菜',gi:15,giLevel:'low',calPer100:95,serve:'一份（约150g）',bgAdvice:'青椒肉丝升糖影响很小。青椒GI值极低，瘦肉丝蛋白丰富。但注意饭店做法通常油多、淀粉勾芡多。',bpAdvice:'肉丝和调味料含钠，注意控盐。青椒富含维生素C保护血管。',tip:'在家做用少量油滑肉丝，青椒脆炒不要过火。'},
+  {name:'鱼香肉丝',cat:'家常菜',gi:40,giLevel:'low',calPer100:155,serve:'半碗（约100g）',bgAdvice:'鱼香肉丝GI值不高，主要蛋白来自肉丝。但鱼香汁含糖（白糖+醋），会增加碳水和热量。建议在家做时减少或去掉白糖。',bpAdvice:'鱼香汁含酱油和豆瓣酱，钠含量不低，注意控盐。',tip:'在家做"无糖版"鱼香肉丝，用木耳和胡萝卜丝增加口感和营养。'},
+  {name:'回锅肉',cat:'家常菜',gi:20,giLevel:'low',calPer100:250,serve:'3-4片肉（约50g），偶尔解馋',bgAdvice:'回锅肉使用五花肉或后臀肉，脂肪含量高。虽然对血糖直接影响不大，但高脂肪会加重胰岛素抵抗。',bpAdvice:'回锅肉油大、豆瓣酱咸，对血压控制不利。属于"偶尔吃一次可以"的菜。',tip:'用瘦肉代替五花肉做回锅肉，蒜苗多放，油和豆瓣酱少放。'},
+  {name:'水煮鱼',cat:'家常菜',gi:15,giLevel:'low',calPer100:135,serve:'一小碗（约150g）',bgAdvice:'水煮鱼蛋白含量高，鱼肉对血糖无影响。但水煮鱼其实是用大量热油浇的，油脂含量很高，会间接影响血糖。',bpAdvice:'水煮鱼最后浇的那层油含大量热量和钠（来自汤底），对血压不友好。',tip:'在家做"轻版"水煮鱼，少油少盐，多放豆芽和青菜垫底。'},
+  {name:'干煸豆角',cat:'家常菜',gi:30,giLevel:'low',calPer100:110,serve:'一小盘（约100g）',bgAdvice:'豆角GI值低，干煸做法虽用油较多但整体碳水不高，对血糖影响小。',bpAdvice:'注意盐分，干煸调味通常需要酱油和盐。可以在家做少盐版。',tip:'干煸的关键是豆角要熟透（生豆角有毒），可以用少量油慢慢煸。'},
+  {name:'蒜蓉西兰花',cat:'家常菜',gi:10,giLevel:'low',calPer100:45,serve:'一小碗（约150g）',bgAdvice:'这是糖前期几乎完美的菜肴。西兰花GI值极低，蒜蓉提供风味不增碳水。对血糖几乎零影响。',bpAdvice:'蒜蓉有助血管健康，西兰花富含抗氧化物质。少油快炒即可。',tip:'水开后焯西兰花30秒再炒，颜色翠绿口感脆嫩。'},
+  {name:'凉拌黄瓜',cat:'家常菜',gi:10,giLevel:'low',calPer100:25,serve:'一根黄瓜（约200g）',bgAdvice:'凉拌黄瓜是糖前期最安全的凉菜，黄瓜几乎不含糖，对血糖零影响。',bpAdvice:'凉拌时少放酱油和盐，用醋和蒜末提味。醋本身还有助于降低餐后血糖。',tip:'拍黄瓜比切黄瓜更容易入味，用米醋比陈醋更清爽。'},
+  {name:'紫菜蛋花汤',cat:'家常菜',gi:5,giLevel:'low',calPer100:20,serve:'一碗（约250ml）',bgAdvice:'紫菜蛋花汤GI值极低，紫菜几乎无碳水，鸡蛋提供蛋白质。是糖前期餐桌上安全的汤品。',bpAdvice:'紫菜含钾和碘，对血压无害。注意汤里盐要少放。',tip:'可以在汤里加点豆腐丁和虾皮，营养更丰富。'},
+  {name:'西红柿蛋汤',cat:'家常菜',gi:10,giLevel:'low',calPer100:25,serve:'一碗（约250ml）',bgAdvice:'西红柿蛋汤升糖影响很小。西红柿GI值低，鸡蛋蛋白质丰富。不加糖的西红柿蛋汤是糖前期理想的汤品。',bpAdvice:'西红柿中的番茄红素对心血管有益，少油少盐的蛋汤对血压无负担。',tip:'西红柿先炒出汁再加水，汤色红亮味道浓郁。'},
+  {name:'醋溜白菜',cat:'家常菜',gi:15,giLevel:'low',calPer100:35,serve:'一小盘（约150g）',bgAdvice:'醋溜白菜是糖前期的好菜。白菜GI值极低，醋有助于减缓餐后血糖上升速度。',bpAdvice:'醋溜做法用油和盐都不多，对血压友好。醋还能增加风味减少盐的使用。',tip:'用米醋或白醋都可以，出锅前淋一点醋保留酸味和营养。'},
+  {name:'地三鲜',cat:'家常菜',gi:55,giLevel:'mid',calPer100:140,serve:'半碗（约100g）',bgAdvice:'地三鲜（土豆、茄子、青椒）中土豆GI值中等，且传统做法先炸后炒，吸油量大。虽然蔬菜本身不错，但烹饪方式让这道菜热量和油脂偏高。',bpAdvice:'油炸+调味料，钠含量较高。茄子吸油能力强，对心血管负担较大。',tip:'在家做"轻版"地三鲜：少油煎代替油炸，多放青椒少放土豆。'},
+  {name:'木须肉',cat:'家常菜',gi:20,giLevel:'low',calPer100:105,serve:'一份（约150g）',bgAdvice:'木须肉（木耳、鸡蛋、肉片、黄花菜）的食材搭配非常合理。蛋白+蔬菜为主，升糖影响很小。木耳和黄花菜都是低GI食材。',bpAdvice:'木耳有助降低血液黏稠度，对心血管有益。注意少油少盐烹饪。',tip:'这是糖前期非常推荐的家常菜，营养均衡又好吃。'},
+  {name:'可乐鸡翅',cat:'家常菜',gi:45,giLevel:'low',calPer100:180,serve:'2-3个（约80g），偶尔吃',bgAdvice:'可乐鸡翅的鸡翅本身蛋白质丰富，但烹调用的可乐含有大量糖分（一罐可乐约35g糖），会被鸡肉吸收一部分。糖前期不建议常吃。',bpAdvice:'可乐的糖分和鸡翅的脂肪让这道菜热量较高，对血压控制无益。',tip:'可以试试用无糖可乐或啤酒+酱油代替可乐，减少糖分摄入。'},
+  {name:'红烧鸡块',cat:'家常菜',gi:25,giLevel:'low',calPer100:150,serve:'一小碗（约150g）',bgAdvice:'鸡肉本身对血糖无影响。红烧做法会加少量冰糖炒糖色，糖量比较可控。如果不用糖只用老抽上色就更好了。',bpAdvice:'鸡肉低脂（去皮），红烧汁的盐分要注意。多放香菇和土豆一起烧更丰富。',tip:'鸡块先焯水去血沫，烧出来的汤汁更清亮。'},
+  {name:'葱爆羊肉',cat:'家常菜',gi:15,giLevel:'low',calPer100:165,serve:'一小盘（约100g）',bgAdvice:'羊肉和葱都对血糖无直接影响。高蛋白高营养，但羊肉脂肪含量不低，注意选瘦肉部分。',bpAdvice:'大葱含硫化物有助血管健康。但羊肉饱和脂肪高，血压高的人要适量。',tip:'选羊腿肉或羊里脊，大火快炒锁住水分，口感嫩滑。'},
+  {name:'白灼虾',cat:'家常菜',gi:0,giLevel:'low',calPer100:80,serve:'8-10只（约150g）',bgAdvice:'白灼虾是糖前期完美的海鲜做法。虾本身碳水为零，白灼不加糖不加油，对血糖零影响。',bpAdvice:'虾高蛋白低脂，对血压友好。蘸料用生抽+少许芥末即可，不要太多酱油。',tip:'虾线一定要去掉，水开后下锅煮到变红即可，不要煮老。'},
+  {name:'糖醋里脊',cat:'家常菜',gi:55,giLevel:'mid',calPer100:250,serve:'不建议糖前期经常吃',bgAdvice:'糖醋里脊是"糖+油炸"的组合，虽以瘦肉为主但挂糊油炸后再裹糖醋汁，GI值不低。糖前期偶尔吃一两次可以，不要常吃。',bpAdvice:'油炸和糖醋汁都对血压控制不利，这道菜对心血管负担较大。',tip:'如果很想吃，在家做可以试试空气炸锅版+代糖版糖醋汁。'},
+  {name:'酸辣土豆丝',cat:'家常菜',gi:55,giLevel:'mid',calPer100:70,serve:'一小盘（约100g）',bgAdvice:'土豆丝GI值中等，但醋和辣椒有助于减缓升糖。这道菜作为配菜问题不大，但不要拿来当主食（光吃一盘土豆丝不吃饭）。',bpAdvice:'醋对血管有益，辣椒素能促进代谢。注意炒土豆丝的油和盐不要太多。',tip:'土豆丝切好后泡一下冷水去掉表面淀粉，炒出来更脆、GI值也更低。'},
+  {name:'蚝油生菜',cat:'家常菜',gi:10,giLevel:'low',calPer100:35,serve:'一小盘（约150g）',bgAdvice:'蚝油生菜是糖前期很好的蔬菜做法。生菜GI值极低，蚝油提鲜。注意蚝油本身含糖和盐，用量要少。',bpAdvice:'蚝油钠含量较高，淋少许即可。生菜对血压无影响。',tip:'生菜焯水5秒立刻捞出，保持脆嫩口感。'},
+  {name:'猪肉炖粉条',cat:'家常菜',gi:65,giLevel:'mid',calPer100:180,serve:'半碗（约100g）',bgAdvice:'粉条（红薯粉/土豆粉）的GI值较高，猪肉的脂肪也会增加胰岛素抵抗。这道菜热量偏高、碳水也偏高。糖前期要控制分量。',bpAdvice:'猪肉的饱和脂肪+粉条的碳水+汤汁里的盐，对三高人群不太友好。',tip:'可以多放白菜和豆腐，少放粉条和肥肉。'},
+  {name:'蒜泥白肉',cat:'家常菜',gi:10,giLevel:'low',calPer100:280,serve:'3-4片（约50g），偶尔吃',bgAdvice:'蒜泥白肉使用猪后臀肉（二刀肉），脂肪含量较高但碳水为零，对血糖影响很小。大蒜有助于改善胰岛素敏感性。',bpAdvice:'白肉脂肪含量较高，蒜泥酱油汁含钠，注意控制。',tip:'多放蒜泥、少淋红油，用瘦肉代替肥肉部分。'},
+  {name:'香菇青菜',cat:'家常菜',gi:10,giLevel:'low',calPer100:35,serve:'一小盘（约150g）',bgAdvice:'香菇和青菜（上海青/油菜）都是极低GI食材，这道菜对血糖几乎零影响。荤素搭配中的完美素菜。',bpAdvice:'香菇含钾有助降压，青菜富含纤维和维生素。少油快炒即可。',tip:'香菇先煸出香味再下青菜，味道更有层次。'},
+  {name:'蒸水蛋',cat:'家常菜',gi:15,giLevel:'low',calPer100:60,serve:'一小碗（约150g）',bgAdvice:'蒸水蛋（鸡蛋羹）碳水化合物含量很低，GI值极低。蛋白质丰富，口感软嫩，是糖前期很适合的家常菜。',bpAdvice:'鸡蛋营养好，蒸的做法不加多余油脂，对血压无负担。淋少许生抽即可。',tip:'蒸蛋时用温水（40°C左右），蛋水比例1:1.5，蒸出来的蛋羹最嫩滑。'},
+  {name:'排骨汤',cat:'家常菜',gi:10,giLevel:'low',calPer100:50,serve:'一碗（约250ml，含2-3块排骨）',bgAdvice:'排骨汤本身碳水很低。但很多人喜欢在汤里加玉米、胡萝卜、土豆等，会增加碳水。喝汤为主、吃肉为辅。',bpAdvice:'排骨汤表面的油要撇掉，汤里的盐要少放。可以用海带或冬瓜一起煮增加风味。',tip:'排骨先焯水去掉血沫和部分脂肪，汤会更清。'},
+  {name:'鸡蛋灌饼',cat:'家常菜',gi:68,giLevel:'mid',calPer100:260,serve:'半个（约100g），偶尔吃',bgAdvice:'鸡蛋灌饼是精白面+油+鸡蛋的组合，GI值中等偏高。面饼油炸或油煎的做法增加了不必要的热量。糖前期偶尔当早餐可以，不要经常吃。',bpAdvice:'饼的油和盐要控制，制作过程中放的油脂对血压不友好。',tip:'在家自己做可以用全麦面粉、少油煎，多灌一个鸡蛋增加蛋白质。'},
 
-  // 鏇村涓婚
-  {name:'鐐搁叡闈?,cat:'涓婚',gi:65,giLevel:'mid',calPer100:185,serve:'涓€灏忕锛堢害200g锛?,bgAdvice:'鐐搁叡闈㈢殑闈㈡潯GI鍊煎亸楂橈紝浣嗙偢閰变腑鐨勯粍璞嗛叡鍜岃倝涓佹彁渚涗簡铔嬬櫧鍜岃剛鑲紝鏁翠綋鍗囩硸閫熷害姣旂函闈㈡潯鎱€傚叧閿槸閰辫灏戞斁銆佽彍鐮侊紙榛勭摐涓濄€佽眴鑺界瓑锛夎澶氭斁銆?,bpAdvice:'鐐搁叡鐨勭洂鍒嗗緢楂橈紙榛勮眴閰?鐢滈潰閰憋級锛屽琛€鍘嬩笉鍙嬪ソ銆傚湪瀹跺仛鍙互鍑忛叡銆佸鏀捐彍鐮併€?,tip:'澶氭斁榛勭摐涓濄€佽眴鑺姐€佽悵鍗滀笣绛夎彍鐮侊紝灏戞斁閰卞拰闈紝鍙樻垚"浠ヨ彍涓轰富銆佷互闈负杈?銆?},
-  {name:'鎵撳崵闈?,cat:'涓婚',gi:60,giLevel:'mid',calPer100:150,serve:'涓€灏忕锛堢害200g锛?,bgAdvice:'鎵撳崵闈㈢殑鍗ゆ眮閫氬父鍚湁鏈ㄨ€炽€侀浮铔嬨€佽倝鐗囩瓑锛屽鍔犱簡铔嬬櫧璐ㄥ拰绾ょ淮锛屾瘮绾潰鏉″崌绯栨參銆備絾鍕捐姟锛堟穩绮夛級浼氬鍔犵⒊姘达紝娉ㄦ剰鍗ゆ眮鐨勯噺銆?,bpAdvice:'鍗ゆ眮涓殑鐩愬垎瑕佹敞鎰忥紙閰辨补+鐩愶級锛屽皯鍚冨崵姹佸彲浠ュ噺灏戦挔鎽勫叆銆?,tip:'鍗ゅ瓙閲岀殑鏈ㄨ€冲拰楦¤泲鏄ソ涓滆タ锛岄潰鏉″皯鍚冦€佸崵瀛愬鐩涖€?},
-  {name:'绾㈣柉绮?,cat:'涓婚',gi:62,giLevel:'mid',calPer100:42,serve:'涓€灏忕锛堢害200ml锛?,bgAdvice:'绾㈣柉鏈韩鏄腑浣嶨I椋熺墿锛屼絾鐓垚绮ュ悗GI鍊间細鏈夋墍涓婂崌銆傜孩钖播姣旂函鐧界背绮ュ崌绯栨參锛屼絾浠嶈娉ㄦ剰鎺у埗閲忋€?,bpAdvice:'绾㈣柉楂橀捑浣庨挔锛屾湁鍔╀簬鎺掗挔闄嶅帇銆備笉瑕佸姞绯栥€?,tip:'鎼厤涓€涓按鐓泲鍜屽噳鎷岃彍涓€璧峰悆锛岄檷浣庢€诲崌绯栬礋鑽枫€?},
-  {name:'鐕曢害绮?,cat:'涓婚',gi:50,giLevel:'low',calPer100:52,serve:'涓€灏忕锛堢害250ml锛?,bgAdvice:'鐕曢害绮I鍊艰緝浣庯紝瀵屽惈尾-钁¤仛绯栵紙鍙憾鎬х氦缁达級锛岃兘鏄捐憲鍑忕紦琛€绯栦笂鍗囥€傛槸绯栧墠鏈熼潪甯告帹鑽愮殑鏃╅绮ュ搧銆?,bpAdvice:'鐕曢害涓殑鍙憾鎬х氦缁存湁鍔╀簬闄嶄綆鑳嗗浐閱囷紝瀵瑰績琛€绠″仴搴锋湁鐩娿€?,tip:'鐢ㄥ師鍛崇嚂楹︾墖鐓紝涓嶈鐢ㄥ嵆椋熸垨璋冨懗鐨勩€傚彲浠ュ姞鍑犻钃濊帗鎴栧皯閲忓潥鏋滃鍔犻鍛炽€?},
-  {name:'鏉傜伯楗?,cat:'涓婚',gi:50,giLevel:'low',calPer100:130,serve:'涓€灏忕锛堢害150g锛?,bgAdvice:'鏉傜伯楗槸绯栧墠鏈熸渶鎺ㄨ崘鐨勪富椋熷舰寮忋€傛贩鍚堢硻绫炽€佺嚂楹︺€佸皬绫炽€佺孩璞嗙瓑澶氱璋风墿鍜岃眴绫伙紝GI鍊兼瘮绾櫧绫抽キ浣庡緢澶氾紝鑶抽绾ょ淮涓板瘜銆侀ケ鑵规劅寮恒€?,bpAdvice:'鏉傜伯涓殑閽俱€侀晛绛夌熆鐗╄川鏈夊姪浜庤鍘嬫帶鍒躲€傝眴绫昏泲鐧戒篃鏈夌泭蹇冭绠°€?,tip:'鏉傜伯鍜岃眴绫婚渶瑕佹彁鍓嶆蹈娉★紝鍙ｆ劅鏇村ソ銆傜櫧绫充笌鏉傜伯姣斾緥浠?:1寮€濮嬶紝閫愭笎璋冩暣鍒?:1銆?},
-  {name:'鑺嬪ご',cat:'涓婚',gi:48,giLevel:'low',calPer100:56,serve:'涓瓑澶у皬鍗婁釜锛堢害100g锛?,bgAdvice:'鑺嬪ごGI鍊间綆锛屽瘜鍚喅椋熺氦缁村拰閽俱€備絾鑺嬪ご灞炰簬钖被涓婚锛岀⒊姘村惈閲忎笉浣庯紝鍚冧簡鑺嬪ご瑕佸噺灏戠背楗殑閲忋€?,bpAdvice:'鑺嬪ご楂橀捑浣庨挔锛岄粡娑茶泲鐧芥湁鍔╀簬闄嶄綆鑳嗗浐閱囥€?,tip:'娓呰捀鑺嬪ご铇稿皯璁哥敓鎶芥渶濂斤紝涓嶈鍋氭嫈涓濊妺澶达紙澶ч噺鍔犵硸锛夈€?},
-  {name:'閰搁潰鍖?,cat:'涓婚',gi:45,giLevel:'low',calPer100:230,serve:'1-2鐗囷紙绾?0g锛?,bgAdvice:'閰搁潰鍖咃紙澶╃劧閰垫瘝闈㈠寘锛夌殑GI鍊兼瘮鏅€氶潰鍖呬綆寰堝銆傚彂閰佃繃绋嬩腑浜х敓鐨勬湁鏈洪吀鑳藉噺缂撴穩绮夋秷鍖栭€熷害銆侀檷浣庨鍚庤绯栧弽搴斻€傛槸绯栧墠鏈熸渶濂界殑闈㈠寘閫夋嫨銆?,bpAdvice:'閰搁潰鍖呭彂閰佃繃绋嬩腑閮ㄥ垎鐩愯娑堣€楋紝瀵硅鍘嬫瘮鏅€氶潰鍖呮洿鍙嬪ソ銆?,tip:'鐪熸鐨勯吀闈㈠寘鐢ㄥぉ鐒堕叺姣嶅彂閰碉紝涓嶆槸鍔犱簡閱嬬殑"浼吀闈㈠寘"銆傜湅閰嶆枡琛細鍙湁闈㈢矇銆佹按銆佺洂銆佸ぉ鐒堕叺姣嶃€?},
+  // 更多主食
+  {name:'炸酱面',cat:'主食',gi:65,giLevel:'mid',calPer100:185,serve:'一小碗（约200g）',bgAdvice:'炸酱面的面条GI值偏高，但炸酱中的黄豆酱和肉丁提供了蛋白和脂肪，整体升糖速度比纯面条慢。关键是酱要少放、菜码（黄瓜丝、豆芽等）要多放。',bpAdvice:'炸酱的盐分很高（黄豆酱+甜面酱），对血压不友好。在家做可以减酱、多放菜码。',tip:'多放黄瓜丝、豆芽、萝卜丝等菜码，少放酱和面，变成"以菜为主、以面为辅"。'},
+  {name:'打卤面',cat:'主食',gi:60,giLevel:'mid',calPer100:150,serve:'一小碗（约200g）',bgAdvice:'打卤面的卤汁通常含有木耳、鸡蛋、肉片等，增加了蛋白质和纤维，比纯面条升糖慢。但勾芡（淀粉）会增加碳水，注意卤汁的量。',bpAdvice:'卤汁中的盐分要注意（酱油+盐），少吃卤汁可以减少钠摄入。',tip:'卤子里的木耳和鸡蛋是好东西，面条少吃、卤子多盛。'},
+  {name:'红薯粥',cat:'主食',gi:62,giLevel:'mid',calPer100:42,serve:'一小碗（约200ml）',bgAdvice:'红薯本身是中低GI食物，但煮成粥后GI值会有所上升。红薯粥比纯白米粥升糖慢，但仍要注意控制量。',bpAdvice:'红薯高钾低钠，有助于排钠降压。不要加糖。',tip:'搭配一个水煮蛋和凉拌菜一起吃，降低总升糖负荷。'},
+  {name:'燕麦粥',cat:'主食',gi:50,giLevel:'low',calPer100:52,serve:'一小碗（约250ml）',bgAdvice:'燕麦粥GI值较低，富含β-葡聚糖（可溶性纤维），能显著减缓血糖上升。是糖前期非常推荐的早餐粥品。',bpAdvice:'燕麦中的可溶性纤维有助于降低胆固醇，对心血管健康有益。',tip:'用原味燕麦片煮，不要用即食或调味的。可以加几颗蓝莓或少量坚果增加风味。'},
+  {name:'杂粮饭',cat:'主食',gi:50,giLevel:'low',calPer100:130,serve:'一小碗（约150g）',bgAdvice:'杂粮饭是糖前期最推荐的主食形式。混合糙米、燕麦、小米、红豆等多种谷物和豆类，GI值比纯白米饭低很多，膳食纤维丰富、饱腹感强。',bpAdvice:'杂粮中的钾、镁等矿物质有助于血压控制。豆类蛋白也有益心血管。',tip:'杂粮和豆类需要提前浸泡，口感更好。白米与杂粮比例从3:1开始，逐渐调整到1:1。'},
+  {name:'芋头',cat:'主食',gi:48,giLevel:'low',calPer100:56,serve:'中等大小半个（约100g）',bgAdvice:'芋头GI值低，富含膳食纤维和钾。但芋头属于薯类主食，碳水含量不低，吃了芋头要减少米饭的量。',bpAdvice:'芋头高钾低钠，黏液蛋白有助于降低胆固醇。',tip:'清蒸芋头蘸少许生抽最好，不要做拔丝芋头（大量加糖）。'},
+  {name:'酸面包',cat:'主食',gi:45,giLevel:'low',calPer100:230,serve:'1-2片（约60g）',bgAdvice:'酸面包（天然酵母面包）的GI值比普通面包低很多。发酵过程中产生的有机酸能减缓淀粉消化速度、降低餐后血糖反应。是糖前期最好的面包选择。',bpAdvice:'酸面包发酵过程中部分盐被消耗，对血压比普通面包更友好。',tip:'真正的酸面包用天然酵母发酵，不是加了醋的"伪酸面包"。看配料表：只有面粉、水、盐、天然酵母。'},
 
-  // 铔嬬被锛堢嫭绔嬪垎绫伙級
-  {name:'鐓浮铔?,cat:'铔嬬被',gi:0,giLevel:'low',calPer100:155,serve:'1涓紙绾?0g锛?,bgAdvice:'鐓浮铔婫I鍊间负0锛屽琛€绯栭浂褰卞搷銆傝泲鐧戒紭璐ㄣ€佽泲榛勫惈鍗电７鑴傘€傛按鐓仛娉曟棤娌规棤绯栵紝鏄硸鍓嶆湡鏈€鎺ㄨ崘鐨勮泲绫诲仛娉曘€?,bpAdvice:'楦¤泲鑳嗗浐閱囧澶у鏁颁汉褰卞搷鏈夐檺锛屾瘡澶?涓按鐓泲瀵硅鍘嬫棤璐熸媴銆?,tip:'鐓?鍒嗛挓锛堣泲榛勫垰鍑濆浐锛夊彛鎰熸渶浣筹紝钀ュ吇淇濈暀鏈€濂姐€?},
-  {name:'鐓庨浮铔?,cat:'铔嬬被',gi:0,giLevel:'low',calPer100:196,serve:'1涓紙绾?0g锛?,bgAdvice:'鐓庨浮铔婫I鍊间负0锛屼絾姣旂叜铔嬪浜嗕笉灏戞补銆傜敤涓嶇矘閿呭皯娌圭厧姣斾紶缁熸补鐓庡ソ寰堝銆?,bpAdvice:'鐓庤泲鐢ㄧ殑娌瑰拰鐩愪細澧炲姞鐑噺鍜岄挔鎽勫叆锛屽琛€鍘嬫湁涓€瀹氬奖鍝嶃€?,tip:'鐢ㄤ笉绮橀攨鍒疯杽钖勪竴灞傛补鍗冲彲锛屾垨璇曡瘯姘寸厧铔嬶紙鐢ㄦ按浠ｆ浛娌癸級銆?},
-  {name:'鐐掗浮铔?,cat:'铔嬬被',gi:10,giLevel:'low',calPer100:150,serve:'1-2涓泲鐨勯噺锛堢害100g锛?,bgAdvice:'鐐掗浮铔婫I鍊兼瀬浣庯紝瀵硅绯栧嚑涔庢棤褰卞搷銆傜函鐐掕泲涓嶅姞绯栵紝纰虫按寰堝皯銆傚鏋滃姞浜嗙暘鑼勬垨闊彍涓€璧风倰灏辨洿濂戒簡銆?,bpAdvice:'鐐掕泲鏃舵补閲忚鎺у埗锛屽皯鏀剧洂銆傚拰钄彍涓€璧风倰锛堥煭鑿滅倰铔嬨€佺暘鑼勭倰铔嬶級鏇存湁钀ュ吇銆?,tip:'铔嬫恫閲屽姞涓€鐐圭偣姘存垨鐗涘ザ锛岀倰鍑烘潵鏇村婊戙€?},
-  {name:'鑼跺彾铔?,cat:'铔嬬被',gi:5,giLevel:'low',calPer100:145,serve:'1涓紙绾?0g锛?,bgAdvice:'鑼跺彾铔婫I鍊兼瀬浣庛€傝尪鍙朵腑鐨勮尪澶氶厷鏈夋姉姘у寲浣滅敤銆傜叜鍒惰繃绋嬩腑涓嶅姞娌癸紝鐑噺涓嶉珮锛屼絾浼氬惛鏀舵堡姹佷腑鐨勭洂鍒嗐€?,bpAdvice:'鑼跺彾铔嬬殑姹ゆ眮閫氬父鍚緝澶氶叡娌瑰拰鐩愶紝铔嬪３瑁傜紳瓒婂鐨勮尪鍙惰泲瓒婂捀銆傞珮琛€鍘嬩汉缇ゆ敞鎰忎笉瑕佸悆澶捀鐨勮尪鍙惰泲銆?,tip:'鑷繁鍦ㄥ鍋氬彲浠ユ帶鍒剁洂閲忥紝姣斿闈拱鐨勬竻娣°€?},
-  {name:'鍗よ泲',cat:'铔嬬被',gi:5,giLevel:'low',calPer100:150,serve:'1涓紙绾?0g锛?,bgAdvice:'鍗よ泲GI鍊兼瀬浣庛€傚崵姹佷腑閫氬父鍚硸锛堝啺绯栦笂鑹诧級锛屼絾铔嬫湰韬惛鏀剁殑绯栧緢灏戙€傛暣浣撳琛€绯栧奖鍝嶆瀬灏忋€?,bpAdvice:'鍗ゆ眮鍚緝澶氶叡娌癸紙楂橀挔锛夛紝鍗よ泲浼氭瘮鐓泲鍜稿緢澶氾紝楂樿鍘嬩汉缇ゆ敞鎰忋€?,tip:'鍗よ泲铏藉ソ鍚冿紝浣嗙洂鍒嗕笉浣庯紝鍋跺皵鍚冧竴涓や釜瑙ｉ鍗冲彲銆?},
-  {name:'鑽峰寘铔?,cat:'铔嬬被',gi:0,giLevel:'low',calPer100:140,serve:'1-2涓紙绾?00g锛?,bgAdvice:'姘寸叜鑽峰寘铔嬶紙姘存尝铔嬶級GI鍊间负0锛屾棤娌规棤绯栵紝鍜岀叜楦¤泲涓€鏍锋槸绯栧墠鏈熸渶鎺ㄨ崘鐨勮泲绫诲仛娉曘€?,bpAdvice:'姘寸叜鑽峰寘铔嬪琛€鍘嬫棤璐熸媴锛屽鏋滅敤娌圭厧鑽峰寘铔嬪垯鐑噺楂樹竴浜涖€?,tip:'姘村紑鍚庤浆灏忕伀锛屽湪姘撮噷鍔犱竴鐐圭櫧閱嬶紝铔嬬櫧鏇村鏄撳嚌鍥烘垚褰€?},
-  {name:'铔嬬倰楗?,cat:'铔嬬被',gi:65,giLevel:'mid',calPer100:180,serve:'鍗婄锛堢害100g锛?,bgAdvice:'铔嬬倰楗殑GI鍊煎彇鍐充簬绫抽キ鐨勫灏戙€傜背楗?娌逛竴璧风倰锛岀儹閲忓拰纰虫按閮戒笉浣庛€傚鏋滃鏀捐泲鍜岃敩鑿滐紙鑳¤悵鍗滀竵銆侀潚璞嗙瓑锛夊皯鏀鹃キ锛屽崌绯栦細鏇存參銆?,bpAdvice:'鐐掗キ鏃舵补鍜岀洂瑕佹帶鍒讹紝椁愰鐨勮泲鐐掗キ閫氬父娌瑰緢澶с€?,tip:'鍦ㄥ鐢ㄧ硻绫抽キ鍋氳泲鐐掗キ锛屽鏀捐泲鍜岃敩鑿滀竵锛屽皯鏀炬补鐩愩€?},
+  // 蛋类（独立分类）
+  {name:'煮鸡蛋',cat:'蛋类',gi:0,giLevel:'low',calPer100:155,serve:'1个（约50g）',bgAdvice:'煮鸡蛋GI值为0，对血糖零影响。蛋白优质、蛋黄含卵磷脂。水煮做法无油无糖，是糖前期最推荐的蛋类做法。',bpAdvice:'鸡蛋胆固醇对大多数人影响有限，每天1个水煮蛋对血压无负担。',tip:'煮8分钟（蛋黄刚凝固）口感最佳，营养保留最好。'},
+  {name:'煎鸡蛋',cat:'蛋类',gi:0,giLevel:'low',calPer100:196,serve:'1个（约50g）',bgAdvice:'煎鸡蛋GI值为0，但比煮蛋多了不少油。用不粘锅少油煎比传统油煎好很多。',bpAdvice:'煎蛋用的油和盐会增加热量和钠摄入，对血压有一定影响。',tip:'用不粘锅刷薄薄一层油即可，或试试水煎蛋（用水代替油）。'},
+  {name:'炒鸡蛋',cat:'蛋类',gi:10,giLevel:'low',calPer100:150,serve:'1-2个蛋的量（约100g）',bgAdvice:'炒鸡蛋GI值极低，对血糖几乎无影响。纯炒蛋不加糖，碳水很少。如果加了番茄或韭菜一起炒就更好了。',bpAdvice:'炒蛋时油量要控制，少放盐。和蔬菜一起炒（韭菜炒蛋、番茄炒蛋）更有营养。',tip:'蛋液里加一点点水或牛奶，炒出来更嫩滑。'},
+  {name:'茶叶蛋',cat:'蛋类',gi:5,giLevel:'low',calPer100:145,serve:'1个（约50g）',bgAdvice:'茶叶蛋GI值极低。茶叶中的茶多酚有抗氧化作用。煮制过程中不加油，热量不高，但会吸收汤汁中的盐分。',bpAdvice:'茶叶蛋的汤汁通常含较多酱油和盐，蛋壳裂缝越多的茶叶蛋越咸。高血压人群注意不要吃太咸的茶叶蛋。',tip:'自己在家做可以控制盐量，比外面买的清淡。'},
+  {name:'卤蛋',cat:'蛋类',gi:5,giLevel:'low',calPer100:150,serve:'1个（约50g）',bgAdvice:'卤蛋GI值极低。卤汁中通常含糖（冰糖上色），但蛋本身吸收的糖很少。整体对血糖影响极小。',bpAdvice:'卤汁含较多酱油（高钠），卤蛋会比煮蛋咸很多，高血压人群注意。',tip:'卤蛋虽好吃，但盐分不低，偶尔吃一两个解馋即可。'},
+  {name:'荷包蛋',cat:'蛋类',gi:0,giLevel:'low',calPer100:140,serve:'1-2个（约100g）',bgAdvice:'水煮荷包蛋（水波蛋）GI值为0，无油无糖，和煮鸡蛋一样是糖前期最推荐的蛋类做法。',bpAdvice:'水煮荷包蛋对血压无负担，如果用油煎荷包蛋则热量高一些。',tip:'水开后转小火，在水里加一点白醋，蛋白更容易凝固成形。'},
+  {name:'蛋炒饭',cat:'蛋类',gi:65,giLevel:'mid',calPer100:180,serve:'半碗（约100g）',bgAdvice:'蛋炒饭的GI值取决于米饭的多少。米饭+油一起炒，热量和碳水都不低。如果多放蛋和蔬菜（胡萝卜丁、青豆等）少放饭，升糖会更慢。',bpAdvice:'炒饭时油和盐要控制，餐馆的蛋炒饭通常油很大。',tip:'在家用糙米饭做蛋炒饭，多放蛋和蔬菜丁，少放油盐。'},
 
-  // 鐢滅摐绫?  {name:'棣欑摐',cat:'姘存灉',gi:62,giLevel:'mid',calPer100:30,serve:'鍗婁釜灏忛鐡滐紙绾?50g锛?,bgAdvice:'棣欑摐GI鍊间腑绛夛紝浣嗘按鍒嗗ぇ銆佹€荤⒊姘翠笉绠楅珮銆傜硸鍓嶆湡鍙互閫傞噺鍚冿紝涓€娆′笉瓒呰繃鍗婁釜銆?,bpAdvice:'棣欑摐楂橀捑浣庨挔锛屾按鍒嗕赴瀵岋紝鏈変竴瀹氱殑鍒╁翱鍜岄檷鍘嬩綔鐢ㄣ€?,tip:'閫変笉澶啛閫忕殑棣欑摐锛孏I鍊间細鏇翠綆涓€浜涖€?},
-  {name:'鐧藉叞鐡?,cat:'姘存灉',gi:60,giLevel:'mid',calPer100:28,serve:'涓€灏忓潡锛堢害150g锛?,bgAdvice:'鐧藉叞鐡淕I鍊间腑绛夛紝姘村垎鍚噺楂橈紝鎬荤⒊姘翠綆銆傚拰鍝堝瘑鐡滅被浼硷紝鎺у埗鍒嗛噺鍗冲彲銆?,bpAdvice:'鐧藉叞鐡滃瘜鍚捑鍜屾按鍒嗭紝鏈夊埄灏夸綔鐢紝瀵硅鍘嬫湁涓€瀹氬ソ澶勩€?,tip:'鐧藉叞鐡滃緢鐢滀絾涓昏鏄灉绯栵紝閫傞噺鍚冧笉浼氬墽鐑堝奖鍝嶈绯栥€?},
-  {name:'缃戠汗鐡?,cat:'姘存灉',gi:60,giLevel:'mid',calPer100:32,serve:'涓€灏忓潡锛堢害150g锛?,bgAdvice:'缃戠汗鐡滐紙鏃ユ湰鐢滅摐锛塆I鍊间腑绛夛紝鍚硸閲忔瘮鏅€氶鐡滅暐楂樸€傜硸鍓嶆湡瑕侀€傚綋鍑忓皯鍒嗛噺銆?,bpAdvice:'鍚捑涓板瘜锛屽琛€鍘嬪弸濂姐€備絾绯栧垎姣斾竴鑸敎鐡滈珮锛屼笉鍙椋熴€?,tip:'璐典笖鐢滐紝鍋跺皵鍝佸皾涓€灏忓潡鍗冲彲銆?},
-  {name:'鐜夎尮鐡?,cat:'姘存灉',gi:58,giLevel:'mid',calPer100:28,serve:'涓€灏忓潡锛堢害150g锛?,bgAdvice:'鐜夎尮鐡滐紙鐜夎弴鐢滅摐锛塆I鍊间腑绛夛紝姘村垎澶с€佺儹閲忎綆銆傝倝璐ㄨ蒋绯敎缇庯紝绯栧墠鏈熷彲閫傞噺鍚冿紝涓€娆′笉瓒呰繃涓€灏忓潡銆?,bpAdvice:'鍚捑涓板瘜锛屾按鍒嗗厖瓒筹紝鏈変竴瀹氱殑鍒╁翱浣滅敤锛屽琛€鍘嬪弸濂姐€?,tip:'鐜夎尮鐡滄垚鐔熷悗鐡滆倝浼氬彉杞彉鐢滐紝鍐伴晣鍚庡彛鎰熸洿濂姐€?},
+  // 甜瓜类
+  {name:'香瓜',cat:'水果',gi:62,giLevel:'mid',calPer100:30,serve:'半个小香瓜（约150g）',bgAdvice:'香瓜GI值中等，但水分大、总碳水不算高。糖前期可以适量吃，一次不超过半个。',bpAdvice:'香瓜高钾低钠，水分丰富，有一定的利尿和降压作用。',tip:'选不太熟透的香瓜，GI值会更低一些。'},
+  {name:'白兰瓜',cat:'水果',gi:60,giLevel:'mid',calPer100:28,serve:'一小块（约150g）',bgAdvice:'白兰瓜GI值中等，水分含量高，总碳水低。和哈密瓜类似，控制分量即可。',bpAdvice:'白兰瓜富含钾和水分，有利尿作用，对血压有一定好处。',tip:'白兰瓜很甜但主要是果糖，适量吃不会剧烈影响血糖。'},
+  {name:'网纹瓜',cat:'水果',gi:60,giLevel:'mid',calPer100:32,serve:'一小块（约150g）',bgAdvice:'网纹瓜（日本甜瓜）GI值中等，含糖量比普通香瓜略高。糖前期要适当减少分量。',bpAdvice:'含钾丰富，对血压友好。但糖分比一般甜瓜高，不可多食。',tip:'贵且甜，偶尔品尝一小块即可。'},
+  {name:'玉茹瓜',cat:'水果',gi:58,giLevel:'mid',calPer100:28,serve:'一小块（约150g）',bgAdvice:'玉茹瓜（玉菇甜瓜）GI值中等，水分大、热量低。肉质软糯甜美，糖前期可适量吃，一次不超过一小块。',bpAdvice:'含钾丰富，水分充足，有一定的利尿作用，对血压友好。',tip:'玉茹瓜成熟后瓜肉会变软变甜，冰镇后口感更好。'},
 
-  // 娴烽矞绫伙紙鏂板垎绫伙級
-  {name:'铻冭煿',cat:'娴烽矞',gi:0,giLevel:'low',calPer100:95,serve:'1-2鍙紙绾?00g甯﹀３锛?,bgAdvice:'铻冭煿GI鍊间负0锛岄珮铔嬬櫧浣庤剛锛屽琛€绯栨棤褰卞搷銆傝煿鑲夐矞缇庤惀鍏讳赴瀵屻€備絾锜归粍/锜硅啅鑳嗗浐閱囧惈閲忔瀬楂橈紝瑕佸皯鍚冦€?,bpAdvice:'铻冭煿鏈韩瀵硅鍘嬫棤瀹筹紝浣嗗悆锜规椂甯歌樃濮滈唻姹侊紙鍚洂锛夛紝娉ㄦ剰铇告枡涓嶈澶銆?,tip:'娓呰捀澶ч椄锜规渶缁忓吀锛屼絾锜归粍鑳嗗浐閱囬珮锛屼竴娆?-2鍙嵆鍙€?},
-  {name:'鐢熻殱',cat:'娴烽矞',gi:0,giLevel:'low',calPer100:60,serve:'3-5鍙紙绾?00g鑲夛級',bgAdvice:'鐢熻殱锛堢墶铔庯級GI鍊间负0锛岄珮铔嬬櫧浣庤剛锛屽瘜鍚攲銆傚琛€绯栨棤褰卞搷銆傜⒊鐑ゆ垨娓呰捀閮藉緢閫傚悎绯栧墠鏈熴€?,bpAdvice:'鐢熻殱瀵屽惈閿屽拰鐗涚：閰革紝鏈夊姪浜庡績琛€绠″仴搴枫€傝挏钃夌儰鐢熻殱鐨勬补鍜岀洂瑕佹敞鎰忋€?,tip:'娓呰捀鐢熻殱铇稿皯璁搁叡娌规渶鍋ュ悍锛屾瘮钂滆搲鐑ょ増鏈綆鑴傘€?},
-  {name:'鎵囪礉',cat:'娴烽矞',gi:0,giLevel:'low',calPer100:90,serve:'5-8涓紙绾?00g鑲夛級',bgAdvice:'鎵囪礉GI鍊间负0锛岄珮铔嬬櫧浣庤剛锛屽瘜鍚墰纾洪吀銆傚琛€绯栨棤褰卞搷銆?,bpAdvice:'鎵囪礉鏌憋紙闂３鑲岋級铔嬬櫧鍚噺寰堥珮锛岃剛鑲瀬浣庛€備絾钂滆搲绮変笣钂告墖璐濅腑鐨勭矇涓濅細澧炲姞纰虫按銆?,tip:'娓呰捀鎵囪礉鏈€鍋ュ悍锛屽皯鏀剧矇涓濆拰钂滆搲娌广€?},
-  {name:'闈掑彛',cat:'娴烽矞',gi:0,giLevel:'low',calPer100:80,serve:'10-15涓紙绾?00g鑲夛級',bgAdvice:'闈掑彛锛堣椿璐?娴疯櫣锛塆I鍊间负0锛岃泲鐧藉惈閲忛珮銆傚瘜鍚搧鍜孊12銆傚琛€绯栨棤褰卞搷銆?,bpAdvice:'闈掑彛浣庤剛浣庨挔锛屽瘜鍚玂mega-3锛屽蹇冭绠℃湁淇濇姢浣滅敤銆?,tip:'鐧借憽钀勯厭鐓潚鍙ｅ緢缁忓吀锛堥厭绮句細鎸ュ彂锛屼絾绯栧墠鏈熷缓璁敤娓呰捀锛夈€?},
-  {name:'榫欒櫨',cat:'娴烽矞',gi:0,giLevel:'low',calPer100:90,serve:'鍗婂彧锛堢害150g鑲夛級',bgAdvice:'榫欒櫨GI鍊间负0锛岄珮铔嬬櫧鏋佷綆鑴傘€傚琛€绯栨棤褰卞搷銆備絾浠锋牸璐碉紝涓嶆槸鏃ュ父椋熸潗銆?,bpAdvice:'榫欒櫨铔嬬櫧浼樿川锛屽琛€鍘嬫棤褰卞搷銆傛竻钂告垨鐧界伡鏈€鍋ュ悍銆?,tip:'涓嶈铇稿お澶氶粍娌规垨閰辨枡锛屾竻钂稿悗铇镐竴鐐圭偣鐢熸娊灏卞緢椴滅編銆?},
-  {name:'鐨毊铏?,cat:'娴烽矞',gi:0,giLevel:'low',calPer100:85,serve:'5-8鍙紙绾?50g鑲夛級',bgAdvice:'鐨毊铏撅紙铏捐泟锛塆I鍊间负0锛屽拰鏅€氳櫨绫讳技锛岄珮铔嬬櫧浣庤剛锛屽琛€绯栨棤褰卞搷銆?,bpAdvice:'鐨毊铏惧惈鐗涚：閰稿拰Omega-3锛屾湁鐩婂績琛€绠°€傛竻钂告垨鐧界伡鏈€鍋ュ悍銆?,tip:'姣嶇毊鐨櫨鏈夎櫨榛勶紙铏剧苯锛夋洿棣欙紝浣嗚儐鍥洪唶姣斿叕鐨勯珮涓€浜涖€?},
-  {name:'娴峰弬',cat:'娴烽矞',gi:0,giLevel:'low',calPer100:25,serve:'1-2鏉★紙绾?0g骞插彂鍚庯級',bgAdvice:'娴峰弬GI鍊间负0锛岃泲鐧藉惈閲忛珮锛堜富瑕佹槸鑳跺師铔嬬櫧锛夛紝鍑犱箮鏃犺剛鑲€傚琛€绯栨棤褰卞搷銆?,bpAdvice:'娴峰弬鍚捣鍙傜殏鑻峰拰榛忓绯栵紝浼犵粺璁や负鏈夌泭琛€绠″仴搴峰拰鍏嶇柅鍔涖€備絾鐩愭笉娴峰弬閽犲惈閲忓緢楂橈紝瑕侀€夋贰骞叉捣鍙傝嚜宸卞彂銆?,tip:'娴峰弬鏈韩鏃犲懗锛岄潬姹ゆ眮璋冨懗銆傚缓璁竻娣＄児楗紙钁辩儳灏戞补銆佸皬绫虫捣鍙傜播涓嶅姞鐩愶級銆?},
-  {name:'椴嶉奔',cat:'娴烽矞',gi:0,giLevel:'low',calPer100:82,serve:'1-2鍙紙绾?0g鑲夛級',bgAdvice:'椴嶉奔GI鍊间负0锛岄珮铔嬬櫧浣庤剛锛屽琛€绯栨棤褰卞搷銆備絾椴嶆眮閫氬父鍚緝澶氱洂鍜岀硸锛屾竻钂告瘮绾㈢儳鏇撮€傚悎绯栧墠鏈熴€?,bpAdvice:'椴滈矋楸兼湰韬琛€鍘嬫棤瀹筹紝浣嗗共椴嶇殑娑ㄥ彂杩囩▼鍙兘鐢ㄥ埌纰辨按銆傛竻钂搁矞椴嶆瘮绾㈢儳鏇村仴搴枫€?,tip:'椴滈矋楸煎垏鐗囨竻钂告垨鐧界伡灏卞緢濂斤紝涓嶉渶瑕佸帤閲嶇殑鑺℃眮銆?},
-  {name:'铔忓瓙',cat:'娴烽矞',gi:0,giLevel:'low',calPer100:50,serve:'10-15鍙紙绾?00g鑲夛級',bgAdvice:'铔忓瓙GI鍊间负0锛岄珮铔嬬櫧鏋佷綆鑴傦紝瀵硅绯栨棤褰卞搷銆傛槸鎬т环姣旈珮鐨勬棩甯告捣椴溿€?,bpAdvice:'铔忓瓙鍚攲鍜岀锛屽蹇冭绠℃湁鐩娿€備絾鍜岃洡铚婁竴鏍烽挔鍚噺涓嶄綆锛岀児楗椂灏戝姞鐩愩€?,tip:'钁卞鐐掕洀瀛愬揩鐐掑嵆鍙紝涓嶈涔呯叜鍙樿€併€傜倰涔嬪墠鍚愬噣娌欏瓙銆?},
-  {name:'娴疯灪',cat:'娴烽矞',gi:0,giLevel:'low',calPer100:80,serve:'3-5涓紙绾?0g鑲夛級',bgAdvice:'娴疯灪GI鍊间负0锛岃泲鐧藉惈閲忛珮锛屽琛€绯栨棤褰卞搷銆備絾娴疯灪鑴戯紙鍐呰剰閮ㄥ垎锛夎儐鍥洪唶楂橈紝鍚冭倝涓嶅悆鍐呰剰銆?,bpAdvice:'娴疯灪鑲夊惈鐗涚：閰革紝鏈夌泭蹇冭绠°€傜櫧鐏兼捣铻鸿樃灏戣鐢熸娊鏈€鍋ュ悍銆?,tip:'娴疯灪涓€瀹氳鐓啛鐓€忥紝閬垮厤瀵勭敓铏闄┿€?},
+  // 海鲜类（新分类）
+  {name:'螃蟹',cat:'海鲜',gi:0,giLevel:'low',calPer100:95,serve:'1-2只（约200g带壳）',bgAdvice:'螃蟹GI值为0，高蛋白低脂，对血糖无影响。蟹肉鲜美营养丰富。但蟹黄/蟹膏胆固醇含量极高，要少吃。',bpAdvice:'螃蟹本身对血压无害，但吃蟹时常蘸姜醋汁（含盐），注意蘸料不要太多。',tip:'清蒸大闸蟹最经典，但蟹黄胆固醇高，一次1-2只即可。'},
+  {name:'生蚝',cat:'海鲜',gi:0,giLevel:'low',calPer100:60,serve:'3-5只（约100g肉）',bgAdvice:'生蚝（牡蛎）GI值为0，高蛋白低脂，富含锌。对血糖无影响。碳烤或清蒸都很适合糖前期。',bpAdvice:'生蚝富含锌和牛磺酸，有助于心血管健康。蒜蓉烤生蚝的油和盐要注意。',tip:'清蒸生蚝蘸少许酱油最健康，比蒜蓉烤版本低脂。'},
+  {name:'扇贝',cat:'海鲜',gi:0,giLevel:'low',calPer100:90,serve:'5-8个（约100g肉）',bgAdvice:'扇贝GI值为0，高蛋白低脂，富含牛磺酸。对血糖无影响。',bpAdvice:'扇贝柱（闭壳肌）蛋白含量很高，脂肪极低。但蒜蓉粉丝蒸扇贝中的粉丝会增加碳水。',tip:'清蒸扇贝最健康，少放粉丝和蒜蓉油。'},
+  {name:'青口',cat:'海鲜',gi:0,giLevel:'low',calPer100:80,serve:'10-15个（约100g肉）',bgAdvice:'青口（贻贝/海虹）GI值为0，蛋白含量高。富含铁和B12。对血糖无影响。',bpAdvice:'青口低脂低钠，富含Omega-3，对心血管有保护作用。',tip:'白葡萄酒煮青口很经典（酒精会挥发，但糖前期建议用清蒸）。'},
+  {name:'龙虾',cat:'海鲜',gi:0,giLevel:'low',calPer100:90,serve:'半只（约150g肉）',bgAdvice:'龙虾GI值为0，高蛋白极低脂。对血糖无影响。但价格贵，不是日常食材。',bpAdvice:'龙虾蛋白优质，对血压无影响。清蒸或白灼最健康。',tip:'不要蘸太多黄油或酱料，清蒸后蘸一点点生抽就很鲜美。'},
+  {name:'皮皮虾',cat:'海鲜',gi:0,giLevel:'low',calPer100:85,serve:'5-8只（约150g肉）',bgAdvice:'皮皮虾（虾蛄）GI值为0，和普通虾类似，高蛋白低脂，对血糖无影响。',bpAdvice:'皮皮虾含牛磺酸和Omega-3，有益心血管。清蒸或白灼最健康。',tip:'母皮皮虾有虾黄（虾籽）更香，但胆固醇比公的高一些。'},
+  {name:'海参',cat:'海鲜',gi:0,giLevel:'low',calPer100:25,serve:'1-2条（约50g干发后）',bgAdvice:'海参GI值为0，蛋白含量高（主要是胶原蛋白），几乎无脂肪。对血糖无影响。',bpAdvice:'海参含海参皂苷和黏多糖，传统认为有益血管健康和免疫力。但盐渍海参钠含量很高，要选淡干海参自己发。',tip:'海参本身无味，靠汤汁调味。建议清淡烹饪（葱烧少油、小米海参粥不加盐）。'},
+  {name:'鲍鱼',cat:'海鲜',gi:0,giLevel:'low',calPer100:82,serve:'1-2只（约50g肉）',bgAdvice:'鲍鱼GI值为0，高蛋白低脂，对血糖无影响。但鲍汁通常含较多盐和糖，清蒸比红烧更适合糖前期。',bpAdvice:'鲜鲍鱼本身对血压无害，但干鲍的涨发过程可能用到碱水。清蒸鲜鲍比红烧更健康。',tip:'鲜鲍鱼切片清蒸或白灼就很好，不需要厚重的芡汁。'},
+  {name:'蛏子',cat:'海鲜',gi:0,giLevel:'low',calPer100:50,serve:'10-15只（约100g肉）',bgAdvice:'蛏子GI值为0，高蛋白极低脂，对血糖无影响。是性价比高的日常海鲜。',bpAdvice:'蛏子含锌和硒，对心血管有益。但和蛤蜊一样钠含量不低，烹饪时少加盐。',tip:'葱姜炒蛏子快炒即可，不要久煮变老。炒之前吐净沙子。'},
+  {name:'海螺',cat:'海鲜',gi:0,giLevel:'low',calPer100:80,serve:'3-5个（约80g肉）',bgAdvice:'海螺GI值为0，蛋白含量高，对血糖无影响。但海螺脑（内脏部分）胆固醇高，吃肉不吃内脏。',bpAdvice:'海螺肉含牛磺酸，有益心血管。白灼海螺蘸少许生抽最健康。',tip:'海螺一定要煮熟煮透，避免寄生虫风险。'},
 
-  // 鑽嗚姤锛堣敩鑿滐級
-  {name:'鑽嗚姤',cat:'钄彍',gi:10,giLevel:'low',calPer100:25,serve:'50-80g锛堢害涓€灏忔妸锛?,bgAdvice:'鑽嗚姤鏄竴绉嶇壒鑹查鑽夎敩鑿滐紙娌冲崡绛夊湴甯歌锛夛紝GI鍊兼瀬浣庯紝鐑噺鏋佷綆銆傚瘜鍚尌鍙戞补鍜屽绉嶇淮鐢熺礌锛屽琛€绯栧嚑涔庢棤褰卞搷銆傚噳鎷屾垨鍋氭堡閮介€傚悎绯栧墠鏈熴€?,bpAdvice:'鑽嗚姤涓殑鎸ュ彂娌规湁杞诲害鑸掑紶琛€绠＄殑浣滅敤锛屽琛€鍘嬫棤瀹炽€?,tip:'鍑夋媽鑽嗚姤鏄澶╃殑娓呯埥灏忚彍锛屼篃鍙互鍋氳崋鑺ラ浮铔嬫堡銆?},
+  // 荆芥（蔬菜）
+  {name:'荆芥',cat:'蔬菜',gi:10,giLevel:'low',calPer100:25,serve:'50-80g（约一小把）',bgAdvice:'荆芥是一种特色香草蔬菜（河南等地常见），GI值极低，热量极低。富含挥发油和多种维生素，对血糖几乎无影响。凉拌或做汤都适合糖前期。',bpAdvice:'荆芥中的挥发油有轻度舒张血管的作用，对血压无害。',tip:'凉拌荆芥是夏天的清爽小菜，也可以做荆芥鸡蛋汤。'},
 ];
 
-// ==================== 宸ュ叿鍑芥暟 ====================
+// ==================== 工具函数 ====================
 function formatDate(d) {
   const m = d.getMonth() + 1;
   const day = d.getDate();
@@ -1392,7 +1401,7 @@ function confirmDialog(msg) {
   return window.confirm(msg);
 }
 
-// ==================== Tab 鍒囨崲 ====================
+// ==================== Tab 切换 ====================
 let currentTab = 'tab-bp';
 let bpMorningChartInstance = null;
 let bpEveningChartInstance = null;
@@ -1434,7 +1443,7 @@ function showToast(msg, duration) {
   t._timeout = setTimeout(function() { t.classList.remove('show'); }, duration);
 }
 
-// ==================== Tab 1: 姣忔棩璁板綍 ====================
+// ==================== Tab 1: 每日记录 ====================
 function getTodayStr() {
   return formatDate(new Date());
 }
@@ -1522,7 +1531,7 @@ function getOrCreateRecord(date, type) {
 
 function saveBP() {
   var date = document.getElementById('recordDate').value;
-  if (!date) { showToast('璇峰厛閫夋嫨鏃ユ湡'); return; }
+  if (!date) { showToast('请先选择日期'); return; }
 
   var settings = loadSettings();
 
@@ -1530,7 +1539,7 @@ function saveBP() {
   var mSys = parseFloat(document.getElementById('bpMorningSys').value);
   var mDia = parseFloat(document.getElementById('bpMorningDia').value);
   if (!isNaN(mSys) || !isNaN(mDia)) {
-    if (isNaN(mSys) || isNaN(mDia)) { showToast('璇峰悓鏃跺～鍐欐敹缂╁帇鍜岃垝寮犲帇'); return; }
+    if (isNaN(mSys) || isNaN(mDia)) { showToast('请同时填写收缩压和舒张压'); return; }
     var r = getOrCreateRecord(date, 'bp_morning');
     r.systolic = mSys;
     r.diastolic = mDia;
@@ -1542,7 +1551,7 @@ function saveBP() {
   var eSys = parseFloat(document.getElementById('bpEveningSys').value);
   var eDia = parseFloat(document.getElementById('bpEveningDia').value);
   if (!isNaN(eSys) || !isNaN(eDia)) {
-    if (isNaN(eSys) || isNaN(eDia)) { showToast('璇峰悓鏃跺～鍐欐敹缂╁帇鍜岃垝寮犲帇'); return; }
+    if (isNaN(eSys) || isNaN(eDia)) { showToast('请同时填写收缩压和舒张压'); return; }
     var r2 = getOrCreateRecord(date, 'bp_evening');
     r2.systolic = eSys;
     r2.diastolic = eDia;
@@ -1550,22 +1559,22 @@ function saveBP() {
     checkBP('bpEvening', eSys, eDia, settings);
   }
 
-  if (isNaN(mSys) && isNaN(eSys)) { showToast('璇疯嚦灏戝～鍐欎竴缁勮鍘嬫暟鎹?); return; }
+  if (isNaN(mSys) && isNaN(eSys)) { showToast('请至少填写一组血压数据'); return; }
 
   saveRecords(records);
-  showToast('琛€鍘嬭褰曞凡淇濆瓨锛?);
+  showToast('血压记录已保存！');
 }
 
 function saveGlucose() {
   var date = document.getElementById('recordDate').value;
-  if (!date) { showToast('璇峰厛閫夋嫨鏃ユ湡'); return; }
+  if (!date) { showToast('请先选择日期'); return; }
 
   var settings = loadSettings();
 
   var fasting = parseFloat(document.getElementById('glucoseFasting').value);
   var postmeal = parseFloat(document.getElementById('glucosePostmeal').value);
 
-  if (isNaN(fasting) && isNaN(postmeal)) { showToast('璇疯嚦灏戝～鍐欎竴缁勮绯栨暟鎹?); return; }
+  if (isNaN(fasting) && isNaN(postmeal)) { showToast('请至少填写一组血糖数据'); return; }
 
   if (!isNaN(fasting)) {
     var r = getOrCreateRecord(date, 'glucose_fasting');
@@ -1582,20 +1591,20 @@ function saveGlucose() {
   }
 
   saveRecords(records);
-  showToast('琛€绯栬褰曞凡淇濆瓨锛?);
+  showToast('血糖记录已保存！');
 }
 
 function checkBP(prefix, sys, dia, s) {
   var el = document.getElementById(prefix + 'Status');
   if (sys > s.bp_systolic_max || dia > s.bp_diastolic_max) {
     el.className = 'record-result show abnormal';
-    el.textContent = '鈿狅笍 琛€鍘嬪亸楂橈紒鏀剁缉鍘嬫垨鑸掑紶鍘嬭秴杩囦簡姝ｅ父鑼冨洿锛屽缓璁叧娉ㄥ苟鍜ㄨ鍖荤敓銆?;
+    el.textContent = '⚠️ 血压偏高！收缩压或舒张压超过了正常范围，建议关注并咨询医生。';
   } else if (sys < s.bp_systolic_min || dia < s.bp_diastolic_min) {
     el.className = 'record-result show abnormal';
-    el.textContent = '鈿狅笍 琛€鍘嬪亸浣庯紒濡傛灉鎸佺画鍋忎綆骞朵即鏈夊ご鏅曠瓑鐥囩姸锛岃鍜ㄨ鍖荤敓銆?;
+    el.textContent = '⚠️ 血压偏低！如果持续偏低并伴有头晕等症状，请咨询医生。';
   } else {
     el.className = 'record-result show normal';
-    el.textContent = '鉁?琛€鍘嬫甯革紝缁х画淇濇寔锛?;
+    el.textContent = '✅ 血压正常，继续保持！';
   }
 }
 
@@ -1603,17 +1612,17 @@ function checkGlucose(prefix, glu, min, max) {
   var el = document.getElementById(prefix + 'Status');
   if (glu > max) {
     el.className = 'record-result show abnormal';
-    el.textContent = '鈿狅笍 琛€绯栧亸楂橈紒瓒呰繃浜嗘甯歌寖鍥达紝璇锋敞鎰忛ギ椋熷苟鍜ㄨ鍖荤敓銆?;
+    el.textContent = '⚠️ 血糖偏高！超过了正常范围，请注意饮食并咨询医生。';
   } else if (glu < min) {
     el.className = 'record-result show abnormal';
-    el.textContent = '鈿狅笍 琛€绯栧亸浣庯紒鍙兘鍑虹幇浣庤绯栫棁鐘讹紝璇锋敞鎰忓強鏃惰繘椋熴€?;
+    el.textContent = '⚠️ 血糖偏低！可能出现低血糖症状，请注意及时进食。';
   } else {
     el.className = 'record-result show normal';
-    el.textContent = '鉁?琛€绯栨甯革紝缁х画淇濇寔锛?;
+    el.textContent = '✅ 血糖正常，继续保持！';
   }
 }
 
-// ==================== Tab 2: 瓒嬪娍鍥捐〃 ====================
+// ==================== Tab 2: 趋势图表 ====================
 function getRecordsInPeriod(days) {
   var cutoff = new Date();
   cutoff.setDate(cutoff.getDate() - days + 1);
@@ -1679,12 +1688,12 @@ function getGlucoseDatasets(days) {
     var post = dateMap[d].glucose_postmeal;
 
     if (fast) {
-      labels.push(d + ' 绌鸿吂');
+      labels.push(d + ' 空腹');
       fastingData.push(fast.glucose);
       postmealData.push(null); // offset for alignment
     }
     if (post) {
-      labels.push(d + ' 椁愬悗');
+      labels.push(d + ' 餐后');
       fastingData.push(null);
       postmealData.push(post.glucose);
     }
@@ -1735,7 +1744,7 @@ function renderBPMorningChart() {
       labels: data.labels,
       datasets: [
         {
-          label: '鏀剁缉鍘?,
+          label: '收缩压',
           data: data.sysData,
           borderColor: '#E74C3C',
           backgroundColor: 'rgba(231,76,60,0.1)',
@@ -1745,7 +1754,7 @@ function renderBPMorningChart() {
           tension: 0.3
         },
         {
-          label: '鑸掑紶鍘?,
+          label: '舒张压',
           data: data.diaData,
           borderColor: '#5BA4CF',
           backgroundColor: 'rgba(91,164,207,0.1)',
@@ -1785,9 +1794,9 @@ function renderBPMorningChart() {
   var diaHigh = allDia.filter(function(v){return v > s.bp_diastolic_max;}).length;
 
   document.getElementById('bpMorningStats').innerHTML =
-    '<div class="stat-item"><div class="stat-value">' + sysAvg + '</div><div class="stat-label">骞冲潎鏀剁缉鍘?/div></div>' +
-    '<div class="stat-item"><div class="stat-value">' + diaAvg + '</div><div class="stat-label">骞冲潎鑸掑紶鍘?/div></div>' +
-    '<div class="stat-item' + (sysHigh+diaHigh>0?' warn':'') + '"><div class="stat-value">' + (sysHigh+diaHigh) + '</div><div class="stat-label">瓒呮爣娆℃暟</div></div>';
+    '<div class="stat-item"><div class="stat-value">' + sysAvg + '</div><div class="stat-label">平均收缩压</div></div>' +
+    '<div class="stat-item"><div class="stat-value">' + diaAvg + '</div><div class="stat-label">平均舒张压</div></div>' +
+    '<div class="stat-item' + (sysHigh+diaHigh>0?' warn':'') + '"><div class="stat-value">' + (sysHigh+diaHigh) + '</div><div class="stat-label">超标次数</div></div>';
 }
 
 function renderBPEveningChart() {
@@ -1819,7 +1828,7 @@ function renderBPEveningChart() {
       labels: data.labels,
       datasets: [
         {
-          label: '鏀剁缉鍘?,
+          label: '收缩压',
           data: data.sysData,
           borderColor: '#E74C3C',
           backgroundColor: 'rgba(231,76,60,0.1)',
@@ -1829,7 +1838,7 @@ function renderBPEveningChart() {
           tension: 0.3
         },
         {
-          label: '鑸掑紶鍘?,
+          label: '舒张压',
           data: data.diaData,
           borderColor: '#5BA4CF',
           backgroundColor: 'rgba(91,164,207,0.1)',
@@ -1869,9 +1878,9 @@ function renderBPEveningChart() {
   var diaHigh = allDia.filter(function(v){return v > s.bp_diastolic_max;}).length;
 
   document.getElementById('bpEveningStats').innerHTML =
-    '<div class="stat-item"><div class="stat-value">' + sysAvg + '</div><div class="stat-label">骞冲潎鏀剁缉鍘?/div></div>' +
-    '<div class="stat-item"><div class="stat-value">' + diaAvg + '</div><div class="stat-label">骞冲潎鑸掑紶鍘?/div></div>' +
-    '<div class="stat-item' + (sysHigh+diaHigh>0?' warn':'') + '"><div class="stat-value">' + (sysHigh+diaHigh) + '</div><div class="stat-label">瓒呮爣娆℃暟</div></div>';
+    '<div class="stat-item"><div class="stat-value">' + sysAvg + '</div><div class="stat-label">平均收缩压</div></div>' +
+    '<div class="stat-item"><div class="stat-value">' + diaAvg + '</div><div class="stat-label">平均舒张压</div></div>' +
+    '<div class="stat-item' + (sysHigh+diaHigh>0?' warn':'') + '"><div class="stat-value">' + (sysHigh+diaHigh) + '</div><div class="stat-label">超标次数</div></div>';
 }
 
 function renderGlucoseChart() {
@@ -1903,7 +1912,7 @@ function renderGlucoseChart() {
       labels: data.labels,
       datasets: [
         {
-          label: '绌鸿吂琛€绯?,
+          label: '空腹血糖',
           data: data.fastingData,
           borderColor: '#F39C12',
           backgroundColor: 'rgba(243,156,18,0.1)',
@@ -1914,7 +1923,7 @@ function renderGlucoseChart() {
           spanGaps: false
         },
         {
-          label: '椁愬悗2h琛€绯?,
+          label: '餐后2h血糖',
           data: data.postmealData,
           borderColor: '#E74C3C',
           backgroundColor: 'rgba(231,76,60,0.1)',
@@ -1954,9 +1963,9 @@ function renderGlucoseChart() {
                   allPostmeal.filter(function(v){return v > s.glucose_postmeal_max;}).length;
 
   document.getElementById('glucoseStats').innerHTML =
-    '<div class="stat-item"><div class="stat-value">' + fastAvg + '</div><div class="stat-label">骞冲潎绌鸿吂琛€绯?/div></div>' +
-    '<div class="stat-item"><div class="stat-value">' + postAvg + '</div><div class="stat-label">骞冲潎椁愬悗琛€绯?/div></div>' +
-    '<div class="stat-item' + (overCount>0?' warn':'') + '"><div class="stat-value">' + overCount + '</div><div class="stat-label">瓒呮爣娆℃暟</div></div>';
+    '<div class="stat-item"><div class="stat-value">' + fastAvg + '</div><div class="stat-label">平均空腹血糖</div></div>' +
+    '<div class="stat-item"><div class="stat-value">' + postAvg + '</div><div class="stat-label">平均餐后血糖</div></div>' +
+    '<div class="stat-item' + (overCount>0?' warn':'') + '"><div class="stat-value">' + overCount + '</div><div class="stat-label">超标次数</div></div>';
 
   // Show dinner records for dates in the chart period
   renderGlucoseDinnerContext(days);
@@ -2018,7 +2027,7 @@ function renderGlucoseDinnerContext(days) {
     var postmeal = g.postmeal;
     var nextFasting = fastingByDateAll[getNextDate(date)];
 
-    var dinnerText = (dinner && dinner.length > 0) ? '馃嵔锔?' + dinner.join('銆?) : '<span style="color:var(--text-light);">鏈褰曟櫄椁?/span>';
+    var dinnerText = (dinner && dinner.length > 0) ? '🍽️ ' + dinner.join('、') : '<span style="color:var(--text-light);">未记录晚餐</span>';
     var postmealText = postmeal !== undefined
       ? '<span style="color:' + (postmeal > s.glucose_postmeal_max ? 'var(--red)' : 'var(--green)') + ';font-weight:600;">' + postmeal + '</span>'
       : '<span style="color:var(--text-light);">--</span>';
@@ -2031,11 +2040,11 @@ function renderGlucoseDinnerContext(days) {
         '<div style="min-width:75px;font-weight:600;line-height:1.4;">' + date + '</div>' +
         '<div style="flex:1;line-height:1.4;">' + dinnerText + '</div>' +
         '<div style="min-width:65px;text-align:center;line-height:1.4;">' +
-          '<div style="font-size:11px;color:var(--text-light);">椁愬悗2h</div>' +
+          '<div style="font-size:11px;color:var(--text-light);">餐后2h</div>' +
           '<div>' + postmealText + '</div>' +
         '</div>' +
         '<div style="min-width:65px;text-align:center;line-height:1.4;">' +
-          '<div style="font-size:11px;color:var(--text-light);">娆℃棩绌鸿吂</div>' +
+          '<div style="font-size:11px;color:var(--text-light);">次日空腹</div>' +
           '<div>' + nextFastingText + '</div>' +
         '</div>' +
       '</div>';
@@ -2043,10 +2052,10 @@ function renderGlucoseDinnerContext(days) {
 
   if (rows) {
     contextEl.innerHTML = '<div class="dinner-context" style="margin-top:12px;">' +
-      '<strong>馃搵 鏅氶涓庤绯栧鐓?/strong>' +
-      '<div style="margin-top:4px;font-size:11px;color:var(--text-light);">鏄ㄦ櫄鏅氶 鈫?椁愬悗2h琛€绯?鈫?浠婃棭绌鸿吂琛€绯?/div>' +
+      '<strong>📋 晚餐与血糖对照</strong>' +
+      '<div style="margin-top:4px;font-size:11px;color:var(--text-light);">昨晚晚餐 → 餐后2h血糖 → 今早空腹血糖</div>' +
       '<div style="margin-top:6px;">' + rows + '</div>' +
-      '<div style="margin-top:6px;font-size:12px;color:var(--text-light);">馃挕 鏅氶鍚冧粈涔堟槸褰卞搷绗簩澶╃┖鑵硅绯栫殑鍏抽敭鍥犵礌銆傝瀵熶笉鍚屾櫄椁愭惌閰嶅悗娆℃棩绌鸿吂琛€绯栫殑鍙樺寲锛屾壘鍒伴€傚悎鑷繁鐨勬櫄椁愭柟妗堛€?/div>' +
+      '<div style="margin-top:6px;font-size:12px;color:var(--text-light);">💡 晚餐吃什么是影响第二天空腹血糖的关键因素。观察不同晚餐搭配后次日空腹血糖的变化，找到适合自己的晚餐方案。</div>' +
       '</div>';
   } else {
     contextEl.innerHTML = '';
@@ -2066,7 +2075,7 @@ function switchGlucosePeriod(days, btn) {
   renderGlucoseChart();
 }
 
-// ==================== 鏅氶璁板綍 ====================
+// ==================== 晚餐记录 ====================
 var DINNER_STORAGE = 'lz_dinner_records';
 var currentDinnerFoods = [];
 
@@ -2087,11 +2096,11 @@ function loadDinnerForDate(date) {
 
 function saveDinner() {
   var date = getActiveDateInput().value;
-  if (!date) { showToast('璇峰厛閫夋嫨鏃ユ湡'); return; }
+  if (!date) { showToast('请先选择日期'); return; }
   var allDinners = loadDinnerRecords();
   allDinners[date] = currentDinnerFoods.slice();
   saveDinnerRecords(allDinners);
-  showToast('鏅氶璁板綍宸蹭繚瀛橈紒');
+  showToast('晚餐记录已保存！');
 }
 
 function onDinnerSearch() {
@@ -2124,9 +2133,9 @@ function onDinnerSearch() {
   }
 
   dropdown.innerHTML = matches.map(function(f) {
-    var giBadge = f.giLevel === 'low' ? '<span class="badge badge-gi-low">浣嶨I</span>' :
-                  (f.giLevel === 'mid' ? '<span class="badge badge-gi-mid">涓璆I</span>' :
-                   '<span class="badge badge-gi-high">楂楪I</span>');
+    var giBadge = f.giLevel === 'low' ? '<span class="badge badge-gi-low">低GI</span>' :
+                  (f.giLevel === 'mid' ? '<span class="badge badge-gi-mid">中GI</span>' :
+                   '<span class="badge badge-gi-high">高GI</span>');
     return '<div class="dinner-autocomplete-item" onclick="addDinnerFood(\'' +
            f.name.replace(/'/g, "\\'") + '\')">' +
            '<span>' + f.name + '</span>' + giBadge + '</div>';
@@ -2153,12 +2162,12 @@ function renderDinnerTags() {
   var container = document.getElementById('dinnerTags');
   if (!container) return;
   if (currentDinnerFoods.length === 0) {
-    container.innerHTML = '<span class="empty-hint">杩樻病鏈夎褰曚粖鏅氱殑鏅氶</span>';
+    container.innerHTML = '<span class="empty-hint">还没有记录今晚的晚餐</span>';
     return;
   }
   container.innerHTML = currentDinnerFoods.map(function(f, i) {
     return '<span class="dinner-tag">' + f +
-           '<button class="remove-tag" onclick="removeDinnerFood(' + i + ')">鉁?/button></span>';
+           '<button class="remove-tag" onclick="removeDinnerFood(' + i + ')">✕</button></span>';
   }).join('');
 }
 
@@ -2178,121 +2187,123 @@ document.addEventListener('click', function(e) {
   }
 });
 
-// ==================== 椋熺墿鍒悕鏄犲皠 ====================
+// ==================== 食物别名映射 ====================
 var foodAliases = {
-  // 瀹跺父鑿滃埆鍚?  '瑗跨孩鏌跨倰楦¤泲': '鐣寗鐐掕泲', '瑗跨孩鏌跨倰铔?: '鐣寗鐐掕泲', '鐣寗鐐掗浮铔?: '鐣寗鐐掕泲',
-  '鐣寗铔嬭姳姹?: '瑗跨孩鏌胯泲姹?, '鐣寗楦¤泲姹?: '瑗跨孩鏌胯泲姹?,
-  '楦¤泲缇?: '钂告按铔?, '钂搁浮铔?: '钂告按铔?, '姘磋捀铔?: '钂告按铔?,
-  '钂滆搲瑗胯摑鑺?: '钂滆搲瑗垮叞鑺?,
-  '鎷嶉粍鐡?: '鍑夋媽榛勭摐',
-  '閱嬫簻澶х櫧鑿?: '閱嬫簻鐧借彍', '閱嬬啒鐧借彍': '閱嬫簻鐧借彍',
-  '绾㈢儳鎺掗': '绾㈢儳鑲?, '鎺掗': '鎺掗姹?,
-  // 钄彍鍒悕
-  '鐣寗': '瑗跨孩鏌?, '娲嬫熆瀛?: '瑗跨孩鏌?,
-  '娲嬭妺': '鍦熻眴', '椹搩钖?: '鍦熻眴', '鍦拌泲': '鍦熻眴', '灞辫嵂铔?: '鍦熻眴',
-  '鍦扮摐': '绾㈣柉', '鐣柉': '绾㈣柉', '鐢樿柉': '绾㈣柉', '鐧借柉': '绾㈣柉', '绾㈣嫊': '绾㈣柉',
-  '鑻炶胺': '鐜夌背', '绮熺背': '灏忕背', '妫掑瓙': '鐜夌背', '鐜夎渶榛?: '鐜夌背',
-  '娣北': '灞辫嵂', '钖摚': '灞辫嵂',
-  '鑺辨ぐ鑿?: '瑗垮叞鑺?, '闈掕姳鑿?: '瑗垮叞鑺?, '瑗胯摑鑺?: '瑗垮叞鑺?,
-  '绾㈣悵鍗?: '鑳¤悵鍗?,
-  '闈掔摐': '榛勭摐',
-  '鍦嗚懕': '娲嬭懕', '钁卞ご': '娲嬭懕', '鐨娊瀛?: '娲嬭懕',
-  '鍑夌摐': '鑻︾摐',
-  '鐭摐': '鑼勫瓙',
-  '鍊摐': '鍗楃摐', '鍖楃摐': '鍗楃摐',
-  '閫氬績鑿?: '绌哄績鑿?, '钑硅彍': '绌哄績鑿?, '閫氳彍': '绌哄績鑿?,
-  '鐨囧笣鑿?: '鑼艰捒', '钃捒': '鑼艰捒',
-  '鐢熻彍蹇?: '鐢熻彍', '鐜荤拑鐢熻彍': '鐢熻彍',
-  '闈掕彍': '鐧借彍', '娌硅彍': '鐧借彍', '涓婃捣闈?: '鐧借彍',
-  '鐏妞?: '闈掓', '鏌垮瓙妞?: '闈掓', '鐢滄': '闈掓',
-  '绉嬭懙鑽?: '绉嬭懙', '缇婅璞?: '绉嬭懙',
-  '鑾磋嫞': '鑾寸瑡', '闈掔瑡': '鑾寸瑡',
-  // 姘存灉鍒悕
-  '濂囧紓鏋?: '鐚曠尨妗?, '闃虫': '鐚曠尨妗?,
-  '鍑ゆⅷ': '鑿犺悵', '榛勬ⅷ': '鑿犺悵',
-  '杞﹀帢瀛?: '妯辨',
-  '澹鍟ゆⅷ': '鑽夎帗',
-  '鍝堣湝鐡?: '鍝堝瘑鐡?,
-  '铚滅摐': '鍝堝瘑鐡?,
-  '瑗挎煔': '鏌氬瓙', '钁¤悇鏌?: '鏌氬瓙',
-  '姗樺瓙': '姗欏瓙', '妗斿瓙': '姗欏瓙', '鏌戞': '姗欏瓙',
-  '鎻愬瓙': '钁¤悇',
-  '鑺箰': '鐣煶姒?,
-  // 鑲夌被娴烽矞鍒悕
-  '鍒€楸?: '甯﹂奔',
-  '鑺辩敳': '铔よ湂', '鑺辫洡': '铔よ湂', '鏂囪洡': '铔よ湂',
-  '涓夌汗楸?: '涓夋枃楸?, '椴戦奔': '涓夋枃楸?,
-  '鐚ぇ娌?: '浜旇姳鑲?, '鑲ヨ倝': '浜旇姳鑲?,
-  '楦″瓙': '楦¤泲', '楦″嵉': '楦¤泲',
-  '鐗涗钩': '鐗涘ザ',
-  // 璞嗗埗鍝佸埆鍚?  '璞嗗共': '璞嗚厫骞?, '棣欏共': '璞嗚厫骞?, '璞嗚厫涔?: '璞嗚厫骞?,
-  '璞嗚姳': '璞嗚厫', '姘磋眴鑵?: '璞嗚厫',
-  '璞嗕钩': '璞嗘祮', '璞嗗ザ': '璞嗘祮',
-  '澶ц眴': '榛勮眴',
-  // 涓婚鍒悕
-  '姘撮ズ': '楗哄瓙',
-  '鎶勬墜': '棣勯エ', '浜戝悶': '棣勯エ',
-  '棣?: '棣掑ご', '钂搁': '棣掑ご', '鐧介': '棣掑ご',
-  '鎰忛潰': '鎰忓ぇ鍒╅潰', '鎰忓ぇ鍒╅潰鏉?: '鎰忓ぇ鍒╅潰', '閫氬績绮?: '鎰忓ぇ鍒╅潰',
-  '鐧介キ': '鐧界背楗?, '澶х背楗?: '鐧界背楗?,
-  '绋€楗?: '灏忕背绮?, '鐧界播': '灏忕背绮?,
-  '闈?: '闈㈡潯', '鍒囬潰': '闈㈡潯',
-  '楹︾墖': '鐕曢害', '鐕曢害鐗?: '鐕曢害',
-  '鍏ㄩ害鍖?: '鍏ㄩ害闈㈠寘',
-  '閿呰创': '楗哄瓙',
-  // 闆堕楗搧鍒悕
-  '鐧界硸': '鐧界爞绯?, '钄楃硸': '鐧界爞绯?, '鐮傜硸': '鐧界爞绯?,
-  '浼樻牸': '閰稿ザ', '閰镐钩': '閰稿ザ', '浼橀叒涔?: '閰稿ザ',
-  '钀借姳鐢?: '鑺辩敓', '闀跨敓鏋?: '鑺辩敓',
-  '鏋ｅ瓙': '澶ф灒', '绾㈡灒': '澶ф灒', '骞叉灒': '澶ф灒',
-  '鏋告潪瀛?: '鏋告潪',
-  '鍙箰楗枡': '鍙箰', '鍙彛鍙箰': '鍙箰',
-  '鍟ら厭': '鍟ら厭', '榛勬堡': '鍟ら厭',
-  '鐧介厭': '鐧介厭', '鐑ч厭': '鐧介厭', '鑰佺櫧骞?: '鐧介厭',
-  '鑻忔墦姘?: '鏃犵硸鑻忔墦姘?, '姘旀场姘?: '鏃犵硸鑻忔墦姘?,
-  '闆硶': '鍐版穱娣?, '鍐版': '鍐版穱娣?, '鍐版縺鍑?: '鍐版穱娣?,
-  '钖潯': '钖墖', '鐐歌柉鏉?: '钖墖',
-  '鏈卞彜鍔?: '宸у厠鍔?,
-  // 鏂板姞闈㈤
-  '鐐搁叡闈?: '鐐搁叡闈?, '鏉傞叡闈?: '鐐搁叡闈?, '鍖椾含鐐搁叡闈?: '鐐搁叡闈?,
-  '鎵撳崵闈?: '鎵撳崵闈?, '澶у崵闈?: '鎵撳崵闈?,
-  // 绮ラキ
-  '鍦扮摐绮?: '绾㈣柉绮?, '鐣柉绮?: '绾㈣柉绮?, '绾㈣嫊绮?: '绾㈣柉绮?,
-  '楹︾墖绮?: '鐕曢害绮?, '鐕曢害绋€楗?: '鐕曢害绮?,
-  '绮楃伯楗?: '鏉傜伯楗?, '浜旇胺楗?: '鏉傜伯楗?, '澶氳胺楗?: '鏉傜伯楗?,
-  // 闈㈠寘
-  '閰哥闈㈠寘': '閰搁潰鍖?, '澶╃劧閰垫瘝闈㈠寘': '閰搁潰鍖?, '閰搁潰鍥㈤潰鍖?: '閰搁潰鍖?, '鑰侀潰闈㈠寘': '閰搁潰鍖?,
-  // 鑺嬪ご
-  '鑺嬭壙': '鑺嬪ご', '鑺嬩粩': '鑺嬪ご', '棣欒妺': '鑺嬪ご',
-  // 铔嬬被
-  '姘寸叜铔?: '鐓浮铔?, '鐧界叜铔?: '鐓浮铔?,
-  '鐓庤泲': '鐓庨浮铔?, '娌圭厧铔?: '鐓庨浮铔?,
-  '鐐掕泲': '鐐掗浮铔?, '鎽婇浮铔?: '鐐掗浮铔?,
-  '鑼惰泲': '鑼跺彾铔?, '浜旈鑼跺彾铔?: '鑼跺彾铔?,
-  '鍗ゆ按铔?: '鍗よ泲', '鍗ら浮铔?: '鍗よ泲',
-  '姘存尝铔?: '鑽峰寘铔?, '鍗ц泲': '鑽峰寘铔?, '姘寸叜鑽峰寘铔?: '鑽峰寘铔?,
-  '铔嬬倰楗?: '铔嬬倰楗?, '鎵窞鐐掗キ': '铔嬬倰楗?,
-  // 鐢滅摐
-  '鐢滅摐': '棣欑摐', '姊ㄧ摐': '棣欑摐', '灏忛鐡?: '棣欑摐',
-  '鍏板窞鐡?: '鐧藉叞鐡?, '鐧藉叞棣欑摐': '鐧藉叞鐡?,
-  '鏃ユ湰鐢滅摐': '缃戠汗鐡?, '铚滅摐': '缃戠汗鐡?,
-  '鐜夎弴鐡?: '鐜夎尮鐡?, '鐜夎弴鐢滅摐': '鐜夎尮鐡?, '鐜夎尮鐢滅摐': '鐜夎尮鐡?,
-  // 娴烽矞
-  '锜?: '铻冭煿', '澶ч椄锜?: '铻冭煿', '姊瓙锜?: '铻冭煿', '娌宠煿': '铻冭煿',
-  '鐗¤泿': '鐢熻殱', '铓?: '鐢熻殱', '娴疯泿瀛?: '鐢熻殱',
-  '甯﹀瓙': '鎵囪礉', '椴滆礉': '鎵囪礉',
-  '璐昏礉': '闈掑彛', '娴疯櫣': '闈掑彛', '娣¤彍': '闈掑彛', '闈掑彛璐?: '闈掑彛',
-  '婢抽緳': '榫欒櫨', '澶ч緳铏?: '榫欒櫨', '灏忛緳铏?: '榫欒櫨',
-  '铏捐泟': '鐨毊铏?, '婵戝翱铏?: '鐨毊铏?, '铏剧埇瀛?: '鐨毊铏?, '鐞电惗铏?: '鐨毊铏?,
-  '娴峰弬': '娴峰弬', '鍒哄弬': '娴峰弬',
-  '椴嶉奔': '椴嶉奔', '椴滈矋': '椴嶉奔', '骞查矋': '椴嶉奔',
-  '铔忓瓙': '铔忓瓙', '绔硅洀': '铔忓瓙', '铔?: '铔忓瓙',
-  '娴疯灪': '娴疯灪', '棣欒灪': '娴疯灪', '铻鸿倝': '娴疯灪',
-  // 鍏朵粬鍒悕
-  '榛戞湪鑰?: '鏈ㄨ€?, '浜戣€?: '鏈ㄨ€?,
-  '鐧芥湪鑰?: '鏈ㄨ€?, '閾惰€?: '鏈ㄨ€?,
-  '铚傝湝': '铚傝湝', '铚滅硸': '铚傝湝',
-  '鑽嗚姤': '鑽嗚姤', '鑽嗚彍': '鑽嗚姤', '鍋囪嫃': '鑽嗚姤'
+  // 家常菜别名
+  '西红柿炒鸡蛋': '番茄炒蛋', '西红柿炒蛋': '番茄炒蛋', '番茄炒鸡蛋': '番茄炒蛋',
+  '番茄蛋花汤': '西红柿蛋汤', '番茄鸡蛋汤': '西红柿蛋汤',
+  '鸡蛋羹': '蒸水蛋', '蒸鸡蛋': '蒸水蛋', '水蒸蛋': '蒸水蛋',
+  '蒜蓉西蓝花': '蒜蓉西兰花',
+  '拍黄瓜': '凉拌黄瓜',
+  '醋溜大白菜': '醋溜白菜', '醋熘白菜': '醋溜白菜',
+  '红烧排骨': '红烧肉', '排骨': '排骨汤',
+  // 蔬菜别名
+  '番茄': '西红柿', '洋柿子': '西红柿',
+  '洋芋': '土豆', '马铃薯': '土豆', '地蛋': '土豆', '山药蛋': '土豆',
+  '地瓜': '红薯', '番薯': '红薯', '甘薯': '红薯', '白薯': '红薯', '红苕': '红薯',
+  '苞谷': '玉米', '粟米': '小米', '棒子': '玉米', '玉蜀黍': '玉米',
+  '淮山': '山药', '薯蓣': '山药',
+  '花椰菜': '西兰花', '青花菜': '西兰花', '西蓝花': '西兰花',
+  '红萝卜': '胡萝卜',
+  '青瓜': '黄瓜',
+  '圆葱': '洋葱', '葱头': '洋葱', '皮芽子': '洋葱',
+  '凉瓜': '苦瓜',
+  '矮瓜': '茄子',
+  '倭瓜': '南瓜', '北瓜': '南瓜',
+  '通心菜': '空心菜', '蕹菜': '空心菜', '通菜': '空心菜',
+  '皇帝菜': '茼蒿', '蓬蒿': '茼蒿',
+  '生菜心': '生菜', '玻璃生菜': '生菜',
+  '青菜': '白菜', '油菜': '白菜', '上海青': '白菜',
+  '灯笼椒': '青椒', '柿子椒': '青椒', '甜椒': '青椒',
+  '秋葵荚': '秋葵', '羊角豆': '秋葵',
+  '莴苣': '莴笋', '青笋': '莴笋',
+  // 水果别名
+  '奇异果': '猕猴桃', '阳桃': '猕猴桃',
+  '凤梨': '菠萝', '黄梨': '菠萝',
+  '车厘子': '樱桃',
+  '士多啤梨': '草莓',
+  '哈蜜瓜': '哈密瓜',
+  '蜜瓜': '哈密瓜',
+  '西柚': '柚子', '葡萄柚': '柚子',
+  '橘子': '橙子', '桔子': '橙子', '柑橘': '橙子',
+  '提子': '葡萄',
+  '芭乐': '番石榴',
+  // 肉类海鲜别名
+  '刀鱼': '带鱼',
+  '花甲': '蛤蜊', '花蛤': '蛤蜊', '文蛤': '蛤蜊',
+  '三纹鱼': '三文鱼', '鲑鱼': '三文鱼',
+  '猪大油': '五花肉', '肥肉': '五花肉',
+  '鸡子': '鸡蛋', '鸡卵': '鸡蛋',
+  '牛乳': '牛奶',
+  // 豆制品别名
+  '豆干': '豆腐干', '香干': '豆腐干', '豆腐乾': '豆腐干',
+  '豆花': '豆腐', '水豆腐': '豆腐',
+  '豆乳': '豆浆', '豆奶': '豆浆',
+  '大豆': '黄豆',
+  // 主食别名
+  '水饺': '饺子',
+  '抄手': '馄饨', '云吞': '馄饨',
+  '馍': '馒头', '蒸馍': '馒头', '白馍': '馒头',
+  '意面': '意大利面', '意大利面条': '意大利面', '通心粉': '意大利面',
+  '白饭': '白米饭', '大米饭': '白米饭',
+  '稀饭': '小米粥', '白粥': '小米粥',
+  '面': '面条', '切面': '面条',
+  '麦片': '燕麦', '燕麦片': '燕麦',
+  '全麦包': '全麦面包',
+  '锅贴': '饺子',
+  // 零食饮品别名
+  '白糖': '白砂糖', '蔗糖': '白砂糖', '砂糖': '白砂糖',
+  '优格': '酸奶', '酸乳': '酸奶', '优酪乳': '酸奶',
+  '落花生': '花生', '长生果': '花生',
+  '枣子': '大枣', '红枣': '大枣', '干枣': '大枣',
+  '枸杞子': '枸杞',
+  '可乐饮料': '可乐', '可口可乐': '可乐',
+  '啤酒': '啤酒', '黄汤': '啤酒',
+  '白酒': '白酒', '烧酒': '白酒', '老白干': '白酒',
+  '苏打水': '无糖苏打水', '气泡水': '无糖苏打水',
+  '雪糕': '冰淇淋', '冰棍': '冰淇淋', '冰激凌': '冰淇淋',
+  '薯条': '薯片', '炸薯条': '薯片',
+  '朱古力': '巧克力',
+  // 新加面食
+  '炸酱面': '炸酱面', '杂酱面': '炸酱面', '北京炸酱面': '炸酱面',
+  '打卤面': '打卤面', '大卤面': '打卤面',
+  // 粥饭
+  '地瓜粥': '红薯粥', '番薯粥': '红薯粥', '红苕粥': '红薯粥',
+  '麦片粥': '燕麦粥', '燕麦稀饭': '燕麦粥',
+  '粗粮饭': '杂粮饭', '五谷饭': '杂粮饭', '多谷饭': '杂粮饭',
+  // 面包
+  '酸种面包': '酸面包', '天然酵母面包': '酸面包', '酸面团面包': '酸面包', '老面面包': '酸面包',
+  // 芋头
+  '芋艿': '芋头', '芋仔': '芋头', '香芋': '芋头',
+  // 蛋类
+  '水煮蛋': '煮鸡蛋', '白煮蛋': '煮鸡蛋',
+  '煎蛋': '煎鸡蛋', '油煎蛋': '煎鸡蛋',
+  '炒蛋': '炒鸡蛋', '摊鸡蛋': '炒鸡蛋',
+  '茶蛋': '茶叶蛋', '五香茶叶蛋': '茶叶蛋',
+  '卤水蛋': '卤蛋', '卤鸡蛋': '卤蛋',
+  '水波蛋': '荷包蛋', '卧蛋': '荷包蛋', '水煮荷包蛋': '荷包蛋',
+  '蛋炒饭': '蛋炒饭', '扬州炒饭': '蛋炒饭',
+  // 甜瓜
+  '甜瓜': '香瓜', '梨瓜': '香瓜', '小香瓜': '香瓜',
+  '兰州瓜': '白兰瓜', '白兰香瓜': '白兰瓜',
+  '日本甜瓜': '网纹瓜', '蜜瓜': '网纹瓜',
+  '玉菇瓜': '玉茹瓜', '玉菇甜瓜': '玉茹瓜', '玉茹甜瓜': '玉茹瓜',
+  // 海鲜
+  '蟹': '螃蟹', '大闸蟹': '螃蟹', '梭子蟹': '螃蟹', '河蟹': '螃蟹',
+  '牡蛎': '生蚝', '蚝': '生蚝', '海蛎子': '生蚝',
+  '带子': '扇贝', '鲜贝': '扇贝',
+  '贻贝': '青口', '海虹': '青口', '淡菜': '青口', '青口贝': '青口',
+  '澳龙': '龙虾', '大龙虾': '龙虾', '小龙虾': '龙虾',
+  '虾蛄': '皮皮虾', '濑尿虾': '皮皮虾', '虾爬子': '皮皮虾', '琵琶虾': '皮皮虾',
+  '海参': '海参', '刺参': '海参',
+  '鲍鱼': '鲍鱼', '鲜鲍': '鲍鱼', '干鲍': '鲍鱼',
+  '蛏子': '蛏子', '竹蛏': '蛏子', '蛏': '蛏子',
+  '海螺': '海螺', '香螺': '海螺', '螺肉': '海螺',
+  // 其他别名
+  '黑木耳': '木耳', '云耳': '木耳',
+  '白木耳': '木耳', '银耳': '木耳',
+  '蜂蜜': '蜂蜜', '蜜糖': '蜂蜜',
+  '荆芥': '荆芥', '荆菜': '荆芥', '假苏': '荆芥'
 };
 
 // Helper: find canonical names for a query
@@ -2302,7 +2313,7 @@ function resolveFoodQuery(query) {
   if (foodAliases[query]) {
     results.push(foodAliases[query]);
   }
-  // Check partial matches 鈥?if query is part of an alias, resolve it
+  // Check partial matches — if query is part of an alias, resolve it
   for (var alias in foodAliases) {
     if (alias.includes(query) && results.indexOf(foodAliases[alias]) === -1) {
       results.push(foodAliases[alias]);
@@ -2311,7 +2322,7 @@ function resolveFoodQuery(query) {
   return results;
 }
 
-// ==================== Tab 3: 椋熺墿鏌ヨ ====================
+// ==================== Tab 3: 食物查询 ====================
 function filterFoods() {
   var query = document.getElementById('foodSearch').value.trim().toLowerCase();
 
@@ -2344,19 +2355,19 @@ function filterFoods() {
 function showFoodAutocomplete(filtered) {
   var dd = document.getElementById('foodAutocomplete');
   if (filtered.length === 0) {
-    dd.innerHTML = '<div class="autocomplete-empty">娌℃湁鎵惧埌鍖归厤鐨勯鐗╋紝璇曡瘯鍏朵粬鍏抽敭璇嶅惂~</div>';
+    dd.innerHTML = '<div class="autocomplete-empty">没有找到匹配的食物，试试其他关键词吧~</div>';
     dd.classList.add('show');
     return;
   }
 
   dd.innerHTML = filtered.map(function(f) {
     var giBadgeClass = f.giLevel === 'low' ? 'badge-gi-low' : (f.giLevel === 'mid' ? 'badge-gi-mid' : 'badge-gi-high');
-    var giLabel = f.giLevel === 'low' ? '浣嶨I' : (f.giLevel === 'mid' ? '涓璆I' : '楂楪I');
+    var giLabel = f.giLevel === 'low' ? '低GI' : (f.giLevel === 'mid' ? '中GI' : '高GI');
     return '<div class="autocomplete-item" onclick="openFoodDetail(\'' +
            f.name.replace(/'/g, "\\'") + '\')">' +
       '<div>' +
         '<div class="item-name">' + f.name + '</div>' +
-        '<div class="item-meta" style="margin-top:2px;">' + f.cat + ' 路 ' + f.calPer100 + '鍗冨崱/100g</div>' +
+        '<div class="item-meta" style="margin-top:2px;">' + f.cat + ' · ' + f.calPer100 + '千卡/100g</div>' +
       '</div>' +
       '<span class="badge ' + giBadgeClass + '">' + giLabel + ' GI:' + f.gi + '</span>' +
     '</div>';
@@ -2382,30 +2393,30 @@ function openFoodDetail(foodName) {
 
 function showFoodDetailFromObj(f) {
   var giBadgeClass = f.giLevel === 'low' ? 'badge-gi-low' : (f.giLevel === 'mid' ? 'badge-gi-mid' : 'badge-gi-high');
-  var giLabel = f.giLevel === 'low' ? '浣嶨I' : (f.giLevel === 'mid' ? '涓璆I' : '楂楪I');
+  var giLabel = f.giLevel === 'low' ? '低GI' : (f.giLevel === 'mid' ? '中GI' : '高GI');
   var bgClass = '';
-  if (f.giLevel === 'high' || f.serve.indexOf('涓嶅缓璁?) !== -1) bgClass = ' warning';
-  else if (f.giLevel === 'low' && f.serve.indexOf('涓嶅缓璁?) === -1) bgClass = ' safe';
+  if (f.giLevel === 'high' || f.serve.indexOf('不建议') !== -1) bgClass = ' warning';
+  else if (f.giLevel === 'low' && f.serve.indexOf('不建议') === -1) bgClass = ' safe';
 
   var html =
     '<div class="food-detail-header">' +
       '<h2>' + f.name + '</h2>' +
-      '<span class="badge ' + giBadgeClass + '" style="font-size:var(--font-md);padding:6px 16px;">' + giLabel + ' 鈥?GI鍊? ' + f.gi + '</span>' +
+      '<span class="badge ' + giBadgeClass + '" style="font-size:var(--font-md);padding:6px 16px;">' + giLabel + ' — GI值: ' + f.gi + '</span>' +
     '</div>' +
     '<div class="food-detail-grid">' +
-      '<div class="food-detail-item"><div class="value">' + f.gi + '</div><div class="label">GI鍊硷紙鍗囩硸鎸囨暟锛?/div></div>' +
-      '<div class="food-detail-item"><div class="value">' + f.calPer100 + '</div><div class="label">姣?00g鐑噺锛堝崈鍗★級</div></div>' +
-      '<div class="food-detail-item"><div class="value">' + f.cat + '</div><div class="label">椋熺墿鍒嗙被</div></div>' +
-      '<div class="food-detail-item"><div class="value" style="font-size:var(--font-md);">' + f.serve + '</div><div class="label">寤鸿姣忔鎽勫叆閲?/div></div>' +
+      '<div class="food-detail-item"><div class="value">' + f.gi + '</div><div class="label">GI值（升糖指数）</div></div>' +
+      '<div class="food-detail-item"><div class="value">' + f.calPer100 + '</div><div class="label">每100g热量（千卡）</div></div>' +
+      '<div class="food-detail-item"><div class="value">' + f.cat + '</div><div class="label">食物分类</div></div>' +
+      '<div class="food-detail-item"><div class="value" style="font-size:var(--font-md);">' + f.serve + '</div><div class="label">建议每次摄入量</div></div>' +
     '</div>' +
     '<div class="food-advice' + bgClass + '">' +
-      '<strong>馃└ 瀵硅绯栫殑褰卞搷锛?/strong><br>' + f.bgAdvice +
+      '<strong>🩸 对血糖的影响：</strong><br>' + f.bgAdvice +
     '</div>' +
     '<div class="food-advice">' +
-      '<strong>馃挀 瀵硅鍘嬬殑褰卞搷锛?/strong><br>' + f.bpAdvice +
+      '<strong>💓 对血压的影响：</strong><br>' + f.bpAdvice +
     '</div>' +
     '<div style="background:#E8F4FD;border-radius:var(--radius-sm);padding:14px 16px;font-size:var(--font-md);line-height:1.7;">' +
-      '<strong>馃挕 绯栧墠鏈熼ギ椋熷缓璁細</strong><br>' + f.tip +
+      '<strong>💡 糖前期饮食建议：</strong><br>' + f.tip +
     '</div>';
 
   document.getElementById('foodModalContent').innerHTML = html;
@@ -2416,28 +2427,28 @@ function closeFoodModal() {
   document.getElementById('foodModal').classList.remove('show');
 }
 
-// ==================== 姣忔棩楗寤鸿 ====================
+// ==================== 每日饮食建议 ====================
 var dailyTips = [
-  { title: 'GI鍊兼槸浠€涔堬紵', icon: '馃摉', text: 'GI锛堝崌绯栨寚鏁帮級鍙嶆槧椋熺墿鍚冧笅鍘诲悗琛€绯栦笂鍗囩殑蹇參銆侴I鈮?5涓轰綆GI锛?6-69涓轰腑GI锛屸墺70涓洪珮GI銆傜硸鍓嶆湡寤鸿澶氶€変綆GI椋熺墿銆? },
-  { title: '鍚冮キ椤哄簭鏈夎绌?, icon: '馃嵔锔?, text: '寤鸿鎸夈€岃敩鑿?鈫?铔嬬櫧璐紙鑲?铔?璞嗭級 鈫?涓婚銆嶇殑椤哄簭鍚冦€傚厛鍚冭敩鑿滃拰铔嬬櫧璐ㄥ彲浠ュ噺缂撳悗缁富椋熺殑鍗囩硸閫熷害銆? },
-  { title: '绮楃伯鏇夸唬娉?, icon: '馃尵', text: '鐧界背楗彲浠ョ敤1/3绯欑背鎴栫嚂楹︽浛鎹紝GI鍊奸檷浣庣殑鍚屾椂鍙ｆ劅宸埆涓嶅ぇ銆傛參鎱㈠鍔犵矖绮瘮渚嬶紝鑲犻亾涔熼渶瑕佹椂闂撮€傚簲銆? },
-  { title: '姘存灉搴旇浠€涔堟椂鍊欏悆锛?, icon: '馃崕', text: '姘存灉寤鸿鍦ㄤ袱椁愪箣闂村悆锛堜笂鍗?0鐐规垨涓嬪崍3鐐癸級锛屼笉瑕侀キ鍚庨┈涓婂悆銆傞キ鍚庤绯栧凡缁忓湪涓婂崌锛屽啀鍔犳按鏋滀細鍙犲姞鍗囬珮銆? },
-  { title: '鎺х洂灏辨槸鎺ц鍘?, icon: '馃', text: '姣忓ぉ椋熺洂涓嶈秴杩?鍏嬶紙绾︿竴鍟ら厭鐡剁洊锛夈€傞叡娌广€佽殱娌广€佸懗绮鹃兘鍚ぇ閲忛挔锛屾斁浜嗚繖浜涘氨瑕佸皯鏀剧洂銆? },
-  { title: '鍠濈播鏈夐櫡闃?, icon: '馃ィ', text: '绮ョ叜寰楄秺鐑傦紝鍗囩硸瓒婂揩銆傚嵆浣挎槸灏忕背绮ャ€佹潅绮播锛岀叜涔呬簡GI鍊间篃涓嶄綆銆傚鏋滃枩娆㈠枬绮ワ紝涓嶈鐓お鐑傦紝鎼厤楦¤泲鍜岃敩鑿滀竴璧枫€? },
-  { title: '杩愬姩鏄渶濂界殑闄嶇硸鑽?, icon: '馃毝', text: '楗悗鏁ｆ20-30鍒嗛挓鑳芥樉钁楅檷浣庨鍚庤绯栥€備笉闇€瑕佸墽鐑堣繍鍔紝鎱㈡參璧板氨鏈夋晥鏋溿€傛瘡澶╃疮璁℃琛?000-8000姝ヤ负浣炽€? },
-  { title: '璇绘噦椋熷搧鏍囩', icon: '馃彿锔?, text: '涔板寘瑁呴鍝佹椂鐪嬮厤鏂欒〃锛屾帓绗竴鐨勬槸鍚噺鏈€楂樼殑銆傚鏋滅櫧鐮傜硸銆佹灉钁＄硸娴嗘帓鍦ㄥ墠涓変綅锛岀硸鍓嶆湡鎱庝拱銆? },
-  { title: '澶栧嚭灏遍灏忚创澹?, icon: '馃崪', text: '椁愰鐨勮彍閫氬父娌瑰ぇ鐩愬銆傚彲浠ヨ涓€纰楁竻姘达紝鎶婅彍娑竴涓嬪啀鍚冦€傚厛鍚冨噳鎷岃彍锛堝皯閰憋級锛屽啀鍚冪儹鑿滐紝绫抽キ鏈€鍚庡悆銆? },
-  { title: '瓒抽噺楗按寰堥噸瑕?, icon: '馃挧', text: '姣忓ぉ鍠?500-1700ml姘达紙绾?-8鏉級銆傚厖瓒崇殑姘村垎鏈夊姪浜庤偩鑴忔帓鍑哄浣欑殑绯栧垎銆傚皯鍠濆惈绯栭ギ鏂欙紝鐧藉紑姘存槸鏈€濂界殑閫夋嫨銆? },
-  { title: '鐔涔熶細鍗囬珮琛€绯?, icon: '馃槾', text: '鐫＄湢涓嶈冻浼氳韬綋鍒嗘硨鏇村鍘嬪姏婵€绱狅紝瀵艰嚧绗簩澶╄绯栧亸楂樸€傚缓璁瘡鏅?1鐐瑰墠鍏ョ潯锛屼繚璇?-8灏忔椂鐫＄湢銆? },
-  { title: '鑶抽绾ょ淮鏄ソ鏈嬪弸', icon: '馃ガ', text: '姣忓ぉ鍚冨500g钄彍锛堝叾涓竴鍗婁负缁垮彾鑿滐級锛岃喅椋熺氦缁磋兘寤剁紦绯栧垎鍚告敹銆佸鍔犻ケ鑵规劅銆傞鑹茶秺娣辩殑钄彍钀ュ吇瓒婂ソ銆? },
-  { title: '鍧氭灉铏藉ソ鍒椽澶?, icon: '馃', text: '鏍告銆佹潖浠佺瓑鍧氭灉瀵屽惈鍋ュ悍鑴傝偑锛孏I鍊兼瀬浣庛€備絾瀹冧滑鐑噺楂橈紝姣忓ぉ涓€灏忔妸锛堢害20-30g锛夊氨澶熶簡锛岄€夊師鍛崇殑涓嶈鐩愮剹銆? },
-  { title: '鍘嬪姏绠＄悊涔熼噸瑕?, icon: '馃', text: '闀挎湡鐒﹁檻鍜屽帇鍔涗細鍗囬珮琛€绯栧拰琛€鍘嬨€傛瘡澶╄姳10鍒嗛挓鍋氭繁鍛煎惛銆佸惉鍚煶涔愭垨鍑洪棬璧拌蛋锛屽琛€绯栨帶鍒舵湁瀹炲疄鍦ㄥ湪鐨勫府鍔┿€? },
-  { title: '鏃犵硸鈮犳棤瀹?, icon: '鈿狅笍', text: '"鏃犵硸"楗煎共鍙兘娌℃湁鍔犺敆绯栵紝浣嗕粛鐒剁敱绮惧埗闈㈢矇鍜屾补鑴傚埗鎴愶紝鐑噺鍜屽崌绯栬兘鍔涗笉瀹瑰皬瑙戙€備笉瑕佽"鏃犵硸"鏍囩杩锋儜銆? },
-  { title: '浼樿川铔嬬櫧鎬庝箞閫?, icon: '馃', text: '铔嬬櫧璐ㄧ殑浼樺厛绾э細楸艰倝 > 绂借倝 > 铔嬬被 > 璞嗗埗鍝?> 绾㈣倝銆傛瘡鍛ㄥ悆楸?-3娆★紝绾㈣倝锛堢尓鐗涚緤鑲夛級涓嶈秴杩?娆°€? },
-  { title: '鏃╅瑕佸悆濂?, icon: '馃寘', text: '涓嶅悆鏃╅浼氬鑷村崍椁愬悗琛€绯栨洿楂樸€傚ソ鐨勬棭椁愬簲璇ュ寘鍚細浼樿川铔嬬櫧锛堥浮铔?鐗涘ザ锛? 绮楃伯涓婚 + 涓€浠借敩鑿溿€? },
-  { title: '灏戦澶氶鏈夐亾鐞?, icon: '鈴?, text: '涓夐瀹氭椂瀹氶噺锛屾瘡椁愪竷鍏垎楗便€傚鏋滀袱椁愰棿闅旇秴杩?灏忔椂锛屽彲浠ュ姞涓€娆″皬鍔犻锛堝涓€涓嫻鏋滄垨涓€灏忔澂閰稿ザ锛夛紝閬垮厤浣庤绯栥€? },
-  { title: '缁嗗毤鎱㈠捊闄嶈绯?, icon: '馃Ψ', text: '姣忓彛楗毤20-30涓嬶紝涓€椤块キ鍚?0鍒嗛挓浠ヤ笂銆傚悆寰楁參鑳借澶ц剳鍙婃椂鏀跺埌"楗变簡"鐨勪俊鍙凤紝閬垮厤鍚冨锛屼篃鑳藉噺缂撹绯栦笂鍗囥€? },
-  { title: '鎴掔儫闄愰厭', icon: '馃毉', text: '鍚哥儫浼氭崯浼よ绠°€佸姞閲嶈儼宀涚礌鎶垫姉銆傞厭绮句細骞叉壈鑲濊剰鐨勮绯栬皟鑺傦紝绌鸿吂楗厭灏ゅ叾鍗遍櫓銆傜硸鍓嶆湡寤鸿鎴掔儫銆佷弗鏍奸檺閰掋€? }
+  { title: 'GI值是什么？', icon: '📖', text: 'GI（升糖指数）反映食物吃下去后血糖上升的快慢。GI≤55为低GI，56-69为中GI，≥70为高GI。糖前期建议多选低GI食物。' },
+  { title: '吃饭顺序有讲究', icon: '🍽️', text: '建议按「蔬菜 → 蛋白质（肉/蛋/豆） → 主食」的顺序吃。先吃蔬菜和蛋白质可以减缓后续主食的升糖速度。' },
+  { title: '粗粮替代法', icon: '🌾', text: '白米饭可以用1/3糙米或燕麦替换，GI值降低的同时口感差别不大。慢慢增加粗粮比例，肠道也需要时间适应。' },
+  { title: '水果应该什么时候吃？', icon: '🍎', text: '水果建议在两餐之间吃（上午10点或下午3点），不要饭后马上吃。饭后血糖已经在上升，再加水果会叠加升高。' },
+  { title: '控盐就是控血压', icon: '🧂', text: '每天食盐不超过5克（约一啤酒瓶盖）。酱油、蚝油、味精都含大量钠，放了这些就要少放盐。' },
+  { title: '喝粥有陷阱', icon: '🥣', text: '粥煮得越烂，升糖越快。即使是小米粥、杂粮粥，煮久了GI值也不低。如果喜欢喝粥，不要煮太烂，搭配鸡蛋和蔬菜一起。' },
+  { title: '运动是最好的降糖药', icon: '🚶', text: '饭后散步20-30分钟能显著降低餐后血糖。不需要剧烈运动，慢慢走就有效果。每天累计步行6000-8000步为佳。' },
+  { title: '读懂食品标签', icon: '🏷️', text: '买包装食品时看配料表，排第一的是含量最高的。如果白砂糖、果葡糖浆排在前三位，糖前期慎买。' },
+  { title: '外出就餐小贴士', icon: '🍜', text: '餐馆的菜通常油大盐多。可以要一碗清水，把菜涮一下再吃。先吃凉拌菜（少酱），再吃热菜，米饭最后吃。' },
+  { title: '足量饮水很重要', icon: '💧', text: '每天喝1500-1700ml水（约7-8杯）。充足的水分有助于肾脏排出多余的糖分。少喝含糖饮料，白开水是最好的选择。' },
+  { title: '熬夜也会升高血糖', icon: '😴', text: '睡眠不足会让身体分泌更多压力激素，导致第二天血糖偏高。建议每晚11点前入睡，保证7-8小时睡眠。' },
+  { title: '膳食纤维是好朋友', icon: '🥬', text: '每天吃够500g蔬菜（其中一半为绿叶菜），膳食纤维能延缓糖分吸收、增加饱腹感。颜色越深的蔬菜营养越好。' },
+  { title: '坚果虽好别贪多', icon: '🥜', text: '核桃、杏仁等坚果富含健康脂肪，GI值极低。但它们热量高，每天一小把（约20-30g）就够了，选原味的不要盐焗。' },
+  { title: '压力管理也重要', icon: '🧘', text: '长期焦虑和压力会升高血糖和血压。每天花10分钟做深呼吸、听听音乐或出门走走，对血糖控制有实实在在的帮助。' },
+  { title: '无糖≠无害', icon: '⚠️', text: '"无糖"饼干可能没有加蔗糖，但仍然由精制面粉和油脂制成，热量和升糖能力不容小觑。不要被"无糖"标签迷惑。' },
+  { title: '优质蛋白怎么选', icon: '🥚', text: '蛋白质的优先级：鱼肉 > 禽肉 > 蛋类 > 豆制品 > 红肉。每周吃鱼2-3次，红肉（猪牛羊肉）不超过3次。' },
+  { title: '早餐要吃好', icon: '🌅', text: '不吃早餐会导致午餐后血糖更高。好的早餐应该包含：优质蛋白（鸡蛋/牛奶）+ 粗粮主食 + 一份蔬菜。' },
+  { title: '少食多餐有道理', icon: '⏰', text: '三餐定时定量，每餐七八分饱。如果两餐间隔超过5小时，可以加一次小加餐（如一个苹果或一小杯酸奶），避免低血糖。' },
+  { title: '细嚼慢咽降血糖', icon: '🦷', text: '每口饭嚼20-30下，一顿饭吃20分钟以上。吃得慢能让大脑及时收到"饱了"的信号，避免吃多，也能减缓血糖上升。' },
+  { title: '戒烟限酒', icon: '🚭', text: '吸烟会损伤血管、加重胰岛素抵抗。酒精会干扰肝脏的血糖调节，空腹饮酒尤其危险。糖前期建议戒烟、严格限酒。' }
 ];
 
 function renderDailyTips() {
@@ -2455,21 +2466,21 @@ function renderDailyTips() {
 
   var months = now.getMonth() + 1;
   var days = now.getDate();
-  var weekdays = ['鏃?, '涓€', '浜?, '涓?, '鍥?, '浜?, '鍏?];
+  var weekdays = ['日', '一', '二', '三', '四', '五', '六'];
   var weekday = weekdays[now.getDay()];
 
   container.innerHTML =
-    '<h3>馃挕 浠婃棩楗寤鸿</h3>' +
+    '<h3>💡 今日饮食建议</h3>' +
     selectedTips.map(function(t) {
       return '<div class="tip-card">' +
         '<div class="tip-title"><span class="tip-icon">' + t.icon + '</span>' + t.title + '</div>' +
         '<div class="tip-text">' + t.text + '</div>' +
       '</div>';
     }).join('') +
-    '<div class="tip-date">馃搮 ' + months + '鏈? + days + '鏃?鏄熸湡' + weekday + ' 路 姣忓ぉ3鏉★紝姣忓ぉ鏇存柊</div>';
+    '<div class="tip-date">📅 ' + months + '月' + days + '日 星期' + weekday + ' · 每天3条，每天更新</div>';
 }
 
-// ==================== Tab 4: 璁剧疆 ====================
+// ==================== Tab 4: 设置 ====================
 function loadSettingsToForm() {
   var s = loadSettings();
   document.getElementById('setBpSysMax').value = s.bp_systolic_max;
@@ -2497,7 +2508,7 @@ function saveSettings() {
     reminder_postmeal_glucose: document.getElementById('setRemindGluPostmeal').value || '20:30'
   };
   saveSettingsToStore(settings);
-  showToast('璁剧疆宸蹭繚瀛橈紒');
+  showToast('设置已保存！');
 }
 
 function exportData() {
@@ -2510,12 +2521,12 @@ function exportData() {
   var url = URL.createObjectURL(blob);
   var a = document.createElement('a');
   a.href = url;
-  a.download = '鑰佸乏鍋ュ悍鏁版嵁_澶囦唤_' + getTodayStr() + '.json';
+  a.download = '老左健康数据_备份_' + getTodayStr() + '.json';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
-  showToast('鏁版嵁宸插鍑猴紒');
+  showToast('数据已导出！');
 }
 
 function importData(event) {
@@ -2526,19 +2537,19 @@ function importData(event) {
     try {
       var data = JSON.parse(e.target.result);
       if (!data.records || !Array.isArray(data.records)) {
-        showToast('鏂囦欢鏍煎紡涓嶆纭紒');
+        showToast('文件格式不正确！');
         return;
       }
-      if (!confirmDialog('鍗冲皢瀵煎叆 ' + data.records.length + ' 鏉¤褰曪紝鐜版湁鏁版嵁灏嗚瑕嗙洊銆傜‘瀹氱户缁悧锛?)) return;
+      if (!confirmDialog('即将导入 ' + data.records.length + ' 条记录，现有数据将被覆盖。确定继续吗？')) return;
       saveRecords(data.records);
       if (data.settings) saveSettingsToStore(data.settings);
       records = loadRecords();
       settings = loadSettings();
-      showToast('鏁版嵁瀵煎叆鎴愬姛锛佸叡瀵煎叆 ' + data.records.length + ' 鏉¤褰?);
+      showToast('数据导入成功！共导入 ' + data.records.length + ' 条记录');
       loadDayRecords();
       loadSettingsToForm();
     } catch(err) {
-      showToast('鏂囦欢瑙ｆ瀽澶辫触锛岃妫€鏌ユ枃浠舵槸鍚︽纭€?);
+      showToast('文件解析失败，请检查文件是否正确。');
     }
   };
   reader.readAsText(file);
@@ -2546,18 +2557,18 @@ function importData(event) {
 }
 
 function clearAllData() {
-  if (!confirmDialog('鈿狅笍 纭畾瑕佹竻闄ゅ叏閮ㄦ暟鎹悧锛熻繖涓搷浣滄棤娉曟挙閿€锛乗n\n寤鸿鍏堝鍑烘暟鎹浠姐€?)) return;
-  if (!confirmDialog('鍐嶆纭锛氱湡鐨勮娓呴櫎鍏ㄩ儴鍋ュ悍璁板綍鍜岃缃悧锛?)) return;
+  if (!confirmDialog('⚠️ 确定要清除全部数据吗？这个操作无法撤销！\n\n建议先导出数据备份。')) return;
+  if (!confirmDialog('再次确认：真的要清除全部健康记录和设置吗？')) return;
   localStorage.removeItem(STORAGE_KEY_RECORDS);
   localStorage.removeItem(STORAGE_KEY_SETTINGS);
   records = [];
   settings = loadSettings();
-  showToast('鍏ㄩ儴鏁版嵁宸叉竻闄?);
+  showToast('全部数据已清除');
   loadDayRecords();
   loadSettingsToForm();
 }
 
-// ==================== 鎻愰啋绯荤粺 ====================
+// ==================== 提醒系统 ====================
 let lastReminderDate = '';
 let reminderInterval = null;
 
@@ -2575,10 +2586,10 @@ function checkReminders() {
   var s = loadSettings();
 
   var reminders = [
-    { time: s.reminder_morning_bp, msg: '鈽€锔?鑰佸乏锛岃娴嬫棭涓婅鍘嬪暒锛佽寰楀厛瀹夐潤浼戞伅5鍒嗛挓鍐嶆祴閲忓摝~', key: 'mbp' },
-    { time: s.reminder_evening_bp, msg: '馃寵 鑰佸乏锛屾櫄涓婂暒锛屾祴涓€涓嬭鍘嬪惂锛佺潯鍓?灏忔椂娴嬮噺鏈€鍑唦', key: 'ebp' },
-    { time: s.reminder_fasting_glucose, msg: '馃寘 鏃╀笂濂斤紒璁板緱绌鸿吂娴嬭绯栧摝锛堣捣搴婂悗銆佸悆鏃╅キ鍓嶏級~', key: 'fgl' },
-    { time: s.reminder_postmeal_glucose, msg: '馃嵔锔?鏅氶キ鍚?灏忔椂鍟︼紝璇ユ祴椁愬悗琛€绯栦簡~', key: 'pgl' }
+    { time: s.reminder_morning_bp, msg: '☀️ 老左，该测早上血压啦！记得先安静休息5分钟再测量哦~', key: 'mbp' },
+    { time: s.reminder_evening_bp, msg: '🌙 老左，晚上啦，测一下血压吧！睡前1小时测量最准~', key: 'ebp' },
+    { time: s.reminder_fasting_glucose, msg: '🌅 早上好！记得空腹测血糖哦（起床后、吃早饭前）~', key: 'fgl' },
+    { time: s.reminder_postmeal_glucose, msg: '🍽️ 晚饭后2小时啦，该测餐后血糖了~', key: 'pgl' }
   ];
 
   reminders.forEach(function(r) {
@@ -2588,7 +2599,7 @@ function checkReminders() {
       if (reminded.indexOf(r.key) !== -1) return;
 
       if (Notification.permission === 'granted') {
-        new Notification('鑰佸乏鍋ュ悍妫€娴?, { body: r.msg, icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="80" font-size="80">馃挋</text></svg>', requireInteraction: true });
+        new Notification('老左健康检测', { body: r.msg, icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="80" font-size="80">💙</text></svg>', requireInteraction: true });
       } else if (Notification.permission === 'default') {
         Notification.requestPermission();
       }
@@ -2621,7 +2632,7 @@ function startReminderSystem() {
   checkReminders();
 }
 
-// ==================== 鍒濆鍖?====================
+// ==================== 初始化 ====================
 function init() {
   initDate();
   renderDailyTips();
