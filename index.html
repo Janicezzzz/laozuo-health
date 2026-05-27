@@ -361,6 +361,29 @@ input:focus, select:focus {
   to { transform: translateY(0); }
 }
 
+.modal-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: #ECF0F1;
+  font-size: 20px;
+  color: #5A6C7D;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.modal-close-btn:active {
+  background: #D5DBDB;
+}
+
 .modal-handle {
   width: 40px;
   height: 4px;
@@ -1122,6 +1145,7 @@ input:focus, select:focus {
 <!-- Food Detail Modal -->
 <div class="modal-overlay" id="foodModal" onclick="if(event.target===this)closeFoodModal()">
   <div class="modal-sheet">
+    <button class="modal-close-btn" onclick="closeFoodModal()" aria-label="关闭">✕</button>
     <div class="modal-handle"></div>
     <div id="foodModalContent"></div>
   </div>
