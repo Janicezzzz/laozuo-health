@@ -315,17 +315,6 @@ input:focus, select:focus {
 }
 
 .search-box input {
-  padding-left: 52px;
-}
-
-.search-box .search-icon {
-  position: absolute;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 20px;
-  pointer-events: none;
-  z-index: 1;
   color: var(--text-light);
 }
 
@@ -1017,8 +1006,7 @@ input:focus, select:focus {
           💡 <strong>使用说明：</strong>输入食物名称或选择分类，查看食物的GI值、对血糖血压的影响，以及糖前期的饮食建议。GI值越低，对血糖影响越小。
         </div>
         <div class="search-box">
-          <span class="search-icon">🔍</span>
-          <input type="text" id="foodSearch" placeholder="输入食物名称，如：米饭、苹果..." oninput="filterFoods()" onfocus="filterFoods()" autocomplete="off">
+          <input type="text" id="foodSearch" placeholder="🔍 输入食物名称，如：米饭、苹果..." oninput="filterFoods()" onfocus="filterFoods()" autocomplete="off">
           <div class="autocomplete-dropdown" id="foodAutocomplete"></div>
         </div>
 
