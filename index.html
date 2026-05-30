@@ -2714,7 +2714,13 @@ function init() {
   renderDailyTips();
   loadSettingsToForm();
 
-  // Start reminder system with a delay to avoid spamming on page load
+  // Render charts for the default BP tab after Chart.js loads
+  setTimeout(function() {
+    renderBPMorningChart();
+    renderBPEveningChart();
+  }, 800);
+
+  // Start reminder system with a delay
   setTimeout(startReminderSystem, 3000);
 }
 
