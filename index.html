@@ -1760,7 +1760,19 @@ function getGlucoseDatasets(days) {
 }
 
 function isChartAvailable() {
-  return typeof Chart !== 'undefined';
+  if (typeof Chart !== 'undefined') return true;
+  // Show a hint that charts are loading or unavailable
+  var containers = document.querySelectorAll('.chart-container');
+  for (var i = 0; i < containers.length; i++) {
+    if (containers[i].querySelector('canvas') && !containers[i].querySelector('.chart-hint')) {
+      var hint = document.createElement('div');
+      hint.className = 'chart-hint';
+      hint.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--text-light);font-size:var(--font-sm);text-align:center;';
+      hint.textContent = '图表组件加载中，请稍候...';
+      containers[i].appendChild(hint);
+    }
+  }
+  return false;
 }
 
 function renderBPMorningChart() {
@@ -2747,6 +2759,30 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
-<script src="https://registry.npmmirror.com/chart.js/4.4.7/files/dist/chart.umd.min.js"></script>
+<script>
+// Load Chart.js with fallback
+(function() {
+  var CDNS = [
+    'https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js',
+    'https://cdn.bootcdn.net/ajax/libs/Chart.js/4.4.7/chart.umd.min.js'
+  ];
+  var loaded = false;
+
+  function tryLoad(index) {
+    if (index >= CDNS.length) {
+      console.warn('Chart.js 所有CDN均加载失败，图表功能不可用');
+      return;
+    }
+    var script = document.createElement('script');
+    script.src = CDNS[index];
+    script.onload = function() { loaded = true; };
+    script.onerror = function() { tryLoad(index + 1); };
+    setTimeout(function() { if (!loaded && script.parentNode) { script.remove(); tryLoad(index + 1); } }, 8000);
+    document.body.appendChild(script);
+  }
+
+  tryLoad(0);
+})();
+</script>
 </body>
 </html>
